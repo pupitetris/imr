@@ -29,6 +29,7 @@ namespace IMRpatient
 		public Radionic ()
 		{
 			Port = null;
+			state = STATE.IDLE;
 			serial = new SerialPort ();
 			serial.BaudRate = 2400;
 			serial.DataBits = 8;
