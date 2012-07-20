@@ -33,6 +33,7 @@ namespace IMRpatient
 			CharpGtk charp = new CharpGtk ();
 
 			WelcomeDlg wDlg = new WelcomeDlg (charp);
+			charp.parent = wDlg;
 			wDlg.Show ();
 			Application.Run ();
 
@@ -41,6 +42,7 @@ namespace IMRpatient
 			}
 
 			MainWindow win = new MainWindow (charp);
+			charp.parent = win;
 			win.Show ();
 			Application.Run ();
 		}
