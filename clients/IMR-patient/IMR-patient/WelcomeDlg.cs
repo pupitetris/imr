@@ -66,6 +66,7 @@ namespace IMRpatient
 		{
 			WelcomeSetupDlg dlg = new WelcomeSetupDlg (charp.baseUrl);
 			dlg.Response += delegate { charp.baseUrl = dlg.baseUrl; };
+			dlg.TransientFor = this;
 			dlg.Run ();
 		}
 

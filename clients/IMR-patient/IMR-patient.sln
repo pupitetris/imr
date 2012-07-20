@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "monoCHARP", "..\..\..\charp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "monoCHARP-gtk", "..\..\..\charp\clients\monoCHARP\monoCHARP-gtk\monoCHARP-gtk.csproj", "{B61CFDEB-4C4E-46BC-BEC6-8C3E71C0EA5A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Radionic", "Radionic\Radionic.csproj", "{A3CEFB0C-909A-465B-A4F2-FF9350B780AD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x86 = Debug|x86
@@ -23,6 +25,10 @@ Global
 		{7DE14CEC-61E3-46F4-9CB3-C367DA555044}.Debug|x86.Build.0 = Debug|Any CPU
 		{7DE14CEC-61E3-46F4-9CB3-C367DA555044}.Release|x86.ActiveCfg = Release|Any CPU
 		{7DE14CEC-61E3-46F4-9CB3-C367DA555044}.Release|x86.Build.0 = Release|Any CPU
+		{A3CEFB0C-909A-465B-A4F2-FF9350B780AD}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{A3CEFB0C-909A-465B-A4F2-FF9350B780AD}.Debug|x86.Build.0 = Debug|Any CPU
+		{A3CEFB0C-909A-465B-A4F2-FF9350B780AD}.Release|x86.ActiveCfg = Release|Any CPU
+		{A3CEFB0C-909A-465B-A4F2-FF9350B780AD}.Release|x86.Build.0 = Release|Any CPU
 		{B61CFDEB-4C4E-46BC-BEC6-8C3E71C0EA5A}.Debug|x86.ActiveCfg = Debug|Any CPU
 		{B61CFDEB-4C4E-46BC-BEC6-8C3E71C0EA5A}.Debug|x86.Build.0 = Debug|Any CPU
 		{B61CFDEB-4C4E-46BC-BEC6-8C3E71C0EA5A}.Release|x86.ActiveCfg = Release|Any CPU
