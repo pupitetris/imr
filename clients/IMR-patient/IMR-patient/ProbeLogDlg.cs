@@ -40,6 +40,7 @@ namespace IMRpatient
 		{
 			if (success) {
 				logAppend (Catalog.GetString ("Found."));
+				buttonRetry.Sensitive = true;
 				Respond (Gtk.ResponseType.Apply);
 			} else {
 				probeIdx ++;
@@ -71,8 +72,8 @@ namespace IMRpatient
 			if (probeIdx == probePorts.Length) {
 				logAppend (Catalog.GetString ("Not found. Is equipment on and connected?"));
 				buttonRetry.Sensitive = true;
-				Port = "";
 				Respond (Gtk.ResponseType.None);
+				Port = "";
 				return;
 			}
 
@@ -100,4 +101,3 @@ namespace IMRpatient
 		}
 	}
 }
-

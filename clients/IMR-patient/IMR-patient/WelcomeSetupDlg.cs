@@ -56,7 +56,14 @@ namespace IMRpatient
 			ProbeLogDlg dlg = new ProbeLogDlg (radionic);
 			dlg.TransientFor = this;
 			dlg.Response += delegate(object o, Gtk.ResponseArgs args) {
-				comboPort.Entry.Text = (args.ResponseId == Gtk.ResponseType.Apply)? dlg.Port: "";
+				switch (args.ResponseId) {
+				case Gtk.ResponseType.Apply:
+					comboPort.Entry.Text = dlg.Port;
+					break;
+				case Gtk.ResponseType.None:
+					comboPort.Entry.Text = "";
+					break;
+				}
 			};
 			dlg.Run ();
 		}

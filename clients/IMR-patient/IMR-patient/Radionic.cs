@@ -21,10 +21,9 @@ namespace IMRpatient
 		private CommandComplete cb;
 		private StringBuilder builder;
 
-		private void handleDataReceived (object sender, System.IO.Ports.SerialDataReceivedEventArgs e)
+		private void processExisting ()
 		{
 			string data = serial.ReadExisting ();
-			Console.WriteLine (data);
 
 			switch (state) {
 			case STATE.IDLE:
@@ -32,6 +31,7 @@ namespace IMRpatient
 			case STATE.CMD_PROBE:
 				builder.Append (data);
 				if (builder.ToString ().Length >= REPLY_PROBE.Length) {
+					state = STATE.IDLE;
 					if (builder.ToString () == REPLY_PROBE) {
 						cb (true);
 					} else {
@@ -43,9 +43,15 @@ namespace IMRpatient
 			}
 		}
 
+		private void handleDataReceived (object sender, System.IO.Ports.SerialDataReceivedEventArgs e)
+		{
+			processExisting ();
+		}
+
 		public Radionic ()
 		{
 			Port = null;
+			builder = new StringBuilder ();
 			state = STATE.IDLE;
 			serial = new SerialPort ();
 			serial.BaudRate = 2400;
@@ -53,7 +59,9 @@ namespace IMRpatient
 			serial.Parity = Parity.None;
 			serial.StopBits = StopBits.One;
 			serial.Handshake = Handshake.None;
-			serial.DataReceived += new SerialDataReceivedEventHandler (handleDataReceived);
+
+			// This is not supported by Mono.
+			// serial.DataReceived += new SerialDataReceivedEventHandler (handleDataReceived);
 		}
 
 		public void Open ()
@@ -69,11 +77,24 @@ namespace IMRpatient
 			}
 		}
 
+		private bool checkBytesToRead ()
+		{
+			if (serial.BytesToRead > 0) {
+				processExisting ();
+			}
+
+			if (state == STATE.IDLE) {
+				return false;
+			}
+			return true;
+		}
+
 		public void Probe (CommandComplete cb)
 		{
 			this.cb = cb;
 			state = STATE.CMD_PROBE;
 			serial.Write ("W");
+			GLib.Timeout.Add (150, new GLib.TimeoutHandler (checkBytesToRead));
 		}
 
 		public static string[] findPorts ()
