@@ -73,19 +73,21 @@ namespace IMRpatient
 		public void Close () 
 		{
 			if (serial.IsOpen) {
+				state = STATE.IDLE;
 				serial.Close ();
 			}
 		}
 
 		private bool checkBytesToRead ()
 		{
+			if (state == STATE.IDLE) {
+				return false;
+			}
+
 			if (serial.BytesToRead > 0) {
 				processExisting ();
 			}
 
-			if (state == STATE.IDLE) {
-				return false;
-			}
 			return true;
 		}
 
