@@ -1,5 +1,6 @@
 using System;
 using System.IO.Ports;
+using System.Text;
 
 namespace IMRpatient
 {
@@ -10,18 +11,34 @@ namespace IMRpatient
 			CMD_PROBE
 		}
 
+		public delegate void CommandComplete (bool success);
+
+		private static readonly string REPLY_PROBE = "284a-er45-FG34-09%#-12w+q";
+		
 		public string Port { get; set; }
 		private SerialPort serial;
 		private STATE state;
+		private CommandComplete cb;
+		private StringBuilder builder;
 
-		public delegate void CommandComplete (bool success);
-
-		private void handleDataReceived (System.IO.Ports.SerialDataReceivedEventArgs e)
+		private void handleDataReceived (object sender, System.IO.Ports.SerialDataReceivedEventArgs e)
 		{
+			string data = serial.ReadExisting ();
+			Console.WriteLine (data);
+
 			switch (state) {
 			case STATE.IDLE:
 				return;
 			case STATE.CMD_PROBE:
+				builder.Append (data);
+				if (builder.ToString ().Length >= REPLY_PROBE.Length) {
+					if (builder.ToString () == REPLY_PROBE) {
+						cb (true);
+					} else {
+						cb (false);
+					}
+					builder.Clear ();
+				}
 				return;
 			}
 		}
@@ -36,9 +53,7 @@ namespace IMRpatient
 			serial.Parity = Parity.None;
 			serial.StopBits = StopBits.One;
 			serial.Handshake = Handshake.None;
-			serial.DataReceived += delegate(object sender, System.IO.Ports.SerialDataReceivedEventArgs e) {
-				this.handleDataReceived (e);
-			};
+			serial.DataReceived += new SerialDataReceivedEventHandler (handleDataReceived);
 		}
 
 		public void Open ()
@@ -49,7 +64,16 @@ namespace IMRpatient
 
 		public void Close () 
 		{
-			serial.Close ();
+			if (serial.IsOpen) {
+				serial.Close ();
+			}
+		}
+
+		public void Probe (CommandComplete cb)
+		{
+			this.cb = cb;
+			state = STATE.CMD_PROBE;
+			serial.Write ("W");
 		}
 
 		public static string[] findPorts ()

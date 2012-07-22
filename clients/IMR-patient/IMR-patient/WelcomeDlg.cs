@@ -8,13 +8,15 @@ namespace IMRpatient
 	public partial class WelcomeDlg : Gtk.Window
 	{
 		private Charp charp;
+		private Radionic radionic;
 		private bool passwdFirstEdit;
 		private bool success;
 
-		public WelcomeDlg (Charp charp) : base (Gtk.WindowType.Toplevel)
+		public WelcomeDlg (Charp charp, Radionic radionic) : base (Gtk.WindowType.Toplevel)
 		{
 			this.Build ();
 			this.charp = charp;
+			this.radionic = radionic;
 			passwdFirstEdit = true;
 			success = false;
 
@@ -64,7 +66,7 @@ namespace IMRpatient
 
 		protected void OnButtonConfClicked (object sender, EventArgs e)
 		{
-			WelcomeSetupDlg dlg = new WelcomeSetupDlg (charp.baseUrl);
+			WelcomeSetupDlg dlg = new WelcomeSetupDlg (charp.baseUrl, radionic);
 			dlg.Response += delegate { charp.baseUrl = dlg.baseUrl; };
 			dlg.TransientFor = this;
 			dlg.Run ();

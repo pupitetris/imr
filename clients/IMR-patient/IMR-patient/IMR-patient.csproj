@@ -61,6 +61,8 @@
     <Compile Include="WelcomeSetupDlg.cs" />
     <Compile Include="gtk-gui\IMRpatient.WelcomeSetupDlg.cs" />
     <Compile Include="Radionic.cs" />
+    <Compile Include="ProbeLogDlg.cs" />
+    <Compile Include="gtk-gui\IMRpatient.ProbeLogDlg.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

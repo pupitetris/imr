@@ -1,16 +1,37 @@
 using System;
+using Mono.Unix;
 
 namespace IMRpatient
 {
 	public partial class WelcomeSetupDlg : Gtk.Dialog
 	{
 		public string baseUrl;
+		private Radionic radionic;
+		private int comboPortSize;
 
-		public WelcomeSetupDlg (string baseUrl)
+		private void findPorts ()
+		{
+			while (comboPortSize-- > 0) {
+				comboPort.RemoveText (0);
+			}
+
+			string[] ports = Radionic.findPorts ();
+			comboPortSize = ports.Length;
+			for (int i = 0; i < comboPortSize; i++) {
+				comboPort.AppendText (ports[i]);
+			}
+		}
+
+		public WelcomeSetupDlg (string baseUrl, Radionic radionic)
 		{
 			this.Build ();
 			this.baseUrl = baseUrl;
+			this.radionic = radionic;
+
+			comboPortSize = 0;
+
 			baseUrlEntry.Text = baseUrl;
+			findPorts ();
 		}
 
 		protected void OnButtonOkClicked (object sender, EventArgs e)
@@ -23,6 +44,21 @@ namespace IMRpatient
 		protected void OnButtonCancelClicked (object sender, EventArgs e)
 		{
 			Destroy ();
+		}
+
+		protected void OnButtonPortRefreshClicked (object sender, EventArgs e)
+		{
+			findPorts ();
+		}
+
+		protected void OnButtonProbeClicked (object sender, EventArgs e)
+		{
+			ProbeLogDlg dlg = new ProbeLogDlg (radionic);
+			dlg.TransientFor = this;
+			dlg.Response += delegate(object o, Gtk.ResponseArgs args) {
+				comboPort.Entry.Text = (args.ResponseId == Gtk.ResponseType.Apply)? dlg.Port: "";
+			};
+			dlg.Run ();
 		}
 	}
 }
