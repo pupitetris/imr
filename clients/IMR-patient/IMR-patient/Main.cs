@@ -31,6 +31,7 @@ namespace IMRpatient
 
 			Charp.BASE_URL = baseUrl;
 			CharpGtk charp = new CharpGtk ();
+			Radionic radionic = new Radionic ();
 
 			WelcomeDlg wDlg = new WelcomeDlg (charp);
 			charp.parent = wDlg;

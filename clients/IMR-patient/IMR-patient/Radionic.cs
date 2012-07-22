@@ -3,7 +3,7 @@ using System.IO.Ports;
 
 namespace IMRpatient
 {
-	public abstract class Radionic
+	public class Radionic
 	{
 		private enum STATE {
 			IDLE = 0,
@@ -58,4 +58,3 @@ namespace IMRpatient
 		}
 	}
 }
-
