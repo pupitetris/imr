@@ -36,13 +36,27 @@ namespace IMRpatient
 			GLib.Timeout.Add (100, new GLib.TimeoutHandler (logScroll));
 		}
 
-		private void probeCB (bool success)
+		private void probeCB (Radionic.RESULT result, string reply)
 		{
-			if (success) {
-				logAppend (Catalog.GetString ("Found."));
-				buttonRetry.Sensitive = true;
+			string msg;
+
+			switch (result) {
+			case (Radionic.RESULT.SUCCESS):
+				msg = Catalog.GetString ("Found.");
 				Respond (Gtk.ResponseType.Apply);
-			} else {
+				break;
+			case (Radionic.RESULT.TIMEOUT):
+				msg = Catalog.GetString ("Timeout.\n\n");
+				break;
+			default:
+				msg = Catalog.GetString ("Bad reply.\n\n");
+				break;
+			}
+
+			buttonRetry.Sensitive = true;
+			logAppend (msg);
+
+			if (result != Radionic.RESULT.SUCCESS) {
 				probeIdx ++;
 				probeNext ();
 			}

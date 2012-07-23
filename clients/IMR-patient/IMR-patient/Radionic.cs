@@ -6,53 +6,48 @@ namespace IMRpatient
 {
 	public class Radionic
 	{
+		public enum RESULT {
+			SUCCESS = 0,
+			TIMEOUT,
+			CANCEL,
+			ASSERT_IDLE,
+			BAD_RESPONSE
+		}
+			
+		public delegate void CommandCompleteCB (RESULT result, string reply);
+
 		private enum STATE {
 			IDLE = 0,
 			CMD_PROBE
 		}
-
-		public delegate void CommandComplete (bool success);
-
+		
+		private static readonly string REQUEST_PROBE = "W";
 		private static readonly string REPLY_PROBE = "284a-er45-FG34-09%#-12w+q";
+
+		private static readonly int MAX_POLLS = 10;
+		private static readonly uint POLL_INTERVAL = 150;
 		
 		public string Port { get; set; }
+
 		private SerialPort serial;
 		private STATE state;
-		private CommandComplete cb;
+		private CommandCompleteCB cb;
 		private StringBuilder builder;
+		private string expectStr;
+		private int polls;
 
-		private void processExisting ()
-		{
-			string data = serial.ReadExisting ();
-
-			switch (state) {
-			case STATE.IDLE:
-				return;
-			case STATE.CMD_PROBE:
-				builder.Append (data);
-				if (builder.ToString ().Length >= REPLY_PROBE.Length) {
-					state = STATE.IDLE;
-					if (builder.ToString () == REPLY_PROBE) {
-						cb (true);
-					} else {
-						cb (false);
-					}
-					builder.Clear ();
-				}
-				return;
-			}
-		}
-
-		private void handleDataReceived (object sender, System.IO.Ports.SerialDataReceivedEventArgs e)
+		/* private void handleDataReceived (object sender, System.IO.Ports.SerialDataReceivedEventArgs e)
 		{
 			processExisting ();
-		}
+		} */
 
 		public Radionic ()
 		{
 			Port = null;
 			builder = new StringBuilder ();
 			state = STATE.IDLE;
+			polls = 0;
+
 			serial = new SerialPort ();
 			serial.BaudRate = 2400;
 			serial.DataBits = 8;
@@ -78,25 +73,80 @@ namespace IMRpatient
 			}
 		}
 
+		private void finishCmd (RESULT result)
+		{
+			if (cb != null) {
+				cb (result, builder.ToString ());
+			}
+			
+			cb = null;
+			polls = 0;
+			state = STATE.IDLE;
+			builder.Clear ();
+		}
+		
+		private bool processExisting ()
+		{
+			builder.Append (serial.ReadExisting ());
+			
+			if (state == STATE.IDLE) {
+				return true;
+			}
+			
+			if (builder.ToString ().Length >= expectStr.Length) {
+				finishCmd ((builder.ToString () == expectStr)?
+				           RESULT.SUCCESS: RESULT.BAD_RESPONSE);
+				return false;
+			}
+			return true;
+		}
+		
 		private bool checkBytesToRead ()
 		{
-			if (state == STATE.IDLE) {
-				return false;
+			polls ++;
+			if (polls >= MAX_POLLS) {
+				finishCmd (RESULT.TIMEOUT);
 			}
 
 			if (serial.BytesToRead > 0) {
-				processExisting ();
+				return processExisting ();
 			}
 
+			if (state == STATE.IDLE) {
+				return false;
+			}
 			return true;
 		}
 
-		public void Probe (CommandComplete cb)
+		private void startCmd (string data, string expect, STATE cmd, CommandCompleteCB cb)
 		{
 			this.cb = cb;
-			state = STATE.CMD_PROBE;
-			serial.Write ("W");
-			GLib.Timeout.Add (150, new GLib.TimeoutHandler (checkBytesToRead));
+
+			if (state != STATE.IDLE) {
+				finishCmd (RESULT.ASSERT_IDLE);
+				return;
+			}
+
+			state = cmd;
+			expectStr = expect;
+			polls = 0;
+
+			serial.Write (data);
+			if (expect != null) {
+				GLib.Timeout.Add (POLL_INTERVAL, new GLib.TimeoutHandler (checkBytesToRead));
+			} else {
+				finishCmd (RESULT.SUCCESS);
+			}
+		}
+
+		public void Cancel ()
+		{
+			finishCmd (RESULT.CANCEL);
+		}
+
+		public void Probe (CommandCompleteCB cb = null)
+		{
+			startCmd (REQUEST_PROBE, REPLY_PROBE, STATE.CMD_PROBE, cb);
 		}
 
 		public static string[] findPorts ()
