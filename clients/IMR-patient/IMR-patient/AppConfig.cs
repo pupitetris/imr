@@ -84,7 +84,7 @@ namespace IMRpatient
 			if (baseUrl == null) {
 				return false;
 			}
-			Charp.BASE_URL = baseUrl;
+			Charp.BASE_URL = charp.baseUrl = baseUrl;
 			return true;
 		}
 
