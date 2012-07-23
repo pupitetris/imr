@@ -9,6 +9,7 @@ namespace IMRpatient
 	{
 		private Charp charp;
 		private Radionic radionic;
+		private bool userFirstEdit;
 		private bool passwdFirstEdit;
 		private bool success;
 
@@ -17,6 +18,7 @@ namespace IMRpatient
 			this.Build ();
 			this.charp = charp;
 			this.radionic = radionic;
+			userFirstEdit = true;
 			passwdFirstEdit = true;
 			success = false;
 
@@ -76,6 +78,11 @@ namespace IMRpatient
 			dlg.Run ();
 		}
 
+		protected void OnEntryUserChanged (object sender, EventArgs e)
+		{
+			userFirstEdit = false;
+		}
+
 		protected void OnEntryPasswdChanged (object sender, EventArgs e)
 		{
 			if (passwdFirstEdit) {
@@ -93,6 +100,17 @@ namespace IMRpatient
 		{
 			Gtk.Main.Quit ();
 		}
+
+		protected void OnEntryUserActivated (object sender, EventArgs e)
+		{
+			entryPasswd.GrabFocus ();
+		}
+
+		protected void OnEntryUserFocusGrabbed (object sender, EventArgs e)
+		{
+			if (userFirstEdit) {
+				entryUser.Text = "";
+			}
+		}
 	}
 }
-

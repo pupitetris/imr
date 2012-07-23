@@ -376,6 +376,9 @@
                 <property name="HasFrame">False</property>
                 <property name="ActivatesDefault">True</property>
                 <property name="InvisibleChar">•</property>
+                <signal name="Activated" handler="OnEntryUserActivated" />
+                <signal name="Changed" handler="OnEntryUserChanged" />
+                <signal name="FocusGrabbed" handler="OnEntryUserFocusGrabbed" />
               </widget>
               <packing>
                 <property name="AutoSize">True</property>
