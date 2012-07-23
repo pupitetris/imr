@@ -79,6 +79,7 @@
                 <property name="CanFocus">True</property>
                 <property name="IsEditable">True</property>
                 <property name="InvisibleChar">•</property>
+                <signal name="Changed" handler="OnBaseUrlEntryChanged" />
               </widget>
               <packing>
                 <property name="LeftAttach">1</property>
@@ -103,6 +104,7 @@
                     <property name="MemberName" />
                     <property name="IsTextCombo">True</property>
                     <property name="Items" translatable="yes" />
+                    <signal name="Changed" handler="OnComboPortChanged" />
                   </widget>
                   <packing>
                     <property name="Position">0</property>

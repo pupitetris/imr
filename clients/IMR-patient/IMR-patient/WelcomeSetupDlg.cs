@@ -41,8 +41,6 @@ namespace IMRpatient
 
 		protected void OnButtonOkClicked (object sender, EventArgs e)
 		{
-			baseUrl = baseUrlEntry.Text;
-			radionic.Port = comboPort.Entry.Text;
 			Destroy ();
 		}
 
@@ -72,6 +70,16 @@ namespace IMRpatient
 			};
 			dlg.Run ();
 			radionic.Port = origPort;
+		}
+
+		protected void OnBaseUrlEntryChanged (object sender, EventArgs e)
+		{
+			baseUrl = baseUrlEntry.Text;
+		}
+
+		protected void OnComboPortChanged (object sender, EventArgs e)
+		{
+			radionic.Port = comboPort.Entry.Text;
 		}
 	}
 }
