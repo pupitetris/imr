@@ -23,16 +23,61 @@ namespace IMRpatient
 			table1.FocusChain = new Gtk.Widget[] { entryUser, entryPasswd, buttonOk, buttonConf };
 		}
 
+		private void devError (string message)
+		{
+			DeviceErrorDlg dlg = new DeviceErrorDlg (config, message);
+			dlg.TransientFor = this;
+			dlg.Response += delegate(object o, Gtk.ResponseArgs args) {
+				switch (args.ResponseId) {
+				case Gtk.ResponseType.Yes:
+					// Retry
+					devProbeTry ();
+					break;
+				case Gtk.ResponseType.Accept:
+					// Ignore
+					Gtk.Main.Quit ();
+					Destroy ();
+					break;
+				}
+			};
+			dlg.Run ();
+			Sensitive = true;
+		}
+
+		private void devProbeTry ()
+		{
+			try {
+				config.radionic.Open ();
+				config.radionic.Probe (delegate (Radionic.RESULT result, string reply) {
+					switch (result) {
+					case Radionic.RESULT.SUCCESS:
+						Gtk.Main.Quit ();
+						Destroy ();
+						break;
+					case Radionic.RESULT.TIMEOUT:
+						devError (Catalog.GetString ("Timeout."));
+						break;
+					default:
+						devError (Catalog.GetString ("Read error."));
+						break;
+					}
+				});
+			} catch (Exception e) {
+				devError (String.Format (Catalog.GetString ("Open: {0}"), e.Message));
+			}
+		}
+
 		private void authTry ()
 		{
 			Sensitive = false;
+			success = false;
+
 			config.charp.credentialsSet (entryUser.Text, Charp.GetMD5HexHash (entryPasswd.Text));
 			config.charp.request ("user_auth", null, new Charp.CharpCtx {
 				success = delegate { 
 					Gtk.Application.Invoke (delegate {
 						success = true;
-						Gtk.Main.Quit ();
-						Destroy ();
+						devProbeTry ();
 					});
 				},
 				error = delegate (Charp.CharpError err, Charp.CharpCtx ctx) {
