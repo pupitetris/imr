@@ -13,8 +13,8 @@ namespace IMRpatient
 		private static readonly string GCONF_PORT = GCONF_APP_BASE + "/port";
 		private static readonly string DEFAULT_BASEURL = "http://www.imr.local/";
 
-		private Charp charp;
-		private Radionic radionic;
+		public Charp charp;
+		public Radionic radionic;
 		private GConf.Client gconf;
 		
 		public AppConfig (Charp charp, Radionic radionic)
@@ -57,18 +57,29 @@ namespace IMRpatient
 			}
 		}
 
-		public string Setup (string defaultBaseUrl)
+		private string SetupDo (string defaultBaseUrl, Gtk.Window parent = null)
 		{
 			string baseUrl = null;
 
 			WelcomeSetupDlg dlg = new WelcomeSetupDlg (defaultBaseUrl, radionic);
-			dlg.Response += delegate(object o, Gtk.ResponseArgs a) {
-				if (a.ResponseId == Gtk.ResponseType.Ok) {
+			dlg.Response += delegate(object o, Gtk.ResponseArgs args) {
+				if (args.ResponseId == Gtk.ResponseType.Ok) {
 					baseUrl = dlg.baseUrl; 
 				}
 			};
+			if (parent != null) {
+				dlg.TransientFor = parent;
+			}
 			dlg.Run ();
 			return baseUrl;
+		}
+
+		public void Setup (Gtk.Window parent = null)
+		{
+			string baseUrl = SetupDo (charp.baseUrl, parent);
+			if (baseUrl != null) {
+				charp.baseUrl = baseUrl;
+			}
 		}
 
 		public bool LoadOrSetup () 
@@ -78,7 +89,7 @@ namespace IMRpatient
 				baseUrl = (string) gconf.Get (GCONF_BASEURL);
 				radionic.Port = (string) gconf.Get (GCONF_PORT);
 			} catch (GConf.NoSuchKeyException) {
-				baseUrl = Setup (DEFAULT_BASEURL);
+				baseUrl = SetupDo (DEFAULT_BASEURL);
 			}
 
 			if (baseUrl == null) {
