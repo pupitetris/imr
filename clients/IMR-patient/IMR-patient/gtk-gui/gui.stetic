@@ -9,10 +9,12 @@
     <widget-library name="../../../../../charp/clients/monoCHARP/monoCHARP-gtk/bin/Debug/monoCHARP-gtk.dll" />
     <widget-library name="../bin/Debug/IMR-patient.exe" internal="true" />
   </import>
-  <widget class="Gtk.Window" id="MainWindow" design-size="400 106">
+  <widget class="Gtk.Window" id="IMRpatient.MainWindow" design-size="400 106">
     <property name="MemberName" />
-    <property name="Title" translatable="yes">MainWindow</property>
-    <property name="WindowPosition">CenterOnParent</property>
+    <property name="Title" translatable="yes">Instituto Mexicano de Radiónica</property>
+    <property name="Icon">resource:IMRpatient.img.imr.ico</property>
+    <property name="WindowPosition">Center</property>
+    <signal name="DestroyEvent" handler="OnDestroyEvent" />
     <child>
       <widget class="Gtk.VBox" id="vbox2">
         <property name="MemberName" />
@@ -508,6 +510,190 @@
           </widget>
           <packing>
             <property name="Position">1</property>
+            <property name="Expand">False</property>
+            <property name="Fill">False</property>
+          </packing>
+        </child>
+      </widget>
+    </child>
+  </widget>
+  <widget class="Gtk.Dialog" id="IMRpatient.DeviceErrorDlg" design-size="452 199">
+    <property name="MemberName" />
+    <property name="Title" translatable="yes">Device Error</property>
+    <property name="Icon">stock:gtk-dialog-error Dialog</property>
+    <property name="TypeHint">Dialog</property>
+    <property name="WindowPosition">CenterOnParent</property>
+    <property name="Modal">True</property>
+    <property name="Resizable">False</property>
+    <property name="AllowGrow">False</property>
+    <property name="DefaultWidth">300</property>
+    <property name="Buttons">3</property>
+    <property name="HelpButton">False</property>
+    <child internal-child="VBox">
+      <widget class="Gtk.VBox" id="dialog1_VBox">
+        <property name="MemberName" />
+        <property name="BorderWidth">2</property>
+        <child>
+          <widget class="Gtk.Alignment" id="alignment3">
+            <property name="MemberName" />
+            <property name="LeftPadding">16</property>
+            <property name="TopPadding">8</property>
+            <property name="RightPadding">16</property>
+            <property name="BottomPadding">8</property>
+            <child>
+              <widget class="Gtk.VBox" id="vbox3">
+                <property name="MemberName" />
+                <property name="Spacing">6</property>
+                <child>
+                  <widget class="Gtk.HBox" id="hbox1">
+                    <property name="MemberName" />
+                    <child>
+                      <widget class="Gtk.Alignment" id="alignment2">
+                        <property name="MemberName" />
+                        <property name="BottomPadding">16</property>
+                        <child>
+                          <widget class="Gtk.Fixed" id="fixed1">
+                            <property name="MemberName" />
+                            <property name="HasWindow">False</property>
+                            <child>
+                              <widget class="Gtk.Image" id="image1199">
+                                <property name="MemberName" />
+                                <property name="Pixbuf">stock:gtk-preferences Dialog</property>
+                              </widget>
+                            </child>
+                            <child>
+                              <widget class="Gtk.Image" id="image1200">
+                                <property name="MemberName" />
+                                <property name="Pixbuf">stock:gtk-dialog-error Dnd</property>
+                              </widget>
+                              <packing>
+                                <property name="X">28</property>
+                                <property name="Y">23</property>
+                              </packing>
+                            </child>
+                          </widget>
+                        </child>
+                      </widget>
+                      <packing>
+                        <property name="Position">0</property>
+                        <property name="AutoSize">True</property>
+                        <property name="Expand">False</property>
+                        <property name="Fill">False</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <widget class="Gtk.Alignment" id="alignment4">
+                        <property name="MemberName" />
+                        <property name="LeftPadding">8</property>
+                        <property name="TopPadding">20</property>
+                        <child>
+                          <widget class="Gtk.Label" id="label3">
+                            <property name="MemberName" />
+                            <property name="Xalign">0</property>
+                            <property name="Yalign">0</property>
+                            <property name="LabelProp" translatable="yes">A device error has occurred:</property>
+                            <property name="Selectable">True</property>
+                          </widget>
+                        </child>
+                      </widget>
+                      <packing>
+                        <property name="Position">1</property>
+                        <property name="AutoSize">True</property>
+                        <property name="Expand">False</property>
+                        <property name="Fill">False</property>
+                      </packing>
+                    </child>
+                  </widget>
+                  <packing>
+                    <property name="Position">0</property>
+                    <property name="AutoSize">True</property>
+                    <property name="Expand">False</property>
+                    <property name="Fill">False</property>
+                  </packing>
+                </child>
+                <child>
+                  <widget class="Gtk.Alignment" id="alignment5">
+                    <property name="MemberName" />
+                    <child>
+                      <widget class="Gtk.Label" id="labelMessage">
+                        <property name="MemberName" />
+                        <property name="LabelProp">Message</property>
+                      </widget>
+                    </child>
+                  </widget>
+                  <packing>
+                    <property name="Position">1</property>
+                    <property name="AutoSize">True</property>
+                    <property name="Expand">False</property>
+                    <property name="Fill">False</property>
+                  </packing>
+                </child>
+              </widget>
+            </child>
+          </widget>
+          <packing>
+            <property name="Position">0</property>
+            <property name="AutoSize">True</property>
+            <property name="Expand">False</property>
+            <property name="Fill">False</property>
+          </packing>
+        </child>
+      </widget>
+    </child>
+    <child internal-child="ActionArea">
+      <widget class="Gtk.HButtonBox" id="dialog1_ActionArea">
+        <property name="MemberName" />
+        <property name="Spacing">10</property>
+        <property name="BorderWidth">5</property>
+        <property name="Size">3</property>
+        <property name="LayoutStyle">End</property>
+        <child>
+          <widget class="Gtk.Button" id="buttonConfigure">
+            <property name="MemberName" />
+            <property name="CanDefault">True</property>
+            <property name="CanFocus">True</property>
+            <property name="Type">TextAndIcon</property>
+            <property name="Icon">stock:gtk-preferences Menu</property>
+            <property name="Label" translatable="yes">_Configure</property>
+            <property name="UseUnderline">True</property>
+            <property name="ResponseId">0</property>
+            <signal name="Clicked" handler="OnButtonConfigureClicked" />
+          </widget>
+          <packing>
+            <property name="Expand">False</property>
+            <property name="Fill">False</property>
+          </packing>
+        </child>
+        <child>
+          <widget class="Gtk.Button" id="buttonRetry">
+            <property name="MemberName" />
+            <property name="CanFocus">True</property>
+            <property name="Type">TextAndIcon</property>
+            <property name="Icon">stock:gtk-refresh Menu</property>
+            <property name="Label" translatable="yes">_Retry</property>
+            <property name="UseUnderline">True</property>
+            <property name="ResponseId">-8</property>
+            <signal name="Clicked" handler="OnButtonRetryClicked" />
+          </widget>
+          <packing>
+            <property name="Position">1</property>
+            <property name="Expand">False</property>
+            <property name="Fill">False</property>
+          </packing>
+        </child>
+        <child>
+          <widget class="Gtk.Button" id="buttonIgnore">
+            <property name="MemberName" />
+            <property name="CanDefault">True</property>
+            <property name="CanFocus">True</property>
+            <property name="Type">TextOnly</property>
+            <property name="Label" translatable="yes">_Ignore</property>
+            <property name="UseUnderline">True</property>
+            <property name="ResponseId">-3</property>
+            <signal name="Clicked" handler="OnButtonIgnoreClicked" />
+          </widget>
+          <packing>
+            <property name="Position">2</property>
             <property name="Expand">False</property>
             <property name="Fill">False</property>
           </packing>

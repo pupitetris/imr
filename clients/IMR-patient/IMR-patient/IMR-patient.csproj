@@ -53,7 +53,6 @@
   <ItemGroup>
     <Compile Include="gtk-gui\generated.cs" />
     <Compile Include="MainWindow.cs" />
-    <Compile Include="gtk-gui\MainWindow.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="AssemblyInfo.cs" />
     <Compile Include="WelcomeDlg.cs" />
@@ -64,6 +63,9 @@
     <Compile Include="ProbeLogDlg.cs" />
     <Compile Include="gtk-gui\IMRpatient.ProbeLogDlg.cs" />
     <Compile Include="AppConfig.cs" />
+    <Compile Include="DeviceErrorDlg.cs" />
+    <Compile Include="gtk-gui\IMRpatient.DeviceErrorDlg.cs" />
+    <Compile Include="gtk-gui\IMRpatient.MainWindow.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

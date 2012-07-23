@@ -12,10 +12,9 @@ namespace IMRpatient
 
 			Application.Init ();
 
-			Radionic radionic = new Radionic ();
 			CharpGtk charp = new CharpGtk ();
+			AppConfig config = new AppConfig (charp, new Radionic ());
 
-			AppConfig config = new AppConfig (charp, radionic);
 			if (!config.LoadOrSetup ()) {
 				return;
 			}
@@ -31,7 +30,7 @@ namespace IMRpatient
 				return;
 			}
 
-			MainWindow win = new MainWindow (charp);
+			MainWindow win = new MainWindow (config);
 			charp.parent = win;
 			win.Show ();
 			Application.Run ();
