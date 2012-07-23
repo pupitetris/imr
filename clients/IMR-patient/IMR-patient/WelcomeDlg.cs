@@ -7,17 +7,15 @@ namespace IMRpatient
 {
 	public partial class WelcomeDlg : Gtk.Window
 	{
-		private Charp charp;
-		private Radionic radionic;
+		private AppConfig config;
 		private bool userFirstEdit;
 		private bool passwdFirstEdit;
 		private bool success;
 
-		public WelcomeDlg (Charp charp, Radionic radionic) : base (Gtk.WindowType.Toplevel)
+		public WelcomeDlg (AppConfig config) : base (Gtk.WindowType.Toplevel)
 		{
 			this.Build ();
-			this.charp = charp;
-			this.radionic = radionic;
+			this.config = config;
 			userFirstEdit = true;
 			passwdFirstEdit = true;
 			success = false;
@@ -28,8 +26,8 @@ namespace IMRpatient
 		private void authTry ()
 		{
 			Sensitive = false;
-			charp.credentialsSet (entryUser.Text, Charp.GetMD5HexHash (entryPasswd.Text));
-			charp.request ("user_auth", null, new Charp.CharpCtx {
+			config.charp.credentialsSet (entryUser.Text, Charp.GetMD5HexHash (entryPasswd.Text));
+			config.charp.request ("user_auth", null, new Charp.CharpCtx {
 				success = delegate { 
 					Gtk.Application.Invoke (delegate {
 						success = true;
@@ -68,14 +66,7 @@ namespace IMRpatient
 
 		protected void OnButtonConfClicked (object sender, EventArgs e)
 		{
-			WelcomeSetupDlg dlg = new WelcomeSetupDlg (charp.baseUrl, radionic);
-			dlg.Response += delegate(object o, Gtk.ResponseArgs args) {
-				if (args.ResponseId == Gtk.ResponseType.Ok) {
-					charp.baseUrl = dlg.baseUrl; 
-				}
-			};
-			dlg.TransientFor = this;
-			dlg.Run ();
+			config.Setup (this);
 		}
 
 		protected void OnEntryUserChanged (object sender, EventArgs e)
