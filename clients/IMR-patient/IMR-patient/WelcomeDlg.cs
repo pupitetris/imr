@@ -67,7 +67,11 @@ namespace IMRpatient
 		protected void OnButtonConfClicked (object sender, EventArgs e)
 		{
 			WelcomeSetupDlg dlg = new WelcomeSetupDlg (charp.baseUrl, radionic);
-			dlg.Response += delegate { charp.baseUrl = dlg.baseUrl; };
+			dlg.Response += delegate(object o, Gtk.ResponseArgs args) {
+				if (args.ResponseId == Gtk.ResponseType.Ok) {
+					charp.baseUrl = dlg.baseUrl; 
+				}
+			};
 			dlg.TransientFor = this;
 			dlg.Run ();
 		}

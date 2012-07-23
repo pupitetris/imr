@@ -8,6 +8,7 @@ namespace IMRpatient
 		public string baseUrl;
 		private Radionic radionic;
 		private int comboPortSize;
+		private string origPort;
 
 		private void findPorts ()
 		{
@@ -28,6 +29,10 @@ namespace IMRpatient
 			this.baseUrl = baseUrl;
 			this.radionic = radionic;
 
+			origPort = radionic.Port;
+			if (origPort != null) {
+				comboPort.Entry.Text = origPort;
+			}
 			comboPortSize = 0;
 
 			baseUrlEntry.Text = baseUrl;
@@ -37,7 +42,7 @@ namespace IMRpatient
 		protected void OnButtonOkClicked (object sender, EventArgs e)
 		{
 			baseUrl = baseUrlEntry.Text;
-			Respond (1);
+			radionic.Port = comboPort.Entry.Text;
 			Destroy ();
 		}
 
@@ -66,6 +71,7 @@ namespace IMRpatient
 				}
 			};
 			dlg.Run ();
+			radionic.Port = origPort;
 		}
 	}
 }

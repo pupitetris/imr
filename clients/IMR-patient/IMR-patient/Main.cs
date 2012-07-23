@@ -46,6 +46,7 @@ namespace IMRpatient
 		private static readonly string APP_NAME = "IMR-patient";
 		private static readonly string GCONF_APP_BASE = "/apps/" + APP_NAME;
 		private static readonly string GCONF_BASEURL = GCONF_APP_BASE + "/baseUrl";
+		private static readonly string GCONF_PORT = GCONF_APP_BASE + "/port";
 		private static readonly string DEFAULT_BASEURL = "http://www.imr.local/";
 
 		public static void Main (string[] args)
@@ -60,15 +61,19 @@ namespace IMRpatient
 			string baseUrl = null;
 			try {
 				baseUrl = (string) gconf.Get (GCONF_BASEURL);
+				radionic.Port = (string) gconf.Get (GCONF_PORT);
 			} catch (GConf.NoSuchKeyException) {
 				WelcomeSetupDlg dlg = new WelcomeSetupDlg (DEFAULT_BASEURL, radionic);
-				dlg.Response += delegate { baseUrl = dlg.baseUrl; };
+				dlg.Response += delegate(object o, Gtk.ResponseArgs a) {
+					if (a.ResponseId == Gtk.ResponseType.Ok) {
+						baseUrl = dlg.baseUrl; 
+					}
+				};
 				dlg.Run ();
 			}
 			if (baseUrl == null) {
 				return;
 			}
-			gconf.Set (GCONF_BASEURL, baseUrl);
 
 			Charp.BASE_URL = baseUrl;
 			CharpGtk charp = new CharpGtk ();
@@ -77,6 +82,11 @@ namespace IMRpatient
 			charp.parent = wDlg;
 			wDlg.Show ();
 			Application.Run ();
+
+			gconf.Set (GCONF_BASEURL, charp.baseUrl);
+			if (radionic.Port != null && radionic.Port != "") {
+				gconf.Set (GCONF_PORT, radionic.Port);
+			}
 
 			if (!wDlg.authSuccess ()) {
 				return;
