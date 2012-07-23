@@ -15,17 +15,17 @@ namespace IMRpatient
 			Radionic radionic = new Radionic ();
 			CharpGtk charp = new CharpGtk ();
 
-			AppConfig conf = new AppConfig (charp, radionic);
-			if (!conf.LoadOrSetup ()) {
+			AppConfig config = new AppConfig (charp, radionic);
+			if (!config.LoadOrSetup ()) {
 				return;
 			}
 
-			WelcomeDlg wDlg = new WelcomeDlg (charp, radionic);
+			WelcomeDlg wDlg = new WelcomeDlg (config);
 			charp.parent = wDlg;
 			wDlg.Show ();
 			Application.Run ();
 
-			conf.Save ();
+			config.Save ();
 
 			if (!wDlg.authSuccess ()) {
 				return;
