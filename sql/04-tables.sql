@@ -7,22 +7,368 @@
 -- Licensed under the EUPL V.1.1. See the file LICENSE.txt for copying conditions.
 
 
-CREATE SEQUENCE public.account_persona_id_seq;
-
-CREATE TABLE public.account (
-                persona_id INTEGER NOT NULL DEFAULT nextval('public.account_persona_id_seq'),
-                username VARCHAR(20) NOT NULL,
-                passwd VARCHAR(32) NOT NULL,
-                status charp_account_status NOT NULL,
-                CONSTRAINT account_pk PRIMARY KEY (persona_id)
+CREATE TABLE public.hist_type (
+                code imr_msg_code NOT NULL,
+                type imr_msg_type NOT NULL,
+                area imr_msg_area NOT NULL,
+                CONSTRAINT hist_type_pk PRIMARY KEY (code)
 );
 
 
-ALTER SEQUENCE public.account_persona_id_seq OWNED BY public.account.persona_id;
+CREATE TABLE public.message (
+                code imr_msg_code NOT NULL,
+                lang imr_lang NOT NULL,
+                message VARCHAR NOT NULL,
+                CONSTRAINT message_pk PRIMARY KEY (code, lang)
+);
+
+
+CREATE SEQUENCE public.country_country_id_seq;
+
+CREATE TABLE public.country (
+                country_id INTEGER NOT NULL DEFAULT nextval('public.country_country_id_seq'),
+                ct_name VARCHAR NOT NULL,
+                ct_name_long VARCHAR NOT NULL,
+                ct_abrev VARCHAR NOT NULL,
+                CONSTRAINT country_pk PRIMARY KEY (country_id)
+);
+
+
+ALTER SEQUENCE public.country_country_id_seq OWNED BY public.country.country_id;
+
+CREATE SEQUENCE public.state_state_id_seq;
+
+CREATE TABLE public.state (
+                state_id VARCHAR NOT NULL DEFAULT nextval('public.state_state_id_seq'),
+                st_name VARCHAR NOT NULL,
+                st_name_long VARCHAR NOT NULL,
+                st_abrev VARCHAR NOT NULL,
+                country_id INTEGER NOT NULL,
+                CONSTRAINT state_pk PRIMARY KEY (state_id)
+);
+
+
+ALTER SEQUENCE public.state_state_id_seq OWNED BY public.state.state_id;
+
+CREATE SEQUENCE public.muni_muni_id_seq;
+
+CREATE TABLE public.muni (
+                muni_id INTEGER NOT NULL DEFAULT nextval('public.muni_muni_id_seq'),
+                m_name VARCHAR NOT NULL,
+                state_id VARCHAR NOT NULL,
+                CONSTRAINT muni_pk PRIMARY KEY (muni_id)
+);
+
+
+ALTER SEQUENCE public.muni_muni_id_seq OWNED BY public.muni.muni_id;
+
+CREATE TABLE public.city (
+                city_id INTEGER NOT NULL,
+                c_name VARCHAR NOT NULL,
+                muni_id INTEGER NOT NULL,
+                CONSTRAINT city_pk PRIMARY KEY (city_id)
+);
+
+
+CREATE SEQUENCE public.zipcode_zipcode_id_seq;
+
+CREATE TABLE public.zipcode (
+                zipcode_id INTEGER NOT NULL DEFAULT nextval('public.zipcode_zipcode_id_seq'),
+                muni_id INTEGER NOT NULL,
+                city_id INTEGER NOT NULL,
+                z_code VARCHAR NOT NULL,
+                CONSTRAINT zipcode_pk PRIMARY KEY (zipcode_id)
+);
+
+
+ALTER SEQUENCE public.zipcode_zipcode_id_seq OWNED BY public.zipcode.zipcode_id;
+
+CREATE SEQUENCE public.asenta_asenta_id_seq;
+
+CREATE TABLE public.asenta (
+                asenta_id INTEGER NOT NULL DEFAULT nextval('public.asenta_asenta_id_seq'),
+                zipcode_id INTEGER NOT NULL,
+                a_name VARCHAR NOT NULL,
+                a_type imr_asenta_type NOT NULL,
+                CONSTRAINT asenta_pk PRIMARY KEY (asenta_id)
+);
+
+
+ALTER SEQUENCE public.asenta_asenta_id_seq OWNED BY public.asenta.asenta_id;
+
+CREATE TABLE public.inst (
+                inst_id INTEGER NOT NULL,
+                inst_contact_persona_id INTEGER NOT NULL,
+                inst_name VARCHAR NOT NULL,
+                inst_status imr_record_status NOT NULL,
+                CONSTRAINT inst_pk PRIMARY KEY (inst_id)
+);
+
+
+CREATE SEQUENCE public.product_product_id_seq;
+
+CREATE TABLE public.product (
+                product_id INTEGER NOT NULL DEFAULT nextval('public.product_product_id_seq'),
+                inst_id INTEGER NOT NULL,
+                description VARCHAR NOT NULL,
+                type imr_product_type NOT NULL,
+                price INTEGER NOT NULL,
+                CONSTRAINT product_pk PRIMARY KEY (product_id, inst_id)
+);
+
+
+ALTER SEQUENCE public.product_product_id_seq OWNED BY public.product.product_id;
+
+CREATE SEQUENCE public.ailment_ailment_id_seq;
+
+CREATE TABLE public.ailment (
+                ailment_id INTEGER NOT NULL DEFAULT nextval('public.ailment_ailment_id_seq'),
+                inst_id INTEGER NOT NULL,
+                name VARCHAR NOT NULL,
+                CONSTRAINT ailment_pk PRIMARY KEY (ailment_id, inst_id)
+);
+
+
+ALTER SEQUENCE public.ailment_ailment_id_seq OWNED BY public.ailment.ailment_id;
+
+CREATE UNIQUE INDEX ailment_idx
+ ON public.ailment
+ ( name DESC );
+
+CREATE SEQUENCE public.persona_persona_id_seq;
+
+CREATE TABLE public.persona (
+                persona_id INTEGER NOT NULL DEFAULT nextval('public.persona_persona_id_seq'),
+                inst_id INTEGER NOT NULL,
+                type imr_persona_type NOT NULL,
+                prefix VARCHAR,
+                name VARCHAR NOT NULL,
+                paterno VARCHAR,
+                materno VARCHAR,
+                gender imr_gender NOT NULL,
+                picture VARCHAR,
+                remarks VARCHAR,
+                status imr_record_status NOT NULL,
+                CONSTRAINT persona_pk PRIMARY KEY (persona_id, inst_id)
+);
+COMMENT ON COLUMN public.persona.picture IS 'SHA-256 of picture';
+
+
+ALTER SEQUENCE public.persona_persona_id_seq OWNED BY public.persona.persona_id;
+
+CREATE SEQUENCE public.address_address_id_seq;
+
+CREATE TABLE public.address (
+                address_id INTEGER NOT NULL DEFAULT nextval('public.address_address_id_seq'),
+                inst_id INTEGER NOT NULL,
+                persona_id INTEGER NOT NULL,
+                street VARCHAR NOT NULL,
+                num_ext VARCHAR NOT NULL,
+                num_int VARCHAR NOT NULL,
+                asenta_id INTEGER NOT NULL,
+                CONSTRAINT address_pk PRIMARY KEY (address_id, inst_id)
+);
+
+
+ALTER SEQUENCE public.address_address_id_seq OWNED BY public.address.address_id;
+
+CREATE SEQUENCE public.email_email_id_seq;
+
+CREATE TABLE public.email (
+                email_id INTEGER NOT NULL DEFAULT nextval('public.email_email_id_seq'),
+                inst_id INTEGER NOT NULL,
+                persona_id INTEGER NOT NULL,
+                email VARCHAR NOT NULL,
+                CONSTRAINT email_pk PRIMARY KEY (email_id, inst_id)
+);
+
+
+ALTER SEQUENCE public.email_email_id_seq OWNED BY public.email.email_id;
+
+CREATE SEQUENCE public.phone_phone_id_seq;
+
+CREATE TABLE public.phone (
+                phone_id INTEGER NOT NULL DEFAULT nextval('public.phone_phone_id_seq'),
+                inst_id INTEGER NOT NULL,
+                persona_id INTEGER NOT NULL,
+                number VARCHAR NOT NULL,
+                type imr_phone_type NOT NULL,
+                status imr_record_status NOT NULL,
+                CONSTRAINT phone_pk PRIMARY KEY (phone_id, inst_id)
+);
+
+
+ALTER SEQUENCE public.phone_phone_id_seq OWNED BY public.phone.phone_id;
+
+CREATE TABLE public.patient (
+                persona_id INTEGER NOT NULL,
+                inst_id INTEGER NOT NULL,
+                birth DATE NOT NULL,
+                CONSTRAINT patient_pk PRIMARY KEY (persona_id, inst_id)
+);
+
+
+CREATE SEQUENCE public.analysis_analysis_id_seq;
+
+CREATE TABLE public.analysis (
+                analysis_id VARCHAR NOT NULL DEFAULT nextval('public.analysis_analysis_id_seq'),
+                inst_id INTEGER NOT NULL,
+                persona_id INTEGER NOT NULL,
+                ailment_id INTEGER,
+                name VARCHAR,
+                timestamp TIMESTAMP NOT NULL,
+                height SMALLINT NOT NULL,
+                weight SMALLINT NOT NULL,
+                blood_pressure_sys SMALLINT NOT NULL,
+                blood_pressure_dia SMALLINT NOT NULL,
+                bmi SMALLINT NOT NULL,
+                temp SMALLINT NOT NULL,
+                heart_rate SMALLINT,
+                resp_rate SMALLINT,
+                blood_tension SMALLINT,
+                remarks VARCHAR,
+                level imr_level NOT NULL,
+                CONSTRAINT analysis_pk PRIMARY KEY (analysis_id, inst_id)
+);
+COMMENT ON COLUMN public.analysis.blood_pressure_sys IS 'Systolic (maximum)';
+COMMENT ON COLUMN public.analysis.blood_pressure_dia IS 'Diastolic (minimum)';
+COMMENT ON COLUMN public.analysis.bmi IS 'Body - Mass Index';
+COMMENT ON COLUMN public.analysis.blood_tension IS 'For the hypertense, max. systolic pressure registered?';
+
+
+ALTER SEQUENCE public.analysis_analysis_id_seq OWNED BY public.analysis.analysis_id;
+
+CREATE SEQUENCE public.remedy_remedy_id_seq;
+
+CREATE TABLE public.remedy (
+                remedy_id INTEGER NOT NULL DEFAULT nextval('public.remedy_remedy_id_seq'),
+                inst_id INTEGER NOT NULL,
+                r_name VARCHAR NOT NULL,
+                autosimile BIGINT NOT NULL,
+                CONSTRAINT remedy_pk PRIMARY KEY (remedy_id, inst_id)
+);
+
+
+ALTER SEQUENCE public.remedy_remedy_id_seq OWNED BY public.remedy.remedy_id;
+
+CREATE SEQUENCE public.code_code_id_seq;
+
+CREATE TABLE public.code (
+                code_id INTEGER NOT NULL DEFAULT nextval('public.code_code_id_seq'),
+                inst_id INTEGER NOT NULL,
+                c_name VARCHAR NOT NULL,
+                code BIGINT NOT NULL,
+                description VARCHAR NOT NULL,
+                CONSTRAINT code_pk PRIMARY KEY (code_id, inst_id)
+);
+
+
+ALTER SEQUENCE public.code_code_id_seq OWNED BY public.code.code_id;
+
+CREATE SEQUENCE public.teleheal_teleheal_id_seq;
+
+CREATE TABLE public.teleheal (
+                teleheal_id INTEGER NOT NULL DEFAULT nextval('public.teleheal_teleheal_id_seq'),
+                inst_id INTEGER NOT NULL,
+                persona_id INTEGER NOT NULL,
+                code_id INTEGER NOT NULL,
+                remedy_id INTEGER NOT NULL,
+                analysis_id VARCHAR NOT NULL,
+                type imr_teleheal_type NOT NULL,
+                program VARCHAR,
+                starts TIMESTAMP NOT NULL,
+                ends TIMESTAMP NOT NULL,
+                CONSTRAINT teleheal_pk PRIMARY KEY (teleheal_id, inst_id)
+);
+
+
+ALTER SEQUENCE public.teleheal_teleheal_id_seq OWNED BY public.teleheal.teleheal_id;
+
+CREATE TABLE public.analysis_code (
+                analysis_id VARCHAR NOT NULL,
+                code_id INTEGER NOT NULL,
+                inst_id INTEGER NOT NULL,
+                value SMALLINT NOT NULL,
+                level imr_level NOT NULL,
+                suggested_levels imr_level ARRAY NOT NULL,
+                CONSTRAINT analysis_code_pk PRIMARY KEY (analysis_id, code_id, inst_id)
+);
+
+
+CREATE TABLE public.remedy_code (
+                remedy_id INTEGER NOT NULL,
+                code_id INTEGER NOT NULL,
+                inst_id INTEGER NOT NULL,
+                power INTEGER NOT NULL,
+                method imr_remedy_type NOT NULL,
+                CONSTRAINT remedy_code_pk PRIMARY KEY (remedy_id, code_id, inst_id)
+);
+
+
+CREATE SEQUENCE public.category_category_id_seq;
+
+CREATE TABLE public.category (
+                category_id INTEGER NOT NULL DEFAULT nextval('public.category_category_id_seq'),
+                inst_id INTEGER NOT NULL,
+                name VARCHAR NOT NULL,
+                parent_category_id INTEGER,
+                parent_inst_id INTEGER,
+                CONSTRAINT category_pk PRIMARY KEY (category_id, inst_id)
+);
+
+
+ALTER SEQUENCE public.category_category_id_seq OWNED BY public.category.category_id;
+
+CREATE TABLE public.category_code (
+                category_id INTEGER NOT NULL,
+                code_id INTEGER NOT NULL,
+                inst_id INTEGER NOT NULL,
+                CONSTRAINT category_code_pk PRIMARY KEY (category_id, code_id, inst_id)
+);
+
+
+CREATE TABLE public.account (
+                persona_id INTEGER NOT NULL,
+                inst_id INTEGER NOT NULL,
+                username VARCHAR(20) NOT NULL,
+                passwd VARCHAR(32) NOT NULL,
+                status charp_account_status NOT NULL,
+                CONSTRAINT account_pk PRIMARY KEY (persona_id, inst_id)
+);
+
 
 CREATE UNIQUE INDEX account_idx
  ON public.account
  ( username );
+
+CREATE SEQUENCE public.hist_hist_id_seq;
+
+CREATE TABLE public.hist (
+                hist_id INTEGER NOT NULL DEFAULT nextval('public.hist_hist_id_seq'),
+                inst_id INTEGER NOT NULL,
+                subject_persona_id INTEGER NOT NULL,
+                code imr_msg_code NOT NULL,
+                persona_id INTEGER NOT NULL,
+                CONSTRAINT hist_pk PRIMARY KEY (hist_id, inst_id)
+);
+
+
+ALTER SEQUENCE public.hist_hist_id_seq OWNED BY public.hist.hist_id;
+
+CREATE SEQUENCE public.hist_detail_hist_detail_id_seq;
+
+CREATE TABLE public.hist_detail (
+                hist_detail_id INTEGER NOT NULL DEFAULT nextval('public.hist_detail_hist_detail_id_seq'),
+                inst_id INTEGER NOT NULL,
+                hist_id INTEGER NOT NULL,
+                pos SMALLINT NOT NULL,
+                num INTEGER,
+                str VARCHAR,
+                CONSTRAINT hist_detail_pk PRIMARY KEY (hist_detail_id, inst_id)
+);
+
+
+ALTER SEQUENCE public.hist_detail_hist_detail_id_seq OWNED BY public.hist_detail.hist_detail_id;
 
 CREATE SEQUENCE public.error_log_error_log_id_seq;
 
@@ -43,19 +389,286 @@ ALTER SEQUENCE public.error_log_error_log_id_seq OWNED BY public.error_log.error
 
 CREATE TABLE public.request (
                 request_id VARCHAR(64) NOT NULL,
-                persona_id INTEGER NOT NULL,
+                inst_id INTEGER NOT NULL,
                 timestamp TIMESTAMP NOT NULL,
                 ip_addr INET NOT NULL,
                 proname VARCHAR NOT NULL,
                 params VARCHAR(1024) NOT NULL,
+                persona_id INTEGER NOT NULL,
                 CONSTRAINT request_pk PRIMARY KEY (request_id)
 );
 COMMENT ON COLUMN public.request.proname IS 'Nombre del remote procedure que se va a llamar.';
 
 
+ALTER TABLE public.message ADD CONSTRAINT hist_type_hist_msg_fk
+FOREIGN KEY (code)
+REFERENCES public.hist_type (code)
+ON DELETE NO ACTION
+ON UPDATE NO ACTION
+NOT DEFERRABLE;
+
+ALTER TABLE public.hist ADD CONSTRAINT hist_type_hist_fk
+FOREIGN KEY (code)
+REFERENCES public.hist_type (code)
+ON DELETE NO ACTION
+ON UPDATE NO ACTION
+NOT DEFERRABLE;
+
+ALTER TABLE public.state ADD CONSTRAINT country_state_fk
+FOREIGN KEY (country_id)
+REFERENCES public.country (country_id)
+ON DELETE NO ACTION
+ON UPDATE NO ACTION
+NOT DEFERRABLE;
+
+ALTER TABLE public.muni ADD CONSTRAINT state_muni_fk
+FOREIGN KEY (state_id)
+REFERENCES public.state (state_id)
+ON DELETE NO ACTION
+ON UPDATE NO ACTION
+NOT DEFERRABLE;
+
+ALTER TABLE public.zipcode ADD CONSTRAINT muni_zipcode_fk
+FOREIGN KEY (muni_id)
+REFERENCES public.muni (muni_id)
+ON DELETE NO ACTION
+ON UPDATE NO ACTION
+NOT DEFERRABLE;
+
+ALTER TABLE public.city ADD CONSTRAINT muni_city_fk
+FOREIGN KEY (muni_id)
+REFERENCES public.muni (muni_id)
+ON DELETE NO ACTION
+ON UPDATE NO ACTION
+NOT DEFERRABLE;
+
+ALTER TABLE public.zipcode ADD CONSTRAINT city_zipcode_fk
+FOREIGN KEY (city_id)
+REFERENCES public.city (city_id)
+ON DELETE NO ACTION
+ON UPDATE NO ACTION
+NOT DEFERRABLE;
+
+ALTER TABLE public.asenta ADD CONSTRAINT zipcode_asenta_fk
+FOREIGN KEY (zipcode_id)
+REFERENCES public.zipcode (zipcode_id)
+ON DELETE NO ACTION
+ON UPDATE NO ACTION
+NOT DEFERRABLE;
+
+ALTER TABLE public.address ADD CONSTRAINT asenta_address_fk
+FOREIGN KEY (asenta_id)
+REFERENCES public.asenta (asenta_id)
+ON DELETE NO ACTION
+ON UPDATE NO ACTION
+NOT DEFERRABLE;
+
+ALTER TABLE public.account ADD CONSTRAINT inst_account_fk
+FOREIGN KEY (inst_id)
+REFERENCES public.inst (inst_id)
+ON DELETE NO ACTION
+ON UPDATE NO ACTION
+NOT DEFERRABLE;
+
+ALTER TABLE public.category ADD CONSTRAINT inst_category_fk
+FOREIGN KEY (inst_id)
+REFERENCES public.inst (inst_id)
+ON DELETE NO ACTION
+ON UPDATE NO ACTION
+NOT DEFERRABLE;
+
+ALTER TABLE public.code ADD CONSTRAINT inst_code_fk
+FOREIGN KEY (inst_id)
+REFERENCES public.inst (inst_id)
+ON DELETE NO ACTION
+ON UPDATE NO ACTION
+NOT DEFERRABLE;
+
+ALTER TABLE public.remedy ADD CONSTRAINT inst_remedy_fk
+FOREIGN KEY (inst_id)
+REFERENCES public.inst (inst_id)
+ON DELETE NO ACTION
+ON UPDATE NO ACTION
+NOT DEFERRABLE;
+
+ALTER TABLE public.persona ADD CONSTRAINT inst_persona_fk
+FOREIGN KEY (inst_id)
+REFERENCES public.inst (inst_id)
+ON DELETE NO ACTION
+ON UPDATE NO ACTION
+NOT DEFERRABLE;
+
+ALTER TABLE public.ailment ADD CONSTRAINT inst_ailment_fk
+FOREIGN KEY (inst_id)
+REFERENCES public.inst (inst_id)
+ON DELETE NO ACTION
+ON UPDATE NO ACTION
+NOT DEFERRABLE;
+
+ALTER TABLE public.product ADD CONSTRAINT inst_product_fk
+FOREIGN KEY (inst_id)
+REFERENCES public.inst (inst_id)
+ON DELETE NO ACTION
+ON UPDATE NO ACTION
+NOT DEFERRABLE;
+
+ALTER TABLE public.analysis ADD CONSTRAINT ailment_analysis_fk
+FOREIGN KEY (inst_id, ailment_id)
+REFERENCES public.ailment (inst_id, ailment_id)
+ON DELETE NO ACTION
+ON UPDATE NO ACTION
+NOT DEFERRABLE;
+
+ALTER TABLE public.patient ADD CONSTRAINT persona_patient_fk
+FOREIGN KEY (inst_id, persona_id)
+REFERENCES public.persona (inst_id, persona_id)
+ON DELETE NO ACTION
+ON UPDATE NO ACTION
+NOT DEFERRABLE;
+
+ALTER TABLE public.phone ADD CONSTRAINT persona_phone_fk
+FOREIGN KEY (inst_id, persona_id)
+REFERENCES public.persona (inst_id, persona_id)
+ON DELETE NO ACTION
+ON UPDATE NO ACTION
+NOT DEFERRABLE;
+
+ALTER TABLE public.email ADD CONSTRAINT persona_email_fk
+FOREIGN KEY (inst_id, persona_id)
+REFERENCES public.persona (inst_id, persona_id)
+ON DELETE NO ACTION
+ON UPDATE NO ACTION
+NOT DEFERRABLE;
+
+ALTER TABLE public.address ADD CONSTRAINT persona_address_fk
+FOREIGN KEY (inst_id, persona_id)
+REFERENCES public.persona (inst_id, persona_id)
+ON DELETE NO ACTION
+ON UPDATE NO ACTION
+NOT DEFERRABLE;
+
+ALTER TABLE public.hist ADD CONSTRAINT persona_hist_fk
+FOREIGN KEY (inst_id, subject_persona_id)
+REFERENCES public.persona (inst_id, persona_id)
+ON DELETE NO ACTION
+ON UPDATE NO ACTION
+NOT DEFERRABLE;
+
+ALTER TABLE public.account ADD CONSTRAINT persona_account_fk
+FOREIGN KEY (inst_id, persona_id)
+REFERENCES public.persona (inst_id, persona_id)
+ON DELETE NO ACTION
+ON UPDATE NO ACTION
+NOT DEFERRABLE;
+
+ALTER TABLE public.inst ADD CONSTRAINT persona_inst_fk
+FOREIGN KEY (inst_contact_persona_id, inst_id)
+REFERENCES public.persona (persona_id, inst_id)
+ON DELETE NO ACTION
+ON UPDATE NO ACTION
+NOT DEFERRABLE;
+
+ALTER TABLE public.analysis ADD CONSTRAINT patient_analysis_fk
+FOREIGN KEY (inst_id, persona_id)
+REFERENCES public.patient (inst_id, persona_id)
+ON DELETE NO ACTION
+ON UPDATE NO ACTION
+NOT DEFERRABLE;
+
+ALTER TABLE public.teleheal ADD CONSTRAINT patient_teleheal_fk
+FOREIGN KEY (inst_id, persona_id)
+REFERENCES public.patient (inst_id, persona_id)
+ON DELETE NO ACTION
+ON UPDATE NO ACTION
+NOT DEFERRABLE;
+
+ALTER TABLE public.analysis_code ADD CONSTRAINT analysis_analysis_code_fk
+FOREIGN KEY (analysis_id, inst_id)
+REFERENCES public.analysis (analysis_id, inst_id)
+ON DELETE NO ACTION
+ON UPDATE NO ACTION
+NOT DEFERRABLE;
+
+ALTER TABLE public.teleheal ADD CONSTRAINT analysis_teleheal_fk
+FOREIGN KEY (analysis_id, inst_id)
+REFERENCES public.analysis (analysis_id, inst_id)
+ON DELETE NO ACTION
+ON UPDATE NO ACTION
+NOT DEFERRABLE;
+
+ALTER TABLE public.remedy_code ADD CONSTRAINT remedy_remedy_code_fk
+FOREIGN KEY (remedy_id, inst_id)
+REFERENCES public.remedy (remedy_id, inst_id)
+ON DELETE NO ACTION
+ON UPDATE NO ACTION
+NOT DEFERRABLE;
+
+ALTER TABLE public.teleheal ADD CONSTRAINT remedy_teleheal_fk
+FOREIGN KEY (remedy_id, inst_id)
+REFERENCES public.remedy (remedy_id, inst_id)
+ON DELETE NO ACTION
+ON UPDATE NO ACTION
+NOT DEFERRABLE;
+
+ALTER TABLE public.category_code ADD CONSTRAINT code_category_code_fk
+FOREIGN KEY (inst_id, code_id)
+REFERENCES public.code (inst_id, code_id)
+ON DELETE NO ACTION
+ON UPDATE NO ACTION
+NOT DEFERRABLE;
+
+ALTER TABLE public.remedy_code ADD CONSTRAINT code_remedy_code_fk
+FOREIGN KEY (inst_id, code_id)
+REFERENCES public.code (inst_id, code_id)
+ON DELETE NO ACTION
+ON UPDATE NO ACTION
+NOT DEFERRABLE;
+
+ALTER TABLE public.analysis_code ADD CONSTRAINT code_analysis_code_fk
+FOREIGN KEY (inst_id, code_id)
+REFERENCES public.code (inst_id, code_id)
+ON DELETE NO ACTION
+ON UPDATE NO ACTION
+NOT DEFERRABLE;
+
+ALTER TABLE public.teleheal ADD CONSTRAINT code_teleheal_fk
+FOREIGN KEY (inst_id, code_id)
+REFERENCES public.code (inst_id, code_id)
+ON DELETE NO ACTION
+ON UPDATE NO ACTION
+NOT DEFERRABLE;
+
+ALTER TABLE public.category ADD CONSTRAINT category_category_fk
+FOREIGN KEY (parent_category_id, parent_inst_id)
+REFERENCES public.category (category_id, inst_id)
+ON DELETE NO ACTION
+ON UPDATE NO ACTION
+NOT DEFERRABLE;
+
+ALTER TABLE public.category_code ADD CONSTRAINT category_category_code_fk
+FOREIGN KEY (inst_id, category_id)
+REFERENCES public.category (inst_id, category_id)
+ON DELETE NO ACTION
+ON UPDATE NO ACTION
+NOT DEFERRABLE;
+
 ALTER TABLE public.request ADD CONSTRAINT account_request_fk
-FOREIGN KEY (persona_id)
-REFERENCES public.account (persona_id)
+FOREIGN KEY (inst_id, persona_id)
+REFERENCES public.account (inst_id, persona_id)
+ON DELETE NO ACTION
+ON UPDATE NO ACTION
+NOT DEFERRABLE;
+
+ALTER TABLE public.hist ADD CONSTRAINT account_hist_fk
+FOREIGN KEY (inst_id, persona_id)
+REFERENCES public.account (inst_id, persona_id)
+ON DELETE NO ACTION
+ON UPDATE NO ACTION
+NOT DEFERRABLE;
+
+ALTER TABLE public.hist_detail ADD CONSTRAINT hist_hist_detail_fk
+FOREIGN KEY (hist_id, inst_id)
+REFERENCES public.hist (hist_id, inst_id)
 ON DELETE NO ACTION
 ON UPDATE NO ACTION
 NOT DEFERRABLE;
