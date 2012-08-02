@@ -49,6 +49,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="img\auth.png" />
     <EmbeddedResource Include="img\imr.ico" />
+    <EmbeddedResource Include="img\main_bg.png" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="gtk-gui\generated.cs" />
