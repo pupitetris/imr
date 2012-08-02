@@ -10,6 +10,9 @@ namespace IMRpatient
 		{
 			AppConfig.TrySetProcessName ();
 
+
+			Gtk.Rc.AddDefaultFile (System.Environment.GetEnvironmentVariable ("HOME") + "/.imr/gtkrc");
+
 			Application.Init ();
 
 			CharpGtk charp = new CharpGtk ();

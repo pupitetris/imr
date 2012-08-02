@@ -131,7 +131,7 @@
       </source>
     </icon-set>
   </icon-factory>
-  <widget class="Gtk.Window" id="IMRpatient.MainWindow" design-size="737 789">
+  <widget class="Gtk.Window" id="IMRpatient.MainWindow" design-size="800 789">
     <action-group name="Default">
       <action id="PatientsAction">
         <property name="Type">Action</property>
@@ -325,15 +325,15 @@
     <property name="DefaultHeight">789</property>
     <signal name="DeleteEvent" handler="OnDeleteEvent" />
     <child>
-      <widget class="Gtk.VBox" id="vbox2">
+      <widget class="Gtk.VBox" id="mainVBox">
         <property name="MemberName" />
         <child>
-          <widget class="Gtk.HBox" id="hbox1">
+          <widget class="Gtk.HBox" id="hboxMainmenu">
             <property name="MemberName" />
             <property name="HeightRequest">52</property>
             <child>
               <widget class="Gtk.MenuBar" id="menubarMain">
-                <property name="MemberName">menubarMain</property>
+                <property name="MemberName" />
                 <node name="menubarMain" type="Menubar">
                   <node type="Menu" action="SystemAction">
                     <node type="Menuitem" action="CategoriesAction" />
@@ -369,9 +369,9 @@
               </packing>
             </child>
             <child>
-              <widget class="Gtk.MenuBar" id="menubar2">
+              <widget class="Gtk.MenuBar" id="menubarMainHelp">
                 <property name="MemberName" />
-                <node name="__gtksharp_100_Stetic_Editor_ActionMenuBar" type="Menubar">
+                <node name="menubarMainHelp" type="Menubar">
                   <node type="Menu" action="helpAction1">
                     <node type="Menuitem" action="UserSManualAction" />
                     <node type="Menuitem" action="aboutAction" />
@@ -396,10 +396,10 @@
         </child>
         <child>
           <widget class="Gtk.Fixed" id="fixedBg">
-            <property name="MemberName">mainBg</property>
+            <property name="MemberName" />
             <property name="HasWindow">False</property>
             <child>
-              <widget class="Gtk.Image" id="image7">
+              <widget class="Gtk.Image" id="mainImageBg">
                 <property name="MemberName" />
                 <property name="Pixbuf">resource:IMRpatient.img.main_bg.png</property>
               </widget>
