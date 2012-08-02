@@ -9,22 +9,383 @@
     <widget-library name="../../../../../charp/clients/monoCHARP/monoCHARP-gtk/bin/Debug/monoCHARP-gtk.dll" />
     <widget-library name="../bin/Debug/IMR-patient.exe" internal="true" />
   </import>
-  <widget class="Gtk.Window" id="IMRpatient.MainWindow" design-size="400 106">
+  <icon-factory>
+    <icon-set id="system_logout">
+      <source>
+        <property name="Image">stock:gtk-quit Menu</property>
+      </source>
+    </icon-set>
+    <icon-set id="patients">
+      <source>
+        <property name="Image">stock:stock_folder-copy Menu</property>
+      </source>
+    </icon-set>
+    <icon-set id="patients_new">
+      <source>
+        <property name="Image">stock:stock_new-dir Menu</property>
+      </source>
+    </icon-set>
+    <icon-set id="patients_search">
+      <source>
+        <property name="Image">stock:gtk-find Menu</property>
+      </source>
+    </icon-set>
+    <icon-set id="patients_remove">
+      <source>
+        <property name="Image">stock:gtk-delete Menu</property>
+      </source>
+    </icon-set>
+    <icon-set id="analysis">
+      <source>
+        <property name="Image">stock:gtk-dialog-info Menu</property>
+      </source>
+    </icon-set>
+    <icon-set id="analysis_new">
+      <source>
+        <property name="Image">stock:gtk-new Menu</property>
+      </source>
+    </icon-set>
+    <icon-set id="analysis_search">
+      <source>
+        <property name="Image">stock:gtk-find Menu</property>
+      </source>
+    </icon-set>
+    <icon-set id="analysis_remove">
+      <source>
+        <property name="Image">stock:gtk-delete Menu</property>
+      </source>
+    </icon-set>
+    <icon-set id="analysis_reanalize">
+      <source>
+        <property name="Image">stock:stock_refresh Menu</property>
+      </source>
+    </icon-set>
+    <icon-set id="analysis_print">
+      <source>
+        <property name="Image">stock:gtk-print Menu</property>
+      </source>
+    </icon-set>
+    <icon-set id="system_backup">
+      <source>
+        <property name="Image">stock:gtk-save Menu</property>
+      </source>
+    </icon-set>
+    <icon-set id="system">
+      <source>
+        <property name="Image">stock:gtk-home Menu</property>
+      </source>
+    </icon-set>
+    <icon-set id="system_users">
+      <source>
+        <property name="Image">stock:gtk-dialog-authentication Menu</property>
+      </source>
+    </icon-set>
+    <icon-set id="system_categories">
+      <source>
+        <property name="Image">stock:gtk-index Menu</property>
+      </source>
+    </icon-set>
+    <icon-set id="system_restore">
+      <source>
+        <property name="Image">stock:stock_up Menu</property>
+      </source>
+    </icon-set>
+    <icon-set id="remedies">
+      <source>
+        <property name="Image">stock:gtk-disconnect Menu</property>
+      </source>
+    </icon-set>
+    <icon-set id="remedies_new">
+      <source>
+        <property name="Image">stock:gtk-new Menu</property>
+      </source>
+    </icon-set>
+    <icon-set id="remedies_search">
+      <source>
+        <property name="Image">stock:gtk-find Menu</property>
+      </source>
+    </icon-set>
+    <icon-set id="remedies_create">
+      <source>
+        <property name="Image">stock:gtk-color-picker Menu</property>
+      </source>
+    </icon-set>
+    <icon-set id="remote">
+      <source>
+        <property name="Image">stock:stock_internet Menu</property>
+      </source>
+    </icon-set>
+    <icon-set id="remote_new">
+      <source>
+        <property name="Image">stock:stock_new-appointment Menu</property>
+      </source>
+    </icon-set>
+    <icon-set id="remote_view">
+      <source>
+        <property name="Image">stock:stock_appointment-reminder Menu</property>
+      </source>
+    </icon-set>
+    <icon-set id="help_manual">
+      <source>
+        <property name="Image">stock:stock_addressbook Menu</property>
+      </source>
+    </icon-set>
+  </icon-factory>
+  <widget class="Gtk.Window" id="IMRpatient.MainWindow" design-size="737 789">
+    <action-group name="Default">
+      <action id="PatientsAction">
+        <property name="Type">Action</property>
+        <property name="Label" translatable="yes">Patients</property>
+        <property name="ShortLabel" translatable="yes">Patients</property>
+        <property name="StockId">patients</property>
+      </action>
+      <action id="NewAction">
+        <property name="Type">Action</property>
+        <property name="Label" translatable="yes">New...</property>
+        <property name="ShortLabel" translatable="yes">New...</property>
+        <property name="StockId">patients_new</property>
+      </action>
+      <action id="EditAction">
+        <property name="Type">Action</property>
+        <property name="Label" translatable="yes">Edit</property>
+        <property name="ShortLabel" translatable="yes">Edit</property>
+      </action>
+      <action id="SearchAction">
+        <property name="Type">Action</property>
+        <property name="Label" translatable="yes">Search...</property>
+        <property name="ShortLabel" translatable="yes">Search...</property>
+        <property name="StockId">patients_search</property>
+      </action>
+      <action id="RemoveAction">
+        <property name="Type">Action</property>
+        <property name="Label" translatable="yes">Remove...</property>
+        <property name="ShortLabel" translatable="yes">Remove...</property>
+        <property name="StockId">patients_remove</property>
+      </action>
+      <action id="SystemAction">
+        <property name="Type">Action</property>
+        <property name="Label" translatable="yes">System</property>
+        <property name="ShortLabel" translatable="yes">System</property>
+        <property name="StockId">system</property>
+      </action>
+      <action id="newAction1">
+        <property name="Type">Action</property>
+        <property name="Label" translatable="yes">_New</property>
+        <property name="ShortLabel" translatable="yes">_New</property>
+        <property name="StockId">gtk-new</property>
+      </action>
+      <action id="CategoriesAction">
+        <property name="Type">Action</property>
+        <property name="Label" translatable="yes">Categories...</property>
+        <property name="ShortLabel" translatable="yes">Categories...</property>
+        <property name="StockId">system_categories</property>
+      </action>
+      <action id="usersAction">
+        <property name="Type">Action</property>
+        <property name="Label" translatable="yes">Users...</property>
+        <property name="ShortLabel" translatable="yes">Users...</property>
+        <property name="StockId">system_users</property>
+      </action>
+      <action id="helpAction">
+        <property name="Type">Action</property>
+        <property name="Label" translatable="yes">_Help</property>
+        <property name="ShortLabel" translatable="yes">_Help</property>
+        <property name="StockId">gtk-help</property>
+      </action>
+      <action id="LogOutAction">
+        <property name="Type">Action</property>
+        <property name="Label" translatable="yes">Log out</property>
+        <property name="ShortLabel" translatable="yes">Log out</property>
+        <property name="StockId">system_logout</property>
+      </action>
+      <action id="AnalysisAction">
+        <property name="Type">Action</property>
+        <property name="Label" translatable="yes">Analysis</property>
+        <property name="ShortLabel" translatable="yes">Analysis</property>
+        <property name="StockId">analysis</property>
+      </action>
+      <action id="NewAction4">
+        <property name="Type">Action</property>
+        <property name="Label" translatable="yes">New...</property>
+        <property name="ShortLabel" translatable="yes">New...</property>
+        <property name="StockId">analysis_new</property>
+      </action>
+      <action id="SearchAction3">
+        <property name="Type">Action</property>
+        <property name="Label" translatable="yes">Search...</property>
+        <property name="ShortLabel" translatable="yes">Search...</property>
+        <property name="StockId">analysis_search</property>
+      </action>
+      <action id="RemoveAction1">
+        <property name="Type">Action</property>
+        <property name="Label" translatable="yes">Remove</property>
+        <property name="ShortLabel" translatable="yes">Remove</property>
+        <property name="StockId">analysis_remove</property>
+      </action>
+      <action id="ReanalizeAction">
+        <property name="Type">Action</property>
+        <property name="Label" translatable="yes">Reanalize</property>
+        <property name="ShortLabel" translatable="yes">Reanalize</property>
+        <property name="StockId">analysis_reanalize</property>
+      </action>
+      <action id="PrintAction">
+        <property name="Type">Action</property>
+        <property name="Label" translatable="yes">Print</property>
+        <property name="ShortLabel" translatable="yes">Print</property>
+        <property name="StockId">analysis_print</property>
+      </action>
+      <action id="BackupAction">
+        <property name="Type">Action</property>
+        <property name="Label" translatable="yes">Backup...</property>
+        <property name="ShortLabel" translatable="yes">Backup...</property>
+        <property name="StockId">system_backup</property>
+      </action>
+      <action id="RestoreAction">
+        <property name="Type">Action</property>
+        <property name="Label" translatable="yes">Restore...</property>
+        <property name="ShortLabel" translatable="yes">Restore...</property>
+        <property name="StockId">system_restore</property>
+      </action>
+      <action id="RemediesAction">
+        <property name="Type">Action</property>
+        <property name="Label" translatable="yes">Remedies</property>
+        <property name="ShortLabel" translatable="yes">Remedies</property>
+        <property name="StockId">remedies</property>
+      </action>
+      <action id="NewAction5">
+        <property name="Type">Action</property>
+        <property name="Label" translatable="yes">New...</property>
+        <property name="ShortLabel" translatable="yes">New...</property>
+        <property name="StockId">remedies_new</property>
+      </action>
+      <action id="SearchAction4">
+        <property name="Type">Action</property>
+        <property name="Label" translatable="yes">Search...</property>
+        <property name="ShortLabel" translatable="yes">Search...</property>
+        <property name="StockId">remedies_search</property>
+      </action>
+      <action id="CreateAction">
+        <property name="Type">Action</property>
+        <property name="Label" translatable="yes">Create</property>
+        <property name="ShortLabel" translatable="yes">Create</property>
+        <property name="StockId">remedies_create</property>
+      </action>
+      <action id="AutosimileAction">
+        <property name="Type">Action</property>
+        <property name="Label" translatable="yes">Autosimile</property>
+        <property name="ShortLabel" translatable="yes">Autosimile</property>
+      </action>
+      <action id="ImprintAction">
+        <property name="Type">Action</property>
+        <property name="Label" translatable="yes">Imprint</property>
+        <property name="ShortLabel" translatable="yes">Imprint</property>
+      </action>
+      <action id="RemoteTreatmentAction">
+        <property name="Type">Action</property>
+        <property name="Label" translatable="yes">Remote treatment</property>
+        <property name="ShortLabel" translatable="yes">Remote treatment</property>
+        <property name="StockId">remote</property>
+      </action>
+      <action id="NewAction6">
+        <property name="Type">Action</property>
+        <property name="Label" translatable="yes">New...</property>
+        <property name="ShortLabel" translatable="yes">New...</property>
+        <property name="StockId">remote_new</property>
+      </action>
+      <action id="ViewScheduleAction">
+        <property name="Type">Action</property>
+        <property name="Label" translatable="yes">View schedule...</property>
+        <property name="ShortLabel" translatable="yes">View schedule...</property>
+        <property name="StockId">remote_view</property>
+      </action>
+      <action id="helpAction1">
+        <property name="Type">Action</property>
+        <property name="Label" translatable="yes">Help</property>
+        <property name="ShortLabel" translatable="yes">Help</property>
+        <property name="StockId">gtk-help</property>
+      </action>
+      <action id="UserSManualAction">
+        <property name="Type">Action</property>
+        <property name="Label" translatable="yes">User's manual</property>
+        <property name="ShortLabel" translatable="yes">User's manual</property>
+        <property name="StockId">help_manual</property>
+      </action>
+      <action id="aboutAction">
+        <property name="Type">Action</property>
+        <property name="Label" translatable="yes">_About...</property>
+        <property name="ShortLabel" translatable="yes">_About...</property>
+        <property name="StockId">gtk-about</property>
+      </action>
+    </action-group>
     <property name="MemberName" />
     <property name="Title" translatable="yes">Instituto Mexicano de Radiónica</property>
     <property name="Icon">resource:IMRpatient.img.imr.ico</property>
-    <property name="WindowPosition">Center</property>
-    <signal name="DestroyEvent" handler="OnDestroyEvent" />
+    <property name="AllowShrink">True</property>
+    <property name="DefaultWidth">737</property>
+    <property name="DefaultHeight">789</property>
+    <signal name="DeleteEvent" handler="OnDeleteEvent" />
     <child>
       <widget class="Gtk.VBox" id="vbox2">
         <property name="MemberName" />
-        <property name="Spacing">6</property>
         <child>
-          <widget class="Gtk.Entry" id="entry1">
+          <widget class="Gtk.HBox" id="hbox1">
             <property name="MemberName" />
-            <property name="CanFocus">True</property>
-            <property name="IsEditable">True</property>
-            <property name="InvisibleChar">•</property>
+            <property name="HeightRequest">52</property>
+            <child>
+              <widget class="Gtk.MenuBar" id="menubarMain">
+                <property name="MemberName">menubarMain</property>
+                <node name="menubarMain" type="Menubar">
+                  <node type="Menu" action="SystemAction">
+                    <node type="Menuitem" action="CategoriesAction" />
+                    <node type="Separator" />
+                    <node type="Menuitem" action="usersAction" />
+                    <node type="Menuitem" action="BackupAction" />
+                    <node type="Menuitem" action="RestoreAction" />
+                    <node type="Separator" />
+                    <node type="Menuitem" action="LogOutAction" />
+                  </node>
+                  <node type="Menu" action="PatientsAction">
+                    <node type="Menuitem" action="NewAction" />
+                    <node type="Menuitem" action="SearchAction" />
+                    <node type="Menuitem" action="RemoveAction" />
+                  </node>
+                  <node type="Menu" action="AnalysisAction">
+                    <node type="Menuitem" action="NewAction4" />
+                    <node type="Menuitem" action="SearchAction3" />
+                  </node>
+                  <node type="Menu" action="RemediesAction">
+                    <node type="Menuitem" action="NewAction5" />
+                    <node type="Menuitem" action="SearchAction4" />
+                  </node>
+                  <node type="Menu" action="RemoteTreatmentAction">
+                    <node type="Menuitem" action="NewAction6" />
+                    <node type="Menuitem" action="ViewScheduleAction" />
+                  </node>
+                </node>
+              </widget>
+              <packing>
+                <property name="Position">0</property>
+                <property name="AutoSize">False</property>
+              </packing>
+            </child>
+            <child>
+              <widget class="Gtk.MenuBar" id="menubar2">
+                <property name="MemberName" />
+                <node name="__gtksharp_100_Stetic_Editor_ActionMenuBar" type="Menubar">
+                  <node type="Menu" action="helpAction1">
+                    <node type="Menuitem" action="UserSManualAction" />
+                    <node type="Menuitem" action="aboutAction" />
+                  </node>
+                </node>
+              </widget>
+              <packing>
+                <property name="PackType">End</property>
+                <property name="Position">1</property>
+                <property name="AutoSize">True</property>
+                <property name="Expand">False</property>
+                <property name="Fill">False</property>
+              </packing>
+            </child>
           </widget>
           <packing>
             <property name="Position">0</property>
@@ -34,19 +395,22 @@
           </packing>
         </child>
         <child>
-          <widget class="Gtk.Button" id="button5">
-            <property name="MemberName" />
-            <property name="CanFocus">True</property>
-            <property name="Type">TextOnly</property>
-            <property name="Label" translatable="yes">Login</property>
-            <property name="UseUnderline">True</property>
-            <signal name="Clicked" handler="OnButton5Clicked" />
+          <widget class="Gtk.Fixed" id="fixedBg">
+            <property name="MemberName">mainBg</property>
+            <property name="HasWindow">False</property>
+            <child>
+              <widget class="Gtk.Image" id="image7">
+                <property name="MemberName" />
+                <property name="Pixbuf">resource:IMRpatient.img.main_bg.png</property>
+              </widget>
+              <packing>
+                <property name="X">177</property>
+              </packing>
+            </child>
           </widget>
           <packing>
             <property name="Position">1</property>
-            <property name="AutoSize">True</property>
-            <property name="Expand">False</property>
-            <property name="Fill">False</property>
+            <property name="AutoSize">False</property>
           </packing>
         </child>
       </widget>

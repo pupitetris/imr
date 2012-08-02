@@ -17,7 +17,7 @@ namespace IMRpatient {
 			this.charp = config.charp;
 		}
 		
-		protected void OnWindowDeleteEvent (object sender, DeleteEventArgs a)
+		protected void OnDeleteEvent (object sender, DeleteEventArgs a)
 		{
 			Gtk.Main.Quit ();
 			a.RetVal = true;
@@ -25,17 +25,13 @@ namespace IMRpatient {
 
 		private void testySuccess (object data, UploadValuesCompletedEventArgs status, Charp.CharpCtx ctx)
 		{
-			Console.WriteLine ("success " + entry1.Text);
+			//Console.WriteLine ("success " + entry1.Text);
+
 		}
 
 		protected void OnButton5Clicked (object sender, EventArgs e)
 		{
-			charp.request (entry1.Text, null, new Charp.CharpCtx () { success = testySuccess });
-		}
-
-		protected void OnDestroyEvent (object sender, EventArgs e)
-		{
-			Gtk.Main.Quit ();
+			//charp.request (entry1.Text, null, new Charp.CharpCtx () { success = testySuccess });
 		}
 	}
 }
