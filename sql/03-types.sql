@@ -1,6 +1,7 @@
 -- Application-specific data types.
 
 CREATE TYPE imr_msg_code AS ENUM (
+	   'USER_NEW'
 );
 
 CREATE TYPE imr_msg_type AS ENUM (
@@ -75,7 +76,7 @@ CREATE TYPE imr_persona_type AS ENUM (
 	   'USER',
 	   'PATIENT',
 	   'CONTACT',
-	   'REFERRAL',
+	   'REFERRAL'
 );
 
 CREATE TYPE imr_gender AS ENUM (
