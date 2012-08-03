@@ -131,7 +131,7 @@
       </source>
     </icon-set>
   </icon-factory>
-  <widget class="Gtk.Window" id="IMRpatient.MainWindow" design-size="800 789">
+  <widget class="Gtk.Window" id="IMRpatient.MainWindow" design-size="702 777">
     <action-group name="Default">
       <action id="PatientsAction">
         <property name="Type">Action</property>
@@ -318,11 +318,12 @@
       </action>
     </action-group>
     <property name="MemberName" />
+    <property name="WidthRequest">700</property>
+    <property name="HeightRequest">700</property>
     <property name="Title" translatable="yes">Instituto Mexicano de Radiónica</property>
     <property name="Icon">resource:IMRpatient.img.imr.ico</property>
-    <property name="AllowShrink">True</property>
-    <property name="DefaultWidth">737</property>
-    <property name="DefaultHeight">789</property>
+    <property name="DefaultWidth">700</property>
+    <property name="DefaultHeight">700</property>
     <signal name="DeleteEvent" handler="OnDeleteEvent" />
     <child>
       <widget class="Gtk.VBox" id="mainVBox">
@@ -330,7 +331,7 @@
         <child>
           <widget class="Gtk.HBox" id="hboxMainmenu">
             <property name="MemberName" />
-            <property name="HeightRequest">52</property>
+            <property name="HeightRequest">40</property>
             <child>
               <widget class="Gtk.MenuBar" id="menubarMain">
                 <property name="MemberName" />
@@ -398,13 +399,14 @@
           <widget class="Gtk.Fixed" id="fixedBg">
             <property name="MemberName" />
             <property name="HasWindow">False</property>
+            <signal name="SizeAllocated" handler="OnFixedBgSizeAllocated" />
             <child>
               <widget class="Gtk.Image" id="mainImageBg">
                 <property name="MemberName" />
                 <property name="Pixbuf">resource:IMRpatient.img.main_bg.png</property>
               </widget>
               <packing>
-                <property name="X">177</property>
+                <property name="X">146</property>
               </packing>
             </child>
           </widget>

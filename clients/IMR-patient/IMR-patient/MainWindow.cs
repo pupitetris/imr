@@ -10,11 +10,16 @@ namespace IMRpatient {
 		private AppConfig config;
 		private Charp charp;
 
+		private Boolean fixedBgAllocateFlag;
+		private readonly int IMAGE_BG_OFFSSETY = 41;
+
 		public MainWindow (AppConfig config): base (Gtk.WindowType.Toplevel)
 		{
 			Build ();
 			this.config = config;
 			this.charp = config.charp;
+
+			fixedBgAllocateFlag = false;
 		}
 		
 		protected void OnDeleteEvent (object sender, DeleteEventArgs a)
@@ -32,6 +37,20 @@ namespace IMRpatient {
 		protected void OnButton5Clicked (object sender, EventArgs e)
 		{
 			//charp.request (entry1.Text, null, new Charp.CharpCtx () { success = testySuccess });
+		}
+
+		protected void OnFixedBgSizeAllocated (object o, SizeAllocatedArgs args)
+		{
+			if (fixedBgAllocateFlag) {
+				fixedBgAllocateFlag = false;
+				return;
+			}
+			fixedBgAllocateFlag = true;
+
+			Gtk.Requisition ireq = mainImageBg.SizeRequest ();
+			Gtk.Fixed.FixedChild w = ((global::Gtk.Fixed.FixedChild) (fixedBg [mainImageBg]));
+			w.X = args.Allocation.Width - ireq.Width;
+			w.Y = args.Allocation.Height - ireq.Height + IMAGE_BG_OFFSSETY;
 		}
 	}
 }
