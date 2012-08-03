@@ -20,21 +20,29 @@ namespace IMRpatient
 				return;
 			}
 
-			WelcomeDlg wDlg = new WelcomeDlg (config);
-			charp.parent = wDlg;
-			wDlg.Show ();
-			Application.Run ();
+			MainWindow win;
+			do {
+				win = null;
 
-			config.Save ();
+				WelcomeDlg wDlg = new WelcomeDlg (config);
+				charp.parent = wDlg;
+				
+				wDlg.Show ();
+				Application.Run ();
+				
+				config.Save ();
+				
+				if (!wDlg.authSuccess ()) {
+					return;
+				}
 
-			if (!wDlg.authSuccess ()) {
-				return;
-			}
+				wDlg = null;
 
-			MainWindow win = new MainWindow (config);
-			charp.parent = win;
-			win.Show ();
-			Application.Run ();
+				win = new MainWindow (config);
+				charp.parent = win;
+				win.Show ();
+				Application.Run ();
+			} while (win.IsLogout);
 		}
 	}
 }

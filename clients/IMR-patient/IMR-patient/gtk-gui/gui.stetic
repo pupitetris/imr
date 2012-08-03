@@ -197,6 +197,7 @@
         <property name="Label" translatable="yes">Log out</property>
         <property name="ShortLabel" translatable="yes">Log out</property>
         <property name="StockId">system_logout</property>
+        <signal name="Activated" handler="OnLogOutActionActivated" />
       </action>
       <action id="AnalysisAction">
         <property name="Type">Action</property>

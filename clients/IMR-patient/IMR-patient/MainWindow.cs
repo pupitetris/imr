@@ -7,11 +7,13 @@ namespace IMRpatient {
 
 	public partial class MainWindow: Gtk.Window
 	{
+		private static readonly int IMAGE_BG_OFFSSETY = 41;
+
 		private AppConfig config;
 		private Charp charp;
 
 		private Boolean fixedBgAllocateFlag;
-		private readonly int IMAGE_BG_OFFSSETY = 41;
+		public Boolean IsLogout;
 
 		public MainWindow (AppConfig config): base (Gtk.WindowType.Toplevel)
 		{
@@ -20,6 +22,7 @@ namespace IMRpatient {
 			this.charp = config.charp;
 
 			fixedBgAllocateFlag = false;
+			IsLogout = false;
 		}
 		
 		protected void OnDeleteEvent (object sender, DeleteEventArgs a)
@@ -51,6 +54,13 @@ namespace IMRpatient {
 			Gtk.Fixed.FixedChild w = ((global::Gtk.Fixed.FixedChild) (fixedBg [mainImageBg]));
 			w.X = args.Allocation.Width - ireq.Width;
 			w.Y = args.Allocation.Height - ireq.Height + IMAGE_BG_OFFSSETY;
+		}
+
+		protected void OnLogOutActionActivated (object sender, EventArgs e)
+		{
+			IsLogout = true;
+			Destroy ();
+			Gtk.Main.Quit ();
 		}
 	}
 }
