@@ -50,9 +50,6 @@
     <EmbeddedResource Include="img\auth.png">
       <Gettext-ScanForTranslations>False</Gettext-ScanForTranslations>
     </EmbeddedResource>
-    <EmbeddedResource Include="img\imr.ico">
-      <Gettext-ScanForTranslations>False</Gettext-ScanForTranslations>
-    </EmbeddedResource>
     <EmbeddedResource Include="img\main_bg.png">
       <Gettext-ScanForTranslations>False</Gettext-ScanForTranslations>
     </EmbeddedResource>
@@ -68,6 +65,8 @@
       <Gettext-ScanForTranslations>False</Gettext-ScanForTranslations>
       <LogicalName>gtkrc</LogicalName>
     </EmbeddedResource>
+    <EmbeddedResource Include="img\imr.ico" />
+    <EmbeddedResource Include="img\imr-icon.png" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="gtk-gui\generated.cs" />
