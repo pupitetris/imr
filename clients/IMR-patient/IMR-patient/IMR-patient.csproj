@@ -47,9 +47,27 @@
     <EmbeddedResource Include="gtk-gui\gui.stetic">
       <LogicalName>gui.stetic</LogicalName>
     </EmbeddedResource>
-    <EmbeddedResource Include="img\auth.png" />
-    <EmbeddedResource Include="img\imr.ico" />
-    <EmbeddedResource Include="img\main_bg.png" />
+    <EmbeddedResource Include="img\auth.png">
+      <Gettext-ScanForTranslations>False</Gettext-ScanForTranslations>
+    </EmbeddedResource>
+    <EmbeddedResource Include="img\imr.ico">
+      <Gettext-ScanForTranslations>False</Gettext-ScanForTranslations>
+    </EmbeddedResource>
+    <EmbeddedResource Include="img\main_bg.png">
+      <Gettext-ScanForTranslations>False</Gettext-ScanForTranslations>
+    </EmbeddedResource>
+    <EmbeddedResource Include="img\menu_prelight_bg.png">
+      <Gettext-ScanForTranslations>False</Gettext-ScanForTranslations>
+      <LogicalName>menu_prelight_bg.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="img\menu_bg.png">
+      <Gettext-ScanForTranslations>False</Gettext-ScanForTranslations>
+      <LogicalName>menu_bg.png</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="gtkrc">
+      <Gettext-ScanForTranslations>False</Gettext-ScanForTranslations>
+      <LogicalName>gtkrc</LogicalName>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="gtk-gui\generated.cs" />

@@ -1,7 +1,10 @@
 using System;
+using System.IO;
 using System.Text;
-using monoCharp;
 using System.Runtime.InteropServices;
+
+using Gtk;
+using monoCharp;
 
 namespace IMRpatient
 {
@@ -55,6 +58,39 @@ namespace IMRpatient
 				SetProcessName(APP_NAME);
 			} catch	{
 			}
+		}
+
+		public static void CopyResource (string dir, string resource)
+		{
+			System.Reflection.Assembly assembly = System.Reflection.Assembly.GetCallingAssembly ();
+			Stream input = assembly.GetManifestResourceStream (resource);
+			FileStream outfile = new FileStream (dir + "/" + resource, FileMode.Create, FileAccess.ReadWrite);
+
+			byte [] buffer = new byte [8192];
+			int n;
+
+			while ((n = input.Read (buffer, 0, 8192)) != 0)
+				outfile.Write (buffer, 0, n);
+
+			input.Close ();
+			outfile.Close ();
+		}
+
+		public static void ThemeSetup ()
+		{
+			string dir = System.Environment.GetEnvironmentVariable ("HOME") + "/.imr";
+			if (!Directory.Exists (dir))
+			{
+				try {
+					Directory.CreateDirectory (dir);
+					CopyResource (dir, "gtkrc");
+					CopyResource (dir, "menu_bg.png");
+					CopyResource (dir, "menu_prelight_bg.png");
+				} catch (Exception e) {
+					Console.WriteLine (e.Message);
+				}
+			}
+			Gtk.Rc.AddDefaultFile (dir + "/gtkrc");
 		}
 
 		private string SetupDo (string defaultBaseUrl, Gtk.Window parent = null)

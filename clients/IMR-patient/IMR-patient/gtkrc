@@ -1,0 +1,41 @@
+# pixmap_path "blah;foo;var"
+
+style "mainBgStyle"
+{
+	bg[NORMAL] = "white"
+}
+
+widget "IMRpatient.MainWindow" style "mainBgStyle"
+
+style "mainMenuStyle"
+{
+	engine "pixmap" {
+		image {
+			function = BOX
+			recolorable = TRUE
+			file = "menu_bg.png"
+			stretch = FALSE
+		}
+	}
+}
+
+style "mainMenuItemStyle"
+{
+	fg[NORMAL] = "white"
+	font_name = "Bold"
+
+	engine "pixmap" {
+		image {
+			state = PRELIGHT
+			function = BOX
+			file = "menu_prelight_bg.png"
+			stretch = FALSE
+		}
+	}
+}
+
+widget "IMRpatient.MainWindow.*.menubarMain" style "mainMenuStyle"
+widget "IMRpatient.MainWindow.*.menubarMainHelp" style "mainMenuStyle"
+
+widget "IMRpatient.MainWindow.*.menubarMain.*" style "mainMenuItemStyle"
+widget "IMRpatient.MainWindow.*.menubarMainHelp.*" style "mainMenuItemStyle"
