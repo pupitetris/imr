@@ -25,7 +25,7 @@ CREATE TYPE imr_lang AS ENUM (
 );
 
 CREATE TYPE imr_record_status AS ENUM (
-	   'NORMAL',
+	   'ACTIVE',
 	   'DISABLED',
 	   'DELETED'
 );
@@ -72,7 +72,7 @@ CREATE TYPE imr_product_type AS ENUM (
 );
 
 CREATE TYPE imr_persona_type AS ENUM (
-	   'INST'
+	   'INST',
 	   'USER',
 	   'PATIENT',
 	   'CONTACT',

@@ -96,14 +96,18 @@ CREATE TABLE public.asenta (
 
 ALTER SEQUENCE public.asenta_asenta_id_seq OWNED BY public.asenta.asenta_id;
 
+CREATE SEQUENCE public.inst_inst_id_seq;
+
 CREATE TABLE public.inst (
-                inst_id INTEGER NOT NULL,
+                inst_id INTEGER NOT NULL DEFAULT nextval('public.inst_inst_id_seq'),
                 inst_contact_persona_id INTEGER NOT NULL,
                 inst_name VARCHAR NOT NULL,
                 inst_status imr_record_status NOT NULL,
                 CONSTRAINT inst_pk PRIMARY KEY (inst_id)
 );
 
+
+ALTER SEQUENCE public.inst_inst_id_seq OWNED BY public.inst.inst_id;
 
 CREATE SEQUENCE public.product_product_id_seq;
 
@@ -300,7 +304,7 @@ CREATE TABLE public.remedy_code (
                 code_id INTEGER NOT NULL,
                 inst_id INTEGER NOT NULL,
                 power INTEGER NOT NULL,
-                method imr_remedy_type NOT NULL,
+                method imr_remedy_method NOT NULL,
                 CONSTRAINT remedy_code_pk PRIMARY KEY (remedy_id, code_id, inst_id)
 );
 
@@ -390,11 +394,11 @@ ALTER SEQUENCE public.error_log_error_log_id_seq OWNED BY public.error_log.error
 CREATE TABLE public.request (
                 request_id VARCHAR(64) NOT NULL,
                 inst_id INTEGER NOT NULL,
+                persona_id INTEGER NOT NULL,
                 timestamp TIMESTAMP NOT NULL,
                 ip_addr INET NOT NULL,
                 proname VARCHAR NOT NULL,
                 params VARCHAR(1024) NOT NULL,
-                persona_id INTEGER NOT NULL,
                 CONSTRAINT request_pk PRIMARY KEY (request_id)
 );
 COMMENT ON COLUMN public.request.proname IS 'Nombre del remote procedure que se va a llamar.';
@@ -562,11 +566,11 @@ ON UPDATE NO ACTION
 NOT DEFERRABLE;
 
 ALTER TABLE public.inst ADD CONSTRAINT persona_inst_fk
-FOREIGN KEY (inst_contact_persona_id, inst_id)
-REFERENCES public.persona (persona_id, inst_id)
+FOREIGN KEY (inst_id, inst_contact_persona_id)
+REFERENCES public.persona (inst_id, persona_id)
 ON DELETE NO ACTION
 ON UPDATE NO ACTION
-NOT DEFERRABLE;
+DEFERRABLE INITIALLY IMMEDIATE;
 
 ALTER TABLE public.analysis ADD CONSTRAINT patient_analysis_fk
 FOREIGN KEY (inst_id, persona_id)

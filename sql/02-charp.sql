@@ -102,17 +102,21 @@ COMMENT ON FUNCTION charp_raise(text, VARIADIC text[]) IS 'Levanta una excepció
 
 
 CREATE OR REPLACE FUNCTION charp_account_get_id_by_username_status(_username character varying, _status charp_account_status)
-  RETURNS integer AS
+  RETURNS TABLE(inst_id integer, persona_id integer) AS
 $BODY$
 DECLARE
-	_id integer;
+	_inst_id integer;
+	_persona_id integer;
 BEGIN
-	SELECT a.persona_id INTO _id FROM account AS a
+	SELECT a.inst_id, a.persona_id INTO _inst_id, _persona_id FROM account AS a
 	       WHERE a.username = _username AND a.status = _status;
-	IF _id IS NULL THEN
+	IF _persona_id IS NULL THEN
 	   PERFORM charp_raise('USERUNK', _username::text, _status::text);
 	END IF;
-	RETURN _id;
+	
+	inst_id := _inst_id;
+	persona_id := _persona_id;
+	RETURN NEXT;
 END
 $BODY$
   LANGUAGE plpgsql STABLE;
@@ -142,11 +146,15 @@ CREATE OR REPLACE FUNCTION charp_request_create(_username character varying, _ip
 $BODY$
 DECLARE
 	_random_bytes character varying;
+	_r record;
 BEGIN
+	SELECT * INTO _r FROM charp_account_get_id_by_username_status(_username, 'ACTIVE');
 	_random_bytes := encode(gen_random_bytes(32), 'hex');
+
 	INSERT INTO request VALUES(
-		_random_bytes, 
-		charp_account_get_id_by_username_status(_username, 'ACTIVE'),
+		_random_bytes,
+		_r.inst_id,
+		_r.persona_id,
 		CURRENT_TIMESTAMP,
 		_ip_addr,
 		charp_rp_get_function_by_name(_function_name),
