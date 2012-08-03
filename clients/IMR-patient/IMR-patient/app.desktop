@@ -4,3 +4,4 @@ Type=Application
 Name=IMR-patient
 Exec=imr-patient
 Terminal=false
+Icon=imr-patient

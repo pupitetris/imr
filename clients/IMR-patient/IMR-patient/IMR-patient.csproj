@@ -65,8 +65,9 @@
       <Gettext-ScanForTranslations>False</Gettext-ScanForTranslations>
       <LogicalName>gtkrc</LogicalName>
     </EmbeddedResource>
-    <EmbeddedResource Include="img\imr.ico" />
-    <EmbeddedResource Include="img\imr-icon.png" />
+    <EmbeddedResource Include="img\imr.ico">
+      <Gettext-ScanForTranslations>False</Gettext-ScanForTranslations>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="gtk-gui\generated.cs" />
@@ -100,5 +101,10 @@
       <Project>{7DE14CEC-61E3-46F4-9CB3-C367DA555044}</Project>
       <Name>monoCHARP</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="img\imr-icon.png">
+      <Gettext-ScanForTranslations>False</Gettext-ScanForTranslations>
+    </None>
   </ItemGroup>
 </Project>

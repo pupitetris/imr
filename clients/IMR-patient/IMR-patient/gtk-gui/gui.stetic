@@ -321,7 +321,7 @@
     <property name="WidthRequest">700</property>
     <property name="HeightRequest">700</property>
     <property name="Title" translatable="yes">Instituto Mexicano de Radiónica</property>
-    <property name="Icon">resource:IMRpatient.img.imr-icon.png</property>
+    <property name="Icon">resource:IMRpatient.img.imr.ico</property>
     <property name="DefaultWidth">700</property>
     <property name="DefaultHeight">700</property>
     <signal name="DeleteEvent" handler="OnDeleteEvent" />
@@ -418,7 +418,7 @@
       </widget>
     </child>
   </widget>
-  <widget class="Gtk.Dialog" id="IMRpatient.WelcomeSetupDlg" design-size="669 169">
+  <widget class="Gtk.Dialog" id="IMRpatient.WelcomeSetupDlg" design-size="669 170">
     <property name="MemberName" />
     <property name="Title" translatable="yes">Connection Setup</property>
     <property name="Icon">stock:gtk-disconnect Menu</property>
@@ -633,7 +633,7 @@
     <property name="WidthRequest">500</property>
     <property name="HeightRequest">250</property>
     <property name="Title">Welcome</property>
-    <property name="Icon">resource:IMRpatient.img.imr-icon.png</property>
+    <property name="Icon">resource:IMRpatient.img.imr.ico</property>
     <property name="WindowPosition">Center</property>
     <property name="Resizable">False</property>
     <property name="AllowGrow">False</property>
