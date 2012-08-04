@@ -316,6 +316,7 @@
         <property name="Label" translatable="yes">_About...</property>
         <property name="ShortLabel" translatable="yes">_About...</property>
         <property name="StockId">gtk-about</property>
+        <signal name="Activated" handler="OnAboutActionActivated" />
       </action>
     </action-group>
     <property name="MemberName" />
@@ -634,7 +635,7 @@
     <property name="WidthRequest">500</property>
     <property name="HeightRequest">250</property>
     <property name="Title">Welcome</property>
-    <property name="Icon">resource:IMRpatient.img.imr.ico</property>
+    <property name="Icon">resource:IMRpatient.img.imr-icon.png</property>
     <property name="WindowPosition">Center</property>
     <property name="Resizable">False</property>
     <property name="AllowGrow">False</property>
@@ -769,24 +770,59 @@
           </packing>
         </child>
         <child>
-          <widget class="Gtk.Label" id="label1">
+          <widget class="Gtk.Fixed" id="fixedImr">
             <property name="MemberName" />
-            <property name="LabelProp" translatable="yes">&lt;b&gt;Instituto Mexicano de Radiónica&lt;/b&gt;</property>
-            <property name="UseMarkup">True</property>
-          </widget>
-          <packing>
-            <property name="X">12</property>
-            <property name="Y">229</property>
-          </packing>
-        </child>
-        <child>
-          <widget class="Gtk.Label" id="label2">
-            <property name="MemberName" />
-            <property name="LabelProp" translatable="yes">&lt;span color="white"&gt;&lt;b&gt;Instituto Mexicano de Radiónica&lt;/b&gt;&lt;/span&gt;</property>
-            <property name="UseMarkup">True</property>
+            <property name="HasWindow">False</property>
+            <child>
+              <widget class="Gtk.Label" id="labelImrShadow">
+                <property name="MemberName" />
+                <property name="LabelProp" translatable="yes">&lt;span color="black"&gt;&lt;b&gt;Instituto Mexicano de Radiónica&lt;/b&gt;&lt;/span&gt;</property>
+                <property name="UseMarkup">True</property>
+              </widget>
+              <packing>
+                <property name="X">1</property>
+                <property name="Y">1</property>
+              </packing>
+            </child>
+            <child>
+              <widget class="Gtk.Label" id="labelImr">
+                <property name="MemberName" />
+                <property name="LabelProp" translatable="yes">&lt;span color="white"&gt;&lt;b&gt;Instituto Mexicano de Radiónica&lt;/b&gt;&lt;/span&gt;</property>
+                <property name="UseMarkup">True</property>
+              </widget>
+            </child>
           </widget>
           <packing>
             <property name="X">10</property>
+            <property name="Y">228</property>
+          </packing>
+        </child>
+        <child>
+          <widget class="Gtk.Fixed" id="fixedVersion">
+            <property name="MemberName" />
+            <property name="HasWindow">False</property>
+            <child>
+              <widget class="Gtk.Label" id="labelVersionShadow">
+                <property name="MemberName" />
+                <property name="LabelProp" translatable="yes">&lt;span color="black"&gt;&lt;b&gt;v. X.Y.Z&lt;/b&gt;&lt;/span&gt;</property>
+                <property name="UseMarkup">True</property>
+              </widget>
+              <packing>
+                <property name="X">1</property>
+                <property name="Y">1</property>
+              </packing>
+            </child>
+            <child>
+              <widget class="Gtk.Label" id="labelVersion">
+                <property name="MemberName" />
+                <property name="LabelProp" translatable="yes">&lt;span color="white"&gt;&lt;b&gt;v. X.Y.Z&lt;/b&gt;&lt;/span&gt;</property>
+                <property name="UseMarkup">True</property>
+                <property name="Selectable">True</property>
+              </widget>
+            </child>
+          </widget>
+          <packing>
+            <property name="X">345</property>
             <property name="Y">228</property>
           </packing>
         </child>
@@ -1061,6 +1097,102 @@
           </widget>
           <packing>
             <property name="Position">2</property>
+            <property name="Expand">False</property>
+            <property name="Fill">False</property>
+          </packing>
+        </child>
+      </widget>
+    </child>
+  </widget>
+  <widget class="Gtk.Dialog" id="IMRpatient.AboutDlg" design-size="506 336">
+    <property name="MemberName" />
+    <property name="Title" translatable="yes">About IMR-patient</property>
+    <property name="Icon">stock:gtk-about Menu</property>
+    <property name="TypeHint">Dialog</property>
+    <property name="WindowPosition">CenterOnParent</property>
+    <property name="Modal">True</property>
+    <property name="Buttons">1</property>
+    <property name="HelpButton">False</property>
+    <child internal-child="VBox">
+      <widget class="Gtk.VBox" id="dialog1_VBox">
+        <property name="MemberName" />
+        <property name="BorderWidth">2</property>
+        <child>
+          <widget class="Gtk.Fixed" id="fixed5">
+            <property name="MemberName" />
+            <property name="HasWindow">False</property>
+            <child>
+              <widget class="Gtk.Image" id="image237">
+                <property name="MemberName" />
+                <property name="Pixbuf">resource:IMRpatient.img.auth.png</property>
+              </widget>
+            </child>
+            <child>
+              <widget class="Gtk.Fixed" id="fixed6">
+                <property name="MemberName" />
+                <property name="HasWindow">False</property>
+                <child>
+                  <widget class="Gtk.Label" id="labelCaptionShadow">
+                    <property name="MemberName" />
+                    <property name="WidthRequest">232</property>
+                    <property name="HeightRequest">40</property>
+                    <property name="Yalign">0</property>
+                    <property name="LabelProp" translatable="yes">&lt;span color="black"&gt;&lt;b&gt;Instituto Mexicano de Radiónica&lt;/b&gt;&lt;/span&gt;</property>
+                    <property name="UseMarkup">True</property>
+                    <property name="Wrap">True</property>
+                    <property name="Justify">Center</property>
+                  </widget>
+                  <packing>
+                    <property name="X">1</property>
+                    <property name="Y">1</property>
+                  </packing>
+                </child>
+                <child>
+                  <widget class="Gtk.Label" id="labelCaption">
+                    <property name="MemberName" />
+                    <property name="WidthRequest">232</property>
+                    <property name="HeightRequest">40</property>
+                    <property name="Yalign">0</property>
+                    <property name="LabelProp" translatable="yes">&lt;span color="white"&gt;&lt;b&gt;Instituto Mexicano de Radiónica&lt;/b&gt;&lt;/span&gt;</property>
+                    <property name="UseMarkup">True</property>
+                    <property name="Wrap">True</property>
+                    <property name="Justify">Center</property>
+                  </widget>
+                </child>
+              </widget>
+              <packing>
+                <property name="X">44</property>
+                <property name="Y">189</property>
+              </packing>
+            </child>
+          </widget>
+          <packing>
+            <property name="Position">0</property>
+            <property name="AutoSize">False</property>
+          </packing>
+        </child>
+      </widget>
+    </child>
+    <child internal-child="ActionArea">
+      <widget class="Gtk.HButtonBox" id="dialog1_ActionArea">
+        <property name="MemberName" />
+        <property name="Spacing">10</property>
+        <property name="BorderWidth">5</property>
+        <property name="Size">1</property>
+        <property name="LayoutStyle">End</property>
+        <child>
+          <widget class="Gtk.Button" id="buttonCancel">
+            <property name="MemberName" />
+            <property name="CanDefault">True</property>
+            <property name="CanFocus">True</property>
+            <property name="UseStock">True</property>
+            <property name="Type">StockItem</property>
+            <property name="StockId">gtk-close</property>
+            <property name="ResponseId">-7</property>
+            <signal name="Clicked" handler="OnButtonCancelClicked" />
+            <property name="label">gtk-close</property>
+          </widget>
+          <packing>
             <property name="Expand">False</property>
             <property name="Fill">False</property>
           </packing>

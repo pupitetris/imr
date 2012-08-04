@@ -68,6 +68,9 @@
     <EmbeddedResource Include="img\imr.ico">
       <Gettext-ScanForTranslations>False</Gettext-ScanForTranslations>
     </EmbeddedResource>
+    <EmbeddedResource Include="img\imr-icon.png">
+      <Gettext-ScanForTranslations>False</Gettext-ScanForTranslations>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="gtk-gui\generated.cs" />
@@ -85,6 +88,8 @@
     <Compile Include="DeviceErrorDlg.cs" />
     <Compile Include="gtk-gui\IMRpatient.DeviceErrorDlg.cs" />
     <Compile Include="gtk-gui\IMRpatient.MainWindow.cs" />
+    <Compile Include="AboutDlg.cs" />
+    <Compile Include="gtk-gui\IMRpatient.AboutDlg.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
@@ -101,10 +106,5 @@
       <Project>{7DE14CEC-61E3-46F4-9CB3-C367DA555044}</Project>
       <Name>monoCHARP</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="img\imr-icon.png">
-      <Gettext-ScanForTranslations>False</Gettext-ScanForTranslations>
-    </None>
   </ItemGroup>
 </Project>

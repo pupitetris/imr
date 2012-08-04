@@ -60,7 +60,7 @@ namespace IMRpatient
 			}
 		}
 
-		public static void CopyResource (string dir, string resource)
+		private static void CopyResource (string dir, string resource)
 		{
 			System.Reflection.Assembly assembly = System.Reflection.Assembly.GetCallingAssembly ();
 			Stream input = assembly.GetManifestResourceStream (resource);
@@ -74,6 +74,12 @@ namespace IMRpatient
 
 			input.Close ();
 			outfile.Close ();
+		}
+
+		public static string GetAppVersion ()
+		{
+			System.Reflection.Assembly assembly = System.Reflection.Assembly.GetCallingAssembly ();
+			return assembly.GetName ().Version.ToString ();
 		}
 
 		public static void ThemeSetup ()

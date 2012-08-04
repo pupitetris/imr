@@ -62,5 +62,12 @@ namespace IMRpatient {
 			Destroy ();
 			Gtk.Main.Quit ();
 		}
+
+		protected void OnAboutActionActivated (object sender, EventArgs e)
+		{
+			AboutDlg dlg = new AboutDlg ();
+			dlg.TransientFor = this;
+			dlg.Run ();
+		}
 	}
 }

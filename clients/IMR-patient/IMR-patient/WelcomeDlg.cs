@@ -21,6 +21,10 @@ namespace IMRpatient
 			success = false;
 
 			table1.FocusChain = new Gtk.Widget[] { entryUser, entryPasswd, buttonOk, buttonConf };
+
+			string ver = AppConfig.GetAppVersion ();
+			labelVersion.Markup = String.Format ("<span color=\"white\"><b>v. {0}</b></span>", ver);
+			labelVersionShadow.Markup = String.Format ("<span color=\"black\"><b>v. {0}</b></span>", ver);
 		}
 
 		private void devError (string message)
