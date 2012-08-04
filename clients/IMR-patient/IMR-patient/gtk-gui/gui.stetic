@@ -130,6 +130,21 @@
         <property name="Image">stock:stock_addressbook Menu</property>
       </source>
     </icon-set>
+    <icon-set id="system_users_new">
+      <source>
+        <property name="Image">stock:stock_new-bcard Menu</property>
+      </source>
+    </icon-set>
+    <icon-set id="system_users_search">
+      <source>
+        <property name="Image">stock:gtk-find Menu</property>
+      </source>
+    </icon-set>
+    <icon-set id="system_users_edit">
+      <source>
+        <property name="Image">stock:gtk-find-and-replace Menu</property>
+      </source>
+    </icon-set>
   </icon-factory>
   <widget class="Gtk.Window" id="IMRpatient.MainWindow" design-size="702 777">
     <action-group name="Default">
@@ -180,9 +195,9 @@
         <property name="ShortLabel" translatable="yes">Categories...</property>
         <property name="StockId">system_categories</property>
       </action>
-      <action id="usersAction">
+      <action id="UsersAction">
         <property name="Type">Action</property>
-        <property name="Label" translatable="yes">Users...</property>
+        <property name="Label" translatable="yes">Users</property>
         <property name="ShortLabel" translatable="yes">Users...</property>
         <property name="StockId">system_users</property>
       </action>
@@ -318,6 +333,18 @@
         <property name="StockId">gtk-about</property>
         <signal name="Activated" handler="OnAboutActionActivated" />
       </action>
+      <action id="UsersNew">
+        <property name="Type">Action</property>
+        <property name="Label" translatable="yes">New...</property>
+        <property name="ShortLabel" translatable="yes">New...</property>
+        <property name="StockId">system_users_new</property>
+      </action>
+      <action id="UsersEdit">
+        <property name="Type">Action</property>
+        <property name="Label" translatable="yes">Edit...</property>
+        <property name="ShortLabel" translatable="yes">Edit...</property>
+        <property name="StockId">system_users_edit</property>
+      </action>
     </action-group>
     <property name="MemberName" />
     <property name="WidthRequest">700</property>
@@ -341,7 +368,10 @@
                   <node type="Menu" action="SystemAction">
                     <node type="Menuitem" action="CategoriesAction" />
                     <node type="Separator" />
-                    <node type="Menuitem" action="usersAction" />
+                    <node type="Menu" action="UsersAction">
+                      <node type="Menuitem" action="UsersNew" />
+                      <node type="Menuitem" action="UsersEdit" />
+                    </node>
                     <node type="Menuitem" action="BackupAction" />
                     <node type="Menuitem" action="RestoreAction" />
                     <node type="Separator" />
