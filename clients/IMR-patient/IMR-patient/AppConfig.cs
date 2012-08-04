@@ -1,5 +1,6 @@
 using System;
 using System.IO;
+using System.Net;
 using System.Text;
 using System.Runtime.InteropServices;
 
@@ -8,6 +9,20 @@ using monoCharp;
 
 namespace IMRpatient
 {
+	public enum IMR_PERM {
+		PATIENT_CREATE = 1000,
+		PATIENT_EDIT,
+		PATIENT_DELETE,
+		USER_CREATE = 2000,
+		USER_EDIT,
+		USER_EDIT_YOURSELF,
+		USER_DELETE,
+		SYSTEM_BACKUP = 3000,
+		SYSTEM_RESTORE
+	}
+
+	public delegate void VoidDelegate ();
+
 	public class AppConfig
 	{
 		private static readonly string APP_NAME = "IMR-patient";
@@ -16,16 +31,25 @@ namespace IMRpatient
 		private static readonly string GCONF_PORT = GCONF_APP_BASE + "/port";
 		private static readonly string DEFAULT_BASEURL = "http://www.imr.local/";
 
+		private enum AccountType {
+			UNKNOWN = 0,
+			OPERATOR,
+			ADMIN,
+			SUPERUSER
+		}
+		
 		public Charp charp;
 		public Radionic radionic;
 		private GConf.Client gconf;
-		
+		private AccountType account_type;
+
 		public AppConfig (Charp charp, Radionic radionic)
 		{
 			this.charp = charp;
 			this.radionic = radionic;
 
 			gconf = new GConf.Client ();
+			account_type = AccountType.UNKNOWN;
 		}
 
 		[DllImport("libc")] // Linux
@@ -147,6 +171,35 @@ namespace IMRpatient
 			if (radionic.Port != null && radionic.Port != "") {
 				gconf.Set (GCONF_PORT, radionic.Port);
 			}
+		}
+
+		public void LoadPermissions (VoidDelegate del)
+		{
+			account_type = AccountType.UNKNOWN;
+			charp.request ("user_get_type", null, new Charp.CharpCtx {
+				success = delegate (object data, UploadValuesCompletedEventArgs status, Charp.CharpCtx ctx){
+					string typestr = (string) data;
+					switch (typestr) {
+					case "ADMIN":
+						account_type = AccountType.ADMIN;
+						break;
+					case "OPERATOR":
+						account_type = AccountType.OPERATOR;
+						break;
+					case "SUPERUSER":
+						account_type = AccountType.SUPERUSER;
+						break;
+					}
+					del ();
+				}
+			});
+		}
+
+		public bool CanPerform (IMR_PERM perm) {
+			if (((int) account_type) < ((int) perm) / 1000) {
+				return false;
+			}
+			return true;
 		}
 	}
 }
