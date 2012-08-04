@@ -107,3 +107,9 @@ CREATE TYPE imr_teleheal_type AS ENUM (
 CREATE TYPE imr_remedy_method AS ENUM (
 	   'C', 'X', 'M', 'MM', 'LM'
 );
+
+CREATE TYPE imr_account_type AS ENUM (
+	   'ADMIN',
+	   'OPERATOR',
+	   'SUPERUSER'
+);
