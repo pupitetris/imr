@@ -336,6 +336,7 @@ CREATE TABLE public.account (
                 inst_id INTEGER NOT NULL,
                 username VARCHAR(20) NOT NULL,
                 passwd VARCHAR(32) NOT NULL,
+                account_type imr_account_type NOT NULL,
                 status charp_account_status NOT NULL,
                 CONSTRAINT account_pk PRIMARY KEY (persona_id, inst_id)
 );

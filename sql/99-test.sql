@@ -8,7 +8,7 @@ BEGIN TRANSACTION;
 	  		 VALUES (DEFAULT, 1, 'INST', NULL, 'Test', NULL, NULL, 'MALE', NULL, NULL, 'ACTIVE');
 
       -- password is ``blah''
-      INSERT INTO account(persona_id, inst_id, username, passwd, status)
-      	     VALUES (1, 1, 'testuser', '6f1ed002ab5595859014ebf0951522d9', 'ACTIVE');
+      INSERT INTO account(persona_id, inst_id, username, passwd, account_type, status)
+      	     VALUES (1, 1, 'testuser', '6f1ed002ab5595859014ebf0951522d9', 'ADMIN', 'ACTIVE');
 
 COMMIT TRANSACTION;
