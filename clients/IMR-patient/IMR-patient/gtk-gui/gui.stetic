@@ -365,6 +365,7 @@
         <property name="Label" translatable="yes">Edit...</property>
         <property name="ShortLabel" translatable="yes">Edit...</property>
         <property name="StockId">system_users_edit</property>
+        <signal name="Activated" handler="OnUsersEditActivated" />
       </action>
     </action-group>
     <property name="MemberName" />
@@ -1251,7 +1252,7 @@
       </widget>
     </child>
   </widget>
-  <widget class="Gtk.Window" id="IMRpatient.UserEditorWin" design-size="447 300">
+  <widget class="Gtk.Window" id="IMRpatient.UserEditorWin" design-size="513 327">
     <action-group name="Default">
       <action id="DeleteAction">
         <property name="Type">Action</property>
@@ -1280,18 +1281,7 @@
         <property name="ShortLabel" translatable="yes">_New</property>
         <property name="StockId">gtk-new</property>
       </action>
-      <action id="PleaseWaitAction">
-        <property name="Type">Action</property>
-        <property name="Label" translatable="yes">Please wait...</property>
-        <property name="Sensitive">False</property>
-        <property name="ShortLabel" translatable="yes"> Please wait...</property>
-        <property name="StockId">please_wait</property>
-        <property name="Visible">False</property>
-        <property name="VisibleHorizontal">False</property>
-        <property name="VisibleVertical">False</property>
-        <property name="VisibleOverflown">False</property>
-      </action>
-      <action id="PleaseWaitAction5">
+      <action id="PleaseWaitCancel">
         <property name="Type">Action</property>
         <property name="Label" translatable="yes">Please wait...</property>
         <property name="Sensitive">False</property>
@@ -1302,7 +1292,18 @@
         <property name="VisibleVertical">False</property>
         <property name="VisibleOverflown">False</property>
       </action>
-      <action id="PleaseWaitAction4">
+      <action id="PleaseWaitOK">
+        <property name="Type">Action</property>
+        <property name="Label" translatable="yes">Please wait...</property>
+        <property name="Sensitive">False</property>
+        <property name="ShortLabel" translatable="yes">Please wait...</property>
+        <property name="StockId">please_wait</property>
+        <property name="Visible">False</property>
+        <property name="VisibleHorizontal">False</property>
+        <property name="VisibleVertical">False</property>
+        <property name="VisibleOverflown">False</property>
+      </action>
+      <action id="PleaseWaitDelete">
         <property name="Type">Action</property>
         <property name="Label" translatable="yes">Please wait...</property>
         <property name="Sensitive">False</property>
@@ -1332,18 +1333,18 @@
             <property name="HeightRequest">40</property>
             <property name="Spacing">6</property>
             <child>
-              <widget class="Gtk.MenuBar" id="menubar1">
+              <widget class="Gtk.MenuBar" id="menubar">
                 <property name="MemberName" />
                 <property name="PackDirection">Rtl</property>
-                <node name="__gtksharp_55_Stetic_Editor_ActionMenuBar" type="Menubar">
+                <node name="menubar" type="Menubar">
                   <node type="Menu" action="OKAction">
-                    <node type="Menuitem" action="PleaseWaitAction5" />
+                    <node type="Menuitem" action="PleaseWaitOK" />
                   </node>
                   <node type="Menu" action="CancelAction">
-                    <node type="Menuitem" action="PleaseWaitAction" />
+                    <node type="Menuitem" action="PleaseWaitCancel" />
                   </node>
                   <node type="Menu" action="DeleteAction">
-                    <node type="Menuitem" action="PleaseWaitAction4" />
+                    <node type="Menuitem" action="PleaseWaitDelete" />
                   </node>
                 </node>
               </widget>
@@ -1411,7 +1412,7 @@
                             <property name="Xalign">1</property>
                             <property name="LeftPadding">6</property>
                             <child>
-                              <widget class="Gtk.Label" id="label4">
+                              <widget class="Gtk.Label" id="labelStatus">
                                 <property name="MemberName" />
                                 <property name="Xalign">1</property>
                                 <property name="LabelProp" translatable="yes">Status:</property>
@@ -1439,7 +1440,7 @@
                             <property name="Xalign">1</property>
                             <property name="LeftPadding">6</property>
                             <child>
-                              <widget class="Gtk.Label" id="label5">
+                              <widget class="Gtk.Label" id="labelLevel">
                                 <property name="MemberName" />
                                 <property name="Xalign">1</property>
                                 <property name="LabelProp" translatable="yes">Level:</property>
@@ -1467,7 +1468,9 @@
                           <widget class="Gtk.ComboBox" id="comboLevel">
                             <property name="MemberName" />
                             <property name="IsTextCombo">True</property>
-                            <property name="Items" translatable="yes" />
+                            <property name="Items" translatable="yes">Operator
+Administrator
+Superuser</property>
                           </widget>
                           <packing>
                             <property name="TopAttach">1</property>
@@ -1489,7 +1492,8 @@
                           <widget class="Gtk.ComboBox" id="comboStatus">
                             <property name="MemberName" />
                             <property name="IsTextCombo">True</property>
-                            <property name="Items" translatable="yes" />
+                            <property name="Items" translatable="yes">Active
+Disabled</property>
                           </widget>
                           <packing>
                             <property name="LeftAttach">3</property>
@@ -1572,12 +1576,14 @@
                           </packing>
                         </child>
                         <child>
-                          <widget class="Gtk.Label" id="label1">
+                          <widget class="Gtk.Label" id="labelConfirm">
                             <property name="MemberName" />
-                            <property name="LabelProp" translatable="yes">Username:</property>
+                            <property name="LabelProp" translatable="yes">(Confirm):</property>
                             <property name="Justify">Right</property>
                           </widget>
                           <packing>
+                            <property name="TopAttach">2</property>
+                            <property name="BottomAttach">3</property>
                             <property name="AutoSize">True</property>
                             <property name="XOptions">Fill</property>
                             <property name="YOptions">Fill</property>
@@ -1590,7 +1596,7 @@
                           </packing>
                         </child>
                         <child>
-                          <widget class="Gtk.Label" id="label2">
+                          <widget class="Gtk.Label" id="labelPassword">
                             <property name="MemberName" />
                             <property name="LabelProp" translatable="yes">Password:</property>
                             <property name="Justify">Right</property>
@@ -1610,14 +1616,12 @@
                           </packing>
                         </child>
                         <child>
-                          <widget class="Gtk.Label" id="label3">
+                          <widget class="Gtk.Label" id="labelUsername">
                             <property name="MemberName" />
-                            <property name="LabelProp" translatable="yes">(Confirm):</property>
+                            <property name="LabelProp" translatable="yes">Username:</property>
                             <property name="Justify">Right</property>
                           </widget>
                           <packing>
-                            <property name="TopAttach">2</property>
-                            <property name="BottomAttach">3</property>
                             <property name="AutoSize">True</property>
                             <property name="XOptions">Fill</property>
                             <property name="YOptions">Fill</property>
@@ -1638,7 +1642,7 @@
                   </widget>
                 </child>
                 <child>
-                  <widget class="Gtk.Label" id="GtkLabel3">
+                  <widget class="Gtk.Label" id="GtkLabel5">
                     <property name="MemberName" />
                     <property name="LabelProp" translatable="yes">&lt;b&gt;User Account&lt;/b&gt;</property>
                     <property name="UseMarkup">True</property>
@@ -1671,7 +1675,7 @@
                   </widget>
                 </child>
                 <child>
-                  <widget class="Gtk.Label" id="GtkLabel4">
+                  <widget class="Gtk.Label" id="GtkLabel6">
                     <property name="MemberName" />
                     <property name="LabelProp" translatable="yes">&lt;b&gt;Contact Information&lt;/b&gt;</property>
                     <property name="UseMarkup">True</property>

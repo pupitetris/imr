@@ -83,10 +83,15 @@ namespace IMRpatient {
 
 		protected void OnUsersNewActivated (object sender, EventArgs e)
 		{
-			UserEditorWin win = new UserEditorWin (UserEditorWin.TYPE.NEW);
+			UserEditorWin win = new UserEditorWin (UserEditorWin.TYPE.NEW, config);
 			win.TransientFor = this;
 			win.Show ();
 			win.Present ();
+		}
+
+		protected void OnUsersEditActivated (object sender, EventArgs e)
+		{
+
 		}
 	}
 }

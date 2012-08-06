@@ -10,15 +10,17 @@ using monoCharp;
 namespace IMRpatient
 {
 	public enum IMR_PERM {
-		PATIENT_CREATE = 1000,
+		PATIENT_CREATE = 1000, // Operator
 		PATIENT_EDIT,
 		PATIENT_DELETE,
-		USER_CREATE = 2000,
+		USER_CREATE = 2000, // Admin
 		USER_EDIT,
 		USER_EDIT_YOURSELF,
 		USER_DELETE,
-		SYSTEM_BACKUP = 3000,
-		SYSTEM_RESTORE
+		SYSTEM_BACKUP = 3000, // Superuser
+		SYSTEM_RESTORE,
+		USER_SET_STATUS,
+		USER_SET_ADMIN_LEVEL
 	}
 
 	public delegate void VoidDelegate ();
