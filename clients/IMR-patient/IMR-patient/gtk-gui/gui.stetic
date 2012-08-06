@@ -1291,9 +1291,8 @@
         <property name="VisibleVertical">False</property>
         <property name="VisibleOverflown">False</property>
       </action>
-      <action id="PleaseWaitAction3">
+      <action id="PleaseWaitAction5">
         <property name="Type">Action</property>
-        <property name="HideIfEmpty">False</property>
         <property name="Label" translatable="yes">Please wait...</property>
         <property name="Sensitive">False</property>
         <property name="ShortLabel" translatable="yes">Please wait...</property>
@@ -1305,7 +1304,6 @@
       </action>
       <action id="PleaseWaitAction4">
         <property name="Type">Action</property>
-        <property name="HideIfEmpty">False</property>
         <property name="Label" translatable="yes">Please wait...</property>
         <property name="Sensitive">False</property>
         <property name="ShortLabel" translatable="yes">Please wait...</property>
@@ -1339,13 +1337,13 @@
                 <property name="PackDirection">Rtl</property>
                 <node name="__gtksharp_55_Stetic_Editor_ActionMenuBar" type="Menubar">
                   <node type="Menu" action="OKAction">
-                    <node type="Menu" action="PleaseWaitAction3" />
+                    <node type="Menuitem" action="PleaseWaitAction5" />
                   </node>
                   <node type="Menu" action="CancelAction">
                     <node type="Menuitem" action="PleaseWaitAction" />
                   </node>
                   <node type="Menu" action="DeleteAction">
-                    <node type="Menu" action="PleaseWaitAction4" />
+                    <node type="Menuitem" action="PleaseWaitAction4" />
                   </node>
                 </node>
               </widget>
