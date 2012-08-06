@@ -26,6 +26,8 @@ namespace IMRpatient {
 			config.LoadPermissions (delegate {
 				ConfigureByPermissions ();
 			});
+
+			Maximize ();
 		}
 
 		private void ConfigureByPermissions ()
@@ -84,6 +86,7 @@ namespace IMRpatient {
 			UserEditorWin win = new UserEditorWin (UserEditorWin.TYPE.NEW);
 			win.TransientFor = this;
 			win.Show ();
+			win.Present ();
 		}
 	}
 }

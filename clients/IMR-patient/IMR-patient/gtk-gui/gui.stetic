@@ -160,6 +160,11 @@
         <property name="Image">stock:gtk-cancel Menu</property>
       </source>
     </icon-set>
+    <icon-set id="please_wait">
+      <source>
+        <property name="Image">stock:gtk-execute Menu</property>
+      </source>
+    </icon-set>
   </icon-factory>
   <widget class="Gtk.Window" id="IMRpatient.MainWindow" design-size="702 777">
     <action-group name="Default">
@@ -1269,11 +1274,54 @@
         <property name="StockId">useredit_cancel</property>
         <signal name="Activated" handler="OnCancelActionActivated" />
       </action>
+      <action id="newAction">
+        <property name="Type">Action</property>
+        <property name="Label" translatable="yes">_New</property>
+        <property name="ShortLabel" translatable="yes">_New</property>
+        <property name="StockId">gtk-new</property>
+      </action>
+      <action id="PleaseWaitAction">
+        <property name="Type">Action</property>
+        <property name="Label" translatable="yes">Please wait...</property>
+        <property name="Sensitive">False</property>
+        <property name="ShortLabel" translatable="yes"> Please wait...</property>
+        <property name="StockId">please_wait</property>
+        <property name="Visible">False</property>
+        <property name="VisibleHorizontal">False</property>
+        <property name="VisibleVertical">False</property>
+        <property name="VisibleOverflown">False</property>
+      </action>
+      <action id="PleaseWaitAction3">
+        <property name="Type">Action</property>
+        <property name="HideIfEmpty">False</property>
+        <property name="Label" translatable="yes">Please wait...</property>
+        <property name="Sensitive">False</property>
+        <property name="ShortLabel" translatable="yes">Please wait...</property>
+        <property name="StockId">please_wait</property>
+        <property name="Visible">False</property>
+        <property name="VisibleHorizontal">False</property>
+        <property name="VisibleVertical">False</property>
+        <property name="VisibleOverflown">False</property>
+      </action>
+      <action id="PleaseWaitAction4">
+        <property name="Type">Action</property>
+        <property name="HideIfEmpty">False</property>
+        <property name="Label" translatable="yes">Please wait...</property>
+        <property name="Sensitive">False</property>
+        <property name="ShortLabel" translatable="yes">Please wait...</property>
+        <property name="StockId">please_wait</property>
+        <property name="Visible">False</property>
+        <property name="VisibleHorizontal">False</property>
+        <property name="VisibleVertical">False</property>
+        <property name="VisibleOverflown">False</property>
+      </action>
     </action-group>
     <property name="MemberName" />
     <property name="Title" translatable="yes">UserEditorWin</property>
     <property name="TypeHint">Utility</property>
-    <property name="WindowPosition">CenterOnParent</property>
+    <property name="WindowPosition">Center</property>
+    <property name="Resizable">False</property>
+    <property name="AllowGrow">False</property>
     <property name="DestroyWithParent">True</property>
     <property name="SkipPagerHint">True</property>
     <property name="SkipTaskbarHint">True</property>
@@ -1290,9 +1338,15 @@
                 <property name="MemberName" />
                 <property name="PackDirection">Rtl</property>
                 <node name="__gtksharp_55_Stetic_Editor_ActionMenuBar" type="Menubar">
-                  <node type="Menu" action="OKAction" />
-                  <node type="Menu" action="CancelAction" />
-                  <node type="Menu" action="DeleteAction" />
+                  <node type="Menu" action="OKAction">
+                    <node type="Menu" action="PleaseWaitAction3" />
+                  </node>
+                  <node type="Menu" action="CancelAction">
+                    <node type="Menuitem" action="PleaseWaitAction" />
+                  </node>
+                  <node type="Menu" action="DeleteAction">
+                    <node type="Menu" action="PleaseWaitAction4" />
+                  </node>
                 </node>
               </widget>
               <packing>

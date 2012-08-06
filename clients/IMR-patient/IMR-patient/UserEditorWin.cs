@@ -26,19 +26,30 @@ namespace IMRpatient
 			}
 		}
 
+		private bool CloseWindow ()
+		{
+			Destroy ();
+			return false;
+		}
+		
+		private void SendClose ()
+		{
+			GLib.Timeout.Add (50, new GLib.TimeoutHandler (CloseWindow));
+		}
+
 		protected void OnDeleteActionActivated (object sender, EventArgs e)
 		{
-			throw new System.NotImplementedException ();
+			SendClose ();
 		}
 
 		protected void OnCancelActionActivated (object sender, EventArgs e)
 		{
-			Destroy ();
+			SendClose ();
 		}
 		
 		protected void OnOKActionActivated (object sender, EventArgs e)
 		{
-			throw new System.NotImplementedException ();
+			SendClose ();
 		}
 	}
 }

@@ -21,9 +21,6 @@ style "mainMenuStyle"
 
 style "mainMenuItemStyle"
 {
-	fg[NORMAL] = "white"
-	font_name = "Bold"
-
 	engine "pixmap" {
 		image {
 			state = PRELIGHT
@@ -34,8 +31,12 @@ style "mainMenuItemStyle"
 	}
 }
 
-widget "IMRpatient.MainWindow.*.menubarMain" style "mainMenuStyle"
-widget "IMRpatient.MainWindow.*.menubarMainHelp" style "mainMenuStyle"
+style "mainMenuAccelLabelStyle"
+{
+	fg[NORMAL] = "white"
+	font_name = "Bold"
+}
 
-widget "IMRpatient.MainWindow.*.menubarMain.*" style "mainMenuItemStyle"
-widget "IMRpatient.MainWindow.*.menubarMainHelp.*" style "mainMenuItemStyle"
+class "GtkMenuBar" style "mainMenuStyle"
+widget_class "*GtkMenuBar*Gtk*MenuItem" style "mainMenuItemStyle"
+widget_class "*GtkMenuBar*GtkAccelLabel" style "mainMenuAccelLabelStyle"
