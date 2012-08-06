@@ -78,5 +78,12 @@ namespace IMRpatient {
 			dlg.TransientFor = this;
 			dlg.Run ();
 		}
+
+		protected void OnUsersNewActivated (object sender, EventArgs e)
+		{
+			UserEditorWin win = new UserEditorWin (UserEditorWin.TYPE.NEW);
+			win.TransientFor = this;
+			win.Show ();
+		}
 	}
 }

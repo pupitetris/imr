@@ -71,6 +71,7 @@
     <EmbeddedResource Include="img\imr-icon.png">
       <Gettext-ScanForTranslations>False</Gettext-ScanForTranslations>
     </EmbeddedResource>
+    <EmbeddedResource Include="img\password.png" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="gtk-gui\generated.cs" />
@@ -90,6 +91,8 @@
     <Compile Include="gtk-gui\IMRpatient.MainWindow.cs" />
     <Compile Include="AboutDlg.cs" />
     <Compile Include="gtk-gui\IMRpatient.AboutDlg.cs" />
+    <Compile Include="UserEditorWin.cs" />
+    <Compile Include="gtk-gui\IMRpatient.UserEditorWin.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
