@@ -1,0 +1,2457 @@
+muni_id|state_id|m_name
+1|15423|Aguascalientes
+2|15423|Asientos
+3|15423|Calvillo
+4|15423|Cosío
+5|15423|Jesús María
+6|15423|Pabellón de Arteaga
+7|15423|Rincón de Romos
+8|15423|San José de Gracia
+9|15423|Tepezalá
+10|15423|El Llano
+11|15423|San Francisco de los Romo
+12|15412|Ensenada
+13|15412|Mexicali
+14|15412|Tecate
+15|15412|Tijuana
+16|15412|Playas de Rosarito
+17|15413|Comondú
+18|15413|Mulegé
+19|15413|La Paz
+20|15413|Los Cabos
+21|15413|Loreto
+22|15424|Calkiní
+23|15424|Campeche
+24|15424|Carmen
+25|15424|Champotón
+26|15424|Hecelchakán
+27|15424|Hopelchén
+28|15424|Palizada
+29|15424|Tenabo
+30|15424|Escárcega
+31|15424|Calakmul
+32|15424|Candelaria
+33|15414|Abasolo
+34|15414|Acuña
+35|15414|Allende
+36|15414|Arteaga
+37|15414|Candela
+38|15414|Castaños
+39|15414|Cuatro Ciénegas
+40|15414|Escobedo
+41|15414|Francisco I. Madero
+42|15414|Frontera
+43|15414|General Cepeda
+44|15414|Guerrero
+45|15414|Hidalgo
+46|15414|Jiménez
+47|15414|Juárez
+48|15414|Lamadrid
+49|15414|Matamoros
+50|15414|Monclova
+51|15414|Morelos
+52|15414|Múzquiz
+53|15414|Nadadores
+54|15414|Nava
+55|15414|Ocampo
+56|15414|Parras
+57|15414|Piedras Negras
+58|15414|Progreso
+59|15414|Ramos Arizpe
+60|15414|Sabinas
+61|15414|Sacramento
+62|15414|Saltillo
+63|15414|San Buenaventura
+64|15414|San Juan de Sabinas
+65|15414|San Pedro
+66|15414|Sierra Mojada
+67|15414|Torreón
+68|15414|Viesca
+69|15414|Villa Unión
+70|15414|Zaragoza
+71|15425|Armería
+72|15425|Colima
+73|15425|Comala
+74|15425|Coquimatlán
+75|15425|Cuauhtémoc
+76|15425|Ixtlahuacán
+77|15425|Manzanillo
+78|15425|Minatitlán
+79|15425|Tecomán
+80|15425|Villa de Álvarez
+81|15415|Acacoyagua
+82|15415|Acala
+83|15415|Acapetahua
+84|15415|Altamirano
+85|15415|Amatán
+86|15415|Amatenango de la Frontera
+87|15415|Amatenango del Valle
+88|15415|Angel Albino Corzo
+89|15415|Arriaga
+90|15415|Bejucal de Ocampo
+91|15415|Bella Vista
+92|15415|Berriozábal
+93|15415|Bochil
+94|15415|El Bosque
+95|15415|Cacahoatán
+96|15415|Catazajá
+97|15415|Cintalapa
+98|15415|Coapilla
+99|15415|Comitán de Domínguez
+100|15415|La Concordia
+101|15415|Copainalá
+102|15415|Chalchihuitán
+103|15415|Chamula
+104|15415|Chanal
+105|15415|Chapultenango
+106|15415|Chenalhó
+107|15415|Chiapa de Corzo
+108|15415|Chiapilla
+109|15415|Chicoasén
+110|15415|Chicomuselo
+111|15415|Chilón
+112|15415|Escuintla
+113|15415|Francisco León
+114|15415|Frontera Comalapa
+115|15415|Frontera Hidalgo
+116|15415|La Grandeza
+117|15415|Huehuetán
+118|15415|Huixtán
+119|15415|Huitiupán
+120|15415|Huixtla
+121|15415|La Independencia
+122|15415|Ixhuatán
+123|15415|Ixtacomitán
+124|15415|Ixtapa
+125|15415|Ixtapangajoya
+126|15415|Jiquipilas
+127|15415|Jitotol
+128|15415|Juárez
+129|15415|Larráinzar
+130|15415|La Libertad
+131|15415|Mapastepec
+132|15415|Las Margaritas
+133|15415|Mazapa de Madero
+134|15415|Mazatán
+135|15415|Metapa
+136|15415|Mitontic
+137|15415|Motozintla
+138|15415|Nicolás Ruíz
+139|15415|Ocosingo
+140|15415|Ocotepec
+141|15415|Ocozocoautla de Espinosa
+142|15415|Ostuacán
+143|15415|Osumacinta
+144|15415|Oxchuc
+145|15415|Palenque
+146|15415|Pantelhó
+147|15415|Pantepec
+148|15415|Pichucalco
+149|15415|Pijijiapan
+150|15415|El Porvenir
+151|15415|Villa Comaltitlán
+152|15415|Pueblo Nuevo Solistahuacán
+153|15415|Rayón
+154|15415|Reforma
+155|15415|Las Rosas
+156|15415|Sabanilla
+157|15415|Salto de Agua
+158|15415|San Cristóbal de las Casas
+159|15415|San Fernando
+160|15415|Siltepec
+161|15415|Simojovel
+162|15415|Sitalá
+163|15415|Socoltenango
+164|15415|Solosuchiapa
+165|15415|Soyaló
+166|15415|Suchiapa
+167|15415|Suchiate
+168|15415|Sunuapa
+169|15415|Tapachula
+170|15415|Tapalapa
+171|15415|Tapilula
+172|15415|Tecpatán
+173|15415|Tenejapa
+174|15415|Teopisca
+175|15415|Tila
+176|15415|Tonalá
+177|15415|Totolapa
+178|15415|La Trinitaria
+179|15415|Tumbalá
+180|15415|Tuxtla Gutiérrez
+181|15415|Tuxtla Chico
+182|15415|Tuzantán
+183|15415|Tzimol
+184|15415|Unión Juárez
+185|15415|Venustiano Carranza
+186|15415|Villa Corzo
+187|15415|Villaflores
+188|15415|Yajalón
+189|15415|San Lucas
+190|15415|Zinacantán
+191|15415|San Juan Cancuc
+192|15415|Aldama
+193|15415|Benemérito de las Américas
+194|15415|Maravilla Tenejapa
+195|15415|Marqués de Comillas
+196|15415|Montecristo de Guerrero
+197|15415|San Andrés Duraznal
+198|15415|Santiago el Pinar
+199|15416|Ahumada
+200|15416|Aldama
+201|15416|Allende
+202|15416|Aquiles Serdán
+203|15416|Ascensión
+204|15416|Bachíniva
+205|15416|Balleza
+206|15416|Batopilas
+207|15416|Bocoyna
+208|15416|Buenaventura
+209|15416|Camargo
+210|15416|Carichí
+211|15416|Casas Grandes
+212|15416|Coronado
+213|15416|Coyame del Sotol
+214|15416|La Cruz
+215|15416|Cuauhtémoc
+216|15416|Cusihuiriachi
+217|15416|Chihuahua
+218|15416|Chínipas
+219|15416|Delicias
+220|15416|Dr. Belisario Domínguez
+221|15416|Galeana
+222|15416|Santa Isabel
+223|15416|Gómez Farías
+224|15416|Gran Morelos
+225|15416|Guachochi
+226|15416|Guadalupe
+227|15416|Guadalupe y Calvo
+228|15416|Guazapares
+229|15416|Guerrero
+230|15416|Hidalgo del Parral
+231|15416|Huejotitán
+232|15416|Ignacio Zaragoza
+233|15416|Janos
+234|15416|Jiménez
+235|15416|Juárez
+236|15416|Julimes
+237|15416|López
+238|15416|Madera
+239|15416|Maguarichi
+240|15416|Manuel Benavides
+241|15416|Matachí
+242|15416|Matamoros
+243|15416|Meoqui
+244|15416|Morelos
+245|15416|Moris
+246|15416|Namiquipa
+247|15416|Nonoava
+248|15416|Nuevo Casas Grandes
+249|15416|Ocampo
+250|15416|Ojinaga
+251|15416|Praxedis G. Guerrero
+252|15416|Riva Palacio
+253|15416|Rosales
+254|15416|Rosario
+255|15416|San Francisco de Borja
+256|15416|San Francisco de Conchos
+257|15416|San Francisco del Oro
+258|15416|Santa Bárbara
+259|15416|Satevó
+260|15416|Saucillo
+261|15416|Temósachic
+262|15416|El Tule
+263|15416|Urique
+264|15416|Uruachi
+265|15416|Valle de Zaragoza
+266|15426|Azcapotzalco
+267|15426|Coyoacán
+268|15426|Cuajimalpa de Morelos
+269|15426|Gustavo A. Madero
+270|15426|Iztacalco
+271|15426|Iztapalapa
+272|15426|La Magdalena Contreras
+273|15426|Milpa Alta
+274|15426|Álvaro Obregón
+275|15426|Tláhuac
+276|15426|Tlalpan
+277|15426|Xochimilco
+278|15426|Benito Juárez
+279|15426|Cuauhtémoc
+280|15426|Miguel Hidalgo
+281|15426|Venustiano Carranza
+282|15417|Canatlán
+283|15417|Canelas
+284|15417|Coneto de Comonfort
+285|15417|Cuencamé
+286|15417|Durango
+287|15417|General Simón Bolívar
+288|15417|Gómez Palacio
+289|15417|Guadalupe Victoria
+290|15417|Guanaceví
+291|15417|Hidalgo
+292|15417|Indé
+293|15417|Lerdo
+294|15417|Mapimí
+295|15417|Mezquital
+296|15417|Nazas
+297|15417|Nombre de Dios
+298|15417|Ocampo
+299|15417|El Oro
+300|15417|Otáez
+301|15417|Pánuco de Coronado
+302|15417|Peñón Blanco
+303|15417|Poanas
+304|15417|Pueblo Nuevo
+305|15417|Rodeo
+306|15417|San Bernardo
+307|15417|San Dimas
+308|15417|San Juan de Guadalupe
+309|15417|San Juan del Río
+310|15417|San Luis del Cordero
+311|15417|San Pedro del Gallo
+312|15417|Santa Clara
+313|15417|Santiago Papasquiaro
+314|15417|Súchil
+315|15417|Tamazula
+316|15417|Tepehuanes
+317|15417|Tlahualilo
+318|15417|Topia
+319|15417|Vicente Guerrero
+320|15417|Nuevo Ideal
+321|15418|Abasolo
+322|15418|Acámbaro
+323|15418|San Miguel de Allende
+324|15418|Apaseo el Alto
+325|15418|Apaseo el Grande
+326|15418|Atarjea
+327|15418|Celaya
+328|15418|Manuel Doblado
+329|15418|Comonfort
+330|15418|Coroneo
+331|15418|Cortazar
+332|15418|Cuerámaro
+333|15418|Doctor Mora
+334|15418|Dolores Hidalgo Cuna de la Independencia Nacional
+335|15418|Guanajuato
+336|15418|Huanímaro
+337|15418|Irapuato
+338|15418|Jaral del Progreso
+339|15418|Jerécuaro
+340|15418|León
+341|15418|Moroleón
+342|15418|Ocampo
+343|15418|Pénjamo
+344|15418|Pueblo Nuevo
+345|15418|Purísima del Rincón
+346|15418|Romita
+347|15418|Salamanca
+348|15418|Salvatierra
+349|15418|San Diego de la Unión
+350|15418|San Felipe
+351|15418|San Francisco del Rincón
+352|15418|San José Iturbide
+353|15418|San Luis de la Paz
+354|15418|Santa Catarina
+355|15418|Santa Cruz de Juventino Rosas
+356|15418|Santiago Maravatío
+357|15418|Silao
+358|15418|Tarandacuao
+359|15418|Tarimoro
+360|15418|Tierra Blanca
+361|15418|Uriangato
+362|15418|Valle de Santiago
+363|15418|Victoria
+364|15418|Villagrán
+365|15418|Xichú
+366|15418|Yuriria
+367|15427|Acapulco de Juárez
+368|15427|Ahuacuotzingo
+369|15427|Ajuchitlán del Progreso
+370|15427|Alcozauca de Guerrero
+371|15427|Alpoyeca
+372|15427|Apaxtla
+373|15427|Arcelia
+374|15427|Atenango del Río
+375|15427|Atlamajalcingo del Monte
+376|15427|Atlixtac
+377|15427|Atoyac de Álvarez
+378|15427|Ayutla de los Libres
+379|15427|Azoyú
+380|15427|Benito Juárez
+381|15427|Buenavista de Cuéllar
+382|15427|Coahuayutla de José María Izazaga
+383|15427|Cocula
+384|15427|Copala
+385|15427|Copalillo
+386|15427|Copanatoyac
+387|15427|Coyuca de Benítez
+388|15427|Coyuca de Catalán
+389|15427|Cuajinicuilapa
+390|15427|Cualác
+391|15427|Cuautepec
+392|15427|Cuetzala del Progreso
+393|15427|Cutzamala de Pinzón
+394|15427|Chilapa de Álvarez
+395|15427|Chilpancingo de los Bravo
+396|15427|Florencio Villarreal
+397|15427|General Canuto A. Neri
+398|15427|General Heliodoro Castillo
+399|15427|Huamuxtitlán
+400|15427|Huitzuco de los Figueroa
+401|15427|Iguala de la Independencia
+402|15427|Igualapa
+403|15427|Ixcateopan de Cuauhtémoc
+404|15427|Zihuatanejo de Azueta
+405|15427|Juan R. Escudero
+406|15427|Leonardo Bravo
+407|15427|Malinaltepec
+408|15427|Mártir de Cuilapan
+409|15427|Metlatónoc
+410|15427|Mochitlán
+411|15427|Olinalá
+412|15427|Ometepec
+413|15427|Pedro Ascencio Alquisiras
+414|15427|Petatlán
+415|15427|Pilcaya
+416|15427|Pungarabato
+417|15427|Quechultenango
+418|15427|San Luis Acatlán
+419|15427|San Marcos
+420|15427|San Miguel Totolapan
+421|15427|Taxco de Alarcón
+422|15427|Tecoanapa
+423|15427|Técpan de Galeana
+424|15427|Teloloapan
+425|15427|Tepecoacuilco de Trujano
+426|15427|Tetipac
+427|15427|Tixtla de Guerrero
+428|15427|Tlacoachistlahuaca
+429|15427|Tlacoapa
+430|15427|Tlalchapa
+431|15427|Tlalixtaquilla de Maldonado
+432|15427|Tlapa de Comonfort
+433|15427|Tlapehuala
+434|15427|La Unión de Isidoro Montes de Oca
+435|15427|Xalpatláhuac
+436|15427|Xochihuehuetlán
+437|15427|Xochistlahuaca
+438|15427|Zapotitlán Tablas
+439|15427|Zirándaro
+440|15427|Zitlala
+441|15427|Eduardo Neri
+442|15427|Acatepec
+443|15427|Marquelia
+444|15427|Cochoapa el Grande
+445|15427|José Joaquin de Herrera
+446|15427|Juchitán
+447|15427|Iliatenco
+448|15419|Acatlán
+449|15419|Acaxochitlán
+450|15419|Actopan
+451|15419|Agua Blanca de Iturbide
+452|15419|Ajacuba
+453|15419|Alfajayucan
+454|15419|Almoloya
+455|15419|Apan
+456|15419|El Arenal
+457|15419|Atitalaquia
+458|15419|Atlapexco
+459|15419|Atotonilco el Grande
+460|15419|Atotonilco de Tula
+461|15419|Calnali
+462|15419|Cardonal
+463|15419|Cuautepec de Hinojosa
+464|15419|Chapantongo
+465|15419|Chapulhuacán
+466|15419|Chilcuautla
+467|15419|Eloxochitlán
+468|15419|Emiliano Zapata
+469|15419|Epazoyucan
+470|15419|Francisco I. Madero
+471|15419|Huasca de Ocampo
+472|15419|Huautla
+473|15419|Huazalingo
+474|15419|Huehuetla
+475|15419|Huejutla de Reyes
+476|15419|Huichapan
+477|15419|Ixmiquilpan
+478|15419|Jacala de Ledezma
+479|15419|Jaltocán
+480|15419|Juárez Hidalgo
+481|15419|Lolotla
+482|15419|Metepec
+483|15419|San Agustín Metzquititlán
+484|15419|Metztitlán
+485|15419|Mineral del Chico
+486|15419|Mineral del Monte
+487|15419|La Misión
+488|15419|Mixquiahuala de Juárez
+489|15419|Molango de Escamilla
+490|15419|Nicolás Flores
+491|15419|Nopala de Villagrán
+492|15419|Omitlán de Juárez
+493|15419|San Felipe Orizatlán
+494|15419|Pacula
+495|15419|Pachuca de Soto
+496|15419|Pisaflores
+497|15419|Progreso de Obregón
+498|15419|Mineral de la Reforma
+499|15419|San Agustín Tlaxiaca
+500|15419|San Bartolo Tutotepec
+501|15419|San Salvador
+502|15419|Santiago de Anaya
+503|15419|Santiago Tulantepec de Lugo Guerrero
+504|15419|Singuilucan
+505|15419|Tasquillo
+506|15419|Tecozautla
+507|15419|Tenango de Doria
+508|15419|Tepeapulco
+509|15419|Tepehuacán de Guerrero
+510|15419|Tepeji del Río de Ocampo
+511|15419|Tepetitlán
+512|15419|Tetepango
+513|15419|Villa de Tezontepec
+514|15419|Tezontepec de Aldama
+515|15419|Tianguistengo
+516|15419|Tizayuca
+517|15419|Tlahuelilpan
+518|15419|Tlahuiltepa
+519|15419|Tlanalapa
+520|15419|Tlanchinol
+521|15419|Tlaxcoapan
+522|15419|Tolcayuca
+523|15419|Tula de Allende
+524|15419|Tulancingo de Bravo
+525|15419|Xochiatipan
+526|15419|Xochicoatlán
+527|15419|Yahualica
+528|15419|Zacualtipán de Ángeles
+529|15419|Zapotlán de Juárez
+530|15419|Zempoala
+531|15419|Zimapán
+532|15420|Acatic
+533|15420|Acatlán de Juárez
+534|15420|Ahualulco de Mercado
+535|15420|Amacueca
+536|15420|Amatitán
+537|15420|Ameca
+538|15420|San Juanito de Escobedo
+539|15420|Arandas
+540|15420|El Arenal
+541|15420|Atemajac de Brizuela
+542|15420|Atengo
+543|15420|Atenguillo
+544|15420|Atotonilco el Alto
+545|15420|Atoyac
+546|15420|Autlán de Navarro
+547|15420|Ayotlán
+548|15420|Ayutla
+549|15420|La Barca
+550|15420|Bolaños
+551|15420|Cabo Corrientes
+552|15420|Casimiro Castillo
+553|15420|Cihuatlán
+554|15420|Zapotlán el Grande
+555|15420|Cocula
+556|15420|Colotlán
+557|15420|Concepción de Buenos Aires
+558|15420|Cuautitlán de García Barragán
+559|15420|Cuautla
+560|15420|Cuquío
+561|15420|Chapala
+562|15420|Chimaltitán
+563|15420|Chiquilistlán
+564|15420|Degollado
+565|15420|Ejutla
+566|15420|Encarnación de Díaz
+567|15420|Etzatlán
+568|15420|El Grullo
+569|15420|Guachinango
+570|15420|Guadalajara
+571|15420|Hostotipaquillo
+572|15420|Huejúcar
+573|15420|Huejuquilla el Alto
+574|15420|La Huerta
+575|15420|Ixtlahuacán de los Membrillos
+576|15420|Ixtlahuacán del Río
+577|15420|Jalostotitlán
+578|15420|Jamay
+579|15420|Jesús María
+580|15420|Jilotlán de los Dolores
+581|15420|Jocotepec
+582|15420|Juanacatlán
+583|15420|Juchitlán
+584|15420|Lagos de Moreno
+585|15420|El Limón
+586|15420|Magdalena
+587|15420|Santa María del Oro
+588|15420|La Manzanilla de la Paz
+589|15420|Mascota
+590|15420|Mazamitla
+591|15420|Mexticacán
+592|15420|Mezquitic
+593|15420|Mixtlán
+594|15420|Ocotlán
+595|15420|Ojuelos de Jalisco
+596|15420|Pihuamo
+597|15420|Poncitlán
+598|15420|Puerto Vallarta
+599|15420|Villa Purificación
+600|15420|Quitupan
+601|15420|El Salto
+602|15420|San Cristóbal de la Barranca
+603|15420|San Diego de Alejandría
+604|15420|San Juan de los Lagos
+605|15420|San Julián
+606|15420|San Marcos
+607|15420|San Martín de Bolaños
+608|15420|San Martín Hidalgo
+609|15420|San Miguel el Alto
+610|15420|Gómez Farías
+611|15420|San Sebastián del Oeste
+612|15420|Santa María de los Ángeles
+613|15420|Sayula
+614|15420|Tala
+615|15420|Talpa de Allende
+616|15420|Tamazula de Gordiano
+617|15420|Tapalpa
+618|15420|Tecalitlán
+619|15420|Tecolotlán
+620|15420|Techaluta de Montenegro
+621|15420|Tenamaxtlán
+622|15420|Teocaltiche
+623|15420|Teocuitatlán de Corona
+624|15420|Tepatitlán de Morelos
+625|15420|Tequila
+626|15420|Teuchitlán
+627|15420|Tizapán el Alto
+628|15420|Tlajomulco de Zúñiga
+629|15420|Tlaquepaque
+630|15420|Tolimán
+631|15420|Tomatlán
+632|15420|Tonalá
+633|15420|Tonaya
+634|15420|Tonila
+635|15420|Totatiche
+636|15420|Tototlán
+637|15420|Tuxcacuesco
+638|15420|Tuxcueca
+639|15420|Tuxpan
+640|15420|Unión de San Antonio
+641|15420|Unión de Tula
+642|15420|Valle de Guadalupe
+643|15420|Valle de Juárez
+644|15420|San Gabriel
+645|15420|Villa Corona
+646|15420|Villa Guerrero
+647|15420|Villa Hidalgo
+648|15420|Cañadas de Obregón
+649|15420|Yahualica de González Gallo
+650|15420|Zacoalco de Torres
+651|15420|Zapopan
+652|15420|Zapotiltic
+653|15420|Zapotitlán de Vadillo
+654|15420|Zapotlán del Rey
+655|15420|Zapotlanejo
+656|15420|San Ignacio Cerro Gordo
+657|15421|Acambay
+658|15421|Acolman
+659|15421|Aculco
+660|15421|Almoloya de Alquisiras
+661|15421|Almoloya de Juárez
+662|15421|Almoloya del Río
+663|15421|Amanalco
+664|15421|Amatepec
+665|15421|Amecameca
+666|15421|Apaxco
+667|15421|Atenco
+668|15421|Atizapán
+669|15421|Atizapán de Zaragoza
+670|15421|Atlacomulco
+671|15421|Atlautla
+672|15421|Axapusco
+673|15421|Ayapango
+674|15421|Calimaya
+675|15421|Capulhuac
+676|15421|Coacalco de Berriozábal
+677|15421|Coatepec Harinas
+678|15421|Cocotitlán
+679|15421|Coyotepec
+680|15421|Cuautitlán
+681|15421|Chalco
+682|15421|Chapa de Mota
+683|15421|Chapultepec
+684|15421|Chiautla
+685|15421|Chicoloapan
+686|15421|Chiconcuac
+687|15421|Chimalhuacán
+688|15421|Donato Guerra
+689|15421|Ecatepec de Morelos
+690|15421|Ecatzingo
+691|15421|Huehuetoca
+692|15421|Hueypoxtla
+693|15421|Huixquilucan
+694|15421|Isidro Fabela
+695|15421|Ixtapaluca
+696|15421|Ixtapan de la Sal
+697|15421|Ixtapan del Oro
+698|15421|Ixtlahuaca
+699|15421|Xalatlaco
+700|15421|Jaltenco
+701|15421|Jilotepec
+702|15421|Jilotzingo
+703|15421|Jiquipilco
+704|15421|Jocotitlán
+705|15421|Joquicingo
+706|15421|Juchitepec
+707|15421|Lerma
+708|15421|Malinalco
+709|15421|Melchor Ocampo
+710|15421|Metepec
+711|15421|Mexicaltzingo
+712|15421|Morelos
+713|15421|Naucalpan de Juárez
+714|15421|Nezahualcóyotl
+715|15421|Nextlalpan
+716|15421|Nicolás Romero
+717|15421|Nopaltepec
+718|15421|Ocoyoacac
+719|15421|Ocuilan
+720|15421|El Oro
+721|15421|Otumba
+722|15421|Otzoloapan
+723|15421|Otzolotepec
+724|15421|Ozumba
+725|15421|Papalotla
+726|15421|La Paz
+727|15421|Polotitlán
+728|15421|Rayón
+729|15421|San Antonio la Isla
+730|15421|San Felipe del Progreso
+731|15421|San Martín de las Pirámides
+732|15421|San Mateo Atenco
+733|15421|San Simón de Guerrero
+734|15421|Santo Tomás
+735|15421|Soyaniquilpan de Juárez
+736|15421|Sultepec
+737|15421|Tecámac
+738|15421|Tejupilco
+739|15421|Temamatla
+740|15421|Temascalapa
+741|15421|Temascalcingo
+742|15421|Temascaltepec
+743|15421|Temoaya
+744|15421|Tenancingo
+745|15421|Tenango del Aire
+746|15421|Tenango del Valle
+747|15421|Teoloyucán
+748|15421|Teotihuacán
+749|15421|Tepetlaoxtoc
+750|15421|Tepetlixpa
+751|15421|Tepotzotlán
+752|15421|Tequixquiac
+753|15421|Texcaltitlán
+754|15421|Texcalyacac
+755|15421|Texcoco
+756|15421|Tezoyuca
+757|15421|Tianguistenco
+758|15421|Timilpan
+759|15421|Tlalmanalco
+760|15421|Tlalnepantla de Baz
+761|15421|Tlatlaya
+762|15421|Toluca
+763|15421|Tonatico
+764|15421|Tultepec
+765|15421|Tultitlán
+766|15421|Valle de Bravo
+767|15421|Villa de Allende
+768|15421|Villa del Carbón
+769|15421|Villa Guerrero
+770|15421|Villa Victoria
+771|15421|Xonacatlán
+772|15421|Zacazonapan
+773|15421|Zacualpan
+774|15421|Zinacantepec
+775|15421|Zumpahuacán
+776|15421|Zumpango
+777|15421|Cuautitlán Izcalli
+778|15421|Valle de Chalco Solidaridad
+779|15421|Luvianos
+780|15421|San José del Rincón
+781|15421|Tonanitla
+782|15422|Acuitzio
+783|15422|Aguililla
+784|15422|Álvaro Obregón
+785|15422|Angamacutiro
+786|15422|Angangueo
+787|15422|Apatzingán
+788|15422|Aporo
+789|15422|Aquila
+790|15422|Ario
+791|15422|Arteaga
+792|15422|Briseñas
+793|15422|Buenavista
+794|15422|Carácuaro
+795|15422|Coahuayana
+796|15422|Coalcomán de Vázquez Pallares
+797|15422|Coeneo
+798|15422|Contepec
+799|15422|Copándaro
+800|15422|Cotija
+801|15422|Cuitzeo
+802|15422|Charapan
+803|15422|Charo
+804|15422|Chavinda
+805|15422|Cherán
+806|15422|Chilchota
+807|15422|Chinicuila
+808|15422|Chucándiro
+809|15422|Churintzio
+810|15422|Churumuco
+811|15422|Ecuandureo
+812|15422|Epitacio Huerta
+813|15422|Erongarícuaro
+814|15422|Gabriel Zamora
+815|15422|Hidalgo
+816|15422|La Huacana
+817|15422|Huandacareo
+818|15422|Huaniqueo
+819|15422|Huetamo
+820|15422|Huiramba
+821|15422|Indaparapeo
+822|15422|Irimbo
+823|15422|Ixtlán
+824|15422|Jacona
+825|15422|Jiménez
+826|15422|Jiquilpan
+827|15422|Juárez
+828|15422|Jungapeo
+829|15422|Lagunillas
+830|15422|Madero
+831|15422|Maravatío
+832|15422|Marcos Castellanos
+833|15422|Lázaro Cárdenas
+834|15422|Morelia
+835|15422|Morelos
+836|15422|Múgica
+837|15422|Nahuatzen
+838|15422|Nocupétaro
+839|15422|Nuevo Parangaricutiro
+840|15422|Nuevo Urecho
+841|15422|Numarán
+842|15422|Ocampo
+843|15422|Pajacuarán
+844|15422|Panindícuaro
+845|15422|Parácuaro
+846|15422|Paracho
+847|15422|Pátzcuaro
+848|15422|Penjamillo
+849|15422|Peribán
+850|15422|La Piedad
+851|15422|Purépero
+852|15422|Puruándiro
+853|15422|Queréndaro
+854|15422|Quiroga
+855|15422|Cojumatlán de Régules
+856|15422|Los Reyes
+857|15422|Sahuayo
+858|15422|San Lucas
+859|15422|Santa Ana Maya
+860|15422|Salvador Escalante
+861|15422|Senguio
+862|15422|Susupuato
+863|15422|Tacámbaro
+864|15422|Tancítaro
+865|15422|Tangamandapio
+866|15422|Tangancícuaro
+867|15422|Tanhuato
+868|15422|Taretan
+869|15422|Tarímbaro
+870|15422|Tepalcatepec
+871|15422|Tingambato
+872|15422|Tingüindín
+873|15422|Tiquicheo de Nicolás Romero
+874|15422|Tlalpujahua
+875|15422|Tlazazalca
+876|15422|Tocumbo
+877|15422|Tumbiscatío
+878|15422|Turicato
+879|15422|Tuxpan
+880|15422|Tuzantla
+881|15422|Tzintzuntzan
+882|15422|Tzitzio
+883|15422|Uruapan
+884|15422|Venustiano Carranza
+885|15422|Villamar
+886|15422|Vista Hermosa
+887|15422|Yurécuaro
+888|15422|Zacapu
+889|15422|Zamora
+890|15422|Zináparo
+891|15422|Zinapécuaro
+892|15422|Ziracuaretiro
+893|15422|Zitácuaro
+894|15422|José Sixto Verduzco
+895|15428|Amacuzac
+896|15428|Atlatlahucan
+897|15428|Axochiapan
+898|15428|Ayala
+899|15428|Coatlán del Río
+900|15428|Cuautla
+901|15428|Cuernavaca
+902|15428|Emiliano Zapata
+903|15428|Huitzilac
+904|15428|Jantetelco
+905|15428|Jiutepec
+906|15428|Jojutla
+907|15428|Jonacatepec
+908|15428|Mazatepec
+909|15428|Miacatlán
+910|15428|Ocuituco
+911|15428|Puente de Ixtla
+912|15428|Temixco
+913|15428|Tepalcingo
+914|15428|Tepoztlán
+915|15428|Tetecala
+916|15428|Tetela del Volcán
+917|15428|Tlalnepantla
+918|15428|Tlaltizapán
+919|15428|Tlaquiltenango
+920|15428|Tlayacapan
+921|15428|Totolapan
+922|15428|Xochitepec
+923|15428|Yautepec
+924|15428|Yecapixtla
+925|15428|Zacatepec
+926|15428|Zacualpan
+927|15428|Temoac
+928|15429|Acaponeta
+929|15429|Ahuacatlán
+930|15429|Amatlán de Cañas
+931|15429|Compostela
+932|15429|Huajicori
+933|15429|Ixtlán del Río
+934|15429|Jala
+935|15429|Xalisco
+936|15429|Del Nayar
+937|15429|Rosamorada
+938|15429|Ruíz
+939|15429|San Blas
+940|15429|San Pedro Lagunillas
+941|15429|Santa María del Oro
+942|15429|Santiago Ixcuintla
+943|15429|Tecuala
+944|15429|Tepic
+945|15429|Tuxpan
+946|15429|La Yesca
+947|15429|Bahía de Banderas
+948|15403|Abasolo
+949|15403|Agualeguas
+950|15403|Los Aldamas
+951|15403|Allende
+952|15403|Anáhuac
+953|15403|Apodaca
+954|15403|Aramberri
+955|15403|Bustamante
+956|15403|Cadereyta Jiménez
+957|15403|Carmen
+958|15403|Cerralvo
+959|15403|Ciénega de Flores
+960|15403|China
+961|15403|Dr. Arroyo
+962|15403|Dr. Coss
+963|15403|Dr. González
+964|15403|Galeana
+965|15403|García
+966|15403|San Pedro Garza García
+967|15403|Gral. Bravo
+968|15403|Gral. Escobedo
+969|15403|Gral. Terán
+970|15403|Gral. Treviño
+971|15403|Gral. Zaragoza
+972|15403|Gral. Zuazua
+973|15403|Guadalupe
+974|15403|Los Herreras
+975|15403|Higueras
+976|15403|Hualahuises
+977|15403|Iturbide
+978|15403|Juárez
+979|15403|Lampazos de Naranjo
+980|15403|Linares
+981|15403|Marín
+982|15403|Melchor Ocampo
+983|15403|Mier y Noriega
+984|15403|Mina
+985|15403|Montemorelos
+986|15403|Monterrey
+987|15403|Parás
+988|15403|Pesquería
+989|15403|Los Ramones
+990|15403|Rayones
+991|15403|Sabinas Hidalgo
+992|15403|Salinas Victoria
+993|15403|San Nicolás de los Garza
+994|15403|Hidalgo
+995|15403|Santa Catarina
+996|15403|Santiago
+997|15403|Vallecillo
+998|15403|Villaldama
+999|15430|Abejones
+1000|15430|Acatlán de Pérez Figueroa
+1001|15430|Asunción Cacalotepec
+1002|15430|Asunción Cuyotepeji
+1003|15430|Asunción Ixtaltepec
+1004|15430|Asunción Nochixtlán
+1005|15430|Asunción Ocotlán
+1006|15430|Asunción Tlacolulita
+1007|15430|Ayotzintepec
+1008|15430|El Barrio de la Soledad
+1009|15430|Calihualá
+1010|15430|Candelaria Loxicha
+1011|15430|Ciénega de Zimatlán
+1012|15430|Ciudad Ixtepec
+1013|15430|Coatecas Altas
+1014|15430|Coicoyán de las Flores
+1015|15430|La Compañía
+1016|15430|Concepción Buenavista
+1017|15430|Concepción Pápalo
+1018|15430|Constancia del Rosario
+1019|15430|Cosolapa
+1020|15430|Cosoltepec
+1021|15430|Cuilápam de Guerrero
+1022|15430|Cuyamecalco Villa de Zaragoza
+1023|15430|Chahuites
+1024|15430|Chalcatongo de Hidalgo
+1025|15430|Chiquihuitlán de Benito Juárez
+1026|15430|Heroica Ciudad de Ejutla de Crespo
+1027|15430|Eloxochitlán de Flores Magón
+1028|15430|El Espinal
+1029|15430|Tamazulápam del Espíritu Santo
+1030|15430|Fresnillo de Trujano
+1031|15430|Guadalupe Etla
+1032|15430|Guadalupe de Ramírez
+1033|15430|Guelatao de Juárez
+1034|15430|Guevea de Humboldt
+1035|15430|Mesones Hidalgo
+1036|15430|Villa Hidalgo
+1037|15430|Heroica Ciudad de Huajuapan de León
+1038|15430|Huautepec
+1039|15430|Huautla de Jiménez
+1040|15430|Ixtlán de Juárez
+1041|15430|Heroica Ciudad de Juchitán de Zaragoza
+1042|15430|Loma Bonita
+1043|15430|Magdalena Apasco
+1044|15430|Magdalena Jaltepec
+1045|15430|Santa Magdalena Jicotlán
+1046|15430|Magdalena Mixtepec
+1047|15430|Magdalena Ocotlán
+1048|15430|Magdalena Peñasco
+1049|15430|Magdalena Teitipac
+1050|15430|Magdalena Tequisistlán
+1051|15430|Magdalena Tlacotepec
+1052|15430|Magdalena Zahuatlán
+1053|15430|Mariscala de Juárez
+1054|15430|Mártires de Tacubaya
+1055|15430|Matías Romero Avendaño
+1056|15430|Mazatlán Villa de Flores
+1057|15430|Miahuatlán de Porfirio Díaz
+1058|15430|Mixistlán de la Reforma
+1059|15430|Monjas
+1060|15430|Natividad
+1061|15430|Nazareno Etla
+1062|15430|Nejapa de Madero
+1063|15430|Ixpantepec Nieves
+1064|15430|Santiago Niltepec
+1065|15430|Oaxaca de Juárez
+1066|15430|Ocotlán de Morelos
+1067|15430|La Pe
+1068|15430|Pinotepa de Don Luis
+1069|15430|Pluma Hidalgo
+1070|15430|San José del Progreso
+1071|15430|Putla Villa de Guerrero
+1072|15430|Santa Catarina Quioquitani
+1073|15430|Reforma de Pineda
+1074|15430|La Reforma
+1075|15430|Reyes Etla
+1076|15430|Rojas de Cuauhtémoc
+1077|15430|Salina Cruz
+1078|15430|San Agustín Amatengo
+1079|15430|San Agustín Atenango
+1080|15430|San Agustín Chayuco
+1081|15430|San Agustín de las Juntas
+1082|15430|San Agustín Etla
+1083|15430|San Agustín Loxicha
+1084|15430|San Agustín Tlacotepec
+1085|15430|San Agustín Yatareni
+1086|15430|San Andrés Cabecera Nueva
+1087|15430|San Andrés Dinicuiti
+1088|15430|San Andrés Huaxpaltepec
+1089|15430|San Andrés Huayápam
+1090|15430|San Andrés Ixtlahuaca
+1091|15430|San Andrés Lagunas
+1092|15430|San Andrés Nuxiño
+1093|15430|San Andrés Paxtlán
+1094|15430|San Andrés Sinaxtla
+1095|15430|San Andrés Solaga
+1096|15430|San Andrés Teotilálpam
+1097|15430|San Andrés Tepetlapa
+1098|15430|San Andrés Yaá
+1099|15430|San Andrés Zabache
+1100|15430|San Andrés Zautla
+1101|15430|San Antonino Castillo Velasco
+1102|15430|San Antonino el Alto
+1103|15430|San Antonino Monte Verde
+1104|15430|San Antonio Acutla
+1105|15430|San Antonio de la Cal
+1106|15430|San Antonio Huitepec
+1107|15430|San Antonio Nanahuatípam
+1108|15430|San Antonio Sinicahua
+1109|15430|San Antonio Tepetlapa
+1110|15430|San Baltazar Chichicápam
+1111|15430|San Baltazar Loxicha
+1112|15430|San Baltazar Yatzachi el Bajo
+1113|15430|San Bartolo Coyotepec
+1114|15430|San Bartolomé Ayautla
+1115|15430|San Bartolomé Loxicha
+1116|15430|San Bartolomé Quialana
+1117|15430|San Bartolomé Yucuañe
+1118|15430|San Bartolomé Zoogocho
+1119|15430|San Bartolo Soyaltepec
+1120|15430|San Bartolo Yautepec
+1121|15430|San Bernardo Mixtepec
+1122|15430|San Blas Atempa
+1123|15430|San Carlos Yautepec
+1124|15430|San Cristóbal Amatlán
+1125|15430|San Cristóbal Amoltepec
+1126|15430|San Cristóbal Lachirioag
+1127|15430|San Cristóbal Suchixtlahuaca
+1128|15430|San Dionisio del Mar
+1129|15430|San Dionisio Ocotepec
+1130|15430|San Dionisio Ocotlán
+1131|15430|San Esteban Atatlahuca
+1132|15430|San Felipe Jalapa de Díaz
+1133|15430|San Felipe Tejalápam
+1134|15430|San Felipe Usila
+1135|15430|San Francisco Cahuacuá
+1136|15430|San Francisco Cajonos
+1137|15430|San Francisco Chapulapa
+1138|15430|San Francisco Chindúa
+1139|15430|San Francisco del Mar
+1140|15430|San Francisco Huehuetlán
+1141|15430|San Francisco Ixhuatán
+1142|15430|San Francisco Jaltepetongo
+1143|15430|San Francisco Lachigoló
+1144|15430|San Francisco Logueche
+1145|15430|San Francisco Nuxaño
+1146|15430|San Francisco Ozolotepec
+1147|15430|San Francisco Sola
+1148|15430|San Francisco Telixtlahuaca
+1149|15430|San Francisco Teopan
+1150|15430|San Francisco Tlapancingo
+1151|15430|San Gabriel Mixtepec
+1152|15430|San Ildefonso Amatlán
+1153|15430|San Ildefonso Sola
+1154|15430|San Ildefonso Villa Alta
+1155|15430|San Jacinto Amilpas
+1156|15430|San Jacinto Tlacotepec
+1157|15430|San Jerónimo Coatlán
+1158|15430|San Jerónimo Silacayoapilla
+1159|15430|San Jerónimo Sosola
+1160|15430|San Jerónimo Taviche
+1161|15430|San Jerónimo Tecóatl
+1162|15430|San Jorge Nuchita
+1163|15430|San José Ayuquila
+1164|15430|San José Chiltepec
+1165|15430|San José del Peñasco
+1166|15430|San José Estancia Grande
+1167|15430|San José Independencia
+1168|15430|San José Lachiguiri
+1169|15430|San José Tenango
+1170|15430|San Juan Achiutla
+1171|15430|San Juan Atepec
+1172|15430|Ánimas Trujano
+1173|15430|San Juan Bautista Atatlahuca
+1174|15430|San Juan Bautista Coixtlahuaca
+1175|15430|San Juan Bautista Cuicatlán
+1176|15430|San Juan Bautista Guelache
+1177|15430|San Juan Bautista Jayacatlán
+1178|15430|San Juan Bautista Lo de Soto
+1179|15430|San Juan Bautista Suchitepec
+1180|15430|San Juan Bautista Tlacoatzintepec
+1181|15430|San Juan Bautista Tlachichilco
+1182|15430|San Juan Bautista Tuxtepec
+1183|15430|San Juan Cacahuatepec
+1184|15430|San Juan Cieneguilla
+1185|15430|San Juan Coatzóspam
+1186|15430|San Juan Colorado
+1187|15430|San Juan Comaltepec
+1188|15430|San Juan Cotzocón
+1189|15430|San Juan Chicomezúchil
+1190|15430|San Juan Chilateca
+1191|15430|San Juan del Estado
+1192|15430|San Juan del Río
+1193|15430|San Juan Diuxi
+1194|15430|San Juan Evangelista Analco
+1195|15430|San Juan Guelavía
+1196|15430|San Juan Guichicovi
+1197|15430|San Juan Ihualtepec
+1198|15430|San Juan Juquila Mixes
+1199|15430|San Juan Juquila Vijanos
+1200|15430|San Juan Lachao
+1201|15430|San Juan Lachigalla
+1202|15430|San Juan Lajarcia
+1203|15430|San Juan Lalana
+1204|15430|San Juan de los Cués
+1205|15430|San Juan Mazatlán
+1206|15430|San Juan Mixtepec -Dto. 08 -
+1207|15430|San Juan Mixtepec -Dto. 26 -
+1208|15430|San Juan Ñumí
+1209|15430|San Juan Ozolotepec
+1210|15430|San Juan Petlapa
+1211|15430|San Juan Quiahije
+1212|15430|San Juan Quiotepec
+1213|15430|San Juan Sayultepec
+1214|15430|San Juan Tabaá
+1215|15430|San Juan Tamazola
+1216|15430|San Juan Teita
+1217|15430|San Juan Teitipac
+1218|15430|San Juan Tepeuxila
+1219|15430|San Juan Teposcolula
+1220|15430|San Juan Yaeé
+1221|15430|San Juan Yatzona
+1222|15430|San Juan Yucuita
+1223|15430|San Lorenzo
+1224|15430|San Lorenzo Albarradas
+1225|15430|San Lorenzo Cacaotepec
+1226|15430|San Lorenzo Cuaunecuiltitla
+1227|15430|San Lorenzo Texmelúcan
+1228|15430|San Lorenzo Victoria
+1229|15430|San Lucas Camotlán
+1230|15430|San Lucas Ojitlán
+1231|15430|San Lucas Quiaviní
+1232|15430|San Lucas Zoquiápam
+1233|15430|San Luis Amatlán
+1234|15430|San Marcial Ozolotepec
+1235|15430|San Marcos Arteaga
+1236|15430|San Martín de los Cansecos
+1237|15430|San Martín Huamelúlpam
+1238|15430|San Martín Itunyoso
+1239|15430|San Martín Lachilá
+1240|15430|San Martín Peras
+1241|15430|San Martín Tilcajete
+1242|15430|San Martín Toxpalan
+1243|15430|San Martín Zacatepec
+1244|15430|San Mateo Cajonos
+1245|15430|Capulálpam de Méndez
+1246|15430|San Mateo del Mar
+1247|15430|San Mateo Yoloxochitlán
+1248|15430|San Mateo Etlatongo
+1249|15430|San Mateo Nejápam
+1250|15430|San Mateo Peñasco
+1251|15430|San Mateo Piñas
+1252|15430|San Mateo Río Hondo
+1253|15430|San Mateo Sindihui
+1254|15430|San Mateo Tlapiltepec
+1255|15430|San Melchor Betaza
+1256|15430|San Miguel Achiutla
+1257|15430|San Miguel Ahuehuetitlán
+1258|15430|San Miguel Aloápam
+1259|15430|San Miguel Amatitlán
+1260|15430|San Miguel Amatlán
+1261|15430|San Miguel Coatlán
+1262|15430|San Miguel Chicahua
+1263|15430|San Miguel Chimalapa
+1264|15430|San Miguel del Puerto
+1265|15430|San Miguel del Río
+1266|15430|San Miguel Ejutla
+1267|15430|San Miguel el Grande
+1268|15430|San Miguel Huautla
+1269|15430|San Miguel Mixtepec
+1270|15430|San Miguel Panixtlahuaca
+1271|15430|San Miguel Peras
+1272|15430|San Miguel Piedras
+1273|15430|San Miguel Quetzaltepec
+1274|15430|San Miguel Santa Flor
+1275|15430|Villa Sola de Vega
+1276|15430|San Miguel Soyaltepec
+1277|15430|San Miguel Suchixtepec
+1278|15430|Villa Talea de Castro
+1279|15430|San Miguel Tecomatlán
+1280|15430|San Miguel Tenango
+1281|15430|San Miguel Tequixtepec
+1282|15430|San Miguel Tilquiápam
+1283|15430|San Miguel Tlacamama
+1284|15430|San Miguel Tlacotepec
+1285|15430|San Miguel Tulancingo
+1286|15430|San Miguel Yotao
+1287|15430|San Nicolás
+1288|15430|San Nicolás Hidalgo
+1289|15430|San Pablo Coatlán
+1290|15430|San Pablo Cuatro Venados
+1291|15430|San Pablo Etla
+1292|15430|San Pablo Huitzo
+1293|15430|San Pablo Huixtepec
+1294|15430|San Pablo Macuiltianguis
+1295|15430|San Pablo Tijaltepec
+1296|15430|San Pablo Villa de Mitla
+1297|15430|San Pablo Yaganiza
+1298|15430|San Pedro Amuzgos
+1299|15430|San Pedro Apóstol
+1300|15430|San Pedro Atoyac
+1301|15430|San Pedro Cajonos
+1302|15430|San Pedro Coxcaltepec Cántaros
+1303|15430|San Pedro Comitancillo
+1304|15430|San Pedro el Alto
+1305|15430|San Pedro Huamelula
+1306|15430|San Pedro Huilotepec
+1307|15430|San Pedro Ixcatlán
+1308|15430|San Pedro Ixtlahuaca
+1309|15430|San Pedro Jaltepetongo
+1310|15430|San Pedro Jicayán
+1311|15430|San Pedro Jocotipac
+1312|15430|San Pedro Juchatengo
+1313|15430|San Pedro Mártir
+1314|15430|San Pedro Mártir Quiechapa
+1315|15430|San Pedro Mártir Yucuxaco
+1316|15430|San Pedro Mixtepec -Dto. 22 -
+1317|15430|San Pedro Mixtepec -Dto. 26 -
+1318|15430|San Pedro Molinos
+1319|15430|San Pedro Nopala
+1320|15430|San Pedro Ocopetatillo
+1321|15430|San Pedro Ocotepec
+1322|15430|San Pedro Pochutla
+1323|15430|San Pedro Quiatoni
+1324|15430|San Pedro Sochiápam
+1325|15430|San Pedro Tapanatepec
+1326|15430|San Pedro Taviche
+1327|15430|San Pedro Teozacoalco
+1328|15430|San Pedro Teutila
+1329|15430|San Pedro Tidaá
+1330|15430|San Pedro Topiltepec
+1331|15430|San Pedro Totolápam
+1332|15430|Villa de Tututepec de Melchor Ocampo
+1333|15430|San Pedro Yaneri
+1334|15430|San Pedro Yólox
+1335|15430|San Pedro y San Pablo Ayutla
+1336|15430|Villa de Etla
+1337|15430|San Pedro y San Pablo Teposcolula
+1338|15430|San Pedro y San Pablo Tequixtepec
+1339|15430|San Pedro Yucunama
+1340|15430|San Raymundo Jalpan
+1341|15430|San Sebastián Abasolo
+1342|15430|San Sebastián Coatlán
+1343|15430|San Sebastián Ixcapa
+1344|15430|San Sebastián Nicananduta
+1345|15430|San Sebastián Río Hondo
+1346|15430|San Sebastián Tecomaxtlahuaca
+1347|15430|San Sebastián Teitipac
+1348|15430|San Sebastián Tutla
+1349|15430|San Simón Almolongas
+1350|15430|San Simón Zahuatlán
+1351|15430|Santa Ana
+1352|15430|Santa Ana Ateixtlahuaca
+1353|15430|Santa Ana Cuauhtémoc
+1354|15430|Santa Ana del Valle
+1355|15430|Santa Ana Tavela
+1356|15430|Santa Ana Tlapacoyan
+1357|15430|Santa Ana Yareni
+1358|15430|Santa Ana Zegache
+1359|15430|Santa Catalina Quierí
+1360|15430|Santa Catarina Cuixtla
+1361|15430|Santa Catarina Ixtepeji
+1362|15430|Santa Catarina Juquila
+1363|15430|Santa Catarina Lachatao
+1364|15430|Santa Catarina Loxicha
+1365|15430|Santa Catarina Mechoacán
+1366|15430|Santa Catarina Minas
+1367|15430|Santa Catarina Quiané
+1368|15430|Santa Catarina Tayata
+1369|15430|Santa Catarina Ticuá
+1370|15430|Santa Catarina Yosonotú
+1371|15430|Santa Catarina Zapoquila
+1372|15430|Santa Cruz Acatepec
+1373|15430|Santa Cruz Amilpas
+1374|15430|Santa Cruz de Bravo
+1375|15430|Santa Cruz Itundujia
+1376|15430|Santa Cruz Mixtepec
+1377|15430|Santa Cruz Nundaco
+1378|15430|Santa Cruz Papalutla
+1379|15430|Santa Cruz Tacache de Mina
+1380|15430|Santa Cruz Tacahua
+1381|15430|Santa Cruz Tayata
+1382|15430|Santa Cruz Xitla
+1383|15430|Santa Cruz Xoxocotlán
+1384|15430|Santa Cruz Zenzontepec
+1385|15430|Santa Gertrudis
+1386|15430|Santa Inés del Monte
+1387|15430|Santa Inés Yatzeche
+1388|15430|Santa Lucía del Camino
+1389|15430|Santa Lucía Miahuatlán
+1390|15430|Santa Lucía Monteverde
+1391|15430|Santa Lucía Ocotlán
+1392|15430|Santa María Alotepec
+1393|15430|Santa María Apazco
+1394|15430|Santa María la Asunción
+1395|15430|Heroica Ciudad de Tlaxiaco
+1396|15430|Ayoquezco de Aldama
+1397|15430|Santa María Atzompa
+1398|15430|Santa María Camotlán
+1399|15430|Santa María Colotepec
+1400|15430|Santa María Cortijo
+1401|15430|Santa María Coyotepec
+1402|15430|Santa María Chachoápam
+1403|15430|Villa de Chilapa de Díaz
+1404|15430|Santa María Chilchotla
+1405|15430|Santa María Chimalapa
+1406|15430|Santa María del Rosario
+1407|15430|Santa María del Tule
+1408|15430|Santa María Ecatepec
+1409|15430|Santa María Guelacé
+1410|15430|Santa María Guienagati
+1411|15430|Santa María Huatulco
+1412|15430|Santa María Huazolotitlán
+1413|15430|Santa María Ipalapa
+1414|15430|Santa María Ixcatlán
+1415|15430|Santa María Jacatepec
+1416|15430|Santa María Jalapa del Marqués
+1417|15430|Santa María Jaltianguis
+1418|15430|Santa María Lachixío
+1419|15430|Santa María Mixtequilla
+1420|15430|Santa María Nativitas
+1421|15430|Santa María Nduayaco
+1422|15430|Santa María Ozolotepec
+1423|15430|Santa María Pápalo
+1424|15430|Santa María Peñoles
+1425|15430|Santa María Petapa
+1426|15430|Santa María Quiegolani
+1427|15430|Santa María Sola
+1428|15430|Santa María Tataltepec
+1429|15430|Santa María Tecomavaca
+1430|15430|Santa María Temaxcalapa
+1431|15430|Santa María Temaxcaltepec
+1432|15430|Santa María Teopoxco
+1433|15430|Santa María Tepantlali
+1434|15430|Santa María Texcatitlán
+1435|15430|Santa María Tlahuitoltepec
+1436|15430|Santa María Tlalixtac
+1437|15430|Santa María Tonameca
+1438|15430|Santa María Totolapilla
+1439|15430|Santa María Xadani
+1440|15430|Santa María Yalina
+1441|15430|Santa María Yavesía
+1442|15430|Santa María Yolotepec
+1443|15430|Santa María Yosoyúa
+1444|15430|Santa María Yucuhiti
+1445|15430|Santa María Zacatepec
+1446|15430|Santa María Zaniza
+1447|15430|Santa María Zoquitlán
+1448|15430|Santiago Amoltepec
+1449|15430|Santiago Apoala
+1450|15430|Santiago Apóstol
+1451|15430|Santiago Astata
+1452|15430|Santiago Atitlán
+1453|15430|Santiago Ayuquililla
+1454|15430|Santiago Cacaloxtepec
+1455|15430|Santiago Camotlán
+1456|15430|Santiago Comaltepec
+1457|15430|Santiago Chazumba
+1458|15430|Santiago Choápam
+1459|15430|Santiago del Río
+1460|15430|Santiago Huajolotitlán
+1461|15430|Santiago Huauclilla
+1462|15430|Santiago Ihuitlán Plumas
+1463|15430|Santiago Ixcuintepec
+1464|15430|Santiago Ixtayutla
+1465|15430|Santiago Jamiltepec
+1466|15430|Santiago Jocotepec
+1467|15430|Santiago Juxtlahuaca
+1468|15430|Santiago Lachiguiri
+1469|15430|Santiago Lalopa
+1470|15430|Santiago Laollaga
+1471|15430|Santiago Laxopa
+1472|15430|Santiago Llano Grande
+1473|15430|Santiago Matatlán
+1474|15430|Santiago Miltepec
+1475|15430|Santiago Minas
+1476|15430|Santiago Nacaltepec
+1477|15430|Santiago Nejapilla
+1478|15430|Santiago Nundiche
+1479|15430|Santiago Nuyoó
+1480|15430|Santiago Pinotepa Nacional
+1481|15430|Santiago Suchilquitongo
+1482|15430|Santiago Tamazola
+1483|15430|Santiago Tapextla
+1484|15430|Villa Tejúpam de la Unión
+1485|15430|Santiago Tenango
+1486|15430|Santiago Tepetlapa
+1487|15430|Santiago Tetepec
+1488|15430|Santiago Texcalcingo
+1489|15430|Santiago Textitlán
+1490|15430|Santiago Tilantongo
+1491|15430|Santiago Tillo
+1492|15430|Santiago Tlazoyaltepec
+1493|15430|Santiago Xanica
+1494|15430|Santiago Xiacuí
+1495|15430|Santiago Yaitepec
+1496|15430|Santiago Yaveo
+1497|15430|Santiago Yolomécatl
+1498|15430|Santiago Yosondúa
+1499|15430|Santiago Yucuyachi
+1500|15430|Santiago Zacatepec
+1501|15430|Santiago Zoochila
+1502|15430|Nuevo Zoquiápam
+1503|15430|Santo Domingo Ingenio
+1504|15430|Santo Domingo Albarradas
+1505|15430|Santo Domingo Armenta
+1506|15430|Santo Domingo Chihuitán
+1507|15430|Santo Domingo de Morelos
+1508|15430|Santo Domingo Ixcatlán
+1509|15430|Santo Domingo Nuxaá
+1510|15430|Santo Domingo Ozolotepec
+1511|15430|Santo Domingo Petapa
+1512|15430|Santo Domingo Roayaga
+1513|15430|Santo Domingo Tehuantepec
+1514|15430|Santo Domingo Teojomulco
+1515|15430|Santo Domingo Tepuxtepec
+1516|15430|Santo Domingo Tlatayápam
+1517|15430|Santo Domingo Tomaltepec
+1518|15430|Santo Domingo Tonalá
+1519|15430|Santo Domingo Tonaltepec
+1520|15430|Santo Domingo Xagacía
+1521|15430|Santo Domingo Yanhuitlán
+1522|15430|Santo Domingo Yodohino
+1523|15430|Santo Domingo Zanatepec
+1524|15430|Santos Reyes Nopala
+1525|15430|Santos Reyes Pápalo
+1526|15430|Santos Reyes Tepejillo
+1527|15430|Santos Reyes Yucuná
+1528|15430|Santo Tomás Jalieza
+1529|15430|Santo Tomás Mazaltepec
+1530|15430|Santo Tomás Ocotepec
+1531|15430|Santo Tomás Tamazulapan
+1532|15430|San Vicente Coatlán
+1533|15430|San Vicente Lachixío
+1534|15430|San Vicente Nuñú
+1535|15430|Silacayoápam
+1536|15430|Sitio de Xitlapehua
+1537|15430|Soledad Etla
+1538|15430|Villa de Tamazulápam del Progreso
+1539|15430|Tanetze de Zaragoza
+1540|15430|Taniche
+1541|15430|Tataltepec de Valdés
+1542|15430|Teococuilco de Marcos Pérez
+1543|15430|Teotitlán de Flores Magón
+1544|15430|Teotitlán del Valle
+1545|15430|Teotongo
+1546|15430|Tepelmeme Villa de Morelos
+1547|15430|Tezoatlán de Segura y Luna
+1548|15430|San Jerónimo Tlacochahuaya
+1549|15430|Tlacolula de Matamoros
+1550|15430|Tlacotepec Plumas
+1551|15430|Tlalixtac de Cabrera
+1552|15430|Totontepec Villa de Morelos
+1553|15430|Trinidad Zaachila
+1554|15430|La Trinidad Vista Hermosa
+1555|15430|Unión Hidalgo
+1556|15430|Valerio Trujano
+1557|15430|San Juan Bautista Valle Nacional
+1558|15430|Villa Díaz Ordaz
+1559|15430|Yaxe
+1560|15430|Magdalena Yodocono de Porfirio Díaz
+1561|15430|Yogana
+1562|15430|Yutanduchi de Guerrero
+1563|15430|Villa de Zaachila
+1564|15430|Zapotitlán del Río
+1565|15430|Zapotitlán Lagunas
+1566|15430|Zapotitlán Palmas
+1567|15430|Santa Inés de Zaragoza
+1568|15430|Zimatlán de Álvarez
+1569|15404|Acajete
+1570|15404|Acateno
+1571|15404|Acatlán
+1572|15404|Acatzingo
+1573|15404|Acteopan
+1574|15404|Ahuacatlán
+1575|15404|Ahuatlán
+1576|15404|Ahuazotepec
+1577|15404|Ahuehuetitla
+1578|15404|Ajalpan
+1579|15404|Albino Zertuche
+1580|15404|Aljojuca
+1581|15404|Altepexi
+1582|15404|Amixtlán
+1583|15404|Amozoc
+1584|15404|Aquixtla
+1585|15404|Atempan
+1586|15404|Atexcal
+1587|15404|Atlixco
+1588|15404|Atoyatempan
+1589|15404|Atzala
+1590|15404|Atzitzihuacán
+1591|15404|Atzitzintla
+1592|15404|Axutla
+1593|15404|Ayotoxco de Guerrero
+1594|15404|Calpan
+1595|15404|Caltepec
+1596|15404|Camocuautla
+1597|15404|Caxhuacan
+1598|15404|Coatepec
+1599|15404|Coatzingo
+1600|15404|Cohetzala
+1601|15404|Cohuecan
+1602|15404|Coronango
+1603|15404|Coxcatlán
+1604|15404|Coyomeapan
+1605|15404|Coyotepec
+1606|15404|Cuapiaxtla de Madero
+1607|15404|Cuautempan
+1608|15404|Cuautinchán
+1609|15404|Cuautlancingo
+1610|15404|Cuayuca de Andrade
+1611|15404|Cuetzalan del Progreso
+1612|15404|Cuyoaco
+1613|15404|Chalchicomula de Sesma
+1614|15404|Chapulco
+1615|15404|Chiautla
+1616|15404|Chiautzingo
+1617|15404|Chiconcuautla
+1618|15404|Chichiquila
+1619|15404|Chietla
+1620|15404|Chigmecatitlán
+1621|15404|Chignahuapan
+1622|15404|Chignautla
+1623|15404|Chila
+1624|15404|Chila de la Sal
+1625|15404|Honey
+1626|15404|Chilchotla
+1627|15404|Chinantla
+1628|15404|Domingo Arenas
+1629|15404|Eloxochitlán
+1630|15404|Epatlán
+1631|15404|Esperanza
+1632|15404|Francisco Z. Mena
+1633|15404|General Felipe Ángeles
+1634|15404|Guadalupe
+1635|15404|Guadalupe Victoria
+1636|15404|Hermenegildo Galeana
+1637|15404|Huaquechula
+1638|15404|Huatlatlauca
+1639|15404|Huauchinango
+1640|15404|Huehuetla
+1641|15404|Huehuetlán el Chico
+1642|15404|Huejotzingo
+1643|15404|Hueyapan
+1644|15404|Hueytamalco
+1645|15404|Hueytlalpan
+1646|15404|Huitzilan de Serdán
+1647|15404|Huitziltepec
+1648|15404|Atlequizayan
+1649|15404|Ixcamilpa de Guerrero
+1650|15404|Ixcaquixtla
+1651|15404|Ixtacamaxtitlán
+1652|15404|Ixtepec
+1653|15404|Izúcar de Matamoros
+1654|15404|Jalpan
+1655|15404|Jolalpan
+1656|15404|Jonotla
+1657|15404|Jopala
+1658|15404|Juan C. Bonilla
+1659|15404|Juan Galindo
+1660|15404|Juan N. Méndez
+1661|15404|Lafragua
+1662|15404|Libres
+1663|15404|La Magdalena Tlatlauquitepec
+1664|15404|Mazapiltepec de Juárez
+1665|15404|Mixtla
+1666|15404|Molcaxac
+1667|15404|Cañada Morelos
+1668|15404|Naupan
+1669|15404|Nauzontla
+1670|15404|Nealtican
+1671|15404|Nicolás Bravo
+1672|15404|Nopalucan
+1673|15404|Ocotepec
+1674|15404|Ocoyucan
+1675|15404|Olintla
+1676|15404|Oriental
+1677|15404|Pahuatlán
+1678|15404|Palmar de Bravo
+1679|15404|Pantepec
+1680|15404|Petlalcingo
+1681|15404|Piaxtla
+1682|15404|Puebla
+1683|15404|Quecholac
+1684|15404|Quimixtlán
+1685|15404|Rafael Lara Grajales
+1686|15404|Los Reyes de Juárez
+1687|15404|San Andrés Cholula
+1688|15404|San Antonio Cañada
+1689|15404|San Diego la Mesa Tochimiltzingo
+1690|15404|San Felipe Teotlalcingo
+1691|15404|San Felipe Tepatlán
+1692|15404|San Gabriel Chilac
+1693|15404|San Gregorio Atzompa
+1694|15404|San Jerónimo Tecuanipan
+1695|15404|San Jerónimo Xayacatlán
+1696|15404|San José Chiapa
+1697|15404|San José Miahuatlán
+1698|15404|San Juan Atenco
+1699|15404|San Juan Atzompa
+1700|15404|San Martín Texmelucan
+1701|15404|San Martín Totoltepec
+1702|15404|San Matías Tlalancaleca
+1703|15404|San Miguel Ixitlán
+1704|15404|San Miguel Xoxtla
+1705|15404|San Nicolás Buenos Aires
+1706|15404|San Nicolás de los Ranchos
+1707|15404|San Pablo Anicano
+1708|15404|San Pedro Cholula
+1709|15404|San Pedro Yeloixtlahuaca
+1710|15404|San Salvador el Seco
+1711|15404|San Salvador el Verde
+1712|15404|San Salvador Huixcolotla
+1713|15404|San Sebastián Tlacotepec
+1714|15404|Santa Catarina Tlaltempan
+1715|15404|Santa Inés Ahuatempan
+1716|15404|Santa Isabel Cholula
+1717|15404|Santiago Miahuatlán
+1718|15404|Huehuetlán el Grande
+1719|15404|Santo Tomás Hueyotlipan
+1720|15404|Soltepec
+1721|15404|Tecali de Herrera
+1722|15404|Tecamachalco
+1723|15404|Tecomatlán
+1724|15404|Tehuacán
+1725|15404|Tehuitzingo
+1726|15404|Tenampulco
+1727|15404|Teopantlán
+1728|15404|Teotlalco
+1729|15404|Tepanco de López
+1730|15404|Tepango de Rodríguez
+1731|15404|Tepatlaxco de Hidalgo
+1732|15404|Tepeaca
+1733|15404|Tepemaxalco
+1734|15404|Tepeojuma
+1735|15404|Tepetzintla
+1736|15404|Tepexco
+1737|15404|Tepexi de Rodríguez
+1738|15404|Tepeyahualco
+1739|15404|Tepeyahualco de Cuauhtémoc
+1740|15404|Tetela de Ocampo
+1741|15404|Teteles de Avila Castillo
+1742|15404|Teziutlán
+1743|15404|Tianguismanalco
+1744|15404|Tilapa
+1745|15404|Tlacotepec de Benito Juárez
+1746|15404|Tlacuilotepec
+1747|15404|Tlachichuca
+1748|15404|Tlahuapan
+1749|15404|Tlaltenango
+1750|15404|Tlanepantla
+1751|15404|Tlaola
+1752|15404|Tlapacoya
+1753|15404|Tlapanalá
+1754|15404|Tlatlauquitepec
+1755|15404|Tlaxco
+1756|15404|Tochimilco
+1757|15404|Tochtepec
+1758|15404|Totoltepec de Guerrero
+1759|15404|Tulcingo
+1760|15404|Tuzamapan de Galeana
+1761|15404|Tzicatlacoyan
+1762|15404|Venustiano Carranza
+1763|15404|Vicente Guerrero
+1764|15404|Xayacatlán de Bravo
+1765|15404|Xicotepec
+1766|15404|Xicotlán
+1767|15404|Xiutetelco
+1768|15404|Xochiapulco
+1769|15404|Xochiltepec
+1770|15404|Xochitlán de Vicente Suárez
+1771|15404|Xochitlán Todos Santos
+1772|15404|Yaonáhuac
+1773|15404|Yehualtepec
+1774|15404|Zacapala
+1775|15404|Zacapoaxtla
+1776|15404|Zacatlán
+1777|15404|Zapotitlán
+1778|15404|Zapotitlán de Méndez
+1779|15404|Zaragoza
+1780|15404|Zautla
+1781|15404|Zihuateutla
+1782|15404|Zinacatepec
+1783|15404|Zongozotla
+1784|15404|Zoquiapan
+1785|15404|Zoquitlán
+1786|15405|Amealco de Bonfil
+1787|15405|Pinal de Amoles
+1788|15405|Arroyo Seco
+1789|15405|Cadereyta de Montes
+1790|15405|Colón
+1791|15405|Corregidora
+1792|15405|Ezequiel Montes
+1793|15405|Huimilpan
+1794|15405|Jalpan de Serra
+1795|15405|Landa de Matamoros
+1796|15405|El Marqués
+1797|15405|Pedro Escobedo
+1798|15405|Peñamiller
+1799|15405|Querétaro
+1800|15405|San Joaquín
+1801|15405|San Juan del Río
+1802|15405|Tequisquiapan
+1803|15405|Tolimán
+1804|15432|Cozumel
+1805|15432|Felipe Carrillo Puerto
+1806|15432|Isla Mujeres
+1807|15432|Othón P. Blanco
+1808|15432|Benito Juárez
+1809|15432|José María Morelos
+1810|15432|Lázaro Cárdenas
+1811|15432|Solidaridad
+1812|15432|Tulum
+1813|15406|Ahualulco
+1814|15406|Alaquines
+1815|15406|Aquismón
+1816|15406|Armadillo de los Infante
+1817|15406|Cárdenas
+1818|15406|Catorce
+1819|15406|Cedral
+1820|15406|Cerritos
+1821|15406|Cerro de San Pedro
+1822|15406|Ciudad del Maíz
+1823|15406|Ciudad Fernández
+1824|15406|Tancanhuitz
+1825|15406|Ciudad Valles
+1826|15406|Coxcatlán
+1827|15406|Charcas
+1828|15406|Ebano
+1829|15406|Guadalcázar
+1830|15406|Huehuetlán
+1831|15406|Lagunillas
+1832|15406|Matehuala
+1833|15406|Mexquitic de Carmona
+1834|15406|Moctezuma
+1835|15406|Rayón
+1836|15406|Rioverde
+1837|15406|Salinas
+1838|15406|San Antonio
+1839|15406|San Ciro de Acosta
+1840|15406|San Luis Potosí
+1841|15406|San Martín Chalchicuautla
+1842|15406|San Nicolás Tolentino
+1843|15406|Santa Catarina
+1844|15406|Santa María del Río
+1845|15406|Santo Domingo
+1846|15406|San Vicente Tancuayalab
+1847|15406|Soledad de Graciano Sánchez
+1848|15406|Tamasopo
+1849|15406|Tamazunchale
+1850|15406|Tampacán
+1851|15406|Tampamolón Corona
+1852|15406|Tamuín
+1853|15406|Tanlajás
+1854|15406|Tanquián de Escobedo
+1855|15406|Tierra Nueva
+1856|15406|Vanegas
+1857|15406|Venado
+1858|15406|Villa de Arriaga
+1859|15406|Villa de Guadalupe
+1860|15406|Villa de la Paz
+1861|15406|Villa de Ramos
+1862|15406|Villa de Reyes
+1863|15406|Villa Hidalgo
+1864|15406|Villa Juárez
+1865|15406|Axtla de Terrazas
+1866|15406|Xilitla
+1867|15406|Zaragoza
+1868|15406|Villa de Arista
+1869|15406|Matlapa
+1870|15406|El Naranjo
+1871|15407|Ahome
+1872|15407|Angostura
+1873|15407|Badiraguato
+1874|15407|Concordia
+1875|15407|Cosalá
+1876|15407|Culiacán
+1877|15407|Choix
+1878|15407|Elota
+1879|15407|Escuinapa
+1880|15407|El Fuerte
+1881|15407|Guasave
+1882|15407|Mazatlán
+1883|15407|Mocorito
+1884|15407|Rosario
+1885|15407|Salvador Alvarado
+1886|15407|San Ignacio
+1887|15407|Sinaloa
+1888|15407|Navolato
+1889|15433|Aconchi
+1890|15433|Agua Prieta
+1891|15433|Alamos
+1892|15433|Altar
+1893|15433|Arivechi
+1894|15433|Arizpe
+1895|15433|Atil
+1896|15433|Bacadéhuachi
+1897|15433|Bacanora
+1898|15433|Bacerac
+1899|15433|Bacoachi
+1900|15433|Bácum
+1901|15433|Banámichi
+1902|15433|Baviácora
+1903|15433|Bavispe
+1904|15433|Benjamín Hill
+1905|15433|Caborca
+1906|15433|Cajeme
+1907|15433|Cananea
+1908|15433|Carbó
+1909|15433|La Colorada
+1910|15433|Cucurpe
+1911|15433|Cumpas
+1912|15433|Divisaderos
+1913|15433|Empalme
+1914|15433|Etchojoa
+1915|15433|Fronteras
+1916|15433|Granados
+1917|15433|Guaymas
+1918|15433|Hermosillo
+1919|15433|Huachinera
+1920|15433|Huásabas
+1921|15433|Huatabampo
+1922|15433|Huépac
+1923|15433|Imuris
+1924|15433|Magdalena
+1925|15433|Mazatán
+1926|15433|Moctezuma
+1927|15433|Naco
+1928|15433|Nácori Chico
+1929|15433|Nacozari de García
+1930|15433|Navojoa
+1931|15433|Nogales
+1932|15433|Onavas
+1933|15433|Opodepe
+1934|15433|Oquitoa
+1935|15433|Pitiquito
+1936|15433|Puerto Peñasco
+1937|15433|Quiriego
+1938|15433|Rayón
+1939|15433|Rosario
+1940|15433|Sahuaripa
+1941|15433|San Felipe de Jesús
+1942|15433|San Javier
+1943|15433|San Luis Río Colorado
+1944|15433|San Miguel de Horcasitas
+1945|15433|San Pedro de la Cueva
+1946|15433|Santa Ana
+1947|15433|Santa Cruz
+1948|15433|Sáric
+1949|15433|Soyopa
+1950|15433|Suaqui Grande
+1951|15433|Tepache
+1952|15433|Trincheras
+1953|15433|Tubutama
+1954|15433|Ures
+1955|15433|Villa Hidalgo
+1956|15433|Villa Pesqueira
+1957|15433|Yécora
+1958|15433|General Plutarco Elías Calles
+1959|15433|Benito Juárez
+1960|15433|San Ignacio Río Muerto
+1961|15408|Balancán
+1962|15408|Cárdenas
+1963|15408|Centla
+1964|15408|Centro
+1965|15408|Comalcalco
+1966|15408|Cunduacán
+1967|15408|Emiliano Zapata
+1968|15408|Huimanguillo
+1969|15408|Jalapa
+1970|15408|Jalpa de Méndez
+1971|15408|Jonuta
+1972|15408|Macuspana
+1973|15408|Nacajuca
+1974|15408|Paraíso
+1975|15408|Tacotalpa
+1976|15408|Teapa
+1977|15408|Tenosique
+1978|15431|Abasolo
+1979|15431|Aldama
+1980|15431|Altamira
+1981|15431|Antiguo Morelos
+1982|15431|Burgos
+1983|15431|Bustamante
+1984|15431|Camargo
+1985|15431|Casas
+1986|15431|Ciudad Madero
+1987|15431|Cruillas
+1988|15431|Gómez Farías
+1989|15431|González
+1990|15431|Güémez
+1991|15431|Guerrero
+1992|15431|Gustavo Díaz Ordaz
+1993|15431|Hidalgo
+1994|15431|Jaumave
+1995|15431|Jiménez
+1996|15431|Llera
+1997|15431|Mainero
+1998|15431|El Mante
+1999|15431|Matamoros
+2000|15431|Méndez
+2001|15431|Mier
+2002|15431|Miguel Alemán
+2003|15431|Miquihuana
+2004|15431|Nuevo Laredo
+2005|15431|Nuevo Morelos
+2006|15431|Ocampo
+2007|15431|Padilla
+2008|15431|Palmillas
+2009|15431|Reynosa
+2010|15431|Río Bravo
+2011|15431|San Carlos
+2012|15431|San Fernando
+2013|15431|San Nicolás
+2014|15431|Soto la Marina
+2015|15431|Tampico
+2016|15431|Tula
+2017|15431|Valle Hermoso
+2018|15431|Victoria
+2019|15431|Villagrán
+2020|15431|Xicoténcatl
+2021|15409|Amaxac de Guerrero
+2022|15409|Apetatitlán de Antonio Carvajal
+2023|15409|Atlangatepec
+2024|15409|Altzayanca
+2025|15409|Apizaco
+2026|15409|Calpulalpan
+2027|15409|El Carmen Tequexquitla
+2028|15409|Cuapiaxtla
+2029|15409|Cuaxomulco
+2030|15409|Chiautempan
+2031|15409|Muñoz de Domingo Arenas
+2032|15409|Españita
+2033|15409|Huamantla
+2034|15409|Hueyotlipan
+2035|15409|Ixtacuixtla de Mariano Matamoros
+2036|15409|Ixtenco
+2037|15409|Mazatecochco de José María Morelos
+2038|15409|Contla de Juan Cuamatzi
+2039|15409|Tepetitla de Lardizábal
+2040|15409|Sanctórum de Lázaro Cárdenas
+2041|15409|Nanacamilpa de Mariano Arista
+2042|15409|Acuamanala de Miguel Hidalgo
+2043|15409|Natívitas
+2044|15409|Panotla
+2045|15409|San Pablo del Monte
+2046|15409|Santa Cruz Tlaxcala
+2047|15409|Tenancingo
+2048|15409|Teolocholco
+2049|15409|Tepeyanco
+2050|15409|Terrenate
+2051|15409|Tetla de la Solidaridad
+2052|15409|Tetlatlahuca
+2053|15409|Tlaxcala
+2054|15409|Tlaxco
+2055|15409|Tocatlán
+2056|15409|Totolac
+2057|15409|Ziltlaltépec de Trinidad Sánchez Santos
+2058|15409|Tzompantepec
+2059|15409|Xaloztoc
+2060|15409|Xaltocan
+2061|15409|Papalotla de Xicohténcatl
+2062|15409|Xicohtzinco
+2063|15409|Yauhquemecan
+2064|15409|Zacatelco
+2065|15409|Benito Juárez
+2066|15409|Emiliano Zapata
+2067|15409|Lázaro Cárdenas
+2068|15409|La Magdalena Tlaltelulco
+2069|15409|San Damián Texoloc
+2070|15409|San Francisco Tetlanohcan
+2071|15409|San Jerónimo Zacualpan
+2072|15409|San José Teacalco
+2073|15409|San Juan Huactzinco
+2074|15409|San Lorenzo Axocomanitla
+2075|15409|San Lucas Tecopilco
+2076|15409|Santa Ana Nopalucan
+2077|15409|Santa Apolonia Teacalco
+2078|15409|Santa Catarina Ayometla
+2079|15409|Santa Cruz Quilehtla
+2080|15409|Santa Isabel Xiloxoxtla
+2081|15410|Acajete
+2082|15410|Acatlán
+2083|15410|Acayucan
+2084|15410|Actopan
+2085|15410|Acula
+2086|15410|Acultzingo
+2087|15410|Camarón de Tejeda
+2088|15410|Alpatláhuac
+2089|15410|Alto Lucero de Gutiérrez Barrios
+2090|15410|Altotonga
+2091|15410|Alvarado
+2092|15410|Amatitlán
+2093|15410|Naranjos Amatlán
+2094|15410|Amatlán de los Reyes
+2095|15410|Angel R. Cabada
+2096|15410|La Antigua
+2097|15410|Apazapan
+2098|15410|Aquila
+2099|15410|Astacinga
+2100|15410|Atlahuilco
+2101|15410|Atoyac
+2102|15410|Atzacan
+2103|15410|Atzalan
+2104|15410|Tlaltetela
+2105|15410|Ayahualulco
+2106|15410|Banderilla
+2107|15410|Benito Juárez
+2108|15410|Boca del Río
+2109|15410|Calcahualco
+2110|15410|Camerino Z. Mendoza
+2111|15410|Carrillo Puerto
+2112|15410|Catemaco
+2113|15410|Cazones de Herrera
+2114|15410|Cerro Azul
+2115|15410|Citlaltépetl
+2116|15410|Coacoatzintla
+2117|15410|Coahuitlán
+2118|15410|Coatepec
+2119|15410|Coatzacoalcos
+2120|15410|Coatzintla
+2121|15410|Coetzala
+2122|15410|Colipa
+2123|15410|Comapa
+2124|15410|Córdoba
+2125|15410|Cosamaloapan de Carpio
+2126|15410|Cosautlán de Carvajal
+2127|15410|Coscomatepec
+2128|15410|Cosoleacaque
+2129|15410|Cotaxtla
+2130|15410|Coxquihui
+2131|15410|Coyutla
+2132|15410|Cuichapa
+2133|15410|Cuitláhuac
+2134|15410|Chacaltianguis
+2135|15410|Chalma
+2136|15410|Chiconamel
+2137|15410|Chiconquiaco
+2138|15410|Chicontepec
+2139|15410|Chinameca
+2140|15410|Chinampa de Gorostiza
+2141|15410|Las Choapas
+2142|15410|Chocamán
+2143|15410|Chontla
+2144|15410|Chumatlán
+2145|15410|Emiliano Zapata
+2146|15410|Espinal
+2147|15410|Filomeno Mata
+2148|15410|Fortín
+2149|15410|Gutiérrez Zamora
+2150|15410|Hidalgotitlán
+2151|15410|Huatusco
+2152|15410|Huayacocotla
+2153|15410|Hueyapan de Ocampo
+2154|15410|Huiloapan de Cuauhtémoc
+2155|15410|Ignacio de la Llave
+2156|15410|Ilamatlán
+2157|15410|Isla
+2158|15410|Ixcatepec
+2159|15410|Ixhuacán de los Reyes
+2160|15410|Ixhuatlán del Café
+2161|15410|Ixhuatlancillo
+2162|15410|Ixhuatlán del Sureste
+2163|15410|Ixhuatlán de Madero
+2164|15410|Ixmatlahuacan
+2165|15410|Ixtaczoquitlán
+2166|15410|Jalacingo
+2167|15410|Xalapa
+2168|15410|Jalcomulco
+2169|15410|Jáltipan
+2170|15410|Jamapa
+2171|15410|Jesús Carranza
+2172|15410|Xico
+2173|15410|Jilotepec
+2174|15410|Juan Rodríguez Clara
+2175|15410|Juchique de Ferrer
+2176|15410|Landero y Coss
+2177|15410|Lerdo de Tejada
+2178|15410|Magdalena
+2179|15410|Maltrata
+2180|15410|Manlio Fabio Altamirano
+2181|15410|Mariano Escobedo
+2182|15410|Martínez de la Torre
+2183|15410|Mecatlán
+2184|15410|Mecayapan
+2185|15410|Medellín
+2186|15410|Miahuatlán
+2187|15410|Las Minas
+2188|15410|Minatitlán
+2189|15410|Misantla
+2190|15410|Mixtla de Altamirano
+2191|15410|Moloacán
+2192|15410|Naolinco
+2193|15410|Naranjal
+2194|15410|Nautla
+2195|15410|Nogales
+2196|15410|Oluta
+2197|15410|Omealca
+2198|15410|Orizaba
+2199|15410|Otatitlán
+2200|15410|Oteapan
+2201|15410|Ozuluama de Mascareñas
+2202|15410|Pajapan
+2203|15410|Pánuco
+2204|15410|Papantla
+2205|15410|Paso del Macho
+2206|15410|Paso de Ovejas
+2207|15410|La Perla
+2208|15410|Perote
+2209|15410|Platón Sánchez
+2210|15410|Playa Vicente
+2211|15410|Poza Rica de Hidalgo
+2212|15410|Las Vigas de Ramírez
+2213|15410|Pueblo Viejo
+2214|15410|Puente Nacional
+2215|15410|Rafael Delgado
+2216|15410|Rafael Lucio
+2217|15410|Los Reyes
+2218|15410|Río Blanco
+2219|15410|Saltabarranca
+2220|15410|San Andrés Tenejapan
+2221|15410|San Andrés Tuxtla
+2222|15410|San Juan Evangelista
+2223|15410|Santiago Tuxtla
+2224|15410|Sayula de Alemán
+2225|15410|Soconusco
+2226|15410|Sochiapa
+2227|15410|Soledad Atzompa
+2228|15410|Soledad de Doblado
+2229|15410|Soteapan
+2230|15410|Tamalín
+2231|15410|Tamiahua
+2232|15410|Tampico Alto
+2233|15410|Tancoco
+2234|15410|Tantima
+2235|15410|Tantoyuca
+2236|15410|Tatatila
+2237|15410|Castillo de Teayo
+2238|15410|Tecolutla
+2239|15410|Tehuipango
+2240|15410|Álamo Temapache
+2241|15410|Tempoal
+2242|15410|Tenampa
+2243|15410|Tenochtitlán
+2244|15410|Teocelo
+2245|15410|Tepatlaxco
+2246|15410|Tepetlán
+2247|15410|Tepetzintla
+2248|15410|Tequila
+2249|15410|José Azueta
+2250|15410|Texcatepec
+2251|15410|Texhuacán
+2252|15410|Texistepec
+2253|15410|Tezonapa
+2254|15410|Tierra Blanca
+2255|15410|Tihuatlán
+2256|15410|Tlacojalpan
+2257|15410|Tlacolulan
+2258|15410|Tlacotalpan
+2259|15410|Tlacotepec de Mejía
+2260|15410|Tlachichilco
+2261|15410|Tlalixcoyan
+2262|15410|Tlalnelhuayocan
+2263|15410|Tlapacoyan
+2264|15410|Tlaquilpa
+2265|15410|Tlilapan
+2266|15410|Tomatlán
+2267|15410|Tonayán
+2268|15410|Totutla
+2269|15410|Tuxpan
+2270|15410|Tuxtilla
+2271|15410|Ursulo Galván
+2272|15410|Vega de Alatorre
+2273|15410|Veracruz
+2274|15410|Villa Aldama
+2275|15410|Xoxocotla
+2276|15410|Yanga
+2277|15410|Yecuatla
+2278|15410|Zacualpan
+2279|15410|Zaragoza
+2280|15410|Zentla
+2281|15410|Zongolica
+2282|15410|Zontecomatlán de López y Fuentes
+2283|15410|Zozocolco de Hidalgo
+2284|15410|Agua Dulce
+2285|15410|El Higo
+2286|15410|Nanchital de Lázaro Cárdenas del Río
+2287|15410|Tres Valles
+2288|15410|Carlos A. Carrillo
+2289|15410|Tatahuicapan de Juárez
+2290|15410|Uxpanapa
+2291|15410|San Rafael
+2292|15410|Santiago Sochiapan
+2293|15402|Abalá
+2294|15402|Acanceh
+2295|15402|Akil
+2296|15402|Baca
+2297|15402|Bokobá
+2298|15402|Buctzotz
+2299|15402|Cacalchén
+2300|15402|Calotmul
+2301|15402|Cansahcab
+2302|15402|Cantamayec
+2303|15402|Celestún
+2304|15402|Cenotillo
+2305|15402|Conkal
+2306|15402|Cuncunul
+2307|15402|Cuzamá
+2308|15402|Chacsinkín
+2309|15402|Chankom
+2310|15402|Chapab
+2311|15402|Chemax
+2312|15402|Chicxulub Pueblo
+2313|15402|Chichimilá
+2314|15402|Chikindzonot
+2315|15402|Chocholá
+2316|15402|Chumayel
+2317|15402|Dzán
+2318|15402|Dzemul
+2319|15402|Dzidzantún
+2320|15402|Dzilam de Bravo
+2321|15402|Dzilam González
+2322|15402|Dzitás
+2323|15402|Dzoncauich
+2324|15402|Espita
+2325|15402|Halachó
+2326|15402|Hocabá
+2327|15402|Hoctún
+2328|15402|Homún
+2329|15402|Huhí
+2330|15402|Hunucmá
+2331|15402|Ixil
+2332|15402|Izamal
+2333|15402|Kanasín
+2334|15402|Kantunil
+2335|15402|Kaua
+2336|15402|Kinchil
+2337|15402|Kopomá
+2338|15402|Mama
+2339|15402|Maní
+2340|15402|Maxcanú
+2341|15402|Mayapán
+2342|15402|Mérida
+2343|15402|Mocochá
+2344|15402|Motul
+2345|15402|Muna
+2346|15402|Muxupip
+2347|15402|Opichén
+2348|15402|Oxkutzcab
+2349|15402|Panabá
+2350|15402|Peto
+2351|15402|Progreso
+2352|15402|Quintana Roo
+2353|15402|Río Lagartos
+2354|15402|Sacalum
+2355|15402|Samahil
+2356|15402|Sanahcat
+2357|15402|San Felipe
+2358|15402|Santa Elena
+2359|15402|Seyé
+2360|15402|Sinanché
+2361|15402|Sotuta
+2362|15402|Sucilá
+2363|15402|Sudzal
+2364|15402|Suma
+2365|15402|Tahdziú
+2366|15402|Tahmek
+2367|15402|Teabo
+2368|15402|Tecoh
+2369|15402|Tekal de Venegas
+2370|15402|Tekantó
+2371|15402|Tekax
+2372|15402|Tekit
+2373|15402|Tekom
+2374|15402|Telchac Pueblo
+2375|15402|Telchac Puerto
+2376|15402|Temax
+2377|15402|Temozón
+2378|15402|Tepakán
+2379|15402|Tetiz
+2380|15402|Teya
+2381|15402|Ticul
+2382|15402|Timucuy
+2383|15402|Tinum
+2384|15402|Tixcacalcupul
+2385|15402|Tixkokob
+2386|15402|Tixmehuac
+2387|15402|Tixpéhual
+2388|15402|Tizimín
+2389|15402|Tunkás
+2390|15402|Tzucacab
+2391|15402|Uayma
+2392|15402|Ucú
+2393|15402|Umán
+2394|15402|Valladolid
+2395|15402|Xocchel
+2396|15402|Yaxcabá
+2397|15402|Yaxkukul
+2398|15402|Yobaín
+2399|15411|Apozol
+2400|15411|Apulco
+2401|15411|Atolinga
+2402|15411|Benito Juárez
+2403|15411|Calera
+2404|15411|Cañitas de Felipe Pescador
+2405|15411|Concepción del Oro
+2406|15411|Cuauhtémoc
+2407|15411|Chalchihuites
+2408|15411|Fresnillo
+2409|15411|Trinidad García de la Cadena
+2410|15411|Genaro Codina
+2411|15411|General Enrique Estrada
+2412|15411|General Francisco R. Murguía
+2413|15411|El Plateado de Joaquín Amaro
+2414|15411|General Pánfilo Natera
+2415|15411|Guadalupe
+2416|15411|Huanusco
+2417|15411|Jalpa
+2418|15411|Jerez
+2419|15411|Jiménez del Teul
+2420|15411|Juan Aldama
+2421|15411|Juchipila
+2422|15411|Loreto
+2423|15411|Luis Moya
+2424|15411|Mazapil
+2425|15411|Melchor Ocampo
+2426|15411|Mezquital del Oro
+2427|15411|Miguel Auza
+2428|15411|Momax
+2429|15411|Monte Escobedo
+2430|15411|Morelos
+2431|15411|Moyahua de Estrada
+2432|15411|Nochistlán de Mejía
+2433|15411|Noria de Ángeles
+2434|15411|Ojocaliente
+2435|15411|Pánuco
+2436|15411|Pinos
+2437|15411|Río Grande
+2438|15411|Sain Alto
+2439|15411|El Salvador
+2440|15411|Sombrerete
+2441|15411|Susticacán
+2442|15411|Tabasco
+2443|15411|Tepechitlán
+2444|15411|Tepetongo
+2445|15411|Teúl de González Ortega
+2446|15411|Tlaltenango de Sánchez Román
+2447|15411|Valparaíso
+2448|15411|Vetagrande
+2449|15411|Villa de Cos
+2450|15411|Villa García
+2451|15411|Villa González Ortega
+2452|15411|Villa Hidalgo
+2453|15411|Villanueva
+2454|15411|Zacatecas
+2455|15411|Trancoso
+2456|15411|Santa María de la Paz
