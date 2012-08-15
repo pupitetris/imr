@@ -28,10 +28,10 @@ CREATE SEQUENCE public.country_country_id_seq;
 CREATE TABLE public.country (
                 country_id INTEGER NOT NULL DEFAULT nextval('public.country_country_id_seq'),
                 ct_name VARCHAR NOT NULL,
-                ct_name_long VARCHAR NOT NULL,
                 ct_abrev VARCHAR NOT NULL,
                 CONSTRAINT country_pk PRIMARY KEY (country_id)
 );
+COMMENT ON COLUMN public.country.country_id IS 'CDH code';
 
 
 ALTER SEQUENCE public.country_country_id_seq OWNED BY public.country.country_id;
@@ -40,10 +40,9 @@ CREATE SEQUENCE public.state_state_id_seq;
 
 CREATE TABLE public.state (
                 state_id VARCHAR NOT NULL DEFAULT nextval('public.state_state_id_seq'),
-                st_name VARCHAR NOT NULL,
-                st_name_long VARCHAR NOT NULL,
-                st_abrev VARCHAR NOT NULL,
                 country_id INTEGER NOT NULL,
+                st_name VARCHAR NOT NULL,
+                st_abrev VARCHAR NOT NULL,
                 CONSTRAINT state_pk PRIMARY KEY (state_id)
 );
 
@@ -54,8 +53,8 @@ CREATE SEQUENCE public.muni_muni_id_seq;
 
 CREATE TABLE public.muni (
                 muni_id INTEGER NOT NULL DEFAULT nextval('public.muni_muni_id_seq'),
-                m_name VARCHAR NOT NULL,
                 state_id VARCHAR NOT NULL,
+                m_name VARCHAR NOT NULL,
                 CONSTRAINT muni_pk PRIMARY KEY (muni_id)
 );
 
@@ -64,8 +63,8 @@ ALTER SEQUENCE public.muni_muni_id_seq OWNED BY public.muni.muni_id;
 
 CREATE TABLE public.city (
                 city_id INTEGER NOT NULL,
-                c_name VARCHAR NOT NULL,
                 muni_id INTEGER NOT NULL,
+                c_name VARCHAR NOT NULL,
                 CONSTRAINT city_pk PRIMARY KEY (city_id)
 );
 
@@ -75,7 +74,7 @@ CREATE SEQUENCE public.zipcode_zipcode_id_seq;
 CREATE TABLE public.zipcode (
                 zipcode_id INTEGER NOT NULL DEFAULT nextval('public.zipcode_zipcode_id_seq'),
                 muni_id INTEGER NOT NULL,
-                city_id INTEGER NOT NULL,
+                city_id INTEGER,
                 z_code VARCHAR NOT NULL,
                 CONSTRAINT zipcode_pk PRIMARY KEY (zipcode_id)
 );
