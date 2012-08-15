@@ -4,15 +4,13 @@ using System.Text;
 
 namespace IMRpatient
 {
-	public partial class UserEditorWin : Gtk.Window
+	public partial class UserEditorWin : UtilityWin
 	{
 		public enum TYPE {
 			NEW,
 			EDIT,
 			EDIT_SELF
 		}
-
-		private AppConfig config;
 
 		private void SetupForNew ()
 		{
@@ -33,11 +31,9 @@ namespace IMRpatient
 		}
 
 		public UserEditorWin (TYPE type, AppConfig config) : 
-				base(Gtk.WindowType.Toplevel)
+				base(config)
 		{
-			Build ();
-
-			this.config = config;
+			this.Build ();
 
 			switch (type) {
 			case TYPE.NEW:
@@ -47,17 +43,6 @@ namespace IMRpatient
 				SetupForEdit ();
 				break;
 			}
-		}
-
-		private bool CloseWindow ()
-		{
-			Destroy ();
-			return false;
-		}
-		
-		private void SendClose ()
-		{
-			GLib.Timeout.Add (50, new GLib.TimeoutHandler (CloseWindow));
 		}
 
 		protected void OnDeleteActionActivated (object sender, EventArgs e)
@@ -113,19 +98,13 @@ namespace IMRpatient
 			return false;
 		}
 
-		private bool OkTimeout ()
-		{
-			GLib.Signal.Emit (menubar, "selection-done");
-			if (Validate ()) {
-				Destroy ();
-			}
-
-			return false;
-		}
-
 		protected void OnOKActionActivated (object sender, EventArgs e)
 		{
-			GLib.Timeout.Add (100, new GLib.TimeoutHandler (OkTimeout));
+			SendAction (menubar, delegate {
+				if (Validate ()) {
+					Destroy ();
+				}
+			});
 		}
 	}
 }

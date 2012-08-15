@@ -165,6 +165,11 @@
         <property name="Image">stock:gtk-execute Menu</property>
       </source>
     </icon-set>
+    <icon-set id="userlist_edit">
+      <source>
+        <property name="Image">stock:gtk-edit Menu</property>
+      </source>
+    </icon-set>
   </icon-factory>
   <widget class="Gtk.Window" id="IMRpatient.MainWindow" design-size="702 777">
     <action-group name="Default">
@@ -360,7 +365,7 @@
         <property name="StockId">system_users_new</property>
         <signal name="Activated" handler="OnUsersNewActivated" />
       </action>
-      <action id="EditAction1">
+      <action id="UsersEdit">
         <property name="Type">Action</property>
         <property name="Label" translatable="yes">Edit...</property>
         <property name="ShortLabel" translatable="yes">Edit...</property>
@@ -392,7 +397,7 @@
                     <node type="Separator" />
                     <node type="Menu" action="UsersAction">
                       <node type="Menuitem" action="UsersNew" />
-                      <node type="Menuitem" action="EditAction1" />
+                      <node type="Menuitem" action="UsersEdit" />
                     </node>
                     <node type="Menuitem" action="BackupAction" />
                     <node type="Menuitem" action="RestoreAction" />
@@ -1690,6 +1695,99 @@ Disabled</property>
                 <property name="Position">1</property>
                 <property name="AutoSize">True</property>
               </packing>
+            </child>
+          </widget>
+          <packing>
+            <property name="Position">1</property>
+            <property name="AutoSize">True</property>
+          </packing>
+        </child>
+      </widget>
+    </child>
+  </widget>
+  <widget class="Gtk.Window" id="IMRpatient.UserListWin" design-size="400 300">
+    <action-group name="Default">
+      <action id="EditAction">
+        <property name="Type">Action</property>
+        <property name="Label" translatable="yes">Edit</property>
+        <property name="ShortLabel" translatable="yes">Edit</property>
+        <property name="StockId">userlist_edit</property>
+      </action>
+      <action id="DeleteAction">
+        <property name="Type">Action</property>
+        <property name="Label" translatable="yes">Delete</property>
+        <property name="ShortLabel" translatable="yes">Delete</property>
+        <property name="StockId">useredit_remove</property>
+      </action>
+      <action id="PleaseWaitEdit">
+        <property name="Type">Action</property>
+        <property name="Label" translatable="yes">Please wait...</property>
+        <property name="Sensitive">False</property>
+        <property name="ShortLabel" translatable="yes">Please wait...</property>
+        <property name="StockId">please_wait</property>
+        <property name="Visible">False</property>
+      </action>
+      <action id="PleaseWaitAction">
+        <property name="Type">Action</property>
+        <property name="Label" translatable="yes">Please wait...</property>
+        <property name="Sensitive">False</property>
+        <property name="ShortLabel" translatable="yes">Please wait...</property>
+        <property name="StockId">please_wait</property>
+        <property name="Visible">False</property>
+      </action>
+    </action-group>
+    <property name="MemberName" />
+    <property name="Title" translatable="yes">User List</property>
+    <property name="TypeHint">Utility</property>
+    <property name="WindowPosition">Center</property>
+    <property name="DestroyWithParent">True</property>
+    <property name="SkipPagerHint">True</property>
+    <property name="SkipTaskbarHint">True</property>
+    <child>
+      <widget class="Gtk.VBox" id="vbox2">
+        <property name="MemberName" />
+        <child>
+          <widget class="Gtk.HBox" id="hbox1">
+            <property name="MemberName" />
+            <property name="HeightRequest">40</property>
+            <property name="Spacing">6</property>
+            <child>
+              <widget class="Gtk.MenuBar" id="menubar">
+                <property name="MemberName" />
+                <property name="PackDirection">Rtl</property>
+                <node name="menubar" type="Menubar">
+                  <node type="Menu" action="EditAction">
+                    <node type="Menuitem" action="PleaseWaitEdit" />
+                  </node>
+                  <node type="Menu" action="DeleteAction">
+                    <node type="Menuitem" action="PleaseWaitAction" />
+                  </node>
+                </node>
+              </widget>
+              <packing>
+                <property name="Position">0</property>
+                <property name="AutoSize">False</property>
+              </packing>
+            </child>
+          </widget>
+          <packing>
+            <property name="Position">0</property>
+            <property name="AutoSize">True</property>
+            <property name="Expand">False</property>
+            <property name="Fill">False</property>
+          </packing>
+        </child>
+        <child>
+          <widget class="Gtk.ScrolledWindow" id="GtkScrolledWindow">
+            <property name="MemberName" />
+            <property name="ShadowType">In</property>
+            <child>
+              <widget class="Gtk.NodeView" id="nodeview1">
+                <property name="MemberName" />
+                <property name="CanFocus">True</property>
+                <property name="ShowScrollbars">True</property>
+                <property name="HeadersVisible">False</property>
+              </widget>
             </child>
           </widget>
           <packing>

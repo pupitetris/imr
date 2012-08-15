@@ -94,6 +94,9 @@
     <Compile Include="UserEditorWin.cs" />
     <Compile Include="gtk-gui\IMRpatient.UserEditorWin.cs" />
     <Compile Include="Util.cs" />
+    <Compile Include="UserListWin.cs" />
+    <Compile Include="gtk-gui\IMRpatient.UserListWin.cs" />
+    <Compile Include="UtilityWin.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
