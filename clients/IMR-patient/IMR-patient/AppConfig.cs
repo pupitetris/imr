@@ -31,6 +31,7 @@ namespace IMRpatient
 		private static readonly string GCONF_APP_BASE = "/apps/" + APP_NAME;
 		private static readonly string GCONF_BASEURL = GCONF_APP_BASE + "/baseUrl";
 		private static readonly string GCONF_PORT = GCONF_APP_BASE + "/port";
+		private static readonly string GCONF_APP_WINDOWS = GCONF_APP_BASE + "/windows";
 		private static readonly string DEFAULT_BASEURL = "http://www.imr.local/";
 
 		private enum AccountType {
@@ -173,6 +174,31 @@ namespace IMRpatient
 			if (radionic.Port != null && radionic.Port != "") {
 				gconf.Set (GCONF_PORT, radionic.Port);
 			}
+		}
+
+		public void SaveWindowGeom (string name, int x, int y, int w, int h) {
+			try {
+				string path = GCONF_APP_WINDOWS + "/" + name + "/";
+				gconf.Set (path + "x", x);
+				gconf.Set (path + "y", y);
+				gconf.Set (path + "w", w);
+				gconf.Set (path + "h", h);
+			} catch (Exception) {
+			}
+		}
+
+		public bool LoadWindowGeom (string name, out int x, out int y, out int w, out int h) {
+			try {
+				string path = GCONF_APP_WINDOWS + "/" + name + "/";
+				x = (int) gconf.Get (path + "x");
+				y = (int) gconf.Get (path + "y");
+				w = (int) gconf.Get (path + "w");
+				h = (int) gconf.Get (path + "h");
+			} catch (Exception) {
+				x = y = w = h = 0;
+				return false;
+			}
+			return true;
 		}
 
 		public void LoadPermissions (VoidDelegate del)

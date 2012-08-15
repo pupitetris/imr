@@ -16,10 +16,30 @@ namespace IMRpatient
 			base(Gtk.WindowType.Toplevel)
 		{
 			this.config = config;
+			this.DeleteEvent += delegate {
+				SavePosition ();
+			};
+
+			this.MapEvent += delegate {
+				int x, y, w, h;
+				if (config.LoadWindowGeom (this.GetType ().FullName, out x, out y, out w, out h)) {
+					this.Move (x, y);
+					this.Resize (w, h);
+				}
+			};
+		}
+
+		private void SavePosition ()
+		{
+			int x, y, w, h;
+			this.GetPosition (out x, out y);
+			this.GetSize (out w, out h);
+			config.SaveWindowGeom (this.GetType ().FullName, x, y, w, h);
 		}
 
 		protected bool CloseWindow ()
 		{
+			SavePosition ();
 			Destroy ();
 			return false;
 		}
