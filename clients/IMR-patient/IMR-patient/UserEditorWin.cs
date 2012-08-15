@@ -8,7 +8,8 @@ namespace IMRpatient
 	{
 		public enum TYPE {
 			NEW,
-			EDIT
+			EDIT,
+			EDIT_SELF
 		}
 
 		private AppConfig config;

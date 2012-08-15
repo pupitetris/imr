@@ -32,7 +32,7 @@ namespace IMRpatient {
 
 		private void ConfigureByPermissions ()
 		{
-			if (!config.CanPerform (IMR_PERM.USER_EDIT_YOURSELF)) {
+			if (!config.CanPerform (IMR_PERM.USER_EDIT_SELF)) {
 				if (!config.CanPerform (IMR_PERM.USER_CREATE)) { UsersAction.Sensitive = false; }
 			} else if (!config.CanPerform (IMR_PERM.USER_CREATE)) { UsersNew.Sensitive = false; }
 
@@ -91,7 +91,13 @@ namespace IMRpatient {
 
 		protected void OnUsersEditActivated (object sender, EventArgs e)
 		{
-
+			if (!config.CanPerform (IMR_PERM.USER_EDIT) &&
+			    config.CanPerform (IMR_PERM.USER_EDIT_SELF)) {
+				UserEditorWin win = new UserEditorWin (UserEditorWin.TYPE.EDIT_SELF, config);
+				win.TransientFor = this;
+				win.Show ();
+				win.Present ();
+			}
 		}
 	}
 }

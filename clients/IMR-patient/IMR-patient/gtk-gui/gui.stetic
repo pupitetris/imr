@@ -360,7 +360,7 @@
         <property name="StockId">system_users_new</property>
         <signal name="Activated" handler="OnUsersNewActivated" />
       </action>
-      <action id="UsersEdit">
+      <action id="EditAction1">
         <property name="Type">Action</property>
         <property name="Label" translatable="yes">Edit...</property>
         <property name="ShortLabel" translatable="yes">Edit...</property>
@@ -392,7 +392,7 @@
                     <node type="Separator" />
                     <node type="Menu" action="UsersAction">
                       <node type="Menuitem" action="UsersNew" />
-                      <node type="Menuitem" action="UsersEdit" />
+                      <node type="Menuitem" action="EditAction1" />
                     </node>
                     <node type="Menuitem" action="BackupAction" />
                     <node type="Menuitem" action="RestoreAction" />
@@ -1663,6 +1663,7 @@ Disabled</property>
               <widget class="Gtk.Frame" id="frame2">
                 <property name="MemberName" />
                 <property name="ShadowType">None</property>
+                <property name="BorderWidth">6</property>
                 <child>
                   <widget class="Gtk.Alignment" id="contPersona">
                     <property name="MemberName" />
