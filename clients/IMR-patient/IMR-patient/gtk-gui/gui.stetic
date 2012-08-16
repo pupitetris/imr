@@ -170,6 +170,11 @@
         <property name="Image">stock:gtk-edit Menu</property>
       </source>
     </icon-set>
+    <icon-set id="userlist_refresh">
+      <source>
+        <property name="Image">stock:gtk-refresh Menu</property>
+      </source>
+    </icon-set>
   </icon-factory>
   <widget class="Gtk.Window" id="IMRpatient.MainWindow" design-size="702 777">
     <action-group name="Default">
@@ -1705,17 +1710,19 @@ Disabled</property>
       </widget>
     </child>
   </widget>
-  <widget class="Gtk.Window" id="IMRpatient.UserListWin" design-size="400 300">
+  <widget class="Gtk.Window" id="IMRpatient.UserListWin" design-size="444 300">
     <action-group name="Default">
       <action id="EditAction">
         <property name="Type">Action</property>
         <property name="Label" translatable="yes">Edit</property>
+        <property name="Sensitive">False</property>
         <property name="ShortLabel" translatable="yes">Edit</property>
         <property name="StockId">userlist_edit</property>
       </action>
       <action id="DeleteAction">
         <property name="Type">Action</property>
         <property name="Label" translatable="yes">Delete</property>
+        <property name="Sensitive">False</property>
         <property name="ShortLabel" translatable="yes">Delete</property>
         <property name="StockId">useredit_remove</property>
       </action>
@@ -1727,7 +1734,22 @@ Disabled</property>
         <property name="StockId">please_wait</property>
         <property name="Visible">False</property>
       </action>
-      <action id="PleaseWaitAction">
+      <action id="PleaseWaitDelete">
+        <property name="Type">Action</property>
+        <property name="Label" translatable="yes">Please wait...</property>
+        <property name="Sensitive">False</property>
+        <property name="ShortLabel" translatable="yes">Please wait...</property>
+        <property name="StockId">please_wait</property>
+        <property name="Visible">False</property>
+      </action>
+      <action id="RefreshAction">
+        <property name="Type">Action</property>
+        <property name="Label" translatable="yes">Refresh</property>
+        <property name="ShortLabel" translatable="yes">Refresh</property>
+        <property name="StockId">userlist_refresh</property>
+        <signal name="Activated" handler="OnRefreshActionActivated" />
+      </action>
+      <action id="PleaseWaitRefresh">
         <property name="Type">Action</property>
         <property name="Label" translatable="yes">Please wait...</property>
         <property name="Sensitive">False</property>
@@ -1760,7 +1782,10 @@ Disabled</property>
                     <node type="Menuitem" action="PleaseWaitEdit" />
                   </node>
                   <node type="Menu" action="DeleteAction">
-                    <node type="Menuitem" action="PleaseWaitAction" />
+                    <node type="Menuitem" action="PleaseWaitDelete" />
+                  </node>
+                  <node type="Menu" action="RefreshAction">
+                    <node type="Menuitem" action="PleaseWaitRefresh" />
                   </node>
                 </node>
               </widget>
@@ -1782,11 +1807,12 @@ Disabled</property>
             <property name="MemberName" />
             <property name="ShadowType">In</property>
             <child>
-              <widget class="Gtk.NodeView" id="nodeview1">
+              <widget class="Gtk.NodeView" id="nodeview">
                 <property name="MemberName" />
                 <property name="CanFocus">True</property>
                 <property name="ShowScrollbars">True</property>
                 <property name="HeadersVisible">False</property>
+                <property name="RulesHint">True</property>
               </widget>
             </child>
           </widget>

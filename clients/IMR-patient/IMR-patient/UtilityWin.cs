@@ -52,7 +52,7 @@ namespace IMRpatient
 		protected void SendAction (Gtk.MenuBar menubar, VoidDelegate del)
 		{
 			ActionDelegate adel = delegate () {
-				GLib.Signal.Emit (menubar, "selection-done");
+				GLib.Signal.Emit (menubar, "cancel");
 				del ();
 				return false;
 			};
