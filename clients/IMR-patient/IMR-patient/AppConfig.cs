@@ -187,6 +187,20 @@ namespace IMRpatient
 			}
 		}
 
+		public void SaveWindowKey (string name, string key, int value) {
+			try {
+				gconf.Set (GCONF_APP_WINDOWS + "/" + name + "/" + key, value);
+			} catch (Exception) {
+			}
+		}
+
+		public void SaveWindowKey (string name, string key, string value) {
+			try {
+				gconf.Set (GCONF_APP_WINDOWS + "/" + name + "/" + key, value);
+			} catch (Exception) {
+			}
+		}
+		
 		public bool LoadWindowGeom (string name, out int x, out int y, out int w, out int h) {
 			try {
 				string path = GCONF_APP_WINDOWS + "/" + name + "/";
@@ -201,6 +215,26 @@ namespace IMRpatient
 			return true;
 		}
 
+		public bool LoadWindowKey (string name, string key, out int value) {
+			try {
+				value = (int) gconf.Get (GCONF_APP_WINDOWS + "/" + name + "/" + key);
+			} catch (Exception) {
+				value = 0;
+				return false;
+			}
+			return true;
+		}
+		
+		public bool LoadWindowKey (string name, string key, out string value) {
+			try {
+				value = (string) gconf.Get (GCONF_APP_WINDOWS + "/" + name + "/" + key);
+			} catch (Exception) {
+				value = null;
+				return false;
+			}
+			return true;
+		}
+		
 		public void LoadPermissions (VoidDelegate del)
 		{
 			account_type = AccountType.UNKNOWN;

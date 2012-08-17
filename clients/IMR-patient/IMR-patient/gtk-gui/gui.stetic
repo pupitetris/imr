@@ -1718,6 +1718,7 @@ Disabled</property>
         <property name="Sensitive">False</property>
         <property name="ShortLabel" translatable="yes">Edit</property>
         <property name="StockId">userlist_edit</property>
+        <signal name="Activated" handler="OnEditActionActivated" />
       </action>
       <action id="DeleteAction">
         <property name="Type">Action</property>
@@ -1725,6 +1726,7 @@ Disabled</property>
         <property name="Sensitive">False</property>
         <property name="ShortLabel" translatable="yes">Delete</property>
         <property name="StockId">useredit_remove</property>
+        <signal name="Activated" handler="OnDeleteActionActivated" />
       </action>
       <action id="PleaseWaitEdit">
         <property name="Type">Action</property>
@@ -1811,8 +1813,7 @@ Disabled</property>
                 <property name="MemberName" />
                 <property name="CanFocus">True</property>
                 <property name="ShowScrollbars">True</property>
-                <property name="HeadersVisible">False</property>
-                <property name="RulesHint">True</property>
+                <property name="SearchColumn">1</property>
               </widget>
             </child>
           </widget>

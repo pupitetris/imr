@@ -15,6 +15,8 @@ namespace IMRpatient {
 		private Boolean fixedBgAllocateFlag;
 		public Boolean IsLogout;
 
+		private UserListWin userListWin;
+
 		public MainWindow (AppConfig config): base (Gtk.WindowType.Toplevel)
 		{
 			Build ();
@@ -92,9 +94,13 @@ namespace IMRpatient {
 		protected void OnUsersEditActivated (object sender, EventArgs e)
 		{
 			if (config.CanPerform (IMR_PERM.USER_EDIT)) {
-				UserListWin win = new UserListWin (config);
-				win.Show ();
-				win.Present ();
+				if (userListWin == null) {
+					UserListWin win = new UserListWin (config);
+					win.DestroyEvent += delegate { userListWin = null; };
+					win.Show ();
+					userListWin = win;
+				}
+				userListWin.Present ();
 			} else if (config.CanPerform (IMR_PERM.USER_EDIT_SELF)) {
 				UserEditorWin win = new UserEditorWin (UserEditorWin.TYPE.EDIT_SELF, config);
 				win.TransientFor = this;

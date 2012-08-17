@@ -16,30 +16,40 @@ namespace IMRpatient
 			base(Gtk.WindowType.Toplevel)
 		{
 			this.config = config;
-			this.DeleteEvent += delegate {
-				SavePosition ();
-			};
-
-			this.MapEvent += delegate {
-				int x, y, w, h;
-				if (config.LoadWindowGeom (this.GetType ().FullName, out x, out y, out w, out h)) {
-					this.Move (x, y);
-					this.Resize (w, h);
-				}
-			};
+			this.DeleteEvent += delegate { SaveState ();	};
+			this.MapEvent += delegate {	LoadState (); };
 		}
 
-		private void SavePosition ()
+		protected void SaveKey (string key, int value)
+		{
+			config.SaveWindowKey (Util.GtkGetWidgetPath (this), key, value);
+		}
+
+		protected bool LoadKey (string key, out int value)
+		{
+			return config.LoadWindowKey (Util.GtkGetWidgetPath (this), key, out value);
+		}
+
+		protected virtual void LoadState ()
+		{
+			int x, y, w, h;
+			if (config.LoadWindowGeom (Util.GtkGetWidgetPath (this), out x, out y, out w, out h)) {
+				this.Move (x, y);
+				this.Resize (w, h);
+			}
+		}
+
+		protected virtual void SaveState ()
 		{
 			int x, y, w, h;
 			this.GetPosition (out x, out y);
 			this.GetSize (out w, out h);
-			config.SaveWindowGeom (this.GetType ().FullName, x, y, w, h);
+			config.SaveWindowGeom (Util.GtkGetWidgetPath (this), x, y, w, h);
 		}
 
 		protected bool CloseWindow ()
 		{
-			SavePosition ();
+			SaveState ();
 			Destroy ();
 			return false;
 		}
@@ -53,11 +63,17 @@ namespace IMRpatient
 		{
 			ActionDelegate adel = delegate () {
 				GLib.Signal.Emit (menubar, "cancel");
-				del ();
+				if (del != null) {
+					del ();
+				}
 				return false;
 			};
 
 			GLib.Timeout.Add (SEND_ACTION_TIMEOUT, new GLib.TimeoutHandler (adel));
+		}
+
+		protected void FinishAction (Gtk.MenuBar menubar) {
+			SendAction (menubar, null);
 		}
 	}
 }
