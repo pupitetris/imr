@@ -113,3 +113,22 @@ CREATE TYPE imr_account_type AS ENUM (
 	   'OPERATOR',
 	   'SUPERUSER'
 );
+
+CREATE TYPE imr_perm AS ENUM (
+	   'PATIENT_CREATE',
+	   'PATIENT_EDIT',
+	   'PATIENT_DELETE',
+	   'USER_EDIT_SELF',
+	   'OPERATOR',
+
+	   'USER_CREATE',
+	   'USER_EDIT',
+	   'USER_DELETE',
+	   'ADMIN',
+
+	   'SYSTEM_BACKUP',
+	   'SYSTEM_RESTORE',
+	   'USER_SET_STATUS',
+	   'USER_SET_ADMIN_LEVEL'
+	   'SUPERUSER',
+);
