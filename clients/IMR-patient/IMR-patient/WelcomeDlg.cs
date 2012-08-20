@@ -81,6 +81,7 @@ namespace IMRpatient
 			Sensitive = false;
 			success = false;
 
+			config.LoginMD5 = entryUser.Text;
 			config.charp.credentialsSet (entryUser.Text, Charp.GetMD5HexHash (entryPasswd.Text));
 			config.charp.request ("user_auth", null, new Charp.CharpCtx {
 				success = delegate { 

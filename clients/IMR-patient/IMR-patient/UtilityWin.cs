@@ -20,20 +20,25 @@ namespace IMRpatient
 			this.MapEvent += delegate {	LoadState (); };
 		}
 
+		private string GetWindowPath ()
+		{
+			return config.LoginMD5 + "/" + Util.GtkGetWidgetPath (this);
+		}
+
 		protected void SaveKey (string key, int value)
 		{
-			config.SaveWindowKey (Util.GtkGetWidgetPath (this), key, value);
+			config.SaveWindowKey (GetWindowPath (), key, value);
 		}
 
 		protected bool LoadKey (string key, out int value)
 		{
-			return config.LoadWindowKey (Util.GtkGetWidgetPath (this), key, out value);
+			return config.LoadWindowKey (GetWindowPath (), key, out value);
 		}
 
 		protected virtual void LoadState ()
 		{
 			int x, y, w, h;
-			if (config.LoadWindowGeom (Util.GtkGetWidgetPath (this), out x, out y, out w, out h)) {
+			if (config.LoadWindowGeom (GetWindowPath (), out x, out y, out w, out h)) {
 				this.Move (x, y);
 				this.Resize (w, h);
 			}
@@ -44,7 +49,7 @@ namespace IMRpatient
 			int x, y, w, h;
 			this.GetPosition (out x, out y);
 			this.GetSize (out w, out h);
-			config.SaveWindowGeom (Util.GtkGetWidgetPath (this), x, y, w, h);
+			config.SaveWindowGeom (GetWindowPath (), x, y, w, h);
 		}
 
 		protected bool CloseWindow ()

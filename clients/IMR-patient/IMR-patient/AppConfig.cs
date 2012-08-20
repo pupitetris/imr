@@ -87,6 +87,16 @@ namespace IMRpatient
 			}
 		}
 
+		private string loginMD5;
+		public string LoginMD5 {
+			set {
+				loginMD5 = Charp.GetMD5HexHash (value);
+			}
+			get {
+				return loginMD5;
+			}
+		}
+
 		private static void CopyResource (string dir, string resource)
 		{
 			System.Reflection.Assembly assembly = System.Reflection.Assembly.GetCallingAssembly ();
