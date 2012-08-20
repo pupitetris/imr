@@ -98,6 +98,7 @@ namespace IMRpatient {
 			if (config.CanPerform (IMR_PERM.USER_EDIT)) {
 				if (userListWin == null) {
 					UserListWin win = new UserListWin (config);
+					win.DeleteEvent += delegate { userListWin = null; };
 					win.DestroyEvent += delegate { userListWin = null; };
 					win.Show ();
 					userListWin = win;

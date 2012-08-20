@@ -16,7 +16,7 @@ namespace IMRpatient
 			base(Gtk.WindowType.Toplevel)
 		{
 			this.config = config;
-			this.DeleteEvent += delegate { SaveState ();	};
+			this.DeleteEvent += delegate { SaveState (); };
 			this.MapEvent += delegate {	LoadState (); };
 		}
 
