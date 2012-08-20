@@ -40,8 +40,10 @@ namespace IMRpatient
 
 				win = new MainWindow (config);
 				charp.parent = win;
+				config.mainwin = win;
 				win.Show ();
 				Application.Run ();
+				config.mainwin = null;
 			} while (win.IsLogout);
 		}
 	}

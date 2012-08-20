@@ -14,6 +14,7 @@ namespace IMRpatient
 		}
 
 		private Dictionary<string, string> Record;
+		private TYPE Type;
 
 		private void SetupForNew ()
 		{
@@ -55,6 +56,8 @@ namespace IMRpatient
 				base(config)
 		{
 			this.Build ();
+
+			Type = type;
 
 			switch (type) {
 			case TYPE.NEW:
@@ -123,6 +126,9 @@ namespace IMRpatient
 		{
 			SendAction (menubar, delegate {
 				if (Validate ()) {
+					if (Type != TYPE.NEW && config.mainwin.userListWin != null) {
+						config.mainwin.userListWin.Refresh ();
+					}
 					Destroy ();
 				}
 			});

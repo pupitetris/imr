@@ -43,6 +43,7 @@ namespace IMRpatient
 		
 		public Charp charp;
 		public Radionic radionic;
+		public MainWindow mainwin;
 		private GConf.Client gconf;
 		private AccountType account_type;
 

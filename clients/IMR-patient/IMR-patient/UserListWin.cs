@@ -80,7 +80,7 @@ namespace IMRpatient
 			}
 		}
 
-		private void Refresh ()
+		public void Refresh ()
 		{
 			store.Clear ();
 			config.charp.request ("user_list_get", null, new CharpGtk.CharpGtkCtx {

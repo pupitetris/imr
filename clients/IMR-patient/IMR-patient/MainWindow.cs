@@ -15,7 +15,7 @@ namespace IMRpatient {
 		private Boolean fixedBgAllocateFlag;
 		public Boolean IsLogout;
 
-		private UserListWin userListWin;
+		public UserListWin userListWin;
 
 		public MainWindow (AppConfig config): base (Gtk.WindowType.Toplevel)
 		{
@@ -98,6 +98,7 @@ namespace IMRpatient {
 			if (config.CanPerform (IMR_PERM.USER_EDIT)) {
 				if (userListWin == null) {
 					UserListWin win = new UserListWin (config);
+					win.TransientFor = this;
 					win.DeleteEvent += delegate { userListWin = null; };
 					win.DestroyEvent += delegate { userListWin = null; };
 					win.Show ();
