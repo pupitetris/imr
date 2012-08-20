@@ -86,6 +86,7 @@ CREATE TYPE imr_gender AS ENUM (
 
 CREATE TYPE imr_phone_type AS ENUM (
 	   'MOBILE',
+	   'NEXTEL',
 	   'HOME',
 	   'WORK'
 );
@@ -131,4 +132,20 @@ CREATE TYPE imr_perm AS ENUM (
 	   'USER_SET_STATUS',
 	   'USER_SET_ADMIN_LEVEL',
 	   'SUPERUSER'
+);
+
+CREATE TYPE imr_address_type AS ENUM (
+	   'HOME',
+	   'WORK',
+	   'FISCAL'
+);
+
+CREATE TYPE imr_email_type AS ENUM (
+	   'PERSONAL',
+	   'WORK'
+);
+
+CREATE TYPE imr_email_system AS ENUM (
+	   'STANDARD',
+	   'SKYPE'
 );
