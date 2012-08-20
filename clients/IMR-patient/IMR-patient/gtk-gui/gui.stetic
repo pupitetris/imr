@@ -953,7 +953,7 @@
             <property name="Icon">stock:gtk-refresh Menu</property>
             <property name="Label" translatable="yes">_Retry</property>
             <property name="UseUnderline">True</property>
-            <property name="ResponseId">-5</property>
+            <property name="ResponseId">-1</property>
             <signal name="Clicked" handler="OnButtonRetryClicked" />
           </widget>
           <packing>
@@ -969,7 +969,7 @@
             <property name="UseStock">True</property>
             <property name="Type">StockItem</property>
             <property name="StockId">gtk-close</property>
-            <property name="ResponseId">-7</property>
+            <property name="ResponseId">-1</property>
             <signal name="Clicked" handler="OnButtonCloseClicked" />
             <property name="label">gtk-close</property>
           </widget>
@@ -1121,7 +1121,7 @@
             <property name="Icon">stock:gtk-preferences Menu</property>
             <property name="Label" translatable="yes">_Configure</property>
             <property name="UseUnderline">True</property>
-            <property name="ResponseId">0</property>
+            <property name="ResponseId">-1</property>
             <signal name="Clicked" handler="OnButtonConfigureClicked" />
           </widget>
           <packing>
@@ -1138,7 +1138,6 @@
             <property name="Label" translatable="yes">_Retry</property>
             <property name="UseUnderline">True</property>
             <property name="ResponseId">-8</property>
-            <signal name="Clicked" handler="OnButtonRetryClicked" />
           </widget>
           <packing>
             <property name="Position">1</property>
@@ -1155,7 +1154,6 @@
             <property name="Label" translatable="yes">_Ignore</property>
             <property name="UseUnderline">True</property>
             <property name="ResponseId">-3</property>
-            <signal name="Clicked" handler="OnButtonIgnoreClicked" />
           </widget>
           <packing>
             <property name="Position">2</property>

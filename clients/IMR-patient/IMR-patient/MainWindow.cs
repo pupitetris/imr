@@ -44,6 +44,7 @@ namespace IMRpatient {
 		
 		protected void OnDeleteEvent (object sender, DeleteEventArgs a)
 		{
+			config.radionic.Close ();
 			Gtk.Main.Quit ();
 			a.RetVal = true;
 		}
@@ -72,6 +73,7 @@ namespace IMRpatient {
 			if (res == (int) Gtk.ResponseType.Yes) {
 				IsLogout = true;
 				Destroy ();
+				config.radionic.Close ();
 				Gtk.Main.Quit ();
 			}
 		}

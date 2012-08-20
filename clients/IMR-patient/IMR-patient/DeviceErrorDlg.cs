@@ -18,16 +18,7 @@ namespace IMRpatient
 		protected void OnButtonConfigureClicked (object sender, EventArgs e)
 		{
 			config.Setup (this);
-		}
-
-		protected void OnButtonRetryClicked (object sender, EventArgs e)
-		{
-			Destroy ();
-		}
-
-		protected void OnButtonIgnoreClicked (object sender, EventArgs e)
-		{
-			Destroy ();
+			Respond (Gtk.ResponseType.Yes);
 		}
 	}
 }

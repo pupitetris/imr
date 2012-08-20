@@ -41,6 +41,7 @@ namespace IMRpatient
 
 		protected void OnButtonOkClicked (object sender, EventArgs e)
 		{
+			radionic.Port = comboPort.Entry.Text;
 			Destroy ();
 		}
 

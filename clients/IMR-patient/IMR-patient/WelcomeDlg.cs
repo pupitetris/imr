@@ -32,6 +32,7 @@ namespace IMRpatient
 			DeviceErrorDlg dlg = new DeviceErrorDlg (config, message);
 			dlg.TransientFor = this;
 			dlg.Response += delegate(object o, Gtk.ResponseArgs args) {
+				dlg.Destroy ();
 				switch (args.ResponseId) {
 				case Gtk.ResponseType.Yes:
 					// Retry
@@ -39,6 +40,7 @@ namespace IMRpatient
 					break;
 				case Gtk.ResponseType.Accept:
 					// Ignore
+					success = true;
 					Gtk.Main.Quit ();
 					Destroy ();
 					break;
@@ -55,13 +57,16 @@ namespace IMRpatient
 				config.radionic.Probe (delegate (Radionic.RESULT result, string reply) {
 					switch (result) {
 					case Radionic.RESULT.SUCCESS:
+						success = true;
 						Gtk.Main.Quit ();
 						Destroy ();
 						break;
 					case Radionic.RESULT.TIMEOUT:
+						config.radionic.Close ();
 						devError (Catalog.GetString ("Timeout."));
 						break;
 					default:
+						config.radionic.Close ();
 						devError (Catalog.GetString ("Read error."));
 						break;
 					}
@@ -80,7 +85,6 @@ namespace IMRpatient
 			config.charp.request ("user_auth", null, new Charp.CharpCtx {
 				success = delegate { 
 					Gtk.Application.Invoke (delegate {
-						success = true;
 						devProbeTry ();
 					});
 				},
