@@ -165,15 +165,25 @@ CREATE TABLE public.address (
                 address_id INTEGER NOT NULL DEFAULT nextval('public.address_address_id_seq'),
                 inst_id INTEGER NOT NULL,
                 persona_id INTEGER NOT NULL,
+                asenta_id INTEGER NOT NULL,
                 street VARCHAR NOT NULL,
                 num_ext VARCHAR NOT NULL,
                 num_int VARCHAR NOT NULL,
-                asenta_id INTEGER NOT NULL,
+                ad_type imr_address_type NOT NULL,
                 CONSTRAINT address_pk PRIMARY KEY (address_id, inst_id)
 );
 
 
 ALTER SEQUENCE public.address_address_id_seq OWNED BY public.address.address_id;
+
+CREATE TABLE public.fiscal (
+                persona_id INTEGER NOT NULL,
+                inst_id INTEGER NOT NULL,
+                address_id INTEGER NOT NULL,
+                code VARCHAR NOT NULL,
+                CONSTRAINT fiscal_pk PRIMARY KEY (persona_id, inst_id)
+);
+
 
 CREATE SEQUENCE public.email_email_id_seq;
 
@@ -182,8 +192,12 @@ CREATE TABLE public.email (
                 inst_id INTEGER NOT NULL,
                 persona_id INTEGER NOT NULL,
                 email VARCHAR NOT NULL,
+                e_type imr_email_type NOT NULL,
+                system imr_email_system NOT NULL,
+                description VARCHAR NOT NULL,
                 CONSTRAINT email_pk PRIMARY KEY (email_id, inst_id)
 );
+COMMENT ON COLUMN public.email.description IS 'Short notes.';
 
 
 ALTER SEQUENCE public.email_email_id_seq OWNED BY public.email.email_id;
@@ -195,7 +209,7 @@ CREATE TABLE public.phone (
                 inst_id INTEGER NOT NULL,
                 persona_id INTEGER NOT NULL,
                 number VARCHAR NOT NULL,
-                type imr_phone_type NOT NULL,
+                p_type imr_phone_type NOT NULL,
                 status imr_record_status NOT NULL,
                 CONSTRAINT phone_pk PRIMARY KEY (phone_id, inst_id)
 );
@@ -571,6 +585,20 @@ REFERENCES public.persona (inst_id, persona_id)
 ON DELETE NO ACTION
 ON UPDATE NO ACTION
 DEFERRABLE INITIALLY IMMEDIATE;
+
+ALTER TABLE public.fiscal ADD CONSTRAINT persona_fiscal_fk
+FOREIGN KEY (inst_id, persona_id)
+REFERENCES public.persona (inst_id, persona_id)
+ON DELETE NO ACTION
+ON UPDATE NO ACTION
+NOT DEFERRABLE;
+
+ALTER TABLE public.fiscal ADD CONSTRAINT address_fiscal_fk
+FOREIGN KEY (address_id, inst_id)
+REFERENCES public.address (address_id, inst_id)
+ON DELETE NO ACTION
+ON UPDATE NO ACTION
+NOT DEFERRABLE;
 
 ALTER TABLE public.analysis ADD CONSTRAINT patient_analysis_fk
 FOREIGN KEY (inst_id, persona_id)
