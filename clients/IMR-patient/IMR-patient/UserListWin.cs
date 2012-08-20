@@ -9,15 +9,17 @@ namespace IMRpatient
 {
 	[Gtk.TreeNode (ListOnly=true)]
 	public class UserListNode : Gtk.TreeNode {
-		public UserListNode (object persona_id, object name, string info, string status)
+		public UserListNode (Dictionary<string, string> data)
 		{
-			PersonaId = Convert.ToUInt32 (persona_id);
-			Name = (string) name;
-			Info = info;
-			Status = status;
+			Data = data;
+			Name = data["username"];
+			Info = Util.StringPlusSpace (data["prefix"]) +	Util.StringPlusSpace (data["name"]) +
+				Util.StringPlusSpace (data["paterno"]) + Util.StringPlusSpace (data["materno"]);
+			Level = Util.UserLevelToString (data["type"]);
+			Status = "(" + Util.StatusToString (data["status"]) + ")";
 		}
 
-		public uint PersonaId;
+		public Dictionary<string, string> Data;
 
 		[Gtk.TreeNodeValue (Column=0)]
 		public string Name;
@@ -26,6 +28,9 @@ namespace IMRpatient
 		public string Info;
 
 		[Gtk.TreeNodeValue (Column=2)]
+		public string Level;
+
+		[Gtk.TreeNodeValue (Column=3)]
 		public string Status;
 	}
 
@@ -51,7 +56,8 @@ namespace IMRpatient
 			nodeview.AppendColumn (Catalog.GetString ("Username"), new Gtk.CellRendererText (), "text", 0);
 			infoCol = nodeview.AppendColumn (Catalog.GetString ("Info"), new Gtk.CellRendererText (), "text", 1);
 			infoCol.Expand = true;
-			nodeview.AppendColumn (Catalog.GetString ("Status"), new Gtk.CellRendererText (), "text", 2);
+			nodeview.AppendColumn (Catalog.GetString ("Level"), new Gtk.CellRendererText (), "text", 2);
+			nodeview.AppendColumn (Catalog.GetString ("Status"), new Gtk.CellRendererText (), "text", 3);
 
 			Refresh ();
 		}
@@ -83,13 +89,7 @@ namespace IMRpatient
 					Gtk.Application.Invoke (delegate {
 						ArrayList arr = (ArrayList) data;
 						for (int i = 0; i < arr.Count; i++) {
-							Dictionary<string, object> o = (Dictionary<string, object>) arr[i];
-							store.AddNode (new UserListNode (o["persona_id"], o["username"], 
-							                                 Util.StringPlusSpace (o["prefix"]) +
-							                                 Util.StringPlusSpace (o["name"]) +
-							                                 Util.StringPlusSpace (o["paterno"]) +
-							                                 Util.StringPlusSpace (o["materno"]),
-							                                 "(" + Util.StatusToString (o["status"]) + ")"));
+							store.AddNode (new UserListNode ((Dictionary<string, string>) arr[i]));
 						}
 						nodeview.ShowNow ();
 						FinishAction (menubar);
@@ -112,7 +112,8 @@ namespace IMRpatient
 			Gtk.ITreeNode[] selected = selection.SelectedNodes;
 			if (i < selected.Length) {
 				UserListNode node = (UserListNode) selected[i];
-				config.charp.request ("user_remove", new object[] {node.PersonaId}, new CharpGtk.CharpGtkCtx {
+				config.charp.request ("user_remove", new object[] {Convert.ToUInt32 (node.Data["persona_id"])}, 
+				new CharpGtk.CharpGtkCtx {
 					parent = this,
 					success = delegate (object data, UploadValuesCompletedEventArgs status, Charp.CharpCtx ctx) {
 						Gtk.Application.Invoke (delegate {
@@ -144,7 +145,19 @@ namespace IMRpatient
 
 		private void DeleteSelected ()
 		{
-			DeleteAsync (0);
+			SendAction (menubar, delegate {
+				string msg = String.Format (
+					Catalog.GetPluralString ("This will delete the user from the system.\n\nAre you sure you want to delete it?",
+				                         "This will delete {0} users from the system.\n\nAre you sure you want to delete them?",
+				                         selection.SelectedNodes.Length), selection.SelectedNodes.Length);
+				Gtk.MessageDialog md = new Gtk.MessageDialog (this, Gtk.DialogFlags.Modal, Gtk.MessageType.Question, 
+				                                              Gtk.ButtonsType.YesNo, msg);
+				int res = md.Run ();
+				md.Destroy ();
+				if (res == (int) Gtk.ResponseType.Yes) {
+					DeleteAsync (0);
+				}
+			});
 		}
 
 		protected void OnDeleteActionActivated (object sender, EventArgs e)
@@ -152,9 +165,27 @@ namespace IMRpatient
 			DeleteSelected ();
 		}
 
+		private void EditSelected ()
+		{
+			Gtk.ITreeNode[] selected = selection.SelectedNodes;
+			if (selected.Length != 1) {
+				throw new Exception ("Selection must be 1");
+			}
+			
+			UserListNode node = (UserListNode) selected[0];
+			UserEditorWin win = new UserEditorWin (UserEditorWin.TYPE.EDIT, config, node.Data);
+			win.Show ();
+			win.Present ();
+		}
+
 		protected void OnEditActionActivated (object sender, EventArgs e)
 		{
-			throw new System.NotImplementedException ();
+			SendAction (menubar, EditSelected);
+		}
+
+		protected void OnNodeviewRowActivated (object o, Gtk.RowActivatedArgs args)
+		{
+			EditSelected ();
 		}
 	}
 }

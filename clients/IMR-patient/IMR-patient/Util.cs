@@ -37,6 +37,15 @@ namespace IMRpatient
 			return StringPlusSpace ((string) o);
 		}
 		
+		public static string UserLevelToString (string level) {
+			switch (level) {
+			case "OPERATOR": return Catalog.GetString ("Operator");
+			case "ADMIN": return Catalog.GetString ("Administrator");
+			case "SUPERUSER": return Catalog.GetString ("Super User");
+			}
+			throw new Exception ("Unsupported level `" + level + "'");
+		}
+		
 		public static string StatusToString (string status) {
 			switch (status) {
 			case "ACTIVE": return Catalog.GetString ("Active");

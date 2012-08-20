@@ -106,7 +106,6 @@ namespace IMRpatient {
 				userListWin.Present ();
 			} else if (config.CanPerform (IMR_PERM.USER_EDIT_SELF)) {
 				UserEditorWin win = new UserEditorWin (UserEditorWin.TYPE.EDIT_SELF, config);
-				win.TransientFor = this;
 				win.Show ();
 				win.Present ();
 			}

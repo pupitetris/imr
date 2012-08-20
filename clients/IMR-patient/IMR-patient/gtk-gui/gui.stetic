@@ -1786,9 +1786,6 @@ Disabled</property>
                   <node type="Menu" action="DeleteAction">
                     <node type="Menuitem" action="PleaseWaitDelete" />
                   </node>
-                  <node type="Menu" action="RefreshAction">
-                    <node type="Menuitem" action="PleaseWaitRefresh" />
-                  </node>
                 </node>
               </widget>
               <packing>
@@ -1814,6 +1811,7 @@ Disabled</property>
                 <property name="CanFocus">True</property>
                 <property name="ShowScrollbars">True</property>
                 <property name="SearchColumn">1</property>
+                <signal name="RowActivated" handler="OnNodeviewRowActivated" />
               </widget>
             </child>
           </widget>

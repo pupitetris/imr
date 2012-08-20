@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Mono.Unix;
 using System.Text;
 
@@ -11,6 +12,8 @@ namespace IMRpatient
 			EDIT,
 			EDIT_SELF
 		}
+
+		private Dictionary<string, string> Record;
 
 		private void SetupForNew ()
 		{
@@ -25,12 +28,30 @@ namespace IMRpatient
 			}
 		}
 
-		private void SetupForEdit ()
+		private void SetupForEdit (Dictionary<string, string> data)
 		{
 			Title = Catalog.GetString ("Edit User");
+			Record = data;
+
+			DeleteAction.Visible = true;
+
+			entryUsername.Text = data["username"];
+
+			int idx = 0;
+			switch (data["type"]) {
+			case "OPERATOR": idx = 0; break;
+			case "ADMIN": idx = 1; break;
+			case "SUPERUSER": idx = 2; break;
+			}
+			comboLevel.Active = idx;
+			comboStatus.Active = (data["status"] == "ACTIVE")? 0: 1;
+
+			if (!config.CanPerform (IMR_PERM.USER_SET_ADMIN_LEVEL)) {
+				comboLevel.Sensitive = false;
+			}
 		}
 
-		public UserEditorWin (TYPE type, AppConfig config) : 
+		public UserEditorWin (TYPE type, AppConfig config, Dictionary<string, string> data = null) : 
 				base(config)
 		{
 			this.Build ();
@@ -40,7 +61,7 @@ namespace IMRpatient
 				SetupForNew ();
 				break;
 			case TYPE.EDIT:
-				SetupForEdit ();
+				SetupForEdit (data);
 				break;
 			}
 		}
