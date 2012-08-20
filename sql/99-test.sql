@@ -16,6 +16,6 @@ BEGIN TRANSACTION;
 
       -- password is ``blah''
       INSERT INTO account(persona_id, inst_id, username, passwd, account_type, status)
-      	     VALUES (2, 1, 'tito', 'd0655af3824a90cf215bedc890a9028a', 'SUPERUSER', 'DISABLED');
+      	     VALUES (2, 1, 'tito', 'd0655af3824a90cf215bedc890a9028a', 'SUPERUSER', 'ACTIVE');
 
 COMMIT TRANSACTION;
