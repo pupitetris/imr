@@ -90,7 +90,6 @@ namespace IMRpatient {
 			UserEditorWin win = new UserEditorWin (UserEditorWin.TYPE.NEW, config);
 			win.TransientFor = this;
 			win.Show ();
-			win.Present ();
 		}
 
 		protected void OnUsersEditActivated (object sender, EventArgs e)
@@ -108,7 +107,6 @@ namespace IMRpatient {
 			} else if (config.CanPerform (IMR_PERM.USER_EDIT_SELF)) {
 				UserEditorWin win = new UserEditorWin (UserEditorWin.TYPE.EDIT_SELF, config);
 				win.Show ();
-				win.Present ();
 			}
 		}
 	}

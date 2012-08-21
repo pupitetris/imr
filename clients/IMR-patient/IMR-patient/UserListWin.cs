@@ -175,7 +175,6 @@ namespace IMRpatient
 			UserListNode node = (UserListNode) selected[0];
 			UserEditorWin win = new UserEditorWin (UserEditorWin.TYPE.EDIT, config, node.Data);
 			win.Show ();
-			win.Present ();
 		}
 
 		protected void OnEditActionActivated (object sender, EventArgs e)
