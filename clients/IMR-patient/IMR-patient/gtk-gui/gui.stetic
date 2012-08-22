@@ -1835,7 +1835,7 @@ Disabled</property>
       </widget>
     </child>
   </widget>
-  <widget class="Gtk.Bin" id="IMRpatient.PersonaEditor" design-size="728 353">
+  <widget class="Gtk.Bin" id="IMRpatient.PersonaEditor" design-size="728 311">
     <property name="MemberName" />
     <property name="Visible">False</property>
     <child>
@@ -1889,10 +1889,12 @@ Disabled</property>
                                 <property name="MemberName" />
                                 <property name="CanFocus">True</property>
                                 <property name="Label" translatable="yes">Male</property>
+                                <property name="Active">True</property>
                                 <property name="DrawIndicator">True</property>
                                 <property name="HasLabel">True</property>
                                 <property name="UseUnderline">True</property>
                                 <property name="Group">gender</property>
+                                <signal name="Toggled" handler="OnRadioMaleToggled" />
                               </widget>
                               <packing>
                                 <property name="Position">0</property>
