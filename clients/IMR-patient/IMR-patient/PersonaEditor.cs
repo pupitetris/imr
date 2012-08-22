@@ -12,8 +12,7 @@ namespace IMRpatient
 			this.Build ();
 
 			Gdk.Color white = new Gdk.Color (255, 255, 255);
-			personaImgFrame.ModifyBg (Gtk.StateType.Prelight, white);
-			personaImg.ModifyBg (Gtk.StateType.Prelight, white);
+			eventPersonaImg.ModifyBg (Gtk.StateType.Normal, white);
 		}
 
 		protected void OnRadioMaleToggled (object sender, EventArgs e)

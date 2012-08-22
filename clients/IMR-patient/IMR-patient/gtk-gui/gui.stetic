@@ -1847,22 +1847,27 @@ Disabled</property>
             <property name="MemberName" />
             <property name="Spacing">6</property>
             <child>
-              <widget class="Gtk.Frame" id="personaImgFrame">
+              <widget class="Gtk.EventBox" id="eventPersonaImg">
                 <property name="MemberName" />
-                <property name="ShadowType">In</property>
-                <property name="LabelYalign">1</property>
                 <child>
-                  <widget class="Gtk.Image" id="personaImg">
+                  <widget class="Gtk.Frame" id="personaImgFrame">
                     <property name="MemberName" />
-                    <property name="Xpad">6</property>
-                    <property name="Ypad">6</property>
-                    <property name="Pixbuf">resource:IMRpatient.img.user_male.png</property>
+                    <property name="ShadowType">In</property>
+                    <property name="LabelYalign">1</property>
+                    <child>
+                      <widget class="Gtk.Image" id="personaImg">
+                        <property name="MemberName" />
+                        <property name="Xpad">6</property>
+                        <property name="Ypad">6</property>
+                        <property name="Pixbuf">resource:IMRpatient.img.user_male.png</property>
+                      </widget>
+                    </child>
                   </widget>
                 </child>
               </widget>
               <packing>
                 <property name="Position">0</property>
-                <property name="AutoSize">False</property>
+                <property name="AutoSize">True</property>
                 <property name="Expand">False</property>
                 <property name="Fill">False</property>
               </packing>
@@ -1889,7 +1894,6 @@ Disabled</property>
                                 <property name="MemberName" />
                                 <property name="CanFocus">True</property>
                                 <property name="Label" translatable="yes">Male</property>
-                                <property name="Active">True</property>
                                 <property name="DrawIndicator">True</property>
                                 <property name="HasLabel">True</property>
                                 <property name="UseUnderline">True</property>
