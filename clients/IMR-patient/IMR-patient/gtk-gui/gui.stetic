@@ -1889,7 +1889,6 @@ Disabled</property>
                                 <property name="MemberName" />
                                 <property name="CanFocus">True</property>
                                 <property name="Label" translatable="yes">Male</property>
-                                <property name="Active">True</property>
                                 <property name="DrawIndicator">True</property>
                                 <property name="HasLabel">True</property>
                                 <property name="UseUnderline">True</property>
@@ -1935,7 +1934,7 @@ Disabled</property>
                           </packing>
                         </child>
                         <child>
-                          <widget class="Gtk.Entry" id="entry5">
+                          <widget class="Gtk.Entry" id="entryBirth">
                             <property name="MemberName" />
                             <property name="WidthRequest">100</property>
                             <property name="CanFocus">True</property>
@@ -1976,18 +1975,18 @@ Disabled</property>
                         <property name="NColumns">4</property>
                         <property name="ColumnSpacing">6</property>
                         <child>
-                          <widget class="Gtk.Entry" id="entry1">
+                          <widget class="Gtk.Entry" id="entryMaterno">
                             <property name="MemberName" />
-                            <property name="WidthRequest">60</property>
                             <property name="CanFocus">True</property>
                             <property name="IsEditable">True</property>
                             <property name="InvisibleChar">•</property>
                           </widget>
                           <packing>
-                            <property name="AutoSize">True</property>
-                            <property name="XOptions">Fill</property>
+                            <property name="LeftAttach">3</property>
+                            <property name="RightAttach">4</property>
+                            <property name="AutoSize">False</property>
                             <property name="YOptions">Fill</property>
-                            <property name="XExpand">False</property>
+                            <property name="XExpand">True</property>
                             <property name="XFill">True</property>
                             <property name="XShrink">False</property>
                             <property name="YExpand">False</property>
@@ -1996,7 +1995,7 @@ Disabled</property>
                           </packing>
                         </child>
                         <child>
-                          <widget class="Gtk.Entry" id="entry2">
+                          <widget class="Gtk.Entry" id="entryNames">
                             <property name="MemberName" />
                             <property name="CanFocus">True</property>
                             <property name="IsEditable">True</property>
@@ -2016,7 +2015,7 @@ Disabled</property>
                           </packing>
                         </child>
                         <child>
-                          <widget class="Gtk.Entry" id="entry3">
+                          <widget class="Gtk.Entry" id="entryPaterno">
                             <property name="MemberName" />
                             <property name="CanFocus">True</property>
                             <property name="IsEditable">True</property>
@@ -2036,18 +2035,18 @@ Disabled</property>
                           </packing>
                         </child>
                         <child>
-                          <widget class="Gtk.Entry" id="entry4">
+                          <widget class="Gtk.Entry" id="entryPrefix">
                             <property name="MemberName" />
+                            <property name="WidthRequest">60</property>
                             <property name="CanFocus">True</property>
                             <property name="IsEditable">True</property>
                             <property name="InvisibleChar">•</property>
                           </widget>
                           <packing>
-                            <property name="LeftAttach">3</property>
-                            <property name="RightAttach">4</property>
-                            <property name="AutoSize">False</property>
+                            <property name="AutoSize">True</property>
+                            <property name="XOptions">Fill</property>
                             <property name="YOptions">Fill</property>
-                            <property name="XExpand">True</property>
+                            <property name="XExpand">False</property>
                             <property name="XFill">True</property>
                             <property name="XShrink">False</property>
                             <property name="YExpand">False</property>
@@ -2198,7 +2197,7 @@ Disabled</property>
                           </packing>
                         </child>
                         <child>
-                          <widget class="Gtk.Button" id="button81">
+                          <widget class="Gtk.Button" id="buttonAddAddress">
                             <property name="MemberName" />
                             <property name="CanFocus">True</property>
                             <property name="Type">TextAndIcon</property>
@@ -2290,7 +2289,7 @@ Disabled</property>
                           </packing>
                         </child>
                         <child>
-                          <widget class="Gtk.Button" id="button82">
+                          <widget class="Gtk.Button" id="buttonAddPhone">
                             <property name="MemberName" />
                             <property name="CanFocus">True</property>
                             <property name="Type">TextAndIcon</property>
@@ -2359,11 +2358,11 @@ Disabled</property>
               </packing>
             </child>
             <child>
-              <widget class="Gtk.HBox" id="hbox9">
+              <widget class="Gtk.HBox" id="hboxFiscal">
                 <property name="MemberName" />
                 <property name="Spacing">6</property>
                 <child>
-                  <widget class="Gtk.Entry" id="entry7">
+                  <widget class="Gtk.Entry" id="entryFiscal">
                     <property name="MemberName" />
                     <property name="WidthRequest">150</property>
                     <property name="CanFocus">True</property>
@@ -2428,7 +2427,7 @@ Disabled</property>
                       </packing>
                     </child>
                     <child>
-                      <widget class="Gtk.Button" id="button83">
+                      <widget class="Gtk.Button" id="buttonAddEmail">
                         <property name="MemberName" />
                         <property name="CanFocus">True</property>
                         <property name="Type">TextAndIcon</property>
@@ -2485,7 +2484,7 @@ Disabled</property>
                 <property name="MemberName" />
                 <property name="Spacing">6</property>
                 <child>
-                  <widget class="Gtk.Expander" id="expander2">
+                  <widget class="Gtk.Expander" id="expanderNotes">
                     <property name="MemberName" />
                     <property name="CanFocus">True</property>
                     <child>
@@ -2513,6 +2512,7 @@ Disabled</property>
                   <widget class="Gtk.TextView" id="textview1">
                     <property name="MemberName" />
                     <property name="Visible">False</property>
+                    <property name="Sensitive">False</property>
                     <property name="CanFocus">True</property>
                     <property name="AcceptsTab">False</property>
                     <property name="Text" translatable="yes" />
