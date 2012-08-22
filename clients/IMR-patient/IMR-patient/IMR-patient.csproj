@@ -42,6 +42,9 @@
     <Reference Include="gconf-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f">
       <SpecificVersion>False</SpecificVersion>
     </Reference>
+    <Reference Include="libstetic">
+      <HintPath>..\..\..\..\..\..\..\..\usr\lib\monodevelop\AddIns\MonoDevelop.GtkCore\libstetic.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="gtk-gui\gui.stetic">
@@ -72,6 +75,12 @@
       <Gettext-ScanForTranslations>False</Gettext-ScanForTranslations>
     </EmbeddedResource>
     <EmbeddedResource Include="img\password.png" />
+    <EmbeddedResource Include="img\user_female.png">
+      <Gettext-ScanForTranslations>False</Gettext-ScanForTranslations>
+    </EmbeddedResource>
+    <EmbeddedResource Include="img\user_male.png">
+      <Gettext-ScanForTranslations>False</Gettext-ScanForTranslations>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="gtk-gui\generated.cs" />
@@ -97,6 +106,8 @@
     <Compile Include="UserListWin.cs" />
     <Compile Include="gtk-gui\IMRpatient.UserListWin.cs" />
     <Compile Include="UtilityWin.cs" />
+    <Compile Include="PersonaEditor.cs" />
+    <Compile Include="gtk-gui\IMRpatient.PersonaEditor.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
