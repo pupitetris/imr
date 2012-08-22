@@ -10,9 +10,6 @@ namespace IMRpatient
 		public PersonaEditor ()
 		{
 			this.Build ();
-
-			Gdk.Color white = new Gdk.Color (255, 255, 255);
-			eventPersonaImg.ModifyBg (Gtk.StateType.Normal, white);
 		}
 
 		protected void OnRadioMaleToggled (object sender, EventArgs e)

@@ -5,7 +5,11 @@ style "mainBgStyle"
 	bg[NORMAL] = "white"
 }
 
-widget "IMRpatient.MainWindow" style "mainBgStyle"
+style "personaImgBgStyle"
+{
+	bg[NORMAL] = "white"
+	
+}
 
 style "mainMenuStyle"
 {
@@ -36,6 +40,10 @@ style "mainMenuAccelLabelStyle"
 	fg[NORMAL] = "white"
 	font_name = "Bold"
 }
+
+widget "IMRpatient.MainWindow" style "mainBgStyle"
+
+widget "*eventPersonaImg" style "personaImgBgStyle"
 
 class "GtkMenuBar" style "mainMenuStyle"
 widget_class "*GtkMenuBar*Gtk*MenuItem" style "mainMenuItemStyle"
