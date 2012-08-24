@@ -22,11 +22,13 @@ END »);
 
 
 M4_FUNCTION( rp_user_list_get(_uid charp_user_id),
-			 «TABLE( persona_id integer, username varchar, prefix varchar, name varchar, 
-			 		 paterno varchar, materno varchar, status charp_account_status )»,
+			 «TABLE( persona_id integer, type imr_account_type, username varchar, picture varchar, remarks varchar,
+			 		 prefix varchar, name varchar, paterno varchar, materno varchar, status charp_account_status,
+					 gender imr_gender )»,
 			 STABLE, M4_DEFN(user), 'Get the list of all users for the user''s instance.', «
 BEGIN
-		RETURN QUERY SELECT a.persona_id, a.username, p.prefix, p.name, p.paterno, p.materno, a.status 
+		RETURN QUERY SELECT a.persona_id, a.account_type, a.username, p.picture, p.remarks, 
+			   		 		p.prefix, p.name, p.paterno, p.materno, a.status, p.gender
 			   		 		FROM account AS a1 
 			   		 			 JOIN account AS a USING (inst_id) 
 								 JOIN persona AS p ON (a.persona_id = p.persona_id) 
@@ -53,8 +55,18 @@ BEGIN
 		END IF;
 
 		UPDATE account SET status='DELETED' WHERE persona_id = _persona_id;
+		UPDATE persona SET p_status='DELETED' WHERE persona_id = _persona_id;
 
 		RETURN TRUE;
 END »);
 		
+
+M4_FUNCTION( rp_file_get_picture(_fname varchar),
+			 «TABLE(mimetype text, filename text)»,
+			 IMMUTABLE, M4_DEFN(user), 'Get an image from the repository.', «
+BEGIN
+		mimetype := 'image/jpeg';
+		filename := 'M4_DEFN(image_repo_dir)/' || replace(_fname, '/', '_') || '.jpg';
+		RETURN NEXT;
+END »);
 
