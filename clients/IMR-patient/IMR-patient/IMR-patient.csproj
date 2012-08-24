@@ -78,6 +78,8 @@
     <EmbeddedResource Include="img\user_male.png">
       <Gettext-ScanForTranslations>False</Gettext-ScanForTranslations>
     </EmbeddedResource>
+    <EmbeddedResource Include="img\image_loading.png" />
+    <EmbeddedResource Include="img\image_error.png" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="gtk-gui\generated.cs" />
@@ -105,6 +107,7 @@
     <Compile Include="UtilityWin.cs" />
     <Compile Include="PersonaEditor.cs" />
     <Compile Include="gtk-gui\IMRpatient.PersonaEditor.cs" />
+    <Compile Include="PictureCache.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

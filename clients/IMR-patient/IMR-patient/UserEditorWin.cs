@@ -50,12 +50,16 @@ namespace IMRpatient
 			if (!config.CanPerform (IMR_PERM.USER_SET_ADMIN_LEVEL)) {
 				comboLevel.Sensitive = false;
 			}
+
+			persona.SetData (data);
 		}
 
 		public UserEditorWin (TYPE type, AppConfig config, Dictionary<string, string> data = null) : 
 				base(config)
 		{
 			this.Build ();
+
+			persona.Setup (config, this);
 
 			OpType = type;
 

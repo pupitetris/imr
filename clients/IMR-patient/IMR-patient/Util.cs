@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Gtk;
 using Mono.Unix;
 
@@ -57,6 +58,13 @@ namespace IMRpatient
 
 		public static string StatusToString (object o) {
 			return StatusToString ((string) o);
+		}
+
+		public static bool DictTryValue (Dictionary<string, string> dict, string key, out string value)
+		{
+			if (dict.TryGetValue (key, out value) && value != null)
+					return true;
+			return false;
 		}
 	}
 }

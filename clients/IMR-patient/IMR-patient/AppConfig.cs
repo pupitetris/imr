@@ -43,6 +43,7 @@ namespace IMRpatient
 		
 		public Charp charp;
 		public Radionic radionic;
+		public PictureCache pcache;
 		public MainWindow mainwin;
 		private GConf.Client gconf;
 		private AccountType account_type;
@@ -51,6 +52,7 @@ namespace IMRpatient
 		{
 			this.charp = charp;
 			this.radionic = radionic;
+			pcache = new PictureCache (charp);
 
 			gconf = new GConf.Client ();
 			account_type = AccountType.UNKNOWN;
@@ -164,6 +166,8 @@ namespace IMRpatient
 
 		public bool LoadOrSetup () 
 		{
+			pcache.Setup ();
+			
 			string baseUrl;
 			try {
 				baseUrl = (string) gconf.Get (GCONF_BASEURL);
@@ -176,6 +180,7 @@ namespace IMRpatient
 				return false;
 			}
 			Charp.BASE_URL = charp.baseUrl = baseUrl;
+
 			return true;
 		}
 

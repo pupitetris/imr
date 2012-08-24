@@ -1855,7 +1855,7 @@ Disabled</property>
                     <property name="ShadowType">In</property>
                     <property name="LabelYalign">1</property>
                     <child>
-                      <widget class="Gtk.Image" id="personaImg">
+                      <widget class="Gtk.Image" id="imagePicture">
                         <property name="MemberName" />
                         <property name="Xpad">6</property>
                         <property name="Ypad">6</property>
@@ -2002,7 +2002,7 @@ Disabled</property>
                           </packing>
                         </child>
                         <child>
-                          <widget class="Gtk.Entry" id="entryNames">
+                          <widget class="Gtk.Entry" id="entryName">
                             <property name="MemberName" />
                             <property name="CanFocus">True</property>
                             <property name="IsEditable">True</property>
@@ -2516,7 +2516,7 @@ Disabled</property>
                   </packing>
                 </child>
                 <child>
-                  <widget class="Gtk.TextView" id="textview1">
+                  <widget class="Gtk.TextView" id="textNotes">
                     <property name="MemberName" />
                     <property name="Visible">False</property>
                     <property name="Sensitive">False</property>
