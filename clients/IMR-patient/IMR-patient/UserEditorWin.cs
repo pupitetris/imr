@@ -73,6 +73,20 @@ namespace IMRpatient
 			}
 		}
 
+		protected override void SaveState ()
+		{
+			base.SaveState ();
+			if (persona.pictureFolder != null) {
+				SaveKey ("pictureFolder", persona.pictureFolder);
+			}
+		}
+
+		protected override void LoadState ()
+		{
+			base.LoadState ();
+			LoadKey ("pictureFolder", out persona.pictureFolder);
+		}
+
 		protected void OnDeleteActionActivated (object sender, EventArgs e)
 		{
 			SendClose ();

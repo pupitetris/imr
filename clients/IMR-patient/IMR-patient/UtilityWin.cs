@@ -29,11 +29,21 @@ namespace IMRpatient
 			return config.LoginMD5 + "/" + Util.GtkGetWidgetPath (this);
 		}
 
+		protected void SaveKey (string key, string value)
+		{
+			config.SaveWindowKey (GetWindowPath (), key, value);
+		}
+		
 		protected void SaveKey (string key, int value)
 		{
 			config.SaveWindowKey (GetWindowPath (), key, value);
 		}
 
+		protected bool LoadKey (string key, out string value)
+		{
+			return config.LoadWindowKey (GetWindowPath (), key, out value);
+		}
+		
 		protected bool LoadKey (string key, out int value)
 		{
 			return config.LoadWindowKey (GetWindowPath (), key, out value);

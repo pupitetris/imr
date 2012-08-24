@@ -9,9 +9,12 @@ namespace IMRpatient
 	public partial class PersonaEditor : Gtk.Bin
 	{
 		private bool imageSet = false;
+		private bool imageChanged = false;
 		private Dictionary<string, string> myData;
 		private AppConfig config;
 		private Gtk.Window parent;
+		private Gdk.Pixbuf pixbufOrig;
+		public string pictureFolder;
 
 		private static int PICTURE_WIDTH = 128;
 		private static int PICTURE_HEIGHT = 128;
@@ -97,9 +100,14 @@ namespace IMRpatient
 
 			int res;
 			do {
+				if (pictureFolder != null)
+					dlg.SetCurrentFolder (pictureFolder);
+
 				res = dlg.Run ();
 				if (res == (int) Gtk.ResponseType.Cancel)
 					break;
+
+				pictureFolder = dlg.CurrentFolder;
 
 				try {
 					Gdk.Pixbuf load = new Gdk.Pixbuf (dlg.Filename);
@@ -116,8 +124,9 @@ namespace IMRpatient
 						big = new Gdk.Pixbuf (orig, 0, (h - w) / 2, w, w);
 					}
 
-					Gdk.Pixbuf dest = big.ScaleSimple (PICTURE_WIDTH, PICTURE_HEIGHT, Gdk.InterpType.Hyper);
-					imagePicture.Pixbuf = dest;
+					imagePicture.Pixbuf = big.ScaleSimple (PICTURE_WIDTH, PICTURE_HEIGHT, Gdk.InterpType.Hyper);
+					pixbufOrig = orig;
+					imageChanged = true;
 				} catch (GLib.GException) {
 					Gtk.MessageDialog msg = 
 						new Gtk.MessageDialog (parent, Gtk.DialogFlags.Modal, Gtk.MessageType.Error, Gtk.ButtonsType.Ok,
@@ -125,6 +134,7 @@ namespace IMRpatient
 					msg.Run ();
 					msg.Destroy ();
 					imagePicture.Pixbuf = Gdk.Pixbuf.LoadFromResource ("IMRpatient.img.image_unknown.png");
+					imageChanged = false;
 					continue;
 				}
 			} while (res != (int) Gtk.ResponseType.Accept);
