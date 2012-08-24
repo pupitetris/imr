@@ -151,7 +151,7 @@ CREATE TABLE public.persona (
                 gender imr_gender NOT NULL,
                 picture VARCHAR,
                 remarks VARCHAR,
-                status imr_record_status NOT NULL,
+                p_status imr_record_status NOT NULL,
                 CONSTRAINT persona_pk PRIMARY KEY (persona_id, inst_id)
 );
 COMMENT ON COLUMN public.persona.picture IS 'SHA-256 of picture';
@@ -194,10 +194,10 @@ CREATE TABLE public.email (
                 email VARCHAR NOT NULL,
                 e_type imr_email_type NOT NULL,
                 system imr_email_system NOT NULL,
-                description VARCHAR NOT NULL,
+                remarks VARCHAR NOT NULL,
                 CONSTRAINT email_pk PRIMARY KEY (email_id, inst_id)
 );
-COMMENT ON COLUMN public.email.description IS 'Short notes.';
+COMMENT ON COLUMN public.email.remarks IS 'Short notes.';
 
 
 ALTER SEQUENCE public.email_email_id_seq OWNED BY public.email.email_id;
@@ -211,6 +211,7 @@ CREATE TABLE public.phone (
                 number VARCHAR NOT NULL,
                 p_type imr_phone_type NOT NULL,
                 status imr_record_status NOT NULL,
+                remarks VARCHAR NOT NULL,
                 CONSTRAINT phone_pk PRIMARY KEY (phone_id, inst_id)
 );
 
