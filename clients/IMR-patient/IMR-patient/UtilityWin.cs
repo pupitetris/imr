@@ -58,7 +58,7 @@ namespace IMRpatient
 			}
 		}
 
-		protected virtual void SaveState ()
+		public virtual void SaveState ()
 		{
 			int x, y, w, h;
 			this.GetPosition (out x, out y);

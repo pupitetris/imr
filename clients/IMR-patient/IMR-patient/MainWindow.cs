@@ -41,11 +41,18 @@ namespace IMRpatient {
 			if (!config.CanPerform (IMR_PERM.SYSTEM_BACKUP)) { BackupAction.Sensitive = false; }
 			if (!config.CanPerform (IMR_PERM.SYSTEM_RESTORE)) { RestoreAction.Sensitive = false; }
 		}
-		
-		protected void OnDeleteEvent (object sender, DeleteEventArgs a)
+
+		private void Quit ()
 		{
+			if (userListWin != null)
+				userListWin.SaveState ();
 			config.radionic.Close ();
 			Gtk.Main.Quit ();
+		}
+
+		protected void OnDeleteEvent (object sender, DeleteEventArgs a)
+		{
+			Quit ();
 			a.RetVal = true;
 		}
 
@@ -73,8 +80,7 @@ namespace IMRpatient {
 			if (res == (int) Gtk.ResponseType.Yes) {
 				IsLogout = true;
 				Destroy ();
-				config.radionic.Close ();
-				Gtk.Main.Quit ();
+				Quit ();
 			}
 		}
 
@@ -102,8 +108,9 @@ namespace IMRpatient {
 					win.DestroyEvent += delegate { userListWin = null; };
 					win.Show ();
 					userListWin = win;
+				} else {
+					userListWin.Present ();
 				}
-				userListWin.Present ();
 			} else if (config.CanPerform (IMR_PERM.USER_EDIT_SELF)) {
 				UserEditorWin win = new UserEditorWin (UserEditorWin.TYPE.EDIT_SELF, config);
 				win.Show ();

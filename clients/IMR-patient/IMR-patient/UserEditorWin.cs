@@ -73,7 +73,7 @@ namespace IMRpatient
 			}
 		}
 
-		protected override void SaveState ()
+		public override void SaveState ()
 		{
 			base.SaveState ();
 			if (persona.pictureFolder != null) {
