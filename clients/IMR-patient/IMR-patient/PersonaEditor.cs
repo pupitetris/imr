@@ -1,6 +1,7 @@
 using System;
 using System.IO;
 using System.Collections.Generic;
+using Mono.Unix;
 
 namespace IMRpatient
 {
@@ -11,6 +12,9 @@ namespace IMRpatient
 		private Dictionary<string, string> myData;
 		private AppConfig config;
 		private Gtk.Window parent;
+
+		private static int PICTURE_WIDTH = 128;
+		private static int PICTURE_HEIGHT = 128;
 
 		public PersonaEditor ()
 		{
@@ -80,6 +84,51 @@ namespace IMRpatient
 			if (!imageSet) {
 				SetImageByGender (radioMale.Active? "MALE": "FEMALE");
 			}
+		}
+
+		protected void OnButtonPictureClicked (object sender, EventArgs e)
+		{
+			Gtk.FileChooserDialog dlg = 
+				new Gtk.FileChooserDialog (Catalog.GetString ("Select Image"), parent, Gtk.FileChooserAction.Open,
+				                           Catalog.GetString ("Cancel"), Gtk.ResponseType.Cancel,
+				                           Catalog.GetString ("Open"), Gtk.ResponseType.Accept);
+			dlg.Modal = true;
+			dlg.TransientFor = parent;
+
+			int res;
+			do {
+				res = dlg.Run ();
+				if (res == (int) Gtk.ResponseType.Cancel)
+					break;
+
+				try {
+					Gdk.Pixbuf load = new Gdk.Pixbuf (dlg.Filename);
+					Gdk.Pixbuf orig = load.ApplyEmbeddedOrientation ();
+					Gdk.Pixbuf big;
+
+					int w = orig.Width;
+					int h = orig.Height;
+					if (w == h) {
+						big = orig;
+					} else if (w > h) {
+						big = new Gdk.Pixbuf (orig, (w - h) / 2, 0, h, h);
+					} else {
+						big = new Gdk.Pixbuf (orig, 0, (h - w) / 2, w, w);
+					}
+
+					Gdk.Pixbuf dest = big.ScaleSimple (PICTURE_WIDTH, PICTURE_HEIGHT, Gdk.InterpType.Hyper);
+					imagePicture.Pixbuf = dest;
+				} catch (GLib.GException) {
+					Gtk.MessageDialog msg = 
+						new Gtk.MessageDialog (parent, Gtk.DialogFlags.Modal, Gtk.MessageType.Error, Gtk.ButtonsType.Ok,
+						                       Catalog.GetString ("Error opening image"));
+					msg.Run ();
+					msg.Destroy ();
+					imagePicture.Pixbuf = Gdk.Pixbuf.LoadFromResource ("IMRpatient.img.image_unknown.png");
+					continue;
+				}
+			} while (res != (int) Gtk.ResponseType.Accept);
+			dlg.Destroy ();
 		}
 	}
 }

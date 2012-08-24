@@ -80,6 +80,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="img\image_loading.png" />
     <EmbeddedResource Include="img\image_error.png" />
+    <EmbeddedResource Include="img\image_unknown.png" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="gtk-gui\generated.cs" />
@@ -108,6 +109,8 @@
     <Compile Include="PersonaEditor.cs" />
     <Compile Include="gtk-gui\IMRpatient.PersonaEditor.cs" />
     <Compile Include="PictureCache.cs" />
+    <Compile Include="ImageChooserDlg.cs" />
+    <Compile Include="gtk-gui\IMRpatient.ImageChooserDlg.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

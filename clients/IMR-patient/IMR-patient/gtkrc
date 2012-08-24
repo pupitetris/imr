@@ -5,12 +5,6 @@ style "mainBgStyle"
 	bg[NORMAL] = "white"
 }
 
-style "personaImgBgStyle"
-{
-	bg[NORMAL] = "white"
-	
-}
-
 style "mainMenuStyle"
 {
 	engine "pixmap" {
@@ -42,8 +36,6 @@ style "mainMenuAccelLabelStyle"
 }
 
 widget "IMRpatient.MainWindow" style "mainBgStyle"
-
-widget "*eventPersonaImg" style "personaImgBgStyle"
 
 class "GtkMenuBar" style "mainMenuStyle"
 widget_class "*GtkMenuBar*Gtk*MenuItem" style "mainMenuItemStyle"
