@@ -1,7 +1,7 @@
 using System;
 using System.Net;
 using System.Collections; // for ArrayList
-using System.Collections.Generic; // for Dictionary
+using System.Collections.Specialized; // for Dictionary
 using Mono.Unix;
 using monoCharp;
 
@@ -9,7 +9,7 @@ namespace IMRpatient
 {
 	[Gtk.TreeNode (ListOnly=true)]
 	public class UserListNode : Gtk.TreeNode {
-		public UserListNode (Dictionary<string, string> data)
+		public UserListNode (StringDictionary data)
 		{
 			Data = data;
 			Name = data["username"];
@@ -19,7 +19,7 @@ namespace IMRpatient
 			Status = "(" + Util.StatusToString (data["status"]) + ")";
 		}
 
-		public Dictionary<string, string> Data;
+		public StringDictionary Data;
 
 		[Gtk.TreeNodeValue (Column=0)]
 		public string Name;
@@ -89,7 +89,7 @@ namespace IMRpatient
 					Gtk.Application.Invoke (delegate {
 						ArrayList arr = (ArrayList) data;
 						for (int i = 0; i < arr.Count; i++) {
-							store.AddNode (new UserListNode ((Dictionary<string, string>) arr[i]));
+							store.AddNode (new UserListNode ((StringDictionary) arr[i]));
 						}
 						nodeview.ShowNow ();
 						FinishAction (menubar);

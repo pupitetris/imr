@@ -107,10 +107,14 @@
     <Compile Include="gtk-gui\IMRpatient.UserListWin.cs" />
     <Compile Include="UtilityWin.cs" />
     <Compile Include="PersonaEditor.cs" />
-    <Compile Include="gtk-gui\IMRpatient.PersonaEditor.cs" />
     <Compile Include="PictureCache.cs" />
     <Compile Include="ImageChooserDlg.cs" />
     <Compile Include="gtk-gui\IMRpatient.ImageChooserDlg.cs" />
+    <Compile Include="AddressEditor.cs" />
+    <Compile Include="gtk-gui\IMRpatient.AddressEditor.cs" />
+    <Compile Include="PersonaAddEditor.cs" />
+    <Compile Include="gtk-gui\IMRpatient.PersonaEditor.cs" />
+    <Compile Include="gtk-gui\IMRpatient.PersonaAddEditor.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

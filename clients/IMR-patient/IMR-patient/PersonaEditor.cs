@@ -1,7 +1,10 @@
 using System;
 using System.IO;
-using System.Collections.Generic;
+using System.Net;
+using System.Collections;
+using System.Collections.Specialized;
 using Mono.Unix;
+using monoCharp;
 
 namespace IMRpatient
 {
@@ -10,9 +13,9 @@ namespace IMRpatient
 	{
 		private bool imageSet = false;
 		private bool imageChanged = false;
-		private Dictionary<string, string> myData;
+		private StringDictionary myData;
 		private AppConfig config;
-		private Gtk.Window parent;
+		private Gtk.Window ParentWin;
 		private Gdk.Pixbuf pixbufOrig;
 		public string pictureFolder;
 
@@ -24,12 +27,18 @@ namespace IMRpatient
 			this.Build ();
 		}
 
+		public void Setup (AppConfig config, Gtk.Window parent)
+		{
+			this.config = config;
+			this.ParentWin = parent;
+		}
+
 		private void LoadPicture (string hash) {
 			imagePicture.Pixbuf = Gdk.Pixbuf.LoadFromResource ("IMRpatient.img.image_loading.png");
 			imageSet = true;
-
+			
 			string fname = myData["persona_id"] + "_" + hash;
-			config.pcache.LoadFile (parent, fname, delegate (Stream stream) {
+			config.pcache.LoadFile (ParentWin, fname, delegate (Stream stream) {
 				Gtk.Application.Invoke (delegate {
 					if (stream == null) {
 						imagePicture.Pixbuf = Gdk.Pixbuf.LoadFromResource ("IMRpatient.img.image_error.png");
@@ -40,14 +49,8 @@ namespace IMRpatient
 				});
 			});
 		}
-
-		public void Setup (AppConfig config, Gtk.Window parent)
-		{
-			this.config = config;
-			this.parent = parent;
-		}
-
-		public void SetData (Dictionary<string, string> data) {
+		
+		public void LoadData (StringDictionary data) {
 			myData = data;
 
 			string val;
@@ -57,7 +60,13 @@ namespace IMRpatient
 			if (Util.DictTryValue (data, "materno", out val)) { entryMaterno.Text = val; }
 			if (Util.DictTryValue (data, "picture", out val)) { LoadPicture (val); }
 			if (Util.DictTryValue (data, "gender", out val)) { SetGender (val); }
-			if (Util.DictTryValue (data, "remarks", out val)) { textNotes.Buffer.InsertAtCursor (val); }
+
+			if (Util.DictTryValue (data, "birth", out val)) {
+				entryBirth.Text = val;
+				hboxBirth.Show ();
+			} else {
+				hboxBirth.Hide ();
+			}
 		}
 
 		private void SetImageByGender (string gender)
@@ -92,11 +101,11 @@ namespace IMRpatient
 		protected void OnButtonPictureClicked (object sender, EventArgs e)
 		{
 			Gtk.FileChooserDialog dlg = 
-				new Gtk.FileChooserDialog (Catalog.GetString ("Select Image"), parent, Gtk.FileChooserAction.Open,
+				new Gtk.FileChooserDialog (Catalog.GetString ("Select Image"), ParentWin, Gtk.FileChooserAction.Open,
 				                           Catalog.GetString ("Cancel"), Gtk.ResponseType.Cancel,
 				                           Catalog.GetString ("Open"), Gtk.ResponseType.Accept);
 			dlg.Modal = true;
-			dlg.TransientFor = parent;
+			dlg.TransientFor = ParentWin;
 
 			int res;
 			do {
@@ -129,7 +138,7 @@ namespace IMRpatient
 					imageChanged = true;
 				} catch (GLib.GException) {
 					Gtk.MessageDialog msg = 
-						new Gtk.MessageDialog (parent, Gtk.DialogFlags.Modal, Gtk.MessageType.Error, Gtk.ButtonsType.Ok,
+						new Gtk.MessageDialog (ParentWin, Gtk.DialogFlags.Modal, Gtk.MessageType.Error, Gtk.ButtonsType.Ok,
 						                       Catalog.GetString ("Error opening image"));
 					msg.Run ();
 					msg.Destroy ();

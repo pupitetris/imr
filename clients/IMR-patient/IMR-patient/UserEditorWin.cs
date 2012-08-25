@@ -1,5 +1,5 @@
 using System;
-using System.Collections.Generic;
+using System.Collections.Specialized;
 using Mono.Unix;
 using System.Text;
 
@@ -13,7 +13,7 @@ namespace IMRpatient
 			EDIT_SELF
 		}
 
-		private Dictionary<string, string> Record;
+		private StringDictionary myData;
 		private TYPE OpType;
 
 		private void SetupForNew ()
@@ -29,10 +29,10 @@ namespace IMRpatient
 			}
 		}
 
-		private void SetupForEdit (Dictionary<string, string> data)
+		private void SetupForEdit (StringDictionary data)
 		{
 			Title = Catalog.GetString ("Edit User");
-			Record = data;
+			myData = data;
 
 			DeleteAction.Visible = true;
 
@@ -51,15 +51,17 @@ namespace IMRpatient
 				comboLevel.Sensitive = false;
 			}
 
-			persona.SetData (data);
+			personaEditor.LoadData (data);
+			personaAddEditor.LoadData (data);
 		}
 
-		public UserEditorWin (TYPE type, AppConfig config, Dictionary<string, string> data = null) : 
+		public UserEditorWin (TYPE type, AppConfig config, StringDictionary data = null) : 
 				base(config)
 		{
 			this.Build ();
 
-			persona.Setup (config, this);
+			personaEditor.Setup (config, this);
+			personaAddEditor.Setup (config, this);
 
 			OpType = type;
 
@@ -76,15 +78,15 @@ namespace IMRpatient
 		public override void SaveState ()
 		{
 			base.SaveState ();
-			if (persona.pictureFolder != null) {
-				SaveKey ("pictureFolder", persona.pictureFolder);
+			if (personaEditor.pictureFolder != null) {
+				SaveKey ("pictureFolder", personaEditor.pictureFolder);
 			}
 		}
 
 		protected override void LoadState ()
 		{
 			base.LoadState ();
-			LoadKey ("pictureFolder", out persona.pictureFolder);
+			LoadKey ("pictureFolder", out personaEditor.pictureFolder);
 		}
 
 		protected void OnDeleteActionActivated (object sender, EventArgs e)
