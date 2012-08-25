@@ -167,8 +167,6 @@ CREATE TABLE public.address (
                 persona_id INTEGER NOT NULL,
                 asenta_id INTEGER NOT NULL,
                 street VARCHAR NOT NULL,
-                num_ext VARCHAR NOT NULL,
-                num_int VARCHAR NOT NULL,
                 ad_type imr_address_type NOT NULL,
                 CONSTRAINT address_pk PRIMARY KEY (address_id, inst_id)
 );
