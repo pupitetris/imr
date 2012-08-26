@@ -39,7 +39,6 @@ namespace IMRpatient
 		{
 			FileStream stream = new FileStream (fullname, FileMode.Open);
 			del ((Stream) stream);
-			//stream.Close ();
 		}
 
 		public void LoadFile (Gtk.Window win, string fname, FileReadyDelegate del)
@@ -52,21 +51,12 @@ namespace IMRpatient
 
 			charp.request ("file_get_picture", new object[] { fname }, new CharpGtk.CharpGtkCtx {
 				parent = win,
-				reply_handler = delegate (Uri base_uri, NameValueCollection parms, Charp.CharpCtx ctx) {
-					ctx.wc = new WebClient ();
-					ctx.wc.UploadValuesCompleted += new UploadValuesCompletedEventHandler (delegate (object sender, UploadValuesCompletedEventArgs status) {
-						if (!charp.resultHandleErrors (status, ctx)) {
-							del (null);
-							return;
-						}
+				success_handler = delegate (UploadValuesCompletedEventArgs status, Charp.CharpCtx ctx) {
+					FileStream stream = new FileStream (fullname, FileMode.Create);
+					stream.Write (status.Result, 0, status.Result.Length);
+					stream.Close ();
 
-						FileStream stream = new FileStream (fullname, FileMode.Create);
-						stream.Write (status.Result, 0, status.Result.Length);
-						stream.Close ();
-
-						CallDelegate (fullname, del);
-					});
-					ctx.wc.UploadValuesAsync (base_uri, "POST", parms, ctx);
+					CallDelegate (fullname, del);
 				},
 				error = delegate {
 					del (null);
