@@ -87,9 +87,8 @@ namespace IMRpatient
 				parent = this,
 				success = delegate (object data, UploadValuesCompletedEventArgs status, Charp.CharpCtx ctx) {
 					Gtk.Application.Invoke (delegate {
-						ArrayList arr = (ArrayList) data;
-						for (int i = 0; i < arr.Count; i++) {
-							store.AddNode (new UserListNode ((StringDictionary) arr[i]));
+						foreach (StringDictionary dat in (ArrayList) data) {
+							store.AddNode (new UserListNode (dat));
 						}
 						nodeview.ShowNow ();
 						FinishAction (menubar);

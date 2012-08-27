@@ -1,14 +1,15 @@
 using System;
+using System.Collections.Specialized;
 
 namespace IMRpatient
 {
 	public abstract class UtilityWin : Gtk.Window
 	{
-		protected AppConfig config;
-
-		private delegate bool ActionDelegate ();
 		protected delegate void VoidDelegate ();
+		private delegate bool ActionDelegate ();
 
+		protected AppConfig config;
+		
 		private static uint SEND_CLOSE_TIMEOUT = 50; // msecs to pass before closing the window.
 		private static uint SEND_ACTION_TIMEOUT = 100; // msecs to pass before an action is performed.
 		private static uint PRESENT_TIMEOUT = 100; // msecs to pass before the window is presented after initial show.
@@ -24,35 +25,30 @@ namespace IMRpatient
 			};
 		}
 
-		private string GetWindowPath ()
-		{
-			return config.LoginMD5 + "/" + Util.GtkGetWidgetPath (this);
-		}
-
 		protected void SaveKey (string key, string value)
 		{
-			config.SaveWindowKey (GetWindowPath (), key, value);
+			config.SaveWindowKey (Util.GtkGetWidgetPath (this, config), key, value);
 		}
 		
 		protected void SaveKey (string key, int value)
 		{
-			config.SaveWindowKey (GetWindowPath (), key, value);
+			config.SaveWindowKey (Util.GtkGetWidgetPath (this, config), key, value);
 		}
 
 		protected bool LoadKey (string key, out string value)
 		{
-			return config.LoadWindowKey (GetWindowPath (), key, out value);
+			return config.LoadWindowKey (Util.GtkGetWidgetPath (this, config), key, out value);
 		}
 		
 		protected bool LoadKey (string key, out int value)
 		{
-			return config.LoadWindowKey (GetWindowPath (), key, out value);
+			return config.LoadWindowKey (Util.GtkGetWidgetPath (this, config), key, out value);
 		}
 
 		protected virtual void LoadState ()
 		{
 			int x, y, w, h;
-			if (config.LoadWindowGeom (GetWindowPath (), out x, out y, out w, out h)) {
+			if (config.LoadWindowGeom (Util.GtkGetWidgetPath (this, config), out x, out y, out w, out h)) {
 				this.Move (x, y);
 				this.Resize (w, h);
 			}
@@ -63,7 +59,7 @@ namespace IMRpatient
 			int x, y, w, h;
 			this.GetPosition (out x, out y);
 			this.GetSize (out w, out h);
-			config.SaveWindowGeom (GetWindowPath (), x, y, w, h);
+			config.SaveWindowGeom (Util.GtkGetWidgetPath (this, config), x, y, w, h);
 		}
 
 		protected bool CloseWindow ()

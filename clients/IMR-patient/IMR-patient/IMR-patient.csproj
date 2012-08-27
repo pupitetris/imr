@@ -81,6 +81,7 @@
     <EmbeddedResource Include="img\image_loading.png" />
     <EmbeddedResource Include="img\image_error.png" />
     <EmbeddedResource Include="img\image_unknown.png" />
+    <EmbeddedResource Include="img\trash_delete.png" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="gtk-gui\generated.cs" />

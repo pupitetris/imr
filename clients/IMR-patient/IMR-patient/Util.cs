@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Specialized;
 using Gtk;
 using Mono.Unix;
@@ -18,13 +19,32 @@ namespace IMRpatient
 			label.Text = str;
 		}
 
-		public static string GtkGetWidgetPath (Gtk.Widget w)
+		public static string GtkGetWidgetPath (Gtk.Widget w, AppConfig config)
 		{
 			uint len;
 			string name, rev;
 			
 			w.Path (out len, out name, out rev);
-			return name;
+			return config.LoginMD5 + "/" + name;
+		}
+
+		public static void GtkComboActiveFromData (Gtk.ComboBox combo, ArrayList list, string key, string value)
+		{
+			if (list != null && value != null && combo.Children.Length == list.Count) {
+				for (int i = 0; i < list.Count; i++) {
+					if (((StringDictionary) list[i])[key] == value) {
+						combo.Active = i;
+						break;
+					}
+				}
+			}
+		}
+
+		public static void GtkComboClear (Gtk.ComboBox combo)
+		{
+			int i = combo.Cells.Length;
+			while (i-- > 0)
+				combo.RemoveText (0);
 		}
 		
 		public static string StringPlusSpace (string str) {

@@ -14,6 +14,7 @@ namespace IMRpatient
 		private StringDictionary myData;
 		private AppConfig config;
 		private Gtk.Window ParentWin;
+		private string DefaultAddressState;
 
 		public PersonaAddEditor ()
 		{
@@ -28,15 +29,31 @@ namespace IMRpatient
 			ParentWin = parent;
 		}
 
+		private void AddAddressEditor (StringDictionary data = null) {
+			AddressEditor editor = new AddressEditor (config, ParentWin, vboxAddress, data);
+
+			string path = Util.GtkGetWidgetPath (editor, config);
+			editor.StateComboChanged += delegate (string state_id) {
+				if (state_id != DefaultAddressState) {
+					config.SaveWindowKey (path, "default_state_id", state_id);
+					DefaultAddressState = state_id;
+				}
+			};
+
+			if (DefaultAddressState == null)
+				config.LoadWindowKey (path, "default_state_id", out DefaultAddressState);
+			editor.StateComboSetDefault (DefaultAddressState);
+
+			vboxAddress.Add (editor);
+		}
+
 		private void LoadAddresses () {
 			config.charp.request ("persona_get_addresses", new object[] { myData["persona_id"] }, new CharpGtk.CharpGtkCtx {
 				parent = ParentWin,
 				success = delegate (object data, UploadValuesCompletedEventArgs status, Charp.CharpCtx ctx) {
 					Gtk.Application.Invoke (delegate {
-						ArrayList arr = (ArrayList) data;
-						for (int i = 0; i < arr.Count; i++) {
-							vboxAddress.Add (new AddressEditor (ParentWin, vboxAddress, (StringDictionary) arr[i]));
-						}
+						foreach (StringDictionary address in (ArrayList) data)
+							AddAddressEditor (address);
 					});
 				}
 			});
@@ -66,9 +83,9 @@ namespace IMRpatient
 
 			if (Util.DictTryValue (data, "fiscal_code", out val)) {
 				entryFiscal.Text = val;
-				hboxFiscal.Show ();
+				contFiscal.Show ();
 			} else {
-				hboxFiscal.Hide ();
+				contFiscal.Hide ();
 			}
 
 			LoadAddresses ();
@@ -83,6 +100,11 @@ namespace IMRpatient
 			} else {
 				textNotes.Hide ();
 			}
+		}
+
+		protected void OnButtonAddAddressClicked (object sender, EventArgs e)
+		{
+			AddAddressEditor ();
 		}
 	}
 }
