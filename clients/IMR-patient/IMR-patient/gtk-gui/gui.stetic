@@ -2411,7 +2411,7 @@ Disabled</property>
       </widget>
     </child>
   </widget>
-  <widget class="Gtk.Bin" id="IMRpatient.AddressEditor" design-size="647 166">
+  <widget class="Gtk.Bin" id="IMRpatient.AddressEditor" design-size="429 166">
     <property name="MemberName" />
     <child>
       <widget class="Gtk.VBox" id="vbox3">
@@ -2466,6 +2466,7 @@ Disabled</property>
                 <property name="Sensitive">False</property>
                 <property name="IsTextCombo">True</property>
                 <property name="Items" translatable="yes" />
+                <signal name="Changed" handler="OnComboAsentaChanged" />
               </widget>
               <packing>
                 <property name="TopAttach">1</property>
@@ -2484,11 +2485,12 @@ Disabled</property>
               </packing>
             </child>
             <child>
-              <widget class="Gtk.ComboBox" id="comboCounty">
+              <widget class="Gtk.ComboBox" id="comboMuni">
                 <property name="MemberName" />
                 <property name="Sensitive">False</property>
                 <property name="IsTextCombo">True</property>
                 <property name="Items" translatable="yes" />
+                <signal name="Changed" handler="OnComboMuniChanged" />
               </widget>
               <packing>
                 <property name="TopAttach">2</property>
@@ -2532,6 +2534,7 @@ Fiscal</property>
             <child>
               <widget class="Gtk.Entry" id="entryStreet">
                 <property name="MemberName" />
+                <property name="Sensitive">False</property>
                 <property name="CanFocus">True</property>
                 <property name="IsEditable">True</property>
                 <property name="InvisibleChar">•</property>
@@ -2554,18 +2557,18 @@ Fiscal</property>
                 <property name="MemberName" />
                 <property name="Spacing">6</property>
                 <child>
-                  <widget class="Gtk.ComboBoxEntry" id="comboZipcode">
+                  <widget class="Gtk.Entry" id="entryZipcode">
                     <property name="MemberName" />
-                    <property name="WidthRequest">100</property>
+                    <property name="WidthRequest">60</property>
                     <property name="Sensitive">False</property>
-                    <property name="IsTextCombo">True</property>
-                    <property name="Items" translatable="yes" />
+                    <property name="CanFocus">True</property>
+                    <property name="IsEditable">True</property>
+                    <property name="InvisibleChar">•</property>
                   </widget>
                   <packing>
                     <property name="Position">0</property>
-                    <property name="AutoSize">True</property>
+                    <property name="AutoSize">False</property>
                     <property name="Expand">False</property>
-                    <property name="Fill">False</property>
                   </packing>
                 </child>
                 <child>
@@ -2574,6 +2577,7 @@ Fiscal</property>
                     <property name="IsTextCombo">True</property>
                     <property name="Items" translatable="yes">State</property>
                     <property name="Active">0</property>
+                    <signal name="Changed" handler="OnComboStateChanged" />
                   </widget>
                   <packing>
                     <property name="PackType">End</property>
@@ -2592,26 +2596,6 @@ Fiscal</property>
                 <property name="AutoSize">False</property>
                 <property name="YOptions">Fill</property>
                 <property name="XExpand">True</property>
-                <property name="XFill">True</property>
-                <property name="XShrink">False</property>
-                <property name="YExpand">False</property>
-                <property name="YFill">True</property>
-                <property name="YShrink">False</property>
-              </packing>
-            </child>
-            <child>
-              <widget class="Gtk.Label" id="label1">
-                <property name="MemberName" />
-                <property name="Xalign">1</property>
-                <property name="LabelProp" translatable="yes">Street:</property>
-              </widget>
-              <packing>
-                <property name="LeftAttach">2</property>
-                <property name="RightAttach">3</property>
-                <property name="AutoSize">True</property>
-                <property name="XOptions">Fill</property>
-                <property name="YOptions">Fill</property>
-                <property name="XExpand">False</property>
                 <property name="XFill">True</property>
                 <property name="XShrink">False</property>
                 <property name="YExpand">False</property>
@@ -2642,15 +2626,36 @@ Fiscal</property>
               </packing>
             </child>
             <child>
-              <widget class="Gtk.Label" id="labelCounty">
+              <widget class="Gtk.Label" id="labelMuni">
                 <property name="MemberName" />
                 <property name="Sensitive">False</property>
                 <property name="Xalign">1</property>
-                <property name="LabelProp" translatable="yes">County:</property>
+                <property name="LabelProp" translatable="yes">Municipality:</property>
               </widget>
               <packing>
                 <property name="TopAttach">2</property>
                 <property name="BottomAttach">3</property>
+                <property name="RightAttach">3</property>
+                <property name="AutoSize">True</property>
+                <property name="XOptions">Fill</property>
+                <property name="YOptions">Fill</property>
+                <property name="XExpand">False</property>
+                <property name="XFill">True</property>
+                <property name="XShrink">False</property>
+                <property name="YExpand">False</property>
+                <property name="YFill">True</property>
+                <property name="YShrink">False</property>
+              </packing>
+            </child>
+            <child>
+              <widget class="Gtk.Label" id="labelStreet">
+                <property name="MemberName" />
+                <property name="Sensitive">False</property>
+                <property name="Xalign">1</property>
+                <property name="LabelProp" translatable="yes">Street:</property>
+              </widget>
+              <packing>
+                <property name="LeftAttach">2</property>
                 <property name="RightAttach">3</property>
                 <property name="AutoSize">True</property>
                 <property name="XOptions">Fill</property>
@@ -3040,6 +3045,7 @@ Fiscal</property>
                         <property name="MemberName" />
                         <property name="WidthRequest">300</property>
                         <property name="HeightRequest">42</property>
+                        <property name="Visible">False</property>
                         <property name="CanFocus">True</property>
                         <property name="AcceptsTab">False</property>
                         <property name="Text" translatable="yes" />
