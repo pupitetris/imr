@@ -28,25 +28,19 @@ namespace IMRpatient
 			return config.LoginMD5 + "/" + name;
 		}
 
-		public static void GtkComboActiveFromData (Gtk.ComboBox combo, ArrayList list, string key, string value)
+		public static void GtkComboActiveFromData (Gtk.ComboBox combo, ArrayList list, 
+		                                           string key, string value, int offset = 0)
 		{
-			if (list != null && value != null && combo.Children.Length == list.Count) {
+			if (list != null && value != null) {
 				for (int i = 0; i < list.Count; i++) {
 					if (((StringDictionary) list[i])[key] == value) {
-						combo.Active = i;
+						combo.Active = i + offset;
 						break;
 					}
 				}
 			}
 		}
 
-		public static void GtkComboClear (Gtk.ComboBox combo)
-		{
-			int i = combo.Cells.Length;
-			while (i-- > 0)
-				combo.RemoveText (0);
-		}
-		
 		public static string StringPlusSpace (string str) {
 			if (str == null) {
 				return "";
