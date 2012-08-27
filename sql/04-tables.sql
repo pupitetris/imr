@@ -36,10 +36,8 @@ COMMENT ON COLUMN public.country.country_id IS 'CDH code';
 
 ALTER SEQUENCE public.country_country_id_seq OWNED BY public.country.country_id;
 
-CREATE SEQUENCE public.state_state_id_seq;
-
 CREATE TABLE public.state (
-                state_id VARCHAR NOT NULL DEFAULT nextval('public.state_state_id_seq'),
+                state_id INTEGER NOT NULL,
                 country_id INTEGER NOT NULL,
                 st_name VARCHAR NOT NULL,
                 st_abrev VARCHAR NOT NULL,
@@ -47,13 +45,11 @@ CREATE TABLE public.state (
 );
 
 
-ALTER SEQUENCE public.state_state_id_seq OWNED BY public.state.state_id;
-
 CREATE SEQUENCE public.muni_muni_id_seq;
 
 CREATE TABLE public.muni (
                 muni_id INTEGER NOT NULL DEFAULT nextval('public.muni_muni_id_seq'),
-                state_id VARCHAR NOT NULL,
+                state_id INTEGER NOT NULL,
                 m_name VARCHAR NOT NULL,
                 CONSTRAINT muni_pk PRIMARY KEY (muni_id)
 );
@@ -100,10 +96,12 @@ CREATE SEQUENCE public.inst_inst_id_seq;
 CREATE TABLE public.inst (
                 inst_id INTEGER NOT NULL DEFAULT nextval('public.inst_inst_id_seq'),
                 inst_contact_persona_id INTEGER NOT NULL,
+                country_id INTEGER NOT NULL,
                 inst_name VARCHAR NOT NULL,
                 inst_status imr_record_status NOT NULL,
                 CONSTRAINT inst_pk PRIMARY KEY (inst_id)
 );
+COMMENT ON COLUMN public.inst.country_id IS 'CDH code';
 
 
 ALTER SEQUENCE public.inst_inst_id_seq OWNED BY public.inst.inst_id;
@@ -432,6 +430,13 @@ ON UPDATE NO ACTION
 NOT DEFERRABLE;
 
 ALTER TABLE public.state ADD CONSTRAINT country_state_fk
+FOREIGN KEY (country_id)
+REFERENCES public.country (country_id)
+ON DELETE NO ACTION
+ON UPDATE NO ACTION
+NOT DEFERRABLE;
+
+ALTER TABLE public.inst ADD CONSTRAINT country_inst_fk
 FOREIGN KEY (country_id)
 REFERENCES public.country (country_id)
 ON DELETE NO ACTION
