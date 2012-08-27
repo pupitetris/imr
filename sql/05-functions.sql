@@ -70,3 +70,33 @@ BEGIN
 		RETURN NEXT;
 END »);
 
+
+M4_FUNCTION( rp_get_states_by_inst(_uid charp_user_id),
+			 «TABLE(state_id integer, st_name varchar, st_abrev varchar)»,
+			 IMMUTABLE, M4_DEFN(user), 'Get states catalog for the user''s instance.', «
+BEGIN
+		RETURN QUERY 
+			   SELECT s.state_id, s.st_name, s.st_abrev 
+			   		  FROM (SELECT country_id FROM account AS a NATURAL JOIN inst AS i WHERE a.persona_id = _uid) AS q 
+					  	   NATURAL JOIN state AS s ORDER BY s.st_name;
+END »);
+
+
+M4_FUNCTION( rp_anon_get_zipcodes_by_state(_state_id integer),
+			 «TABLE(zipcode_id integer, muni_id integer, z_code varchar)»,
+			 IMMUTABLE, M4_DEFN(user), 'Get zipcode catalog for a given state.', «
+BEGIN
+		RETURN QUERY
+			   SELECT zipcode_id, muni_id, z_code FROM zipcode NATURAL JOIN muni WHERE state_id = _state_id;
+END »);
+
+
+M4_FUNCTION( «rp_persona_get_addresses(_uid charp_user_id, _persona_id integer)»,
+			 «TABLE(street varchar, ad_type imr_address_type, asenta_id integer)»,
+			 STABLE, M4_DEFN(user), 'Get addresses related to a given persona.', «
+BEGIN
+		RETURN QUERY 
+			   SELECT a.street, a.ad_type, a.asenta_id
+			   		  FROM address AS a JOIN account AS ac USING (inst_id)
+					  WHERE ac.persona_id = _uid AND a.persona_id = _persona_id;
+END »);
