@@ -108,22 +108,20 @@ namespace IMRpatient
 			});
 		}
 
-		private void FieldsSetSensitive (bool sensitive)
-		{
-			labelZipcode.Sensitive = sensitive;
-			labelMuni.Sensitive = sensitive;
-			entryZipcode.Sensitive = sensitive;
-			comboMuni.Sensitive = sensitive;
-		}
-		
 		protected void OnComboStateChanged (object sender, EventArgs e)
 		{
+			labelMuni.Sensitive = false;
+			comboMuni.Sensitive = false;
+			comboMuni.Active = -1;
+
 			if (comboState.Active < 1) {
-				FieldsSetSensitive (false);
+				labelZipcode.Sensitive = false;
+				entryZipcode.Sensitive = false;
 				return;
 			}
 
-			FieldsSetSensitive (true);
+			labelZipcode.Sensitive = true;
+			entryZipcode.Sensitive = true;
 
 			string state_id = ((StringDictionary)states [comboState.Active - 1]) ["state_id"];
 			if (state_id != GlobalDefaultStateID) {
@@ -160,6 +158,8 @@ namespace IMRpatient
 						foreach (StringDictionary muni in munis)
 							myComboMuni.AppendText (muni["m_name"]);
 
+						labelMuni.Sensitive = true;
+						comboMuni.Sensitive = true;
 						if (state_id == DefaultStateID)
 							Util.GtkComboActiveFromData (comboMuni, munis, "muni_id", DefaultMuniID);
 
@@ -171,11 +171,13 @@ namespace IMRpatient
 
 		protected void OnComboMuniChanged (object sender, EventArgs e)
 		{
-			if (comboMuni.Active < 0)
-				return;
+			labelAsenta.Sensitive = false;
+			comboAsenta.Sensitive = false;
+			comboAsenta.Active = -1;
 
-			labelAsenta.Sensitive = true;
-			comboAsenta.Sensitive = true;
+			if (comboMuni.Active < 0) {
+				return;
+			}
 
 			string muni_id = ((StringDictionary)munis [comboMuni.Active]) ["muni_id"];
 			if (muni_id != GlobalDefaultMuniID) {
@@ -194,7 +196,9 @@ namespace IMRpatient
 						myComboAsenta.Clear ();
 						foreach (StringDictionary asenta in asentas)
 							myComboAsenta.AppendText (asenta["fullname"]);
-						
+
+						labelAsenta.Sensitive = true;
+						comboAsenta.Sensitive = true;
 						if (muni_id == DefaultMuniID)
 							Util.GtkComboActiveFromData (comboAsenta, asentas, "asenta_id", DefaultAsentaID);
 						
@@ -206,8 +210,11 @@ namespace IMRpatient
 
 		protected void OnComboAsentaChanged (object sender, EventArgs e)
 		{
-			if (comboAsenta.Active < 0)
+			if (comboAsenta.Active < 0) {
+				labelStreet.Sensitive = false;
+				entryStreet.Sensitive = false;
 				return;
+			}
 
 			labelStreet.Sensitive = true;
 			entryStreet.Sensitive = true;
