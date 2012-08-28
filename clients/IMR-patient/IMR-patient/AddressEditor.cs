@@ -11,14 +11,12 @@ namespace IMRpatient
 	[System.ComponentModel.ToolboxItem(true)]
 	public partial class AddressEditor : Gtk.Bin
 	{
-		public delegate void StateComboChangedDelegate (string state_id);
-
 		private static ArrayList states;
 		private static Dictionary<string, StringDictionary> zipcodes_by_code;
 
-		public StateComboChangedDelegate StateComboChanged;
-		public StateComboChangedDelegate MuniComboChanged;
-		public StateComboChangedDelegate AsentaComboChanged;
+		private static string GlobalDefaultStateID;
+		private static string GlobalDefaultMuniID;
+		private static string GlobalDefaultAsentaID;
 
 		private AppConfig config;
 		private Gtk.Window ParentWin;
@@ -35,6 +33,8 @@ namespace IMRpatient
 		private MyCombo myComboState;
 		private MyCombo myComboMuni;
 		private MyCombo myComboAsenta;
+
+		private string WidgetPath;
 
 		static AddressEditor ()
 		{
@@ -60,27 +60,23 @@ namespace IMRpatient
 
 			buttonDelete.ConfirmClick += delegate (object sender, EventArgs e) { Cont.Remove (this); };
 
+			WidgetPath = Util.GtkGetWidgetPath (this, config);
+
+			if (GlobalDefaultStateID == null)
+				config.LoadWindowKey (WidgetPath, "default_state_id", out GlobalDefaultStateID);
+			DefaultStateID = GlobalDefaultStateID;
+
+			if (GlobalDefaultMuniID == null)
+				config.LoadWindowKey (WidgetPath, "default_muni_id", out GlobalDefaultMuniID);
+			DefaultMuniID = GlobalDefaultMuniID;
+
+			if (GlobalDefaultAsentaID == null)
+				config.LoadWindowKey (WidgetPath, "default_asenta_id", out GlobalDefaultAsentaID);
+			DefaultAsentaID = GlobalDefaultAsentaID;
+			
 			LoadData (data);
 		}
 
-		public void StateComboSetDefault (string state_id)
-		{
-			DefaultStateID = state_id;
-			Util.GtkComboActiveFromData (comboState, states, "state_id", state_id, 1);
-		}
-		
-		public void MuniComboSetDefault (string muni_id)
-		{
-			DefaultMuniID = muni_id;
-			Util.GtkComboActiveFromData (comboMuni, munis, "muni_id", muni_id);
-		}
-		
-		public void AsentaComboSetDefault (string asenta_id)
-		{
-			DefaultAsentaID = asenta_id;
-			Util.GtkComboActiveFromData (comboAsenta, asentas, "asenta_id", asenta_id);
-		}
-		
 		private void PopulateStates ()
 		{
 			foreach (StringDictionary state in states)
@@ -129,8 +125,11 @@ namespace IMRpatient
 
 			FieldsSetSensitive (true);
 
-			string state_id = ((StringDictionary) states[comboState.Active - 1])["state_id"];
-			StateComboChanged (state_id);
+			string state_id = ((StringDictionary)states [comboState.Active - 1]) ["state_id"];
+			if (state_id != GlobalDefaultStateID) {
+				config.SaveWindowKey (WidgetPath, "default_state_id", state_id);
+				GlobalDefaultStateID = state_id;
+			}
 
 			config.charp.request ("get_zipcodes_by_state", new object [] { state_id }, new CharpGtk.CharpGtkCtx {
 				parent = ParentWin,
@@ -178,8 +177,11 @@ namespace IMRpatient
 			labelAsenta.Sensitive = true;
 			comboAsenta.Sensitive = true;
 
-			string muni_id = ((StringDictionary) munis[comboMuni.Active])["muni_id"];
-			MuniComboChanged (muni_id);
+			string muni_id = ((StringDictionary)munis [comboMuni.Active]) ["muni_id"];
+			if (muni_id != GlobalDefaultMuniID) {
+				config.SaveWindowKey (WidgetPath, "default_muni_id", muni_id);
+				GlobalDefaultMuniID = muni_id;
+			}
 
 			config.charp.request ("get_asentas_by_muni", new object [] { muni_id }, new CharpGtk.CharpGtkCtx {
 				parent = ParentWin,
@@ -210,8 +212,11 @@ namespace IMRpatient
 			labelStreet.Sensitive = true;
 			entryStreet.Sensitive = true;
 
-			string asenta_id = ((StringDictionary) asentas[comboAsenta.Active])["asenta_id"];
-			AsentaComboChanged (asenta_id);
+			string asenta_id = ((StringDictionary)asentas [comboAsenta.Active]) ["asenta_id"];
+			if (asenta_id != GlobalDefaultAsentaID) {
+				config.SaveWindowKey (WidgetPath, "default_asenta_id", asenta_id);
+				GlobalDefaultAsentaID = asenta_id;
+			}
 		}
 	}
 }

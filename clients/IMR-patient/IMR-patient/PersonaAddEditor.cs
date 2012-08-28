@@ -14,9 +14,6 @@ namespace IMRpatient
 		private StringDictionary myData;
 		private AppConfig config;
 		private Gtk.Window ParentWin;
-		private string DefaultAddressState;
-		private string DefaultAddressMuni;
-		private string DefaultAddressAsenta;
 
 		public PersonaAddEditor ()
 		{
@@ -33,40 +30,6 @@ namespace IMRpatient
 
 		private void AddAddressEditor (StringDictionary data = null) {
 			AddressEditor editor = new AddressEditor (config, ParentWin, vboxAddress, data);
-
-			string path = Util.GtkGetWidgetPath (editor, config);
-
-			editor.StateComboChanged += delegate (string state_id) {
-				if (state_id != DefaultAddressState) {
-					config.SaveWindowKey (path, "default_state_id", state_id);
-					DefaultAddressState = state_id;
-				}
-			};
-			editor.MuniComboChanged += delegate (string muni_id) {
-				if (muni_id != DefaultAddressMuni) {
-					config.SaveWindowKey (path, "default_muni_id", muni_id);
-					DefaultAddressMuni = muni_id;
-				}
-			};
-			editor.AsentaComboChanged += delegate (string asenta_id) {
-				if (asenta_id != DefaultAddressAsenta) {
-					config.SaveWindowKey (path, "default_asenta_id", asenta_id);
-					DefaultAddressAsenta = asenta_id;
-				}
-			};
-
-			if (DefaultAddressState == null)
-				config.LoadWindowKey (path, "default_state_id", out DefaultAddressState);
-			editor.StateComboSetDefault (DefaultAddressState);
-
-			if (DefaultAddressMuni == null)
-				config.LoadWindowKey (path, "default_muni_id", out DefaultAddressMuni);
-			editor.MuniComboSetDefault (DefaultAddressMuni);
-
-			if (DefaultAddressAsenta == null)
-				config.LoadWindowKey (path, "default_asenta_id", out DefaultAddressAsenta);
-			editor.AsentaComboSetDefault (DefaultAddressAsenta);
-			
 			vboxAddress.Add (editor);
 		}
 
