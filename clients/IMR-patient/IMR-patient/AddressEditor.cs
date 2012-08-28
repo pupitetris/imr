@@ -13,7 +13,6 @@ namespace IMRpatient
 	{
 		public delegate void StateComboChangedDelegate (string state_id);
 
-		private static uint DELETE_CONFIRM_TIMEOUT = 2000;
 		private static ArrayList states;
 		private static Dictionary<string, StringDictionary> zipcodes_by_code;
 
@@ -25,12 +24,10 @@ namespace IMRpatient
 		private Gtk.Window ParentWin;
 		private Gtk.Container Cont;
 		private StringDictionary myData;
-		private bool DeleteConfirm = false;
 
 		private ArrayList zipcodes;
 		private ArrayList munis;
 		private ArrayList asentas;
-		private ArrayList streets;
 		private string DefaultStateID;
 		private string DefaultMuniID;
 		private string DefaultAsentaID;
@@ -61,27 +58,11 @@ namespace IMRpatient
 			myComboMuni = new MyCombo (comboMuni);
 			myComboAsenta = new MyCombo (comboAsenta);
 
+			buttonDelete.ConfirmClick += delegate (object sender, EventArgs e) { Cont.Remove (this); };
+
 			LoadData (data);
 		}
 
-		private bool ButtonDeleteRevert ()
-		{
-			DeleteConfirm = false;
-			imageButtonDelete.Pixbuf = Stetic.IconLoader.LoadIcon (this, "gtk-remove", Gtk.IconSize.Menu);
-			return false;
-		}
-		
-		protected void OnButtonDeleteClicked (object sender, EventArgs e)
-		{
-			if (!DeleteConfirm) {
-				DeleteConfirm = true;
-				imageButtonDelete.Pixbuf = Gdk.Pixbuf.LoadFromResource ("IMRpatient.img.trash_delete.png");
-				GLib.Timeout.Add (DELETE_CONFIRM_TIMEOUT, this.ButtonDeleteRevert);
-			} else {
-				Cont.Remove (this);
-			}
-		}
-		
 		public void StateComboSetDefault (string state_id)
 		{
 			DefaultStateID = state_id;

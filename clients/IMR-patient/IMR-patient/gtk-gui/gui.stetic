@@ -2411,7 +2411,7 @@ Disabled</property>
       </widget>
     </child>
   </widget>
-  <widget class="Gtk.Bin" id="IMRpatient.AddressEditor" design-size="429 166">
+  <widget class="Gtk.Bin" id="IMRpatient.AddressEditor" design-size="429 191">
     <property name="MemberName" />
     <child>
       <widget class="Gtk.VBox" id="vbox3">
@@ -2436,27 +2436,26 @@ Disabled</property>
             <property name="RowSpacing">6</property>
             <property name="ColumnSpacing">6</property>
             <child>
-              <widget class="Gtk.Button" id="buttonDelete">
+              <widget class="Gtk.Alignment" id="alignment1">
                 <property name="MemberName" />
-                <property name="CanFocus">True</property>
-                <property name="Type">Custom</property>
-                <signal name="Clicked" handler="OnButtonDeleteClicked" />
+                <property name="Xscale">0</property>
+                <property name="Yscale">0</property>
                 <child>
-                  <widget class="Gtk.Image" id="imageButtonDelete">
+                  <widget class="IMRpatient.ButtonConfirm" id="buttonDelete">
                     <property name="MemberName" />
-                    <property name="Pixbuf">stock:gtk-remove Menu</property>
+                    <property name="Events">ButtonPressMask</property>
                   </widget>
                 </child>
               </widget>
               <packing>
-                <property name="AutoSize">False</property>
-                <property name="XOptions">0</property>
-                <property name="YOptions">0</property>
+                <property name="AutoSize">True</property>
+                <property name="XOptions">Fill</property>
+                <property name="YOptions">Fill</property>
                 <property name="XExpand">False</property>
-                <property name="XFill">False</property>
+                <property name="XFill">True</property>
                 <property name="XShrink">False</property>
                 <property name="YExpand">False</property>
-                <property name="YFill">False</property>
+                <property name="YFill">True</property>
                 <property name="YShrink">False</property>
               </packing>
             </child>
@@ -3123,6 +3122,24 @@ Fiscal</property>
             <property name="Expand">False</property>
             <property name="Fill">False</property>
           </packing>
+        </child>
+      </widget>
+    </child>
+  </widget>
+  <widget class="Gtk.Bin" id="IMRpatient.ButtonConfirm" design-size="28 28">
+    <property name="MemberName" />
+    <property name="Visible">False</property>
+    <child>
+      <widget class="Gtk.Button" id="button">
+        <property name="MemberName" />
+        <property name="CanFocus">True</property>
+        <property name="Type">Custom</property>
+        <signal name="Clicked" handler="OnButtonClicked" />
+        <child>
+          <widget class="Gtk.Image" id="image">
+            <property name="MemberName" />
+            <property name="Pixbuf">stock:gtk-remove Menu</property>
+          </widget>
         </child>
       </widget>
     </child>

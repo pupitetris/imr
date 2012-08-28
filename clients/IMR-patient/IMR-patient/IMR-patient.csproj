@@ -117,6 +117,8 @@
     <Compile Include="gtk-gui\IMRpatient.PersonaEditor.cs" />
     <Compile Include="gtk-gui\IMRpatient.PersonaAddEditor.cs" />
     <Compile Include="MyCombo.cs" />
+    <Compile Include="ButtonConfirm.cs" />
+    <Compile Include="gtk-gui\IMRpatient.ButtonConfirm.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
