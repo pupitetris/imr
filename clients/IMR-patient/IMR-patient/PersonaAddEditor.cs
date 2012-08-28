@@ -18,8 +18,6 @@ namespace IMRpatient
 		public PersonaAddEditor ()
 		{
 			this.Build ();
-
-			textNotes.Hide ();
 		}
 
 		public void Setup (AppConfig config, Gtk.Window parent)
@@ -61,10 +59,8 @@ namespace IMRpatient
 			if (Util.DictTryValue (data, "remarks", out val)) { 
 				textNotes.Buffer.InsertAtCursor (val);
 				expanderNotes.Expanded = true;
-				textNotes.Show ();
 			} else {
 				expanderNotes.Expanded = false;
-				textNotes.Hide ();
 			}
 
 			if (Util.DictTryValue (data, "fiscal_code", out val)) {
@@ -77,15 +73,6 @@ namespace IMRpatient
 			LoadAddresses ();
 			LoadPhones ();
 			LoadEmails ();
-		}
-
-		protected void OnExpanderNotesActivated (object sender, EventArgs e)
-		{
-			if (expanderNotes.Expanded) {
-				textNotes.Show ();
-			} else {
-				textNotes.Hide ();
-			}
 		}
 
 		protected void OnButtonAddAddressClicked (object sender, EventArgs e)

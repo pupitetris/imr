@@ -2700,7 +2700,7 @@ Fiscal</property>
       </widget>
     </child>
   </widget>
-  <widget class="Gtk.Bin" id="IMRpatient.PersonaAddEditor" design-size="624 194">
+  <widget class="Gtk.Bin" id="IMRpatient.PersonaAddEditor" design-size="624 201">
     <property name="MemberName" />
     <property name="Visible">False</property>
     <child>
@@ -3011,54 +3011,37 @@ Fiscal</property>
                 <property name="MemberName" />
                 <property name="Spacing">6</property>
                 <child>
-                  <widget class="Gtk.VBox" id="vbox7">
+                  <widget class="Gtk.Expander" id="expanderNotes">
                     <property name="MemberName" />
-                    <child>
-                      <widget class="Gtk.Expander" id="expanderNotes">
-                        <property name="MemberName" />
-                        <property name="CanFocus">True</property>
-                        <signal name="Activated" handler="OnExpanderNotesActivated" />
-                        <child>
-                          <placeholder />
-                        </child>
-                        <child>
-                          <widget class="Gtk.Label" id="GtkLabel5">
-                            <property name="MemberName" />
-                            <property name="LabelProp" translatable="yes">&lt;b&gt;Notes&lt;/b&gt;</property>
-                            <property name="UseMarkup">True</property>
-                            <property name="UseUnderline">True</property>
-                          </widget>
-                          <packing>
-                            <property name="type">label_item</property>
-                          </packing>
-                        </child>
-                      </widget>
-                      <packing>
-                        <property name="Position">0</property>
-                        <property name="AutoSize">False</property>
-                        <property name="Expand">False</property>
-                      </packing>
-                    </child>
+                    <property name="CanFocus">True</property>
                     <child>
                       <widget class="Gtk.TextView" id="textNotes">
                         <property name="MemberName" />
                         <property name="WidthRequest">300</property>
                         <property name="HeightRequest">42</property>
-                        <property name="Visible">False</property>
                         <property name="CanFocus">True</property>
                         <property name="AcceptsTab">False</property>
                         <property name="Text" translatable="yes" />
                         <property name="WrapMode">Word</property>
                       </widget>
+                    </child>
+                    <child>
+                      <widget class="Gtk.Label" id="GtkLabel5">
+                        <property name="MemberName" />
+                        <property name="LabelProp" translatable="yes">&lt;b&gt;Notes&lt;/b&gt;</property>
+                        <property name="UseMarkup">True</property>
+                        <property name="UseUnderline">True</property>
+                      </widget>
                       <packing>
-                        <property name="Position">1</property>
-                        <property name="AutoSize">True</property>
+                        <property name="type">label_item</property>
                       </packing>
                     </child>
                   </widget>
                   <packing>
                     <property name="Position">0</property>
-                    <property name="AutoSize">False</property>
+                    <property name="AutoSize">True</property>
+                    <property name="Expand">False</property>
+                    <property name="Fill">False</property>
                   </packing>
                 </child>
               </widget>
