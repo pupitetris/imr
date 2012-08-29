@@ -86,6 +86,19 @@ namespace IMRpatient
 			value = null;
 			return false;
 		}
+
+		public static bool DictArrayKeyValueUnique (ArrayList arr, string key, string value) {
+			bool first = false;
+			foreach (StringDictionary dict in arr) {
+				if (dict[key] == value) {
+					if (first) return false;
+					first = true;
+				}
+			}
+			if (first)
+				return true;
+			return false; // not found
+		}
 	}
 }
 

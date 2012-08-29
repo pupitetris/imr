@@ -12,7 +12,6 @@ namespace IMRpatient
 	public partial class AddressEditor : Gtk.Bin
 	{
 		private static ArrayList states;
-		private static Dictionary<string, StringDictionary> zipcodes_by_code;
 
 		private static string GlobalDefaultStateID;
 		private static string GlobalDefaultMuniID;
@@ -24,6 +23,7 @@ namespace IMRpatient
 		private StringDictionary myData;
 
 		private ArrayList zipcodes;
+		private Dictionary<string, StringDictionary> zipcodes_by_code;
 		private ArrayList munis;
 		private ArrayList asentas;
 		private string DefaultStateID;
@@ -35,11 +35,6 @@ namespace IMRpatient
 		private MyCombo myComboAsenta;
 
 		private string WidgetPath;
-
-		static AddressEditor ()
-		{
-			zipcodes_by_code = new Dictionary<string, StringDictionary> ();
-		}
 
 		public AddressEditor ()
 		{
@@ -80,10 +75,13 @@ namespace IMRpatient
 		private void PopulateStates ()
 		{
 			foreach (StringDictionary state in states)
-				myComboState.AppendText (state["st_name"]);
+				myComboState.AppendText (state["st_name"], state);
 
-			Util.GtkComboActiveFromData (comboState, states, "state_id", 
-			                             myData.ContainsKey ("state_id")? myData["state_id"]: DefaultStateID, 1);
+			string state_id = myData.ContainsKey ("state_id")? myData["state_id"]: DefaultStateID;
+			myComboState.SetActiveByData (delegate(object obj) {
+				return (((StringDictionary) obj)["state_id"] == state_id);
+			});
+
 			GLib.Signal.Emit (Cont, "check-resize");
 		}
 
@@ -113,8 +111,9 @@ namespace IMRpatient
 			labelMuni.Sensitive = false;
 			comboMuni.Sensitive = false;
 			comboMuni.Active = -1;
+			entryZipcode.Text = "";
 
-			if (comboState.Active < 1) {
+			if (comboState.Active < 0) {
 				labelZipcode.Sensitive = false;
 				entryZipcode.Sensitive = false;
 				return;
@@ -123,7 +122,8 @@ namespace IMRpatient
 			labelZipcode.Sensitive = true;
 			entryZipcode.Sensitive = true;
 
-			string state_id = ((StringDictionary)states [comboState.Active - 1]) ["state_id"];
+			StringDictionary state = (StringDictionary) myComboState.ActiveData ();
+			string state_id = state != null? state["state_id"]: null;
 			if (state_id != GlobalDefaultStateID) {
 				config.SaveWindowKey (WidgetPath, "default_state_id", state_id);
 				GlobalDefaultStateID = state_id;
@@ -137,9 +137,7 @@ namespace IMRpatient
 					Gtk.Application.Invoke (delegate {
 						zipcodes = (ArrayList) dat;
 
-						if (zipcodes_by_code.ContainsKey (((StringDictionary) zipcodes[0])["z_code"]))
-							return;
-
+						zipcodes_by_code = new Dictionary<string, StringDictionary> ();
 						foreach (StringDictionary zipcode in zipcodes)
 							zipcodes_by_code[zipcode["z_code"]] = zipcode;
 					});
@@ -156,12 +154,14 @@ namespace IMRpatient
 
 						myComboMuni.Clear ();
 						foreach (StringDictionary muni in munis)
-							myComboMuni.AppendText (muni["m_name"]);
+							myComboMuni.AppendText (muni["m_name"], muni);
 
 						labelMuni.Sensitive = true;
 						comboMuni.Sensitive = true;
-						if (state_id == DefaultStateID)
-							Util.GtkComboActiveFromData (comboMuni, munis, "muni_id", DefaultMuniID);
+						if (state_id != null && state_id == DefaultStateID)
+							myComboMuni.SetActiveByData (delegate(object obj) {
+								return (((StringDictionary) obj)["muni_id"] == DefaultMuniID);
+							});
 
 						GLib.Signal.Emit (Cont, "check-resize");
 					});
@@ -179,7 +179,8 @@ namespace IMRpatient
 				return;
 			}
 
-			string muni_id = ((StringDictionary)munis [comboMuni.Active]) ["muni_id"];
+			StringDictionary muni = (StringDictionary) myComboMuni.ActiveData ();
+			string muni_id = muni != null? muni["muni_id"]: null;
 			if (muni_id != GlobalDefaultMuniID) {
 				config.SaveWindowKey (WidgetPath, "default_muni_id", muni_id);
 				GlobalDefaultMuniID = muni_id;
@@ -192,16 +193,32 @@ namespace IMRpatient
 				success = delegate (object dat, UploadValuesCompletedEventArgs status, Charp.CharpCtx ctx) {
 					Gtk.Application.Invoke (delegate {
 						asentas = (ArrayList) dat;
-						
+
+						string z_code = entryZipcode.Text;
+						if (!zipcodes_by_code.ContainsKey (z_code))
+							z_code = null;
+
 						myComboAsenta.Clear ();
-						foreach (StringDictionary asenta in asentas)
-							myComboAsenta.AppendText (asenta["fullname"]);
+						foreach (StringDictionary asenta in asentas) {
+							if (z_code != null && asenta["z_code"] == z_code)
+								myComboAsenta.PrependText (asenta["fullname"], asenta);
+							else
+								myComboAsenta.AppendText (asenta["fullname"], asenta);
+						}
 
 						labelAsenta.Sensitive = true;
 						comboAsenta.Sensitive = true;
-						if (muni_id == DefaultMuniID)
-							Util.GtkComboActiveFromData (comboAsenta, asentas, "asenta_id", DefaultAsentaID);
-						
+
+						if (z_code != null && zipcodes_by_code[z_code]["muni_id"] == muni_id)
+							comboAsenta.Active = 0;
+						else {
+							entryZipcode.Text = "";
+							if (muni_id != null && muni_id == DefaultMuniID)
+								myComboAsenta.SetActiveByData (delegate(object obj) {
+									return (((StringDictionary) obj)["asenta_id"] == DefaultAsentaID);
+								});
+						}
+
 						GLib.Signal.Emit (Cont, "check-resize");
 					});
 				}
@@ -219,12 +236,44 @@ namespace IMRpatient
 			labelStreet.Sensitive = true;
 			entryStreet.Sensitive = true;
 
-			string asenta_id = ((StringDictionary)asentas [comboAsenta.Active]) ["asenta_id"];
+			StringDictionary asenta = (StringDictionary) myComboAsenta.ActiveData ();
+			string asenta_id = asenta != null? asenta["asenta_id"]: null;
 			if (asenta_id != GlobalDefaultAsentaID) {
 				config.SaveWindowKey (WidgetPath, "default_asenta_id", asenta_id);
 				GlobalDefaultAsentaID = asenta_id;
 			}
+
+			entryZipcode.Text = asenta["z_code"];
+		}
+
+		private void CheckZipcodeText ()
+		{
+			string z_code = entryZipcode.Text;
+
+			if (zipcodes_by_code.ContainsKey (z_code)) {
+				StringDictionary asenta = (StringDictionary) myComboAsenta.ActiveData ();
+				if (asenta == null || asenta["z_code"] != z_code) {
+					comboMuni.Active = -1;
+					StringDictionary zipcode = zipcodes_by_code[z_code];
+					myComboMuni.SetActiveByData (delegate(object obj) {
+						return (((StringDictionary) obj)["muni_id"] == zipcode["muni_id"]);
+					});
+				}
+				Util.GtkLabelStyleRemove (labelZipcode);
+				return;
+			}
+
+			Util.GtkLabelStyleAsError (labelZipcode);
+		}
+
+		protected void OnEntryZipcodeBackspace (object sender, EventArgs e)
+		{
+			CheckZipcodeText ();
+		}
+
+		protected void OnEntryZipcodeTextInserted (object o, Gtk.TextInsertedArgs args)
+		{
+			CheckZipcodeText ();
 		}
 	}
 }
-
