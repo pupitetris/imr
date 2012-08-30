@@ -87,7 +87,23 @@ namespace IMRpatient
 
 		public void LoadData (StringDictionary data)
 		{
-			myData = (data != null) ? data : new StringDictionary ();
+			if (data != null) {
+				myData = data;
+
+				string val;
+				if (Util.DictTryValue (data, "street", out val)) { entryStreet.Text = val; }
+				if (Util.DictTryValue (data, "ad_type", out val)) {
+					int active;
+					switch (val) {
+					case "HOME": active = 0; break;
+					case "WORK": active = 1; break;
+					case "FISCAL": active = 2; break;
+					default: active = -1; break;
+					}
+					comboType.Active = active;
+				}
+			} else
+				myData = new StringDictionary ();
 
 			if (states != null) {
 				PopulateStates ();
