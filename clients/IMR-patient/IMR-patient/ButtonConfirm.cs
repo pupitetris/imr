@@ -45,7 +45,8 @@ namespace IMRpatient
 
 		private void RemoveTimeout ()
 		{
-			GLib.Source.Remove (confirmTimeoutHandle);
+			if (confirmTimeoutHandle > 0)
+				GLib.Source.Remove (confirmTimeoutHandle);
 			confirmTimeoutHandle = 0;
 		}
 
