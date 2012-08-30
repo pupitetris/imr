@@ -119,6 +119,10 @@
     <Compile Include="MyCombo.cs" />
     <Compile Include="ButtonConfirm.cs" />
     <Compile Include="gtk-gui\IMRpatient.ButtonConfirm.cs" />
+    <Compile Include="PhoneEditor.cs" />
+    <Compile Include="gtk-gui\IMRpatient.PhoneEditor.cs" />
+    <Compile Include="EmailEditor.cs" />
+    <Compile Include="gtk-gui\IMRpatient.EmailEditor.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
