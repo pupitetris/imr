@@ -1,0 +1,35 @@
+<objects attr-sync="on">
+  <object type="IMRpatient.ButtonConfirm" palette-category="IMR-patient" allow-children="false" base-type="Gtk.Bin">
+    <itemgroups>
+      <itemgroup label="ButtonConfirm Properties">
+        <property name="PixbufNormal" />
+        <property name="PixbufConfirming" />
+      </itemgroup>
+    </itemgroups>
+    <signals>
+      <itemgroup label="ButtonConfirm Signals">
+        <signal name="Clicked" />
+      </itemgroup>
+    </signals>
+  </object>
+  <object type="IMRpatient.PersonaEditor" palette-category="General" allow-children="false" base-type="Gtk.Bin">
+    <itemgroups />
+    <signals />
+  </object>
+  <object type="IMRpatient.AddressEditor" palette-category="General" allow-children="false" base-type="Gtk.Bin">
+    <itemgroups />
+    <signals />
+  </object>
+  <object type="IMRpatient.PersonaAddEditor" palette-category="General" allow-children="false" base-type="Gtk.Bin">
+    <itemgroups />
+    <signals />
+  </object>
+  <object type="IMRpatient.PhoneEditor" palette-category="General" allow-children="false" base-type="Gtk.Bin">
+    <itemgroups />
+    <signals />
+  </object>
+  <object type="IMRpatient.EmailEditor" palette-category="General" allow-children="false" base-type="Gtk.Bin">
+    <itemgroups />
+    <signals />
+  </object>
+</objects>

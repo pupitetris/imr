@@ -1,8 +1,9 @@
 using System;
+using System.ComponentModel;
 
 namespace IMRpatient
 {
-	[System.ComponentModel.ToolboxItem(true)]
+	[ToolboxItem(true)]
 	public partial class ButtonConfirm : Gtk.Bin
 	{
 		public delegate void ConfirmedClickDelegate (object sender, EventArgs e);
@@ -19,7 +20,7 @@ namespace IMRpatient
 		private Gdk.Pixbuf pixbufNormal;
 		private Gdk.Pixbuf pixbufConfirming;
 
-		public ConfirmedClickDelegate ConfirmClick;
+		public event EventHandler Clicked;
 
 		public ButtonConfirm ()
 		{
@@ -29,20 +30,30 @@ namespace IMRpatient
 			pixbufConfirming = Gdk.Pixbuf.LoadFromResource ("IMRpatient.img.trash_delete.png");
 		}
 
-		public void SetPixbuf (ConfirmState state, Gdk.Pixbuf pixbuf) {
-			switch (state) {
-			case ConfirmState.NORMAL:
-				pixbufNormal = pixbuf;
-				break;
-			case ConfirmState.CONFIRMING:
-				pixbufConfirming = pixbuf;
-				break;
+		[GLib.Property ("pixbuf")]
+		public Gdk.Pixbuf PixbufNormal {
+			set {
+				pixbufNormal = value;
+				if (currState == ConfirmState.NORMAL)
+					image.Pixbuf = value;
 			}
-
-			if (state == currState)
-				image.Pixbuf = pixbuf;
+			get {
+				return pixbufNormal;
+			}
 		}
 
+		[GLib.Property ("pixbuf")]
+		public Gdk.Pixbuf PixbufConfirming {
+			set {
+				pixbufConfirming = value;
+				if (currState == ConfirmState.CONFIRMING)
+					image.Pixbuf = value;
+			}
+			get {
+				return pixbufConfirming;
+			}
+		}
+		
 		private void RemoveTimeout ()
 		{
 			if (confirmTimeoutHandle > 0)
@@ -68,7 +79,7 @@ namespace IMRpatient
 		{
 			if (currState == ConfirmState.CONFIRMING) {
 				RemoveTimeout ();
-				ConfirmClick (sender, e);
+				Clicked (sender, e);
 			} else {
 				currState = ConfirmState.CONFIRMING;
 				confirmTimeoutHandle = GLib.Timeout.Add (CONFIRM_TIMEOUT, this.ButtonRevert);
@@ -77,4 +88,3 @@ namespace IMRpatient
 		}
 	}
 }
-

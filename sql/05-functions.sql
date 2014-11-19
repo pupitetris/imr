@@ -103,10 +103,10 @@ SELECT $1 || ' ' || $2 || COALESCE(', ' || $3, '');
 
 
 M4_SQL_FUNCTION( rp_anon_get_asentas_by_muni(_muni_id integer),
-			 «TABLE(asenta_id integer, zipcode_id integer, fullname varchar)»,
+			 «TABLE(asenta_id integer, z_code varchar, fullname varchar)»,
 			 IMMUTABLE, M4_DEFN(user), 'Get asenta catalog for a given municipality.', «
 
-SELECT a.asenta_id, a.zipcode_id, imr_asenta_fullname(a.a_type, a.a_name, c.c_name)
+SELECT a.asenta_id, z.z_code, imr_asenta_fullname(a.a_type, a.a_name, c.c_name)
 	   FROM asenta AS a NATURAL JOIN zipcode AS z NATURAL LEFT JOIN city AS c
 	   WHERE z.muni_id = $1
 	   ORDER BY a.a_name;
@@ -114,10 +114,30 @@ SELECT a.asenta_id, a.zipcode_id, imr_asenta_fullname(a.a_type, a.a_name, c.c_na
 
 
 M4_SQL_FUNCTION( «rp_persona_get_addresses(_uid charp_user_id, _persona_id integer)»,
-			 «TABLE(street varchar, ad_type imr_address_type, asenta_id integer)»,
+			 «TABLE(address_id integer, street varchar, ad_type imr_address_type, asenta_id integer)»,
 			 STABLE, M4_DEFN(user), 'Get addresses related to a given persona.', «
 
-SELECT a.street, a.ad_type, a.asenta_id
+SELECT a.address_id, a.street, a.ad_type, a.asenta_id
 	   FROM address AS a JOIN account AS ac USING (inst_id)
 	   WHERE ac.persona_id = $1 AND a.persona_id = $2;
+»);
+
+
+M4_SQL_FUNCTION( «rp_persona_get_phones(_uid charp_user_id, _persona_id integer)»,
+			 «TABLE(phone_id integer, number varchar, p_type imr_phone_type, remarks varchar)»,
+			 STABLE, M4_DEFN(user), 'Get phones related to a given persona.', «
+
+SELECT p.phone_id, p.number, p.p_type, p.remarks
+	   FROM phone AS p JOIN account AS ac USING (inst_id)
+	   WHERE ac.persona_id = $1 AND p.persona_id = $2;
+»);
+
+
+M4_SQL_FUNCTION( «rp_persona_get_emails(_uid charp_user_id, _persona_id integer)»,
+			 «TABLE(email_id integer, email varchar, e_type imr_email_type, system imr_email_system, remarks varchar)»,
+			 STABLE, M4_DEFN(user), 'Get emails related to a given persona.', «
+
+SELECT e.email_id, e.email, e.e_type, e.system, e.remarks
+	   FROM email AS e JOIN account AS ac USING (inst_id)
+	   WHERE ac.persona_id = $1 AND e.persona_id = $2;
 »);
