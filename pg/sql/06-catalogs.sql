@@ -1,0 +1,7 @@
+-- BEGIN TRANSACTION;
+-- 	SET CONSTRAINTS ALL DEFERRED;	
+-- 
+-- This will COPY the file sqldir/catalogs/my_catalog.csv to the my_catalog table.
+--	M4_CATALOG(my_catalog);
+--
+-- COMMIT TRANSACTION;
