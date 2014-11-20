@@ -1,5 +1,6 @@
--- Catalog COPYs. An example for locating the files is included.
+-- Catalog COPYs.
 BEGIN TRANSACTION;
+
 	SET CONSTRAINTS ALL DEFERRED;
 
 	M4_CATALOG(country);
