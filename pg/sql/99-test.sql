@@ -1,31 +1,27 @@
 BEGIN TRANSACTION;
       SET CONSTRAINTS ALL DEFERRED;
 
+	  INSERT INTO inst(inst_id, inst_contact_persona_id, country_id, inst_name, inst_status)
+	  		 VALUES (DEFAULT, 1, 146, 'test', 'ACTIVE');
+
+	  INSERT INTO persona(persona_id, inst_id, type, prefix, name, paterno, materno, gender, picture, remarks, p_status)
+	  		 VALUES (DEFAULT, 1, 'INST', NULL, 'Test', NULL, NULL, 'FEMALE', 'aaa', NULL, 'ACTIVE');
+
       -- password is ``blah''
-      INSERT INTO account(persona_id, username, passwd, status)
-      	     VALUES (DEFAULT, 'testuser', '6f1ed002ab5595859014ebf0951522d9', 'ACTIVE');
+      INSERT INTO account(persona_id, inst_id, username, passwd, account_type, status)
+      	     VALUES (1, 1, 'testuser', '6f1ed002ab5595859014ebf0951522d9', 'ADMIN', 'ACTIVE');
 
-CREATE OR REPLACE FUNCTION rp_anon_get_random_bytes(_start character varying, _end character varying)
-  RETURNS TABLE(random text) AS
-$BODY$
-BEGIN
-	random := _start || encode(gen_random_bytes(32), 'hex') || _end;
-	RETURN NEXT;
-END
-$BODY$
-  LANGUAGE plpgsql VOLATILE;
+	  INSERT INTO persona(persona_id, inst_id, type, prefix, name, paterno, materno, gender, picture, remarks, p_status)
+	  		 VALUES (DEFAULT, 1, 'USER', 'Mr.', 'Alfonso', 'Otero', NULL, 'MALE', NULL, NULL, 'ACTIVE');
 
+      -- password is ``blah''
+      INSERT INTO account(persona_id, inst_id, username, passwd, account_type, status)
+      	     VALUES (2, 1, 'tito', 'd0655af3824a90cf215bedc890a9028a', 'SUPERUSER', 'ACTIVE');
 
-CREATE OR REPLACE FUNCTION rp_file_image_test(_filename varchar)
-  RETURNS TABLE(mimetype text, filename text) AS
-$BODY$
-BEGIN
-	mimetype := 'image/png';
-	filename := _filename;
-	RETURN NEXT;
-END
-$BODY$
-  LANGUAGE plpgsql IMMUTABLE;
+	  INSERT INTO persona(persona_id, inst_id, type, prefix, name, paterno, materno, gender, picture, remarks, p_status)
+	  		 VALUES (DEFAULT, 1, 'USER', 'Dr.', 'Fulano', 'Sultano', NULL, 'MALE', NULL, NULL, 'ACTIVE');
 
+      INSERT INTO account(persona_id, inst_id, username, passwd, account_type, status)
+      	     VALUES (3, 1, 'fulano', 'd0655af3824a90cf215bedc890a9028a', 'OPERATOR', 'ACTIVE');
 
 COMMIT TRANSACTION;
