@@ -1,56 +1,93 @@
 #!/bin/bash
+
 # This file is part of the CHARP project.
 #
-# Copyright © 2011
+# Copyright © 2011 - 2014
 #   Free Software Foundation Europe, e.V.,
 #   Talstrasse 110, 40217 Dsseldorf, Germany
 #
 # Licensed under the EUPL V.1.1. See the file LICENSE.txt for copying conditions.
 
-# Commands to initialize the database
+# Database initializator
 
 # Set the value of this variable to the name of the variable that points
 # to the project's code base.
-BASEDIR_VAR=IMRDIR
+BASEDIR_VAR=IMR_DIR
 
-# *** No further editing needed after this line. ***
-
-BASEDIR=${!BASEDIR_VAR}
-
+# Set the locale you want the script to run under (comment for system default).
 export LANG="en_US.utf8"
 export LC_ALL="en_US.utf8"
 
-if [ "$1" = "-db" ]; then
-    DB=$2
-    shift 2
-fi
+# *** No further editing needed after this line. ***
 
-if [ "$1" = "-td" ]; then
-    TESTDATA=1
-    shift
-fi
+DB=
+TESTDATA=
+NOCAT=
+DRY_RUN=
 
-if [ "$1" = "-nocat" ]; then
-    NOCAT=1
-    shift
-fi
+function showhelp {
+	echo "Usage: $1 { -h | [-dry] [-x] [-db <dbname>] [-td] [-nocat] }
 
+-h		Print this help text and exit.
+-dry		Don't execute commands, print instead.
+-x		Print all shell commands being executed (set -x).
+-db <dbname>	Define database on which to operate.
+-td		Feed test data to the database.
+-nocat		Don't upload catalogs."
+}
+
+while [ ! -z "$1" ]; do
+	case $1 in
+		-h) # Print help.
+			showhelp "$0"
+			exit
+			;;
+		-dry) # Don't execute commands, print instead.
+			DRY_RUN=1
+			;;
+		-x) # For debugging.
+			set -x
+			;;
+		-db) # Define database on which to operate.
+			if [ -z "$2" ]; then
+				echo "Missing argument for -db." >&2
+				exit 2;
+			fi
+			DB=$2
+			shift 
+			;;
+		-td) # Feed test data to the database.
+			TESTDATA=1 
+			;;
+		-nocat) # if -nocat, don't upload catalogs.
+			NOCAT=1
+			;;
+		*)
+			echo "Unrecognized option $1." >&2
+			echo >&2
+			showhelp "$0" >&2
+			exit 2;
+			;;
+	esac
+	shift
+done
+
+BASEDIR=${!BASEDIR_VAR}
 if [ -z "$BASEDIR" ]; then
     echo "$BASEDIR_VAR is not defined." >&2
     exit 1
 fi
-
 if [ ! -d "$BASEDIR" ]; then
     echo "The value of \$$BASEDIR_VAR ($BASEDIR) does not point to a directory." >&2
     exit 3
 fi
 
-source "$BASEDIR/conf/config.sh"
+source "$BASEDIR"/conf/config.sh
 
 cd $SQLDIR
 
-# Under Cygwin, set the Windows-specific locale and make sure permissions are right
-# and kill any cgi-fcgi scripts so the database can be dropped.
+# Under Cygwin, make sure permissions are right and kill
+# any cgi-fcgi scripts so the database can be dropped.
 if [ ! -z "$IS_CYGWIN" ]; then
     chmod -f 644 catalogs/*.csv
     chmod -f 644 datos_prueba/*.csv
@@ -58,35 +95,25 @@ if [ ! -z "$IS_CYGWIN" ]; then
     $BASEDIR/scripts/kill-fcgi.sh
 fi
 
-if [ -e "$SQL_EXPORT" ]; then
+# SQL outputs of PowerArchitect or MySQL Workbench.
+if [ ! -z "$SQL_EXPORT" ]; then
     $BASEDIR/scripts/fix-sql.pl < "$SQL_EXPORT" > 04-tables.sql
 fi
 
-# Check if we can initialize the database before proceeding with the
-# rest of the SQL scripts so they don't fail.
-
-if [ ! -z "$DB" ]; then
-    CONF_DATABASE=DB
-    export PGDATABASE=$DB
-fi
-
-psql -q -d postgres -U $PGSUPERUSER -c "DROP DATABASE IF EXISTS $PGDATABASE"
-
-if psql -q -U $PGSUPERUSER -c "SELECT procpid, application_name, client_addr FROM pg_stat_activity WHERE current_query NOT LIKE '% pg_stat_activity %';" 2>/dev/null; then
-    echo 'The database couldn''t be deleted, a client is still connected.' >&2
-    exit 2
-fi
+db_initialize
 
 # Finally run all of the SQL files.
-psql_filter 01-database.sql -d postgres -U $PGSUPERUSER
-psql_filter 02-pgcrypto.sql -U $PGSUPERUSER
-psql_filter 02-charp.sql
-psql_filter 03-types.sql
-psql_filter 04-tables.sql
-[ -e 04-tables-constraints.sql ] && psql_filter 04-tables-constraints.sql
-psql_filter 05-functions.sql -U $PGSUPERUSER
-[ -e 06-catalogs.sql ] && [ -z "$NOCAT" ] && psql_filter 06-catalogs.sql -U $PGSUPERUSER
-[ -e 07-views.sql ] && psql_filter 07-views.sql
-[ -e 09-data.sql ] && psql_filter 09-data.sql -U $PGSUPERUSER
-if [ -e 98-testdata.sql ]; then [ -z "$TESTDATA" ] || psql_filter 98-testdata.sql -U $PGSUPERUSER; fi
-if [ -e 99-test.sql ]; then [ -z "$TESTDATA" ] || psql_filter 99-test.sql -U $PGSUPERUSER; fi
+
+# -su runs the sql script as the database superuser (DBSUPERUSER).
+# -d connects to the system schema (postgres, mysql...)
+db_filter_or_exit 01-database.sql -su -d
+db_filter_or_exit 02-charp.sql
+db_filter_or_exit 03-types.sql
+db_filter_or_exit 04-tables.sql
+[ -e 04-tables-constraints.sql ] && db_filter_or_exit 04-tables-constraints.sql
+db_filter_or_exit 05-functions.sql -su
+[ -e 06-catalogs.sql -a -z "$NOCAT" ] && db_filter_or_exit 06-catalogs.sql -su
+[ -e 07-views.sql ] && db_filter_or_exit 07-views.sql
+[ -e 09-data.sql ] && db_filter_or_exit 09-data.sql -su
+[ -e 98-testdata.sql -a ! -z "$TESTDATA" ] && db_filter_or_exit 98-testdata.sql -su
+[ -e 99-test.sql -a ! -z "$TESTDATA" ] && db_filter_or_exit 99-test.sql -su
