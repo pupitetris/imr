@@ -95,8 +95,8 @@ SELECT m.muni_id, m.m_name FROM muni AS m WHERE state_id = $1 ORDER BY m.m_name;
 »);
 
 
-M4_SQL_FUNCTION( «imr_asenta_fullname(_type imr_asenta_type, _name varchar, _city_name varchar)», text
-		 IMMUTABLE, M4_DEFN(user), 'Generate the display name for an asenta.', «
+M4_SQL_FUNCTION( «imr_asenta_fullname(_type imr_asenta_type, _name varchar, _city_name varchar)»,
+		 text, IMMUTABLE, M4_DEFN(user), 'Generate the display name for an asenta.', «
 
 SELECT $1 || ' ' || $2 || COALESCE(', ' || $3, '');
 »);
