@@ -1,2 +1,4 @@
 *~
 *.architect-bak
+
+conf/scripts/sqlvars_end.m4
