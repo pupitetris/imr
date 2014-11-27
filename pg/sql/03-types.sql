@@ -1,5 +1,6 @@
 -- Application-specific data types.
 
+-- These codes will grow as operations increase.
 CREATE TYPE imr_msg_code AS ENUM (
 	   'USER_NEW'
 );
