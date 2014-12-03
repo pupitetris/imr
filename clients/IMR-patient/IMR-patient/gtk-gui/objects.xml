@@ -15,7 +15,7 @@
     <itemgroups />
     <signals>
       <itemgroup label="ButtonConfirm Signals">
-        <signal name="Clicked" />
+        <signal name="ConfirmClick" />
       </itemgroup>
     </signals>
   </object>

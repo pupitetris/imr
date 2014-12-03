@@ -20,7 +20,7 @@ namespace IMRpatient
 		private Gdk.Pixbuf pixbufNormal;
 		private Gdk.Pixbuf pixbufConfirming;
 
-		public event EventHandler Clicked;
+		public event EventHandler ConfirmClick;
 
 		public ButtonConfirm ()
 		{
@@ -79,7 +79,7 @@ namespace IMRpatient
 		{
 			if (currState == ConfirmState.CONFIRMING) {
 				RemoveTimeout ();
-				Clicked (sender, e);
+				ConfirmClick (sender, e);
 			} else {
 				currState = ConfirmState.CONFIRMING;
 				confirmTimeoutHandle = GLib.Timeout.Add (CONFIRM_TIMEOUT, this.ButtonRevert);
