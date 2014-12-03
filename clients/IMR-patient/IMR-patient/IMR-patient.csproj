@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
-    <ProductVersion>10.0.0</ProductVersion>
+    <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{E05C0B1C-9D18-4B07-B6B7-731ABD97BEB3}</ProjectGuid>
     <OutputType>WinExe</OutputType>
@@ -15,7 +15,7 @@
     <DebugType>full</DebugType>
     <Optimize>False</Optimize>
     <OutputPath>bin\Debug</OutputPath>
-    <DefineConstants>DEBUG;</DefineConstants>
+    <DefineConstants>DEBUG;CHARP_WINDOWS;CHARP_LINUX_NO</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <PlatformTarget>x86</PlatformTarget>
@@ -29,24 +29,34 @@
     <WarningLevel>4</WarningLevel>
     <PlatformTarget>x86</PlatformTarget>
     <ConsolePause>False</ConsolePause>
+    <DefineConstants>CHARP_WINDOWS;CHARP_LINUX_NO</DefineConstants>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
-    <Reference Include="Mono.Posix" />
-    <Reference Include="gtk-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
-    <Reference Include="gdk-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
-    <Reference Include="glib-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
-    <Reference Include="glade-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
-    <Reference Include="pango-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
-    <Reference Include="atk-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f" />
-    <Reference Include="gconf-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f">
+    <Reference Include="atk-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f">
+      <SpecificVersion>False</SpecificVersion>
+    </Reference>
+    <Reference Include="gdk-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f">
+      <SpecificVersion>False</SpecificVersion>
+    </Reference>
+    <Reference Include="glade-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f">
+      <SpecificVersion>False</SpecificVersion>
+    </Reference>
+    <Reference Include="glib-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f">
+      <SpecificVersion>False</SpecificVersion>
+    </Reference>
+    <Reference Include="gtk-dotnet, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f">
+      <SpecificVersion>False</SpecificVersion>
+    </Reference>
+    <Reference Include="gtk-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f">
+      <SpecificVersion>False</SpecificVersion>
+    </Reference>
+    <Reference Include="Mono.Posix, Version=2.0.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756" />
+    <Reference Include="pango-sharp, Version=2.12.0.0, Culture=neutral, PublicKeyToken=35e10195dab3c99f">
       <SpecificVersion>False</SpecificVersion>
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="gtk-gui\gui.stetic">
-      <LogicalName>gui.stetic</LogicalName>
-    </EmbeddedResource>
     <EmbeddedResource Include="img\auth.png">
       <Gettext-ScanForTranslations>False</Gettext-ScanForTranslations>
     </EmbeddedResource>
@@ -82,46 +92,49 @@
     <EmbeddedResource Include="img\image_error.png" />
     <EmbeddedResource Include="img\image_unknown.png" />
     <EmbeddedResource Include="img\trash_delete.png" />
+    <EmbeddedResource Include="gtk-gui\gui.stetic">
+      <LogicalName>gui.stetic</LogicalName>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="gtk-gui\generated.cs" />
     <Compile Include="MainWindow.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="AssemblyInfo.cs" />
     <Compile Include="WelcomeDlg.cs" />
-    <Compile Include="gtk-gui\IMRpatient.WelcomeDlg.cs" />
     <Compile Include="WelcomeSetupDlg.cs" />
-    <Compile Include="gtk-gui\IMRpatient.WelcomeSetupDlg.cs" />
     <Compile Include="Radionic.cs" />
     <Compile Include="ProbeLogDlg.cs" />
-    <Compile Include="gtk-gui\IMRpatient.ProbeLogDlg.cs" />
     <Compile Include="AppConfig.cs" />
     <Compile Include="DeviceErrorDlg.cs" />
-    <Compile Include="gtk-gui\IMRpatient.DeviceErrorDlg.cs" />
-    <Compile Include="gtk-gui\IMRpatient.MainWindow.cs" />
     <Compile Include="AboutDlg.cs" />
-    <Compile Include="gtk-gui\IMRpatient.AboutDlg.cs" />
     <Compile Include="UserEditorWin.cs" />
-    <Compile Include="gtk-gui\IMRpatient.UserEditorWin.cs" />
     <Compile Include="Util.cs" />
     <Compile Include="UserListWin.cs" />
-    <Compile Include="gtk-gui\IMRpatient.UserListWin.cs" />
     <Compile Include="UtilityWin.cs" />
     <Compile Include="PersonaEditor.cs" />
     <Compile Include="PictureCache.cs" />
     <Compile Include="ImageChooserDlg.cs" />
-    <Compile Include="gtk-gui\IMRpatient.ImageChooserDlg.cs" />
     <Compile Include="AddressEditor.cs" />
-    <Compile Include="gtk-gui\IMRpatient.AddressEditor.cs" />
     <Compile Include="PersonaAddEditor.cs" />
-    <Compile Include="gtk-gui\IMRpatient.PersonaEditor.cs" />
-    <Compile Include="gtk-gui\IMRpatient.PersonaAddEditor.cs" />
     <Compile Include="MyCombo.cs" />
     <Compile Include="ButtonConfirm.cs" />
-    <Compile Include="gtk-gui\IMRpatient.ButtonConfirm.cs" />
     <Compile Include="PhoneEditor.cs" />
-    <Compile Include="gtk-gui\IMRpatient.PhoneEditor.cs" />
     <Compile Include="EmailEditor.cs" />
+    <Compile Include="gtk-gui\generated.cs" />
+    <Compile Include="gtk-gui\IMRpatient.MainWindow.cs" />
+    <Compile Include="gtk-gui\IMRpatient.WelcomeSetupDlg.cs" />
+    <Compile Include="gtk-gui\IMRpatient.WelcomeDlg.cs" />
+    <Compile Include="gtk-gui\IMRpatient.ProbeLogDlg.cs" />
+    <Compile Include="gtk-gui\IMRpatient.DeviceErrorDlg.cs" />
+    <Compile Include="gtk-gui\IMRpatient.AboutDlg.cs" />
+    <Compile Include="gtk-gui\IMRpatient.UserEditorWin.cs" />
+    <Compile Include="gtk-gui\IMRpatient.UserListWin.cs" />
+    <Compile Include="gtk-gui\IMRpatient.PersonaEditor.cs" />
+    <Compile Include="gtk-gui\IMRpatient.ImageChooserDlg.cs" />
+    <Compile Include="gtk-gui\IMRpatient.AddressEditor.cs" />
+    <Compile Include="gtk-gui\IMRpatient.PersonaAddEditor.cs" />
+    <Compile Include="gtk-gui\IMRpatient.ButtonConfirm.cs" />
+    <Compile Include="gtk-gui\IMRpatient.PhoneEditor.cs" />
     <Compile Include="gtk-gui\IMRpatient.EmailEditor.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
