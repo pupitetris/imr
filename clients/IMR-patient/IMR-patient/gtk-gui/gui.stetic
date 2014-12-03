@@ -1849,7 +1849,7 @@ Disabled</property>
       </widget>
     </child>
   </widget>
-  <widget class="Gtk.Bin" id="IMRpatient.PersonaEditor" design-size="710 140">
+  <widget class="Gtk.Bin" id="IMRpatient.PersonaEditor" design-size="716 140">
     <property name="MemberName" />
     <property name="Visible">False</property>
     <child>
