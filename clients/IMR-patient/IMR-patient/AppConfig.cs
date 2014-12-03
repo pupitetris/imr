@@ -27,11 +27,10 @@ namespace IMRpatient
 
 	public class AppConfig
 	{
-		private static readonly string APP_NAME = "IMR-patient";
-		private static readonly string GCONF_APP_BASE = "/apps/" + APP_NAME;
-		private static readonly string GCONF_BASEURL = GCONF_APP_BASE + "/baseUrl";
-		private static readonly string GCONF_PORT = GCONF_APP_BASE + "/port";
-		private static readonly string GCONF_APP_WINDOWS = GCONF_APP_BASE + "/windows";
+		private static readonly string APP_NAME = "IMRpatient";
+		private static readonly string CONF_BASEURL = "baseUrl";
+		private static readonly string CONF_PORT = "port";
+		private static readonly string CONF_APP_WINDOWS = "windows";
 		private static readonly string DEFAULT_BASEURL = "http://www.imr.local/";
 
 		private enum AccountType {
@@ -45,7 +44,7 @@ namespace IMRpatient
 		public Radionic radionic;
 		public PictureCache pcache;
 		public MainWindow mainwin;
-		private GConf.Client gconf;
+		private Charp.Config conf;
 		private AccountType account_type;
 
 		public AppConfig (Charp charp, Radionic radionic)
@@ -54,7 +53,13 @@ namespace IMRpatient
 			this.radionic = radionic;
 			pcache = new PictureCache (charp);
 
-			gconf = new GConf.Client ();
+			#if CHARP_WINDOWS
+			conf = new CharpGtk.MSConfig (DEFAULT_BASEURL);
+			#else
+			conf = new CharpGtk.GConfConfig (DEFAULT_BASEURL);
+			#endif
+			conf.SetApp (APP_NAME);
+
 			account_type = AccountType.UNKNOWN;
 		}
 
@@ -158,9 +163,9 @@ namespace IMRpatient
 
 		public void Setup (Gtk.Window parent = null)
 		{
-			string baseUrl = SetupDo (charp.baseUrl, parent);
+			string baseUrl = SetupDo (charp.BaseUrl, parent);
 			if (baseUrl != null) {
-				charp.baseUrl = baseUrl;
+				charp.BaseUrl = baseUrl;
 			}
 		}
 
@@ -170,60 +175,64 @@ namespace IMRpatient
 			
 			string baseUrl;
 			try {
-				baseUrl = (string) gconf.Get (GCONF_BASEURL);
-				radionic.Port = (string) gconf.Get (GCONF_PORT);
-			} catch (GConf.NoSuchKeyException) {
+				baseUrl = conf.Get (CONF_BASEURL);
+				radionic.Port = conf.Get (CONF_PORT);
+			} catch (Charp.Config.NoSuchKeyException) {
 				baseUrl = SetupDo (DEFAULT_BASEURL);
 			}
 
 			if (baseUrl == null) {
 				return false;
 			}
-			Charp.BASE_URL = charp.baseUrl = baseUrl;
+			Charp.BASE_URL = charp.BaseUrl = baseUrl;
 
 			return true;
 		}
 
 		public void Save () 
 		{
-			gconf.Set (GCONF_BASEURL, charp.baseUrl);
+			conf.Set (CONF_BASEURL, charp.BaseUrl);
 			if (radionic.Port != null && radionic.Port != "") {
-				gconf.Set (GCONF_PORT, radionic.Port);
+				conf.Set (CONF_PORT, radionic.Port);
 			}
+			conf.SuggestSync ();
 		}
 
 		public void SaveWindowGeom (string name, int x, int y, int w, int h) {
 			try {
-				string path = GCONF_APP_WINDOWS + "/" + name + "/";
-				gconf.Set (path + "x", x);
-				gconf.Set (path + "y", y);
-				gconf.Set (path + "w", w);
-				gconf.Set (path + "h", h);
+				string path = CONF_APP_WINDOWS + "/" + name + "/";
+				conf.Set (path + "x", x);
+				conf.Set (path + "y", y);
+				conf.Set (path + "w", w);
+				conf.Set (path + "h", h);
+				conf.SuggestSync ();
 			} catch (Exception) {
 			}
 		}
 
 		public void SaveWindowKey (string name, string key, int value) {
 			try {
-				gconf.Set (GCONF_APP_WINDOWS + "/" + name + "/" + key, value);
+				conf.Set (CONF_APP_WINDOWS + "/" + name + "/" + key, value);
+				conf.SuggestSync ();
 			} catch (Exception) {
 			}
 		}
 
 		public void SaveWindowKey (string name, string key, string value) {
 			try {
-				gconf.Set (GCONF_APP_WINDOWS + "/" + name + "/" + key, value);
+				conf.Set (CONF_APP_WINDOWS + "/" + name + "/" + key, value);
+				conf.SuggestSync ();
 			} catch (Exception) {
 			}
 		}
 		
 		public bool LoadWindowGeom (string name, out int x, out int y, out int w, out int h) {
 			try {
-				string path = GCONF_APP_WINDOWS + "/" + name + "/";
-				x = (int) gconf.Get (path + "x");
-				y = (int) gconf.Get (path + "y");
-				w = (int) gconf.Get (path + "w");
-				h = (int) gconf.Get (path + "h");
+				string path = CONF_APP_WINDOWS + "/" + name + "/";
+				x = conf.GetInt (path + "x");
+				y = conf.GetInt (path + "y");
+				w = conf.GetInt (path + "w");
+				h = conf.GetInt (path + "h");
 			} catch (Exception) {
 				x = y = w = h = 0;
 				return false;
@@ -233,7 +242,7 @@ namespace IMRpatient
 
 		public bool LoadWindowKey (string name, string key, out int value) {
 			try {
-				value = (int) gconf.Get (GCONF_APP_WINDOWS + "/" + name + "/" + key);
+				value = conf.GetInt (CONF_APP_WINDOWS + "/" + name + "/" + key);
 			} catch (Exception) {
 				value = 0;
 				return false;
@@ -243,7 +252,7 @@ namespace IMRpatient
 		
 		public bool LoadWindowKey (string name, string key, out string value) {
 			try {
-				value = (string) gconf.Get (GCONF_APP_WINDOWS + "/" + name + "/" + key);
+				value = conf.Get (CONF_APP_WINDOWS + "/" + name + "/" + key);
 			} catch (Exception) {
 				value = null;
 				return false;
