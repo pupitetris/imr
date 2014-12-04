@@ -17,12 +17,12 @@
     </icon-set>
     <icon-set id="patients">
       <source>
-        <property name="Image">stock:stock_folder-copy Menu</property>
+        <property name="Image">stock:gtk-dnd-multiple Menu</property>
       </source>
     </icon-set>
     <icon-set id="patients_new">
       <source>
-        <property name="Image">stock:stock_new-dir Menu</property>
+        <property name="Image">stock:gtk-new Menu</property>
       </source>
     </icon-set>
     <icon-set id="patients_search">
@@ -57,7 +57,7 @@
     </icon-set>
     <icon-set id="analysis_reanalize">
       <source>
-        <property name="Image">stock:stock_refresh Menu</property>
+        <property name="Image">stock:gtk-refresh Menu</property>
       </source>
     </icon-set>
     <icon-set id="analysis_print">
@@ -77,7 +77,7 @@
     </icon-set>
     <icon-set id="system_users">
       <source>
-        <property name="Image">stock:gtk-dialog-authentication Menu</property>
+        <property name="Image">resource:IMRpatient.img.system_users.png</property>
       </source>
     </icon-set>
     <icon-set id="system_categories">
@@ -87,7 +87,7 @@
     </icon-set>
     <icon-set id="system_restore">
       <source>
-        <property name="Image">stock:stock_up Menu</property>
+        <property name="Image">stock:gtk-go-up Menu</property>
       </source>
     </icon-set>
     <icon-set id="remedies">
@@ -112,37 +112,37 @@
     </icon-set>
     <icon-set id="remote">
       <source>
-        <property name="Image">stock:stock_internet Menu</property>
+        <property name="Image">resource:IMRpatient.img.remote.png</property>
       </source>
     </icon-set>
     <icon-set id="remote_new">
       <source>
-        <property name="Image">stock:stock_new-appointment Menu</property>
+        <property name="Image">resource:IMRpatient.img.remote_new.png</property>
       </source>
     </icon-set>
     <icon-set id="remote_view">
       <source>
-        <property name="Image">stock:stock_appointment-reminder Menu</property>
+        <property name="Image">resource:IMRpatient.img.remote_view.png</property>
       </source>
     </icon-set>
     <icon-set id="help_manual">
       <source>
-        <property name="Image">stock:stock_addressbook Menu</property>
+        <property name="Image">stock:gtk-help Menu</property>
       </source>
     </icon-set>
     <icon-set id="system_users_new">
       <source>
-        <property name="Image">stock:stock_new-bcard Menu</property>
+        <property name="Image">resource:IMRpatient.img.system_users_new.png</property>
       </source>
     </icon-set>
     <icon-set id="system_users_search">
       <source>
-        <property name="Image">stock:gtk-find Menu</property>
+        <property name="Image">resource:IMRpatient.img.system_users_search.png</property>
       </source>
     </icon-set>
     <icon-set id="system_users_edit">
       <source>
-        <property name="Image">stock:gtk-find-and-replace Menu</property>
+        <property name="Image">resource:IMRpatient.img.system_users_edit.png</property>
       </source>
     </icon-set>
     <icon-set id="useredit_remove">
@@ -2965,7 +2965,7 @@ Fiscal</property>
                     <child>
                       <widget class="Gtk.Label" id="label9">
                         <property name="MemberName" />
-                        <property name="LabelProp" translatable="yes">&lt;b&gt;Emails&lt;/b&gt;</property>
+                        <property name="LabelProp" translatable="yes">&lt;b&gt;Email&lt;/b&gt;</property>
                         <property name="UseMarkup">True</property>
                       </widget>
                       <packing>
@@ -3034,15 +3034,28 @@ Fiscal</property>
                   <widget class="Gtk.Expander" id="expanderNotes">
                     <property name="MemberName" />
                     <property name="CanFocus">True</property>
+                    <property name="Expanded">True</property>
                     <child>
-                      <widget class="Gtk.TextView" id="textNotes">
+                      <widget class="Gtk.Frame" id="frame1">
                         <property name="MemberName" />
-                        <property name="WidthRequest">300</property>
-                        <property name="HeightRequest">42</property>
-                        <property name="CanFocus">True</property>
-                        <property name="AcceptsTab">False</property>
-                        <property name="Text" translatable="yes" />
-                        <property name="WrapMode">Word</property>
+                        <property name="ShadowType">In</property>
+                        <property name="LabelYalign">0.95</property>
+                        <property name="BorderWidth">2</property>
+                        <child>
+                          <widget class="Gtk.TextView" id="textNotes">
+                            <property name="MemberName" />
+                            <property name="WidthRequest">300</property>
+                            <property name="HeightRequest">42</property>
+                            <property name="CanFocus">True</property>
+                            <property name="AcceptsTab">False</property>
+                            <property name="Text" translatable="yes" />
+                            <property name="WrapMode">Word</property>
+                            <property name="PixelsAboveLines">2</property>
+                            <property name="PixelsBelowLines">2</property>
+                            <property name="LeftMargin">2</property>
+                            <property name="RightMargin">2</property>
+                          </widget>
+                        </child>
                       </widget>
                     </child>
                     <child>

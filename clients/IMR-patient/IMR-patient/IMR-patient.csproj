@@ -95,6 +95,13 @@
     <EmbeddedResource Include="gtk-gui\gui.stetic">
       <LogicalName>gui.stetic</LogicalName>
     </EmbeddedResource>
+    <EmbeddedResource Include="img\remote.png" />
+    <EmbeddedResource Include="img\remote_new.png" />
+    <EmbeddedResource Include="img\remote_view.png" />
+    <EmbeddedResource Include="img\system_users_new.png" />
+    <EmbeddedResource Include="img\system_users_search.png" />
+    <EmbeddedResource Include="img\system_users_edit.png" />
+    <EmbeddedResource Include="img\system_users.png" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MainWindow.cs" />
