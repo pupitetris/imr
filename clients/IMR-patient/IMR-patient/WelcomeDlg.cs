@@ -95,6 +95,7 @@ namespace IMRpatient
 							Gtk.MessageDialog md = 
 								new Gtk.MessageDialog (this, Gtk.DialogFlags.Modal, Gtk.MessageType.Warning,
 								                       Gtk.ButtonsType.Ok, Catalog.GetString ("\nIncorrect user or password."));
+							md.Title = "Wrong credentials";
 							md.Run ();
 							md.Destroy ();
 							Sensitive = true;

@@ -75,6 +75,7 @@ namespace IMRpatient {
 			Gtk.MessageDialog md = 
 				new Gtk.MessageDialog (this, Gtk.DialogFlags.Modal, Gtk.MessageType.Question, Gtk.ButtonsType.YesNo,
 				                       Catalog.GetString ("This will take you back to the welcome screen.\n\nAre you sure you want to log out?"));
+			md.Title = Catalog.GetString ("Log out");
 			int res = md.Run ();
 			md.Destroy ();
 			if (res == (int) Gtk.ResponseType.Yes) {

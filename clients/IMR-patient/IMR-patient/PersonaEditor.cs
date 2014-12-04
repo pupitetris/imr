@@ -140,6 +140,7 @@ namespace IMRpatient
 					Gtk.MessageDialog msg = 
 						new Gtk.MessageDialog (ParentWin, Gtk.DialogFlags.Modal, Gtk.MessageType.Error, Gtk.ButtonsType.Ok,
 						                       Catalog.GetString ("Error opening image"));
+					msg.Title = "Error";
 					msg.Run ();
 					msg.Destroy ();
 					imagePicture.Pixbuf = Gdk.Pixbuf.LoadFromResource ("IMRpatient.img.image_unknown.png");

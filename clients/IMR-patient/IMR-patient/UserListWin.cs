@@ -151,6 +151,8 @@ namespace IMRpatient
 				                         selection.SelectedNodes.Length), selection.SelectedNodes.Length);
 				Gtk.MessageDialog md = new Gtk.MessageDialog (this, Gtk.DialogFlags.Modal, Gtk.MessageType.Question, 
 				                                              Gtk.ButtonsType.YesNo, msg);
+				md.Title = Catalog.GetString ("Delete user");
+				md.Icon = Stetic.IconLoader.LoadIcon (md, "gtk-dialog-question", Gtk.IconSize.Dialog);
 				int res = md.Run ();
 				md.Destroy ();
 				if (res == (int) Gtk.ResponseType.Yes) {

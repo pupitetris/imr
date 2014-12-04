@@ -136,6 +136,7 @@ namespace IMRpatient
 
 			Gtk.MessageDialog dlg = new Gtk.MessageDialog (this, Gtk.DialogFlags.Modal, Gtk.MessageType.Error, 
 			                                               Gtk.ButtonsType.Ok, b.ToString ());
+			dlg.Title = Catalog.GetString ("Validation");
 			dlg.Run ();
 			dlg.Destroy ();
 
