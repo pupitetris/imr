@@ -1,10 +1,9 @@
 using System;
 using System.IO;
 using System.Net;
-using System.Collections;
-using System.Collections.Specialized;
 using Mono.Unix;
 using monoCharp;
+using Newtonsoft.Json.Linq;
 
 namespace IMRpatient
 {
@@ -13,7 +12,7 @@ namespace IMRpatient
 	{
 		private bool imageSet = false;
 		private bool imageChanged = false;
-		private StringDictionary myData;
+		private JObject myData;
 		private AppConfig config;
 		private Gtk.Window ParentWin;
 		private Gdk.Pixbuf pixbufOrig;
@@ -43,14 +42,18 @@ namespace IMRpatient
 					if (stream == null) {
 						imagePicture.Pixbuf = Gdk.Pixbuf.LoadFromResource ("IMRpatient.img.image_error.png");
 					} else {
-						imagePicture.Pixbuf = new Gdk.Pixbuf (stream);
+						try {
+							imagePicture.Pixbuf = new Gdk.Pixbuf (stream);
+						} catch {
+							imagePicture.Pixbuf = Gdk.Pixbuf.LoadFromResource ("IMRpatient.img.image_error.png");
+						}
 						stream.Close ();
 					}
 				});
 			});
 		}
 		
-		public void LoadData (StringDictionary data) {
+		public void LoadData (JObject data) {
 			myData = data;
 
 			string val;

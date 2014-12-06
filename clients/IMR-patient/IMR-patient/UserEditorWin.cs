@@ -1,7 +1,7 @@
 using System;
-using System.Collections.Specialized;
 using Mono.Unix;
 using System.Text;
+using Newtonsoft.Json.Linq;
 
 namespace IMRpatient
 {
@@ -13,7 +13,7 @@ namespace IMRpatient
 			EDIT_SELF
 		}
 
-		private StringDictionary myData;
+		private JObject myData;
 		private TYPE OpType;
 
 		private void SetupForNew ()
@@ -29,23 +29,23 @@ namespace IMRpatient
 			}
 		}
 
-		private void SetupForEdit (StringDictionary data)
+		private void SetupForEdit (JObject data)
 		{
 			Title = Catalog.GetString ("Edit User");
 			myData = data;
 
 			DeleteAction.Visible = true;
 
-			entryUsername.Text = data["username"];
+			entryUsername.Text = (string) data["username"];
 
 			int idx = 0;
-			switch (data["type"]) {
+			switch ((string) data["type"]) {
 			case "OPERATOR": idx = 0; break;
 			case "ADMIN": idx = 1; break;
 			case "SUPERUSER": idx = 2; break;
 			}
 			comboLevel.Active = idx;
-			comboStatus.Active = (data["status"] == "ACTIVE")? 0: 1;
+			comboStatus.Active = ((string) data["status"] == "ACTIVE")? 0: 1;
 
 			if (!config.CanPerform (IMR_PERM.USER_SET_ADMIN_LEVEL)) {
 				comboLevel.Sensitive = false;
@@ -55,7 +55,7 @@ namespace IMRpatient
 			personaAddEditor.LoadData (data);
 		}
 
-		public UserEditorWin (TYPE type, AppConfig config, StringDictionary data = null) : 
+		public UserEditorWin (TYPE type, AppConfig config, JObject data = null) : 
 				base(config)
 		{
 			this.Build ();

@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IMR-patient", "IMR-patient\IMR-patient.csproj", "{E05C0B1C-9D18-4B07-B6B7-731ABD97BEB3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "fastJSON", "..\..\..\charp\clients\monoCHARP\fastJSON\fastJSON.csproj", "{207E91B1-C9F8-4913-88E1-3549EF5F3273}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "monoCHARP", "..\..\..\charp\clients\monoCHARP\monoCHARP\monoCHARP.csproj", "{7DE14CEC-61E3-46F4-9CB3-C367DA555044}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "monoCHARP-gtk", "..\..\..\charp\clients\monoCHARP\monoCHARP-gtk\monoCHARP-gtk.csproj", "{B61CFDEB-4C4E-46BC-BEC6-8C3E71C0EA5A}"
@@ -15,10 +13,6 @@ Global
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{207E91B1-C9F8-4913-88E1-3549EF5F3273}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{207E91B1-C9F8-4913-88E1-3549EF5F3273}.Debug|x86.Build.0 = Debug|Any CPU
-		{207E91B1-C9F8-4913-88E1-3549EF5F3273}.Release|x86.ActiveCfg = Release|Any CPU
-		{207E91B1-C9F8-4913-88E1-3549EF5F3273}.Release|x86.Build.0 = Release|Any CPU
 		{7DE14CEC-61E3-46F4-9CB3-C367DA555044}.Debug|x86.ActiveCfg = Debug|Any CPU
 		{7DE14CEC-61E3-46F4-9CB3-C367DA555044}.Debug|x86.Build.0 = Debug|Any CPU
 		{7DE14CEC-61E3-46F4-9CB3-C367DA555044}.Release|x86.ActiveCfg = Release|Any CPU

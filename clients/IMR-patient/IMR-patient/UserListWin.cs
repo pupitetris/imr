@@ -4,22 +4,23 @@ using System.Collections; // for ArrayList
 using System.Collections.Specialized; // for Dictionary
 using Mono.Unix;
 using monoCharp;
+using Newtonsoft.Json.Linq;
 
 namespace IMRpatient
 {
 	[Gtk.TreeNode (ListOnly=true)]
 	public class UserListNode : Gtk.TreeNode {
-		public UserListNode (StringDictionary data)
+		public UserListNode (JObject data)
 		{
 			Data = data;
-			Name = data["username"];
-			Info = Util.StringPlusSpace (data["prefix"]) +	Util.StringPlusSpace (data["name"]) +
-				Util.StringPlusSpace (data["paterno"]) + Util.StringPlusSpace (data["materno"]);
-			Level = Util.UserLevelToString (data["type"]);
-			Status = "(" + Util.StatusToString (data["status"]) + ")";
+			Name = (string) data["username"];
+			Info = Util.StringPlusSpace ((string) data["prefix"]) + Util.StringPlusSpace ((string) data["name"]) +
+				Util.StringPlusSpace ((string) data["paterno"]) + Util.StringPlusSpace ((string) data["materno"]);
+			Level = Util.UserLevelToString ((string) data["type"]);
+			Status = "(" + Util.StatusToString ((string) data["status"]) + ")";
 		}
 
-		public StringDictionary Data;
+		public JObject Data;
 
 		[Gtk.TreeNodeValue (Column=0)]
 		public string Name;
@@ -87,7 +88,7 @@ namespace IMRpatient
 				parent = this,
 				success = delegate (object data, UploadValuesCompletedEventArgs status, Charp.CharpCtx ctx) {
 					Gtk.Application.Invoke (delegate {
-						foreach (StringDictionary dat in (ArrayList) data) {
+						foreach (JObject dat in (JArray) data) {
 							store.AddNode (new UserListNode (dat));
 						}
 						nodeview.ShowNow ();

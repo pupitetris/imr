@@ -1,34 +1,33 @@
 using System;
 using System.Net;
-using System.Collections;
-using System.Collections.Specialized;
 using System.Collections.Generic;
 using monoCharp;
 using Mono.Unix;
+using Newtonsoft.Json.Linq;
 
 namespace IMRpatient
 {
 	[System.ComponentModel.ToolboxItem(true)]
 	public partial class AddressEditor : Gtk.Bin
 	{
-		private static ArrayList states;
+		private static JArray states;
 
-		private static string GlobalDefaultStateID;
-		private static string GlobalDefaultMuniID;
-		private static string GlobalDefaultAsentaID;
+		private static int GlobalDefaultStateID = -1;
+		private static int GlobalDefaultMuniID = -1;
+		private static int GlobalDefaultAsentaID = -1;
 
 		private AppConfig config;
 		private Gtk.Window ParentWin;
 		private Gtk.Container Cont;
-		private StringDictionary myData;
+		private JObject myData;
 
-		private ArrayList zipcodes;
-		private Dictionary<string, StringDictionary> zipcodes_by_code;
-		private ArrayList munis;
-		private ArrayList asentas;
-		private string DefaultStateID;
-		private string DefaultMuniID;
-		private string DefaultAsentaID;
+		private JArray zipcodes;
+		private Dictionary<string, JObject> zipcodes_by_code;
+		private JArray munis;
+		private JArray asentas;
+		private int DefaultStateID;
+		private int DefaultMuniID;
+		private int DefaultAsentaID;
 
 		private MyCombo myComboState;
 		private MyCombo myComboMuni;
@@ -41,7 +40,7 @@ namespace IMRpatient
 			this.Build ();
 		}
 
-		public AddressEditor (AppConfig config, Gtk.Window parent, Gtk.Container cont, StringDictionary data = null)
+		public AddressEditor (AppConfig config, Gtk.Window parent, Gtk.Container cont, JObject data = null)
 		{
 			this.Build ();
 
@@ -57,15 +56,15 @@ namespace IMRpatient
 
 			WidgetPath = Util.GtkGetWidgetPath (this, config);
 
-			if (GlobalDefaultStateID == null)
+			if (GlobalDefaultStateID == -1)
 				config.LoadWindowKey (WidgetPath, "default_state_id", out GlobalDefaultStateID);
 			DefaultStateID = GlobalDefaultStateID;
 
-			if (GlobalDefaultMuniID == null)
+			if (GlobalDefaultMuniID == -1)
 				config.LoadWindowKey (WidgetPath, "default_muni_id", out GlobalDefaultMuniID);
 			DefaultMuniID = GlobalDefaultMuniID;
 
-			if (GlobalDefaultAsentaID == null)
+			if (GlobalDefaultAsentaID == -1)
 				config.LoadWindowKey (WidgetPath, "default_asenta_id", out GlobalDefaultAsentaID);
 			DefaultAsentaID = GlobalDefaultAsentaID;
 			
@@ -74,18 +73,18 @@ namespace IMRpatient
 
 		private void PopulateStates ()
 		{
-			foreach (StringDictionary state in states)
-				myComboState.AppendText (state["st_name"], state);
+			foreach (JObject state in states)
+				myComboState.AppendText ((string) state["st_name"], state);
 
-			string state_id = myData.ContainsKey ("state_id")? myData["state_id"]: DefaultStateID;
+			int state_id = myData["state_id"] != null? (int) myData["state_id"]: DefaultStateID;
 			myComboState.SetActiveByData (delegate(object obj) {
-				return (((StringDictionary) obj)["state_id"] == state_id);
+				return ((int) ((JObject) obj)["state_id"] == state_id);
 			});
 
 			GLib.Signal.Emit (Cont, "check-resize");
 		}
 
-		public void LoadData (StringDictionary data)
+		public void LoadData (JObject data)
 		{
 			if (data != null) {
 				myData = data;
@@ -95,15 +94,15 @@ namespace IMRpatient
 				if (Util.DictTryValue (data, "ad_type", out val)) {
 					int active;
 					switch (val) {
-					case "HOME": active = 0; break;
-					case "WORK": active = 1; break;
-					case "FISCAL": active = 2; break;
-					default: active = -1; break;
+						case "HOME": active = 0; break;
+						case "WORK": active = 1; break;
+						case "FISCAL": active = 2; break;
+						default: active = -1; break;
 					}
 					comboType.Active = active;
 				}
 			} else
-				myData = new StringDictionary ();
+				myData = new JObject ();
 
 			if (states != null) {
 				PopulateStates ();
@@ -115,7 +114,7 @@ namespace IMRpatient
 				useCache = true,
 				success = delegate (object dat, UploadValuesCompletedEventArgs status, Charp.CharpCtx ctx) {
 					Gtk.Application.Invoke (delegate {
-						states = (ArrayList) dat;
+						states = (JArray) dat;
 						PopulateStates ();
 					});
 				}
@@ -138,8 +137,8 @@ namespace IMRpatient
 			labelZipcode.Sensitive = true;
 			entryZipcode.Sensitive = true;
 
-			StringDictionary state = (StringDictionary) myComboState.ActiveData ();
-			string state_id = state != null? state["state_id"]: null;
+			JObject state = (JObject) myComboState.ActiveData ();
+			int state_id = state != null? (int) state["state_id"]: -1;
 			if (state_id != GlobalDefaultStateID) {
 				config.SaveWindowKey (WidgetPath, "default_state_id", state_id);
 				GlobalDefaultStateID = state_id;
@@ -151,11 +150,11 @@ namespace IMRpatient
 				asAnon = true,
 				success = delegate (object dat, UploadValuesCompletedEventArgs status, Charp.CharpCtx ctx) {
 					Gtk.Application.Invoke (delegate {
-						zipcodes = (ArrayList) dat;
+						zipcodes = (JArray) dat;
 
-						zipcodes_by_code = new Dictionary<string, StringDictionary> ();
-						foreach (StringDictionary zipcode in zipcodes)
-							zipcodes_by_code[zipcode["z_code"]] = zipcode;
+						zipcodes_by_code = new Dictionary<string, JObject> ();
+						foreach (JObject zipcode in zipcodes)
+							zipcodes_by_code[(string) zipcode["z_code"]] = zipcode;
 					});
 				}
 			});
@@ -166,17 +165,17 @@ namespace IMRpatient
 				asAnon = true,
 				success = delegate (object dat, UploadValuesCompletedEventArgs status, Charp.CharpCtx ctx) {
 					Gtk.Application.Invoke (delegate {
-						munis = (ArrayList) dat;
+						munis = (JArray) dat;
 
 						myComboMuni.Clear ();
-						foreach (StringDictionary muni in munis)
-							myComboMuni.AppendText (muni["m_name"], muni);
+						foreach (JObject muni in munis)
+							myComboMuni.AppendText ((string) muni["m_name"], muni);
 
 						labelMuni.Sensitive = true;
 						comboMuni.Sensitive = true;
-						if (state_id != null && state_id == DefaultStateID)
+						if (state_id != -1 && state_id == DefaultStateID)
 							myComboMuni.SetActiveByData (delegate(object obj) {
-								return (((StringDictionary) obj)["muni_id"] == DefaultMuniID);
+								return ((int) ((JObject) obj)["muni_id"] == DefaultMuniID);
 							});
 
 						GLib.Signal.Emit (Cont, "check-resize");
@@ -195,8 +194,8 @@ namespace IMRpatient
 				return;
 			}
 
-			StringDictionary muni = (StringDictionary) myComboMuni.ActiveData ();
-			string muni_id = muni != null? muni["muni_id"]: null;
+			JObject muni = (JObject) myComboMuni.ActiveData ();
+			int muni_id = muni != null? (int) muni["muni_id"]: -1;
 			if (muni_id != GlobalDefaultMuniID) {
 				config.SaveWindowKey (WidgetPath, "default_muni_id", muni_id);
 				GlobalDefaultMuniID = muni_id;
@@ -208,30 +207,30 @@ namespace IMRpatient
 				asAnon = true,
 				success = delegate (object dat, UploadValuesCompletedEventArgs status, Charp.CharpCtx ctx) {
 					Gtk.Application.Invoke (delegate {
-						asentas = (ArrayList) dat;
+						asentas = (JArray) dat;
 
 						string z_code = entryZipcode.Text;
 						if (!zipcodes_by_code.ContainsKey (z_code))
 							z_code = null;
 
 						myComboAsenta.Clear ();
-						foreach (StringDictionary asenta in asentas) {
-							if (z_code != null && asenta["z_code"] == z_code)
-								myComboAsenta.PrependText (asenta["fullname"], asenta);
+						foreach (JObject asenta in asentas) {
+							if (z_code != null && (string) asenta["z_code"] == z_code)
+								myComboAsenta.PrependText ((string) asenta["fullname"], asenta);
 							else
-								myComboAsenta.AppendText (asenta["fullname"], asenta);
+								myComboAsenta.AppendText ((string) asenta["fullname"], asenta);
 						}
 
 						labelAsenta.Sensitive = true;
 						comboAsenta.Sensitive = true;
 
-						if (z_code != null && zipcodes_by_code[z_code]["muni_id"] == muni_id)
+						if (z_code != null && (int) zipcodes_by_code[z_code]["muni_id"] == muni_id)
 							comboAsenta.Active = 0;
 						else {
 							entryZipcode.Text = "";
-							if (muni_id != null && muni_id == DefaultMuniID)
+							if (muni_id != -1 && muni_id == DefaultMuniID)
 								myComboAsenta.SetActiveByData (delegate(object obj) {
-									return (((StringDictionary) obj)["asenta_id"] == DefaultAsentaID);
+									return ((int) ((JObject) obj)["asenta_id"] == DefaultAsentaID);
 								});
 						}
 
@@ -252,14 +251,14 @@ namespace IMRpatient
 			labelStreet.Sensitive = true;
 			entryStreet.Sensitive = true;
 
-			StringDictionary asenta = (StringDictionary) myComboAsenta.ActiveData ();
-			string asenta_id = asenta != null? asenta["asenta_id"]: null;
+			JObject asenta = (JObject) myComboAsenta.ActiveData ();
+			int asenta_id = asenta != null? (int) asenta["asenta_id"]: -1;
 			if (asenta_id != GlobalDefaultAsentaID) {
 				config.SaveWindowKey (WidgetPath, "default_asenta_id", asenta_id);
 				GlobalDefaultAsentaID = asenta_id;
 			}
 
-			entryZipcode.Text = asenta["z_code"];
+			entryZipcode.Text = (string) asenta["z_code"];
 		}
 
 		private void CheckZipcodeText ()
@@ -267,12 +266,12 @@ namespace IMRpatient
 			string z_code = entryZipcode.Text;
 
 			if (zipcodes_by_code.ContainsKey (z_code)) {
-				StringDictionary asenta = (StringDictionary) myComboAsenta.ActiveData ();
-				if (asenta == null || asenta["z_code"] != z_code) {
+				JObject asenta = (JObject) myComboAsenta.ActiveData ();
+				if (asenta == null || (string) asenta["z_code"] != z_code) {
 					comboMuni.Active = -1;
-					StringDictionary zipcode = zipcodes_by_code[z_code];
+					JObject zipcode = zipcodes_by_code[z_code];
 					myComboMuni.SetActiveByData (delegate(object obj) {
-						return (((StringDictionary) obj)["muni_id"] == zipcode["muni_id"]);
+						return ((int) ((JObject) obj)["muni_id"] == (int) zipcode["muni_id"]);
 					});
 				}
 				Util.GtkLabelStyleRemove (labelZipcode);

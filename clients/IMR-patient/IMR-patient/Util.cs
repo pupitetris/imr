@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Specialized;
 using Gtk;
 using Mono.Unix;
+using Newtonsoft.Json.Linq;
 
 namespace IMRpatient
 {
@@ -87,10 +88,33 @@ namespace IMRpatient
 			return false;
 		}
 
-		public static bool DictArrayKeyValueUnique (ArrayList arr, string key, string value) {
+		public static bool DictTryValue (JObject dict, string key, out string value)
+		{
+			if (dict[key] != null) {
+				value = (string) dict[key];
+				if (value == null)
+					return false;
+				return true;
+			}
+
+			value = null;
+			return false;
+		}
+
+		public static bool DictTryValue (JObject dict, string key, out int value)
+		{
+			if (dict[key] != null) {
+				value = (int) dict[key];
+				return true;
+			}
+			value = -1;
+			return false;
+		}
+
+		public static bool DictArrayKeyValueUnique (JArray arr, string key, string value) {
 			bool first = false;
-			foreach (StringDictionary dict in arr) {
-				if (dict[key] == value) {
+			foreach (JObject dict in arr) {
+				if ((string) dict[key] == value) {
 					if (first) return false;
 					first = true;
 				}

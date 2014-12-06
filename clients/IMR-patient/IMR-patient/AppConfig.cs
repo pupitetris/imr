@@ -3,6 +3,7 @@ using System.IO;
 using System.Net;
 using System.Text;
 using System.Runtime.InteropServices;
+using Newtonsoft.Json.Linq;
 
 using Gtk;
 using monoCharp;
@@ -265,17 +266,17 @@ namespace IMRpatient
 			account_type = AccountType.UNKNOWN;
 			charp.request ("user_get_type", null, new Charp.CharpCtx {
 				success = delegate (object data, UploadValuesCompletedEventArgs status, Charp.CharpCtx ctx){
-					string typestr = (string) data;
+					string typestr = (string) ((JValue) data).Value;
 					switch (typestr) {
-					case "ADMIN":
-						account_type = AccountType.ADMIN;
-						break;
-					case "OPERATOR":
-						account_type = AccountType.OPERATOR;
-						break;
-					case "SUPERUSER":
-						account_type = AccountType.SUPERUSER;
-						break;
+						case "ADMIN":
+							account_type = AccountType.ADMIN;
+							break;
+						case "OPERATOR":
+							account_type = AccountType.OPERATOR;
+							break;
+						case "SUPERUSER":
+							account_type = AccountType.SUPERUSER;
+							break;
 					}
 					del ();
 				}

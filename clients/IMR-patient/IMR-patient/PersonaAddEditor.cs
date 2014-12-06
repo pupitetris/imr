@@ -1,17 +1,16 @@
 using System;
 using System.IO;
 using System.Net;
-using System.Collections;
-using System.Collections.Specialized;
 using Mono.Unix;
 using monoCharp;
+using Newtonsoft.Json.Linq;
 
 namespace IMRpatient
 {
 	[System.ComponentModel.ToolboxItem(true)]
 	public partial class PersonaAddEditor : Gtk.Bin
 	{
-		private StringDictionary myData;
+		private JObject myData;
 		private AppConfig config;
 		private Gtk.Window ParentWin;
 
@@ -26,7 +25,7 @@ namespace IMRpatient
 			ParentWin = parent;
 		}
 
-		private void AddAddressEditor (StringDictionary data = null) {
+		private void AddAddressEditor (JObject data = null) {
 			AddressEditor editor = new AddressEditor (config, ParentWin, vboxAddress, data);
 			vboxAddress.Add (editor);
 			Gtk.Box.BoxChild bc = (Gtk.Box.BoxChild) (vboxAddress[editor]);
@@ -34,7 +33,7 @@ namespace IMRpatient
 			bc.Fill = false;
 		}
 
-		private void AddPhoneEditor (StringDictionary data = null) {
+		private void AddPhoneEditor (JObject data = null) {
 			PhoneEditor editor = new PhoneEditor (config, ParentWin, vboxPhone, data);
 			vboxPhone.Add (editor);
 			Gtk.Box.BoxChild bc = (Gtk.Box.BoxChild) (vboxPhone[editor]);
@@ -42,7 +41,7 @@ namespace IMRpatient
 			bc.Fill = false;
 		}
 		
-		private void AddEmailEditor (StringDictionary data = null) {
+		private void AddEmailEditor (JObject data = null) {
 			EmailEditor editor = new EmailEditor (config, ParentWin, vboxEmails, data);
 			vboxEmails.Add (editor);
 			Gtk.Box.BoxChild bc = (Gtk.Box.BoxChild) (vboxEmails[editor]);
@@ -55,7 +54,7 @@ namespace IMRpatient
 				parent = ParentWin,
 				success = delegate (object data, UploadValuesCompletedEventArgs status, Charp.CharpCtx ctx) {
 					Gtk.Application.Invoke (delegate {
-						foreach (StringDictionary address in (ArrayList) data)
+						foreach (JObject address in (JArray) data)
 							AddAddressEditor (address);
 					});
 				}
@@ -67,7 +66,7 @@ namespace IMRpatient
 				parent = ParentWin,
 				success = delegate (object data, UploadValuesCompletedEventArgs status, Charp.CharpCtx ctx) {
 					Gtk.Application.Invoke (delegate {
-						foreach (StringDictionary phone in (ArrayList) data)
+						foreach (JObject phone in (JArray) data)
 							AddPhoneEditor (phone);
 					});
 				}
@@ -79,14 +78,14 @@ namespace IMRpatient
 				parent = ParentWin,
 				success = delegate (object data, UploadValuesCompletedEventArgs status, Charp.CharpCtx ctx) {
 					Gtk.Application.Invoke (delegate {
-						foreach (StringDictionary email in (ArrayList) data)
+						foreach (JObject email in (JArray) data)
 							AddEmailEditor (email);
 					});
 				}
 			});
 		}
 		
-		public void LoadData (StringDictionary data) {
+		public void LoadData (JObject data) {
 			myData = data;
 
 			string val;
