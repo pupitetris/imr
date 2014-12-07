@@ -42,7 +42,7 @@ namespace IMRpatient
 			}
 		}
 
-		[GLib.Property ("pixbuf")]
+		[GLib.Property ("pixbuf-confirming")]
 		public Gdk.Pixbuf PixbufConfirming {
 			set {
 				pixbufConfirming = value;
