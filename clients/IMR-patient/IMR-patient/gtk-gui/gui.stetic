@@ -1406,7 +1406,7 @@
                           </packing>
                         </child>
                         <child>
-                          <widget class="Gtk.Table" id="table1">
+                          <widget class="Gtk.Table" id="tableUser">
                             <property name="MemberName" />
                             <property name="NRows">3</property>
                             <property name="NColumns">4</property>
@@ -1506,6 +1506,7 @@ Superuser</property>
                                 <property name="IsTextCombo">True</property>
                                 <property name="Items" translatable="yes">Active
 Disabled</property>
+                                <property name="HasFrame">False</property>
                               </widget>
                               <packing>
                                 <property name="LeftAttach">3</property>

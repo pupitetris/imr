@@ -65,6 +65,8 @@ namespace IMRpatient
 
 			OpType = type;
 
+			tableUser.FocusChain = new Gtk.Widget[] { entryUsername, entryPassword, entryConfirm, comboStatus, comboLevel };
+
 			switch (type) {
 			case TYPE.NEW:
 				SetupForNew ();
@@ -136,6 +138,7 @@ namespace IMRpatient
 
 			Gtk.MessageDialog dlg = new Gtk.MessageDialog (this, Gtk.DialogFlags.Modal, Gtk.MessageType.Error, 
 			                                               Gtk.ButtonsType.Ok, b.ToString ());
+			dlg.Icon = Stetic.IconLoader.LoadIcon (dlg, "gtk-dialog-error", Gtk.IconSize.Dialog);
 			dlg.Title = Catalog.GetString ("Validation");
 			dlg.Run ();
 			dlg.Destroy ();
