@@ -52,8 +52,18 @@ namespace IMRpatient {
 
 		protected void OnDeleteEvent (object sender, DeleteEventArgs a)
 		{
-			Quit ();
-			a.RetVal = true;
+			Gtk.MessageDialog md = 
+				new Gtk.MessageDialog (this, Gtk.DialogFlags.Modal, Gtk.MessageType.Question, Gtk.ButtonsType.YesNo,
+					Catalog.GetString ("This will close the application.\n\nAre you sure you want to exit?"));
+			md.Title = Catalog.GetString ("Exit");
+			int res = md.Run ();
+			md.Destroy ();
+			if (res == (int) Gtk.ResponseType.Yes) {
+				IsLogout = false;
+				Quit ();
+				a.RetVal = false;
+			} else
+				a.RetVal = true;
 		}
 
 		protected void OnFixedBgSizeAllocated (object o, SizeAllocatedArgs args)
