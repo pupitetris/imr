@@ -1,5 +1,4 @@
 using System;
-using System.Net;
 using System.Collections.Generic;
 using monoCharp;
 using Mono.Unix;
@@ -112,7 +111,7 @@ namespace IMRpatient
 			config.charp.request ("get_states_by_inst", null, new CharpGtk.CharpGtkCtx {
 				parent = ParentWin,
 				useCache = true,
-				success = delegate (object dat, UploadValuesCompletedEventArgs status, Charp.CharpCtx ctx) {
+				success = delegate (object dat, Charp.CharpCtx ctx) {
 					Gtk.Application.Invoke (delegate {
 						states = (JArray) dat;
 						PopulateStates ();
@@ -148,7 +147,7 @@ namespace IMRpatient
 				parent = ParentWin,
 				useCache = true,
 				asAnon = true,
-				success = delegate (object dat, UploadValuesCompletedEventArgs status, Charp.CharpCtx ctx) {
+				success = delegate (object dat, Charp.CharpCtx ctx) {
 					Gtk.Application.Invoke (delegate {
 						zipcodes = (JArray) dat;
 
@@ -163,7 +162,7 @@ namespace IMRpatient
 				parent = ParentWin,
 				useCache = true,
 				asAnon = true,
-				success = delegate (object dat, UploadValuesCompletedEventArgs status, Charp.CharpCtx ctx) {
+				success = delegate (object dat, Charp.CharpCtx ctx) {
 					Gtk.Application.Invoke (delegate {
 						munis = (JArray) dat;
 
@@ -205,7 +204,7 @@ namespace IMRpatient
 				parent = ParentWin,
 				useCache = true,
 				asAnon = true,
-				success = delegate (object dat, UploadValuesCompletedEventArgs status, Charp.CharpCtx ctx) {
+				success = delegate (object dat, Charp.CharpCtx ctx) {
 					Gtk.Application.Invoke (delegate {
 						asentas = (JArray) dat;
 

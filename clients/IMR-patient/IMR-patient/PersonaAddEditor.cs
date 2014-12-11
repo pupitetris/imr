@@ -1,6 +1,5 @@
 using System;
 using System.IO;
-using System.Net;
 using Mono.Unix;
 using monoCharp;
 using Newtonsoft.Json.Linq;
@@ -52,7 +51,7 @@ namespace IMRpatient
 		private void LoadAddresses () {
 			config.charp.request ("persona_get_addresses", new object[] { myData["persona_id"] }, new CharpGtk.CharpGtkCtx {
 				parent = ParentWin,
-				success = delegate (object data, UploadValuesCompletedEventArgs status, Charp.CharpCtx ctx) {
+				success = delegate (object data, Charp.CharpCtx ctx) {
 					Gtk.Application.Invoke (delegate {
 						foreach (JObject address in (JArray) data)
 							AddAddressEditor (address);
@@ -64,7 +63,7 @@ namespace IMRpatient
 		private void LoadPhones () {
 			config.charp.request ("persona_get_phones", new object[] { myData["persona_id"] }, new CharpGtk.CharpGtkCtx {
 				parent = ParentWin,
-				success = delegate (object data, UploadValuesCompletedEventArgs status, Charp.CharpCtx ctx) {
+				success = delegate (object data, Charp.CharpCtx ctx) {
 					Gtk.Application.Invoke (delegate {
 						foreach (JObject phone in (JArray) data)
 							AddPhoneEditor (phone);
@@ -76,7 +75,7 @@ namespace IMRpatient
 		private void LoadEmails () {
 			config.charp.request ("persona_get_emails", new object[] { myData["persona_id"] }, new CharpGtk.CharpGtkCtx {
 				parent = ParentWin,
-				success = delegate (object data, UploadValuesCompletedEventArgs status, Charp.CharpCtx ctx) {
+				success = delegate (object data, Charp.CharpCtx ctx) {
 					Gtk.Application.Invoke (delegate {
 						foreach (JObject email in (JArray) data)
 							AddEmailEditor (email);

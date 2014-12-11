@@ -51,9 +51,10 @@ namespace IMRpatient
 
 			charp.request ("file_get_picture", new object[] { fname }, new CharpGtk.CharpGtkCtx {
 				parent = win,
-				success_handler = delegate (UploadValuesCompletedEventArgs status, Charp.CharpCtx ctx) {
+				success_handler = delegate (Charp.CharpCtx ctx) {
 					FileStream stream = new FileStream (fullname, FileMode.Create);
-					stream.Write (status.Result, 0, status.Result.Length);
+					byte[] result = ((UploadValuesCompletedEventArgs) ctx.status).Result;
+					stream.Write (result, 0, result.Length);
 					stream.Close ();
 
 					CallDelegate (fullname, del);

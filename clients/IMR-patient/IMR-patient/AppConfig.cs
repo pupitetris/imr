@@ -1,6 +1,5 @@
 using System;
 using System.IO;
-using System.Net;
 using System.Text;
 using System.Runtime.InteropServices;
 using Newtonsoft.Json.Linq;
@@ -265,7 +264,7 @@ namespace IMRpatient
 		{
 			account_type = AccountType.UNKNOWN;
 			charp.request ("user_get_type", null, new Charp.CharpCtx {
-				success = delegate (object data, UploadValuesCompletedEventArgs status, Charp.CharpCtx ctx){
+				success = delegate (object data, Charp.CharpCtx ctx){
 					string typestr = (string) ((JValue) data).Value;
 					switch (typestr) {
 						case "ADMIN":

@@ -1,7 +1,4 @@
 using System;
-using System.Net;
-using System.Collections; // for ArrayList
-using System.Collections.Specialized; // for Dictionary
 using Mono.Unix;
 using monoCharp;
 using Newtonsoft.Json.Linq;
@@ -86,7 +83,7 @@ namespace IMRpatient
 			store.Clear ();
 			config.charp.request ("user_list_get", null, new CharpGtk.CharpGtkCtx {
 				parent = this,
-				success = delegate (object data, UploadValuesCompletedEventArgs status, Charp.CharpCtx ctx) {
+				success = delegate (object data, Charp.CharpCtx ctx) {
 					Gtk.Application.Invoke (delegate {
 						foreach (JObject dat in (JArray) data) {
 							store.AddNode (new UserListNode (dat));
@@ -115,7 +112,7 @@ namespace IMRpatient
 				config.charp.request ("user_remove", new object[] {Convert.ToUInt32 (node.Data["persona_id"])}, 
 				new CharpGtk.CharpGtkCtx {
 					parent = this,
-					success = delegate (object data, UploadValuesCompletedEventArgs status, Charp.CharpCtx ctx) {
+					success = delegate (object data, Charp.CharpCtx ctx) {
 						Gtk.Application.Invoke (delegate {
 							store.RemoveNode (node);
 							DeleteAsync (i);
