@@ -377,6 +377,13 @@
         <property name="StockId">system_users_edit</property>
         <signal name="Activated" handler="OnUsersEditActivated" />
       </action>
+      <action id="refreshThemeAction">
+        <property name="Type">Action</property>
+        <property name="Label" translatable="yes">_Refresh theme</property>
+        <property name="ShortLabel" translatable="yes">_Refresh theme</property>
+        <property name="StockId">gtk-refresh</property>
+        <signal name="Activated" handler="OnRefreshThemeActivated" />
+      </action>
     </action-group>
     <property name="MemberName" />
     <property name="WidthRequest">700</property>
@@ -440,6 +447,7 @@
                   <node type="Menu" action="helpAction1">
                     <node type="Menuitem" action="UserSManualAction" />
                     <node type="Menuitem" action="aboutAction" />
+                    <node type="Menuitem" action="refreshThemeAction" />
                   </node>
                 </node>
               </widget>
@@ -536,6 +544,7 @@
                     <property name="MemberName" />
                     <property name="IsTextCombo">True</property>
                     <property name="Items" translatable="yes" />
+                    <property name="HasFrame">False</property>
                     <signal name="Changed" handler="OnComboPortChanged" />
                   </widget>
                   <packing>
@@ -1483,6 +1492,7 @@
                                 <property name="Items" translatable="yes">Operator
 Administrator
 Superuser</property>
+                                <property name="HasFrame">False</property>
                               </widget>
                               <packing>
                                 <property name="TopAttach">1</property>

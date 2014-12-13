@@ -126,5 +126,14 @@ namespace IMRpatient {
 				win.Show ();
 			}
 		}
+
+
+		protected void OnRefreshThemeActivated (object sender, EventArgs e)
+		{
+			Gtk.Application.Invoke (delegate {
+				if (Gtk.Rc.ReparseAll ())
+					Console.WriteLine ("Theme reloaded");
+			});
+		}
 	}
 }
