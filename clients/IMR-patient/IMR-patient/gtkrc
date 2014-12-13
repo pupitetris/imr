@@ -1,4 +1,31 @@
+# Resources:
+# https://wiki.gnme.org/Attic/GnomeArt/Tutrials/GtkThemes
+# https://wiki.gnme.org/Attic/GnomeArt/Tutrials/GtkThemes/StyleProperties
+# https://wiki.gnme.org/Attic/GnomeArt/Tutrials/GtkEngines
+# http://orford.org/gtk
+# http://awesome.naquadah.org/wiki/Customizing_GTK_Apps
+
+#gtk-theme-name = "MS-Windows"
+#gtk-icon-thme-name = "Tango"
+#gtk-font-name = "Tahoma 10"
+
+#gtk-menu-images = 1
+#gtk-toolbar-style = GTK_TOOLBAR_ICONS
+#gtk-icon-sizes = "gtk-menu=13,13:gtk-small-toolbar=16,16:gtk-large-toolbar=24,24:gtk-dnd=32,32"
+#gtk-toolbar-icon-size = small-toolbar
+
 # pixmap_path "blah;foo;var"
+
+# Stuff applied to all widgets
+style "imrDefault"
+{
+}
+
+style "imrEngine"
+{
+	engine "xamarin" {
+	}
+}
 
 style "mainBgStyle"
 {
@@ -7,6 +34,7 @@ style "mainBgStyle"
 
 style "mainMenuStyle"
 {
+	GtkMenuBar::internal-padding = 0
 	engine "pixmap" {
 		image {
 			function = BOX
@@ -35,8 +63,22 @@ style "mainMenuAccelLabelStyle"
 	font_name = "Bold"
 }
 
+style "imrCombo"
+{
+	GtkWidget::interior-focus = 1
+	GtkWidget::focus-line-width = 2
+	engine "xamarin" {
+	}
+}
+
+class "*" style : highest "imrDefault"
+class "*" style "imrEngine"
+
 widget "IMRpatient.MainWindow" style "mainBgStyle"
 
 class "GtkMenuBar" style "mainMenuStyle"
+widget_class "*GtkComboBox*Button" style : highest "imrCombo"
+widget_class "*GtkComboBox*Arrow" style : highest "imrCombo"
 widget_class "*GtkMenuBar*Gtk*MenuItem" style "mainMenuItemStyle"
-widget_class "*GtkMenuBar*GtkAccelLabel" style "mainMenuAccelLabelStyle"
+widget_class "*GtkMenuBar*GtkAccelLabel" style : highest "mainMenuAccelLabelStyle"
+
