@@ -1,6 +1,6 @@
 -- This file is part of the CHARP project.
 --
--- Copyright © 2011
+-- Copyright © 2011 - 2014
 --   Free Software Foundation Europe, e.V.,
 --   Talstrasse 110, 40217 Dsseldorf, Germany
 --
@@ -36,14 +36,18 @@ COMMENT ON COLUMN public.country.country_id IS 'CDH code';
 
 ALTER SEQUENCE public.country_country_id_seq OWNED BY public.country.country_id;
 
+CREATE SEQUENCE public.state_state_id_seq;
+
 CREATE TABLE public.state (
-                state_id INTEGER NOT NULL,
+                state_id INTEGER NOT NULL DEFAULT nextval('public.state_state_id_seq'),
                 country_id INTEGER NOT NULL,
                 st_name VARCHAR NOT NULL,
                 st_abrev VARCHAR NOT NULL,
                 CONSTRAINT state_pk PRIMARY KEY (state_id)
 );
 
+
+ALTER SEQUENCE public.state_state_id_seq OWNED BY public.state.state_id;
 
 CREATE SEQUENCE public.muni_muni_id_seq;
 
@@ -57,13 +61,17 @@ CREATE TABLE public.muni (
 
 ALTER SEQUENCE public.muni_muni_id_seq OWNED BY public.muni.muni_id;
 
+CREATE SEQUENCE public.city_city_id_seq;
+
 CREATE TABLE public.city (
-                city_id INTEGER NOT NULL,
+                city_id INTEGER NOT NULL DEFAULT nextval('public.city_city_id_seq'),
                 muni_id INTEGER NOT NULL,
                 c_name VARCHAR NOT NULL,
                 CONSTRAINT city_pk PRIMARY KEY (city_id)
 );
 
+
+ALTER SEQUENCE public.city_city_id_seq OWNED BY public.city.city_id;
 
 CREATE SEQUENCE public.zipcode_zipcode_id_seq;
 
@@ -177,8 +185,10 @@ CREATE TABLE public.fiscal (
                 inst_id INTEGER NOT NULL,
                 address_id INTEGER NOT NULL,
                 code VARCHAR NOT NULL,
+                alt_name VARCHAR NOT NULL,
                 CONSTRAINT fiscal_pk PRIMARY KEY (persona_id, inst_id)
 );
+COMMENT ON COLUMN public.fiscal.alt_name IS 'In case fiscal data goes to another name (such as a company name)';
 
 
 CREATE SEQUENCE public.email_email_id_seq;
@@ -222,10 +232,39 @@ CREATE TABLE public.patient (
 );
 
 
+CREATE SEQUENCE public.remedy_remedy_id_seq;
+
+CREATE TABLE public.remedy (
+                remedy_id INTEGER NOT NULL DEFAULT nextval('public.remedy_remedy_id_seq'),
+                inst_id INTEGER NOT NULL,
+                persona_id INTEGER NOT NULL,
+                r_name VARCHAR NOT NULL,
+                autosimile BIGINT NOT NULL,
+                CONSTRAINT remedy_pk PRIMARY KEY (remedy_id, inst_id)
+);
+
+
+ALTER SEQUENCE public.remedy_remedy_id_seq OWNED BY public.remedy.remedy_id;
+
+CREATE SEQUENCE public.referral_referral_id_seq;
+
+CREATE TABLE public.referral (
+                referral_id INTEGER NOT NULL DEFAULT nextval('public.referral_referral_id_seq'),
+                inst_id INTEGER NOT NULL,
+                patient_persona_id INTEGER NOT NULL,
+                type imr_referral_type NOT NULL,
+                persona_id INTEGER NOT NULL,
+                details VARCHAR NOT NULL,
+                CONSTRAINT referral_pk PRIMARY KEY (referral_id, inst_id)
+);
+
+
+ALTER SEQUENCE public.referral_referral_id_seq OWNED BY public.referral.referral_id;
+
 CREATE SEQUENCE public.analysis_analysis_id_seq;
 
 CREATE TABLE public.analysis (
-                analysis_id VARCHAR NOT NULL DEFAULT nextval('public.analysis_analysis_id_seq'),
+                analysis_id INTEGER NOT NULL DEFAULT nextval('public.analysis_analysis_id_seq'),
                 inst_id INTEGER NOT NULL,
                 persona_id INTEGER NOT NULL,
                 ailment_id INTEGER,
@@ -252,19 +291,6 @@ COMMENT ON COLUMN public.analysis.blood_tension IS 'For the hypertense, max. sys
 
 ALTER SEQUENCE public.analysis_analysis_id_seq OWNED BY public.analysis.analysis_id;
 
-CREATE SEQUENCE public.remedy_remedy_id_seq;
-
-CREATE TABLE public.remedy (
-                remedy_id INTEGER NOT NULL DEFAULT nextval('public.remedy_remedy_id_seq'),
-                inst_id INTEGER NOT NULL,
-                r_name VARCHAR NOT NULL,
-                autosimile BIGINT NOT NULL,
-                CONSTRAINT remedy_pk PRIMARY KEY (remedy_id, inst_id)
-);
-
-
-ALTER SEQUENCE public.remedy_remedy_id_seq OWNED BY public.remedy.remedy_id;
-
 CREATE SEQUENCE public.code_code_id_seq;
 
 CREATE TABLE public.code (
@@ -287,7 +313,7 @@ CREATE TABLE public.teleheal (
                 persona_id INTEGER NOT NULL,
                 code_id INTEGER NOT NULL,
                 remedy_id INTEGER NOT NULL,
-                analysis_id VARCHAR NOT NULL,
+                analysis_id INTEGER NOT NULL,
                 type imr_teleheal_type NOT NULL,
                 program VARCHAR,
                 starts TIMESTAMP NOT NULL,
@@ -299,7 +325,7 @@ CREATE TABLE public.teleheal (
 ALTER SEQUENCE public.teleheal_teleheal_id_seq OWNED BY public.teleheal.teleheal_id;
 
 CREATE TABLE public.analysis_code (
-                analysis_id VARCHAR NOT NULL,
+                analysis_id INTEGER NOT NULL,
                 code_id INTEGER NOT NULL,
                 inst_id INTEGER NOT NULL,
                 value SMALLINT NOT NULL,
@@ -324,9 +350,8 @@ CREATE SEQUENCE public.category_category_id_seq;
 CREATE TABLE public.category (
                 category_id INTEGER NOT NULL DEFAULT nextval('public.category_category_id_seq'),
                 inst_id INTEGER NOT NULL,
-                name VARCHAR NOT NULL,
                 parent_category_id INTEGER,
-                parent_inst_id INTEGER,
+                name VARCHAR NOT NULL,
                 CONSTRAINT category_pk PRIMARY KEY (category_id, inst_id)
 );
 
@@ -364,6 +389,7 @@ CREATE TABLE public.hist (
                 subject_persona_id INTEGER NOT NULL,
                 code imr_msg_code NOT NULL,
                 persona_id INTEGER NOT NULL,
+                timestamp TIMESTAMP NOT NULL,
                 CONSTRAINT hist_pk PRIMARY KEY (hist_id, inst_id)
 );
 
@@ -506,13 +532,6 @@ ON DELETE NO ACTION
 ON UPDATE NO ACTION
 NOT DEFERRABLE;
 
-ALTER TABLE public.remedy ADD CONSTRAINT inst_remedy_fk
-FOREIGN KEY (inst_id)
-REFERENCES public.inst (inst_id)
-ON DELETE NO ACTION
-ON UPDATE NO ACTION
-NOT DEFERRABLE;
-
 ALTER TABLE public.persona ADD CONSTRAINT inst_persona_fk
 FOREIGN KEY (inst_id)
 REFERENCES public.inst (inst_id)
@@ -528,6 +547,27 @@ ON UPDATE NO ACTION
 NOT DEFERRABLE;
 
 ALTER TABLE public.product ADD CONSTRAINT inst_product_fk
+FOREIGN KEY (inst_id)
+REFERENCES public.inst (inst_id)
+ON DELETE NO ACTION
+ON UPDATE NO ACTION
+NOT DEFERRABLE;
+
+ALTER TABLE public.referral ADD CONSTRAINT inst_referral_fk
+FOREIGN KEY (inst_id)
+REFERENCES public.inst (inst_id)
+ON DELETE NO ACTION
+ON UPDATE NO ACTION
+NOT DEFERRABLE;
+
+ALTER TABLE public.remedy ADD CONSTRAINT inst_remedy_fk
+FOREIGN KEY (inst_id)
+REFERENCES public.inst (inst_id)
+ON DELETE NO ACTION
+ON UPDATE NO ACTION
+NOT DEFERRABLE;
+
+ALTER TABLE public.analysis ADD CONSTRAINT inst_analysis_fk
 FOREIGN KEY (inst_id)
 REFERENCES public.inst (inst_id)
 ON DELETE NO ACTION
@@ -597,6 +637,13 @@ ON DELETE NO ACTION
 ON UPDATE NO ACTION
 NOT DEFERRABLE;
 
+ALTER TABLE public.referral ADD CONSTRAINT persona_referral_fk
+FOREIGN KEY (inst_id, persona_id)
+REFERENCES public.persona (inst_id, persona_id)
+ON DELETE NO ACTION
+ON UPDATE NO ACTION
+NOT DEFERRABLE;
+
 ALTER TABLE public.fiscal ADD CONSTRAINT address_fiscal_fk
 FOREIGN KEY (address_id, inst_id)
 REFERENCES public.address (address_id, inst_id)
@@ -618,16 +665,16 @@ ON DELETE NO ACTION
 ON UPDATE NO ACTION
 NOT DEFERRABLE;
 
-ALTER TABLE public.analysis_code ADD CONSTRAINT analysis_analysis_code_fk
-FOREIGN KEY (analysis_id, inst_id)
-REFERENCES public.analysis (analysis_id, inst_id)
+ALTER TABLE public.referral ADD CONSTRAINT patient_referral_fk
+FOREIGN KEY (inst_id, patient_persona_id)
+REFERENCES public.patient (inst_id, persona_id)
 ON DELETE NO ACTION
 ON UPDATE NO ACTION
 NOT DEFERRABLE;
 
-ALTER TABLE public.teleheal ADD CONSTRAINT analysis_teleheal_fk
-FOREIGN KEY (analysis_id, inst_id)
-REFERENCES public.analysis (analysis_id, inst_id)
+ALTER TABLE public.remedy ADD CONSTRAINT patient_remedy_fk
+FOREIGN KEY (inst_id, persona_id)
+REFERENCES public.patient (inst_id, persona_id)
 ON DELETE NO ACTION
 ON UPDATE NO ACTION
 NOT DEFERRABLE;
@@ -642,6 +689,20 @@ NOT DEFERRABLE;
 ALTER TABLE public.teleheal ADD CONSTRAINT remedy_teleheal_fk
 FOREIGN KEY (remedy_id, inst_id)
 REFERENCES public.remedy (remedy_id, inst_id)
+ON DELETE NO ACTION
+ON UPDATE NO ACTION
+NOT DEFERRABLE;
+
+ALTER TABLE public.analysis_code ADD CONSTRAINT analysis_analysis_code_fk
+FOREIGN KEY (analysis_id, inst_id)
+REFERENCES public.analysis (analysis_id, inst_id)
+ON DELETE NO ACTION
+ON UPDATE NO ACTION
+NOT DEFERRABLE;
+
+ALTER TABLE public.teleheal ADD CONSTRAINT analysis_teleheal_fk
+FOREIGN KEY (analysis_id, inst_id)
+REFERENCES public.analysis (analysis_id, inst_id)
 ON DELETE NO ACTION
 ON UPDATE NO ACTION
 NOT DEFERRABLE;
@@ -675,8 +736,8 @@ ON UPDATE NO ACTION
 NOT DEFERRABLE;
 
 ALTER TABLE public.category ADD CONSTRAINT category_category_fk
-FOREIGN KEY (parent_category_id, parent_inst_id)
-REFERENCES public.category (category_id, inst_id)
+FOREIGN KEY (inst_id, parent_category_id)
+REFERENCES public.category (inst_id, category_id)
 ON DELETE NO ACTION
 ON UPDATE NO ACTION
 NOT DEFERRABLE;
