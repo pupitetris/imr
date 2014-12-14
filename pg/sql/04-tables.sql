@@ -228,8 +228,19 @@ CREATE TABLE public.patient (
                 persona_id INTEGER NOT NULL,
                 inst_id INTEGER NOT NULL,
                 birth DATE NOT NULL,
+                sickness_remarks VARCHAR NOT NULL,
+                alcohol BOOLEAN NOT NULL,
+                alcohol_remarks VARCHAR NOT NULL,
+                tobacco BOOLEAN NOT NULL,
+                tobacco_remarks VARCHAR NOT NULL,
+                drugs BOOLEAN NOT NULL,
+                drugs_remarks VARCHAR NOT NULL,
+                medication_remarks VARCHAR NOT NULL,
+                diet_remarks VARCHAR NOT NULL,
+                activity_remarks VARCHAR NOT NULL,
                 CONSTRAINT patient_pk PRIMARY KEY (persona_id, inst_id)
 );
+COMMENT ON COLUMN public.patient.activity_remarks IS 'Actividad física';
 
 
 CREATE SEQUENCE public.remedy_remedy_id_seq;
