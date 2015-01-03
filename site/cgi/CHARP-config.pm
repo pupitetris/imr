@@ -23,5 +23,6 @@ undef $DB_PORT;
 
 $DB_DRIVER = 'Pg';
 $CHARP_LANG = 'es';
+$FILE_DIR = '/cygdrive/c/Users/Arturo/Work/IMR/Pictures';
 
 1;
