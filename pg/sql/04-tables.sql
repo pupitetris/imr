@@ -7,6 +7,19 @@
 -- Licensed under the EUPL V.1.1. See the file LICENSE.txt for copying conditions.
 
 
+CREATE TABLE public.mime_type (
+                mime_type_id INTEGER NOT NULL,
+                type VARCHAR NOT NULL,
+                name VARCHAR NOT NULL,
+                extension VARCHAR NOT NULL,
+                CONSTRAINT mime_type_pk PRIMARY KEY (mime_type_id)
+);
+
+
+CREATE UNIQUE INDEX mime_type_idx
+ ON public.mime_type
+ ( type );
+
 CREATE TABLE public.hist_type (
                 code imr_msg_code NOT NULL,
                 type imr_msg_type NOT NULL,
@@ -114,6 +127,20 @@ COMMENT ON COLUMN public.inst.country_id IS 'CDH code';
 
 ALTER SEQUENCE public.inst_inst_id_seq OWNED BY public.inst.inst_id;
 
+CREATE TABLE public.photo (
+                photo_id VARCHAR NOT NULL,
+                inst_id INTEGER NOT NULL,
+                fname VARCHAR NOT NULL,
+                created TIMESTAMP NOT NULL,
+                mime_type_id INTEGER NOT NULL,
+                CONSTRAINT photo_pk PRIMARY KEY (photo_id, inst_id)
+);
+
+
+CREATE UNIQUE INDEX photo_idx
+ ON public.photo
+ ( fname );
+
 CREATE SEQUENCE public.product_product_id_seq;
 
 CREATE TABLE public.product (
@@ -164,6 +191,14 @@ COMMENT ON COLUMN public.persona.picture IS 'SHA-256 of picture';
 
 
 ALTER SEQUENCE public.persona_persona_id_seq OWNED BY public.persona.persona_id;
+
+CREATE TABLE public.persona_photo (
+                persona_id INTEGER NOT NULL,
+                inst_id INTEGER NOT NULL,
+                photo_id VARCHAR NOT NULL,
+                CONSTRAINT persona_photo_pk PRIMARY KEY (persona_id, inst_id, photo_id)
+);
+
 
 CREATE SEQUENCE public.address_address_id_seq;
 
@@ -452,6 +487,13 @@ CREATE TABLE public.request (
 COMMENT ON COLUMN public.request.proname IS 'Nombre del remote procedure que se va a llamar.';
 
 
+ALTER TABLE public.photo ADD CONSTRAINT mime_type_photo_fk
+FOREIGN KEY (mime_type_id)
+REFERENCES public.mime_type (mime_type_id)
+ON DELETE NO ACTION
+ON UPDATE NO ACTION
+NOT DEFERRABLE;
+
 ALTER TABLE public.message ADD CONSTRAINT hist_type_hist_msg_fk
 FOREIGN KEY (code)
 REFERENCES public.hist_type (code)
@@ -585,6 +627,20 @@ ON DELETE NO ACTION
 ON UPDATE NO ACTION
 NOT DEFERRABLE;
 
+ALTER TABLE public.photo ADD CONSTRAINT inst_photo_fk
+FOREIGN KEY (inst_id)
+REFERENCES public.inst (inst_id)
+ON DELETE NO ACTION
+ON UPDATE NO ACTION
+NOT DEFERRABLE;
+
+ALTER TABLE public.persona_photo ADD CONSTRAINT photo_persona_photo_fk
+FOREIGN KEY (inst_id, photo_id)
+REFERENCES public.photo (inst_id, photo_id)
+ON DELETE NO ACTION
+ON UPDATE NO ACTION
+NOT DEFERRABLE;
+
 ALTER TABLE public.analysis ADD CONSTRAINT ailment_analysis_fk
 FOREIGN KEY (inst_id, ailment_id)
 REFERENCES public.ailment (inst_id, ailment_id)
@@ -649,6 +705,13 @@ ON UPDATE NO ACTION
 NOT DEFERRABLE;
 
 ALTER TABLE public.referral ADD CONSTRAINT persona_referral_fk
+FOREIGN KEY (inst_id, persona_id)
+REFERENCES public.persona (inst_id, persona_id)
+ON DELETE NO ACTION
+ON UPDATE NO ACTION
+NOT DEFERRABLE;
+
+ALTER TABLE public.persona_photo ADD CONSTRAINT persona_persona_photo_fk
 FOREIGN KEY (inst_id, persona_id)
 REFERENCES public.persona (inst_id, persona_id)
 ON DELETE NO ACTION

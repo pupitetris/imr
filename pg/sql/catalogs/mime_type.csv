@@ -1,0 +1,686 @@
+mime_type_id|type|name|extension
+1|application/andrew-inset|Andrew Toolkit|N/A
+2|application/applixware|Applixware|aw
+3|application/atom+xml|Atom Syndication Format|atom
+4|application/atomcat+xml|Atom Publishing Protocol|atomcat
+5|application/atomsvc+xml|Atom Publishing Protocol Service Document|atomsvc
+6|application/ccxml+xml|Voice Browser Call Control|ccxml
+7|application/cdmi-capability|Cloud Data Management Interface (CDMI) - Capability|cdmia
+8|application/cdmi-container|Cloud Data Management Interface (CDMI) - Contaimer|cdmic
+9|application/cdmi-domain|Cloud Data Management Interface (CDMI) - Domain|cdmid
+10|application/cdmi-object|Cloud Data Management Interface (CDMI) - Object|cdmio
+11|application/cdmi-queue|Cloud Data Management Interface (CDMI) - Queue|cdmiq
+12|application/cu-seeme|CU-SeeMe|cu
+13|application/davmount+xml|Web Distributed Authoring and Versioning|davmount
+14|application/dssc+der|Data Structure for the Security Suitability of Cryptographic Algorithms|dssc
+15|application/dssc+xml|Data Structure for the Security Suitability of Cryptographic Algorithms|xdssc
+16|application/ecmascript|ECMAScript|es
+17|application/emma+xml|Extensible MultiModal Annotation|emma
+18|application/epub+zip|Electronic Publication|epub
+19|application/exi|Efficient XML Interchange|exi
+20|application/font-tdpfr|Portable Font Resource|pfr
+21|application/hyperstudio|Hyperstudio|stk
+22|application/ipfix|Internet Protocol Flow Information Export|ipfix
+23|application/java-archive|Java Archive|jar
+24|application/java-serialized-object|Java Serialized Object|ser
+25|application/java-vm|Java Bytecode File|class
+26|application/javascript|JavaScript|js
+27|application/json|JavaScript Object Notation (JSON)|json
+28|application/mac-binhex40|Macintosh BinHex 4.0|hqx
+29|application/mac-compactpro|Compact Pro|cpt
+30|application/mads+xml|Metadata Authority  Description Schema|mads
+31|application/marc|MARC Formats|mrc
+32|application/marcxml+xml|MARC21 XML Schema|mrcx
+33|application/mathematica|Mathematica Notebooks|ma
+34|application/mathml+xml|Mathematical Markup Language|mathml
+35|application/mbox|Mbox database files|mbox
+36|application/mediaservercontrol+xml|Media Server Control Markup Language|mscml
+37|application/metalink4+xml|Metalink|meta4
+38|application/mets+xml|Metadata Encoding and Transmission Standard|mets
+39|application/mods+xml|Metadata Object Description Schema|mods
+40|application/mp21|MPEG-21|m21
+41|application/mp4|MPEG4|mp4
+42|application/msword|Microsoft Word|doc
+43|application/mxf|Material Exchange Format|mxf
+44|application/octet-stream|Binary Data|bin
+45|application/oda|Office Document Architecture|oda
+46|application/oebps-package+xml|Open eBook Publication Structure|opf
+47|application/ogg|Ogg|ogx
+48|application/onenote|Microsoft OneNote|onetoc
+49|application/patch-ops-error+xml|XML Patch Framework|xer
+50|application/pdf|Adobe Portable Document Format|pdf
+51|application/pgp-encrypted|Pretty Good Privacy|N/A
+52|application/pgp-signature|Pretty Good Privacy - Signature|pgp
+53|application/pics-rules|PICSRules|prf
+54|application/pkcs10|PKCS #10 - Certification Request Standard|p10
+55|application/pkcs7-mime|PKCS #7 - Cryptographic Message Syntax Standard|p7m
+56|application/pkcs7-signature|PKCS #7 - Cryptographic Message Syntax Standard|p7s
+57|application/pkcs8|PKCS #8 - Private-Key Information Syntax Standard|p8
+58|application/pkix-attr-cert|Attribute Certificate|ac
+59|application/pkix-cert|Internet Public Key Infrastructure - Certificate|cer
+60|application/pkix-crl|Internet Public Key Infrastructure - Certificate Revocation Lists|crl
+61|application/pkix-pkipath|Internet Public Key Infrastructure - Certification Path|pkipath
+62|application/pkixcmp|Internet Public Key Infrastructure - Certificate Management Protocole|pki
+63|application/pls+xml|Pronunciation Lexicon Specification|pls
+64|application/postscript|PostScript|ai
+65|application/prs.cww|CU-Writer|cww
+66|application/pskc+xml|Portable Symmetric Key Container|pskcxml
+67|application/rdf+xml|Resource Description Framework|rdf
+68|application/reginfo+xml|IMS Networks|rif
+69|application/relax-ng-compact-syntax|Relax NG Compact Syntax|rnc
+70|application/resource-lists+xml|XML Resource Lists|rl
+71|application/resource-lists-diff+xml|XML Resource Lists Diff|rld
+72|application/rls-services+xml|XML Resource Lists|rs
+73|application/rsd+xml|Really Simple Discovery|rsd
+74|application/rss+xml|RSS - Really Simple Syndication|rss
+75|application/rtf|Rich Text Format|rtf
+76|application/sbml+xml|Systems Biology Markup Language|sbml
+77|application/scvp-cv-request|Server-Based Certificate Validation Protocol - Validation Request|scq
+78|application/scvp-cv-response|Server-Based Certificate Validation Protocol - Validation Response|scs
+79|application/scvp-vp-request|Server-Based Certificate Validation Protocol - Validation Policies - Request|spq
+80|application/scvp-vp-response|Server-Based Certificate Validation Protocol - Validation Policies - Response|spp
+81|application/sdp|Session Description Protocol|sdp
+82|application/set-payment-initiation|Secure Electronic Transaction - Payment|setpay
+83|application/set-registration-initiation|Secure Electronic Transaction - Registration|setreg
+84|application/shf+xml|S Hexdump Format|shf
+85|application/smil+xml|Synchronized Multimedia Integration Language|smi
+86|application/sparql-query|SPARQL - Query|rq
+87|application/sparql-results+xml|SPARQL - Results|srx
+88|application/srgs|Speech Recognition Grammar Specification|gram
+89|application/srgs+xml|Speech Recognition Grammar Specification - XML|grxml
+90|application/sru+xml|Search/Retrieve via URL Response Format|sru
+91|application/ssml+xml|Speech Synthesis Markup Language|ssml
+92|application/tei+xml|Text Encoding and Interchange|tei
+93|application/thraud+xml|Sharing Transaction Fraud Data|tfi
+94|application/timestamped-data|Time Stamped Data Envelope|tsd
+95|application/vnd.3gpp.pic-bw-large|3rd Generation Partnership Project - Pic Large|plb
+96|application/vnd.3gpp.pic-bw-small|3rd Generation Partnership Project - Pic Small|psb
+97|application/vnd.3gpp.pic-bw-var|3rd Generation Partnership Project - Pic Var|pvb
+98|application/vnd.3gpp2.tcap|3rd Generation Partnership Project - Transaction Capabilities Application Part|tcap
+99|application/vnd.3m.post-it-notes|3M Post It Notes|pwn
+100|application/vnd.accpac.simply.aso|Simply Accounting|aso
+101|application/vnd.accpac.simply.imp|Simply Accounting - Data Import|imp
+102|application/vnd.acucobol|ACU Cobol|acu
+103|application/vnd.acucorp|ACU Cobol|atc
+104|application/vnd.adobe.air-application-installer-package+zip|Adobe AIR Application|air
+105|application/vnd.adobe.fxp|Adobe Flex Project|fxp
+106|application/vnd.adobe.xdp+xml|Adobe XML Data Package|xdp
+107|application/vnd.adobe.xfdf|Adobe XML Forms Data Format|xfdf
+108|application/vnd.ahead.space|Ahead AIR Application|ahead
+109|application/vnd.airzip.filesecure.azf|AirZip FileSECURE|azf
+110|application/vnd.airzip.filesecure.azs|AirZip FileSECURE|azs
+111|application/vnd.amazon.ebook|Amazon Kindle eBook format|azw
+112|application/vnd.americandynamics.acc|Active Content Compression|acc
+113|application/vnd.amiga.ami|AmigaDE|ami
+114|application/vnd.android.package-archive|Android Package Archive|apk
+115|application/vnd.anser-web-certificate-issue-initiation|ANSER-WEB Terminal Client - Certificate Issue|cii
+116|application/vnd.anser-web-funds-transfer-initiation|ANSER-WEB Terminal Client - Web Funds Transfer|fti
+117|application/vnd.antix.game-component|Antix Game Player|atx
+118|application/vnd.apple.installer+xml|Apple Installer Package|mpkg
+119|application/vnd.apple.mpegurl|Multimedia Playlist Unicode|m3u8
+120|application/vnd.aristanetworks.swi|Arista Networks Software Image|swi
+121|application/vnd.audiograph|Audiograph|aep
+122|application/vnd.blueice.multipass|Blueice Research Multipass|mpm
+123|application/vnd.bmi|BMI Drawing Data Interchange|bmi
+124|application/vnd.businessobjects|BusinessObjects|rep
+125|application/vnd.chemdraw+xml|CambridgeSoft Chem Draw|cdxml
+126|application/vnd.chipnuts.karaoke-mmd|Karaoke on Chipnuts Chipsets|mmd
+127|application/vnd.cinderella|Interactive Geometry Software Cinderella|cdy
+128|application/vnd.claymore|Claymore Data Files|cla
+129|application/vnd.cloanto.rp9|RetroPlatform Player|rp9
+130|application/vnd.clonk.c4group|Clonk Game|c4g
+131|application/vnd.cluetrust.cartomobile-config|ClueTrust CartoMobile - Config|c11amc
+132|application/vnd.cluetrust.cartomobile-config-pkg|ClueTrust CartoMobile - Config Package|c11amz
+133|application/vnd.commonspace|Sixth Floor Media - CommonSpace|csp
+134|application/vnd.contact.cmsg|CIM Database|cdbcmsg
+135|application/vnd.cosmocaller|CosmoCaller|cmc
+136|application/vnd.crick.clicker|CrickSoftware - Clicker|clkx
+137|application/vnd.crick.clicker.keyboard|CrickSoftware - Clicker - Keyboard|clkk
+138|application/vnd.crick.clicker.palette|CrickSoftware - Clicker - Palette|clkp
+139|application/vnd.crick.clicker.template|CrickSoftware - Clicker - Template|clkt
+140|application/vnd.crick.clicker.wordbank|CrickSoftware - Clicker - Wordbank|clkw
+141|application/vnd.criticaltools.wbs+xml|Critical Tools - PERT Chart EXPERT|wbs
+142|application/vnd.ctc-posml|PosML|pml
+143|application/vnd.cups-ppd|Adobe PostScript Printer Description File Format|ppd
+144|application/vnd.curl.car|CURL Applet|car
+145|application/vnd.curl.pcurl|CURL Applet|pcurl
+146|application/vnd.data-vision.rdz|RemoteDocs R-Viewer|rdz
+147|application/vnd.denovo.fcselayout-link|FCS Express Layout Link|fe_launch
+148|application/vnd.dna|New Moon Liftoff/DNA|dna
+149|application/vnd.dolby.mlp|Dolby Meridian Lossless Packing|mlp
+150|application/vnd.dpgraph|DPGraph|dpg
+151|application/vnd.dreamfactory|DreamFactory|dfac
+152|application/vnd.dvb.ait|Digital Video Broadcasting|ait
+153|application/vnd.dvb.service|Digital Video Broadcasting|svc
+154|application/vnd.dynageo|DynaGeo|geo
+155|application/vnd.ecowin.chart|EcoWin Chart|mag
+156|application/vnd.enliven|Enliven Viewer|nml
+157|application/vnd.epson.esf|QUASS Stream Player|esf
+158|application/vnd.epson.msf|QUASS Stream Player|msf
+159|application/vnd.epson.quickanime|QuickAnime Player|qam
+160|application/vnd.epson.salt|SimpleAnimeLite Player|slt
+161|application/vnd.epson.ssf|QUASS Stream Player|ssf
+162|application/vnd.eszigno3+xml|MICROSEC e-Szign¢|es3
+163|application/vnd.ezpix-album|EZPix Secure Photo Album|ez2
+164|application/vnd.ezpix-package|EZPix Secure Photo Album|ez3
+165|application/vnd.fdf|Forms Data Format|fdf
+166|application/vnd.fdsn.seed|Digital Siesmograph Networks - SEED Datafiles|seed
+167|application/vnd.flographit|NpGraphIt|gph
+168|application/vnd.fluxtime.clip|FluxTime Clip|ftc
+169|application/vnd.framemaker|FrameMaker Normal Format|fm
+170|application/vnd.frogans.fnc|Frogans Player|fnc
+171|application/vnd.frogans.ltf|Frogans Player|ltf
+172|application/vnd.fsc.weblaunch|Friendly Software Corporation|fsc
+173|application/vnd.fujitsu.oasys|Fujitsu Oasys|oas
+174|application/vnd.fujitsu.oasys2|Fujitsu Oasys|oa2
+175|application/vnd.fujitsu.oasys3|Fujitsu Oasys|oa3
+176|application/vnd.fujitsu.oasysgp|Fujitsu Oasys|fg5
+177|application/vnd.fujitsu.oasysprs|Fujitsu Oasys|bh2
+178|application/vnd.fujixerox.ddd|Fujitsu - Xerox 2D CAD Data|ddd
+179|application/vnd.fujixerox.docuworks|Fujitsu - Xerox DocuWorks|xdw
+180|application/vnd.fujixerox.docuworks.binder|Fujitsu - Xerox DocuWorks Binder|xbd
+181|application/vnd.fuzzysheet|FuzzySheet|fzs
+182|application/vnd.genomatix.tuxedo|Genomatix Tuxedo Framework|txd
+183|application/vnd.geogebra.file|GeoGebra|ggb
+184|application/vnd.geogebra.tool|GeoGebra|ggt
+185|application/vnd.geometry-explorer|GeoMetry Explorer|gex
+186|application/vnd.geonext|GEONExT and JSXGraph|gxt
+187|application/vnd.geoplan|GeoplanW|g2w
+188|application/vnd.geospace|GeospacW|g3w
+189|application/vnd.gmx|GameMaker ActiveX|gmx
+190|application/vnd.google-earth.kml+xml|Google Earth - KML|kml
+191|application/vnd.google-earth.kmz|Google Earth - Zipped KML|kmz
+192|application/vnd.grafeq|GrafEq|gqf
+193|application/vnd.groove-account|Groove - Account|gac
+194|application/vnd.groove-help|Groove - Help|ghf
+195|application/vnd.groove-identity-message|Groove - Identity Message|gim
+196|application/vnd.groove-injector|Groove - Injector|grv
+197|application/vnd.groove-tool-message|Groove - Tool Message|gtm
+198|application/vnd.groove-tool-template|Groove - Tool Template|tpl
+199|application/vnd.groove-vcard|Groove - Vcard|vcg
+200|application/vnd.hal+xml|Hypertext Application Language|hal
+201|application/vnd.handheld-entertainment+xml|ZVUE Media Manager|zmm
+202|application/vnd.hbci|Homebanking Computer Interface (HBCI)|hbci
+203|application/vnd.hhe.lesson-player|Archipelago Lesson Player|les
+204|application/vnd.hp-hpgl|HP-GL/2 and HP RTL|hpgl
+205|application/vnd.hp-hpid|Hewlett Packard Instant Delivery|hpid
+206|application/vnd.hp-hps|Hewlett-Packard's WebPrintSmart|hps
+207|application/vnd.hp-jlyt|HP Indigo Digital Press - Job Layout Languate|jlt
+208|application/vnd.hp-pcl|HP Printer Command Language|pcl
+209|application/vnd.hp-pclxl|PCL 6 Enhanced (Formely PCL XL)|pclxl
+210|application/vnd.hydrostatix.sof-data|Hydrostatix Master Suite|sfd-hdstx
+211|application/vnd.hzn-3d-crossword|3D Crossword Plugin|x3d
+212|application/vnd.ibm.minipay|MiniPay|mpy
+213|application/vnd.ibm.modcap|MO:DCA-P|afp
+214|application/vnd.ibm.rights-management|IBM DB2 Rights Manager|irm
+215|application/vnd.ibm.secure-container|IBM Electronic Media Management System - Secure Container|sc
+216|application/vnd.iccprofile|ICC profile|icc
+217|application/vnd.igloader|igLoader|igl
+218|application/vnd.immervision-ivp|ImmerVision PURE Players|ivp
+219|application/vnd.immervision-ivu|ImmerVision PURE Players|ivu
+220|application/vnd.insors.igm|IOCOM Visimeet|igm
+221|application/vnd.intercon.formnet|Intercon FormNet|xpw
+222|application/vnd.intergeo|Interactive Geometry Software|i2g
+223|application/vnd.intu.qbo|Open Financial Exchange|qbo
+224|application/vnd.intu.qfx|Quicken|qfx
+225|application/vnd.ipunplugged.rcprofile|IP Unplugged Roaming Client|rcprofile
+226|application/vnd.irepository.package+xml|iRepository / Lucidoc Editor|irp
+227|application/vnd.is-xpr|Express by Infoseek|xpr
+228|application/vnd.isac.fcs|International Society for Advancement of Cytometry|fcs
+229|application/vnd.jam|Lightspeed Audio Lab|jam
+230|application/vnd.jcp.javame.midlet-rms|Mobile Information Device Profile|rms
+231|application/vnd.jisp|RhymBox|jisp
+232|application/vnd.joost.joda-archive|Joda Archive|joda
+233|application/vnd.kahootz|Kahootz|ktz
+234|application/vnd.kde.karbon|KDE KOffice Office Suite - Karbon|karbon
+235|application/vnd.kde.kchart|KDE KOffice Office Suite - KChart|chrt
+236|application/vnd.kde.kformula|KDE KOffice Office Suite - Kformula|kfo
+237|application/vnd.kde.kivio|KDE KOffice Office Suite - Kivio|flw
+238|application/vnd.kde.kontour|KDE KOffice Office Suite - Kontour|kon
+239|application/vnd.kde.kpresenter|KDE KOffice Office Suite - Kpresenter|kpr
+240|application/vnd.kde.kspread|KDE KOffice Office Suite - Kspread|ksp
+241|application/vnd.kde.kword|KDE KOffice Office Suite - Kword|kwd
+242|application/vnd.kenameaapp|Kenamea App|htke
+243|application/vnd.kidspiration|Kidspiration|kia
+244|application/vnd.kinar|Kinar Applications|kne
+245|application/vnd.koan|SSEYO Koan Play File|skp
+246|application/vnd.kodak-descriptor|Kodak Storyshare|sse
+247|application/vnd.las.las+xml|Laser App Enterprise|lasxml
+248|application/vnd.llamagraphics.life-balance.desktop|Life Balance - Desktop Edition|lbd
+249|application/vnd.llamagraphics.life-balance.exchange+xml|Life Balance - Exchange Format|lbe
+250|application/vnd.lotus-1-2-3|Lotus 1-2-3|123
+251|application/vnd.lotus-approach|Lotus Approach|apr
+252|application/vnd.lotus-freelance|Lotus Freelance|pre
+253|application/vnd.lotus-notes|Lotus Notes|nsf
+254|application/vnd.lotus-organizer|Lotus Organizer|org
+255|application/vnd.lotus-screencam|Lotus Screencam|scm
+256|application/vnd.lotus-wordpro|Lotus Wordpro|lwp
+257|application/vnd.macports.portpkg|MacPorts Port System|portpkg
+258|application/vnd.mcd|Micro CADAM Helix D&D|mcd
+259|application/vnd.medcalcdata|MedCalc|mc1
+260|application/vnd.mediastation.cdkey|MediaRemote|cdkey
+261|application/vnd.mfer|Medical Waveform Encoding Format|mwf
+262|application/vnd.mfmp|Melody Format for Mobile Platform|mfm
+263|application/vnd.micrografx.flo|Micrografx|flo
+264|application/vnd.micrografx.igx|Micrografx iGrafx Professional|igx
+265|application/vnd.mif|FrameMaker Interchange Format|mif
+266|application/vnd.mobius.daf|Mobius Management Systems - UniversalArchive|daf
+267|application/vnd.mobius.dis|Mobius Management Systems - Distribution Database|dis
+268|application/vnd.mobius.mbk|Mobius Management Systems - Basket file|mbk
+269|application/vnd.mobius.mqy|Mobius Management Systems - Query File|mqy
+270|application/vnd.mobius.msl|Mobius Management Systems - Script Language|msl
+271|application/vnd.mobius.plc|Mobius Management Systems - Policy Definition Language File|plc
+272|application/vnd.mobius.txf|Mobius Management Systems - Topic Index File|txf
+273|application/vnd.mophun.application|Mophun VM|mpn
+274|application/vnd.mophun.certificate|Mophun Certificate|mpc
+275|application/vnd.mozilla.xul+xml|XUL - XML User Interface Language|xul
+276|application/vnd.ms-artgalry|Microsoft Artgalry|cil
+277|application/vnd.ms-cab-compressed|Microsoft Cabinet File|cab
+278|application/vnd.ms-excel|Microsoft Excel|xls
+279|application/vnd.ms-excel.addin.macroenabled.12|Microsoft Excel - Add-In File|xlam
+280|application/vnd.ms-excel.sheet.binary.macroenabled.12|Microsoft Excel - Binary Workbook|xlsb
+281|application/vnd.ms-excel.sheet.macroenabled.12|Microsoft Excel - Macro-Enabled Workbook|xlsm
+282|application/vnd.ms-excel.template.macroenabled.12|Microsoft Excel - Macro-Enabled Template File|xltm
+283|application/vnd.ms-fontobject|Microsoft Embedded OpenType|eot
+284|application/vnd.ms-htmlhelp|Microsoft Html Help File|chm
+285|application/vnd.ms-ims|Microsoft Class Server|ims
+286|application/vnd.ms-lrm|Microsoft Learning Resource Module|lrm
+287|application/vnd.ms-officetheme|Microsoft Office System Release Theme|thmx
+288|application/vnd.ms-pki.seccat|Microsoft Trust UI Provider - Security Catalog|cat
+289|application/vnd.ms-pki.stl|Microsoft Trust UI Provider - Certificate Trust Link|stl
+290|application/vnd.ms-powerpoint|Microsoft PowerPoint|ppt
+291|application/vnd.ms-powerpoint.addin.macroenabled.12|Microsoft PowerPoint - Add-in file|ppam
+292|application/vnd.ms-powerpoint.presentation.macroenabled.12|Microsoft PowerPoint - Macro-Enabled Presentation File|pptm
+293|application/vnd.ms-powerpoint.slide.macroenabled.12|Microsoft PowerPoint - Macro-Enabled Open XML Slide|sldm
+294|application/vnd.ms-powerpoint.slideshow.macroenabled.12|Microsoft PowerPoint - Macro-Enabled Slide Show File|ppsm
+295|application/vnd.ms-powerpoint.template.macroenabled.12|Micosoft PowerPoint - Macro-Enabled Template File|potm
+296|application/vnd.ms-project|Microsoft Project|mpp
+297|application/vnd.ms-word.document.macroenabled.12|Micosoft Word - Macro-Enabled Document|docm
+298|application/vnd.ms-word.template.macroenabled.12|Micosoft Word - Macro-Enabled Template|dotm
+299|application/vnd.ms-works|Microsoft Works|wps
+300|application/vnd.ms-wpl|Microsoft Windows Media Player Playlist|wpl
+301|application/vnd.ms-xpsdocument|Microsoft XML Paper Specification|xps
+302|application/vnd.mseq|3GPP MSEQ File|mseq
+303|application/vnd.musician|MUsical Score Interpreted Code Invented  for the ASCII designation of Notation|mus
+304|application/vnd.muvee.style|Muvee Automatic Video Editing|msty
+305|application/vnd.neurolanguage.nlu|neuroLanguage|nlu
+306|application/vnd.noblenet-directory|NobleNet Directory|nnd
+307|application/vnd.noblenet-sealer|NobleNet Sealer|nns
+308|application/vnd.noblenet-web|NobleNet Web|nnw
+309|application/vnd.nokia.n-gage.data|N-Gage Game Data|ngdat
+310|application/vnd.nokia.n-gage.symbian.install|N-Gage Game Installer|n-gage
+311|application/vnd.nokia.radio-preset|Nokia Radio Application - Preset|rpst
+312|application/vnd.nokia.radio-presets|Nokia Radio Application - Preset|rpss
+313|application/vnd.novadigm.edm|Novadigm's RADIA and EDM products|edm
+314|application/vnd.novadigm.edx|Novadigm's RADIA and EDM products|edx
+315|application/vnd.novadigm.ext|Novadigm's RADIA and EDM products|ext
+316|application/vnd.oasis.opendocument.chart|OpenDocument Chart|odc
+317|application/vnd.oasis.opendocument.chart-template|OpenDocument Chart Template|otc
+318|application/vnd.oasis.opendocument.database|OpenDocument Database|odb
+319|application/vnd.oasis.opendocument.formula|OpenDocument Formula|odf
+320|application/vnd.oasis.opendocument.formula-template|OpenDocument Formula Template|odft
+321|application/vnd.oasis.opendocument.graphics|OpenDocument Graphics|odg
+322|application/vnd.oasis.opendocument.graphics-template|OpenDocument Graphics Template|otg
+323|application/vnd.oasis.opendocument.image|OpenDocument Image|odi
+324|application/vnd.oasis.opendocument.image-template|OpenDocument Image Template|oti
+325|application/vnd.oasis.opendocument.presentation|OpenDocument Presentation|odp
+326|application/vnd.oasis.opendocument.presentation-template|OpenDocument Presentation Template|otp
+327|application/vnd.oasis.opendocument.spreadsheet|OpenDocument Spreadsheet|ods
+328|application/vnd.oasis.opendocument.spreadsheet-template|OpenDocument Spreadsheet Template|ots
+329|application/vnd.oasis.opendocument.text|OpenDocument Text|odt
+330|application/vnd.oasis.opendocument.text-master|OpenDocument Text Master|odm
+331|application/vnd.oasis.opendocument.text-template|OpenDocument Text Template|ott
+332|application/vnd.oasis.opendocument.text-web|Open Document Text Web|oth
+333|application/vnd.olpc-sugar|Sugar Linux Application Bundle|xo
+334|application/vnd.oma.dd2+xml|OMA Download Agents|dd2
+335|application/vnd.openofficeorg.extension|Open Office Extension|oxt
+336|application/vnd.openxmlformats-officedocument.presentationml.presentation|Microsoft Office - OOXML - Presentation|pptx
+337|application/vnd.openxmlformats-officedocument.presentationml.slide|Microsoft Office - OOXML - Presentation (Slide)|sldx
+338|application/vnd.openxmlformats-officedocument.presentationml.slideshow|Microsoft Office - OOXML - Presentation (Slideshow)|ppsx
+339|application/vnd.openxmlformats-officedocument.presentationml.template|Microsoft Office - OOXML - Presentation Template|potx
+340|application/vnd.openxmlformats-officedocument.spreadsheetml.sheet|Microsoft Office - OOXML - Spreadsheet|xlsx
+341|application/vnd.openxmlformats-officedocument.spreadsheetml.template|Microsoft Office - OOXML - Spreadsheet Teplate|xltx
+342|application/vnd.openxmlformats-officedocument.wordprocessingml.document|Microsoft Office - OOXML - Word Document|docx
+343|application/vnd.openxmlformats-officedocument.wordprocessingml.template|Microsoft Office - OOXML - Word Document Template|dotx
+344|application/vnd.osgeo.mapguide.package|MapGuide DBXML|mgp
+345|application/vnd.osgi.dp|OSGi Deployment Package|dp
+346|application/vnd.palm|PalmOS Data|pdb
+347|application/vnd.pawaafile|PawaaFILE|paw
+348|application/vnd.pg.format|Proprietary P&G Standard Reporting System|str
+349|application/vnd.pg.osasli|Proprietary P&G Standard Reporting System|ei6
+350|application/vnd.picsel|Pcsel eFIF File|efif
+351|application/vnd.pmi.widget|Qualcomm's Plaza Mobile Internet|wg
+352|application/vnd.pocketlearn|PocketLearn Viewers|plf
+353|application/vnd.powerbuilder6|PowerBuilder|pbd
+354|application/vnd.previewsystems.box|Preview Systems ZipLock/VBox|box
+355|application/vnd.proteus.magazine|EFI Proteus|mgz
+356|application/vnd.publishare-delta-tree|PubliShare Objects|qps
+357|application/vnd.pvi.ptid1|Princeton Video Image|ptid
+358|application/vnd.quark.quarkxpress|QuarkXpress|qxd
+359|application/vnd.realvnc.bed|RealVNC|bed
+360|application/vnd.recordare.musicxml|Recordare Applications|mxl
+361|application/vnd.recordare.musicxml+xml|Recordare Applications|musicxml
+362|application/vnd.rig.cryptonote|CryptoNote|cryptonote
+363|application/vnd.rim.cod|Blackberry COD File|cod
+364|application/vnd.rn-realmedia|RealMedia|rm
+365|application/vnd.route66.link66+xml|ROUTE 66 Location Based Services|link66
+366|application/vnd.sailingtracker.track|SailingTracker|st
+367|application/vnd.seemail|SeeMail|see
+368|application/vnd.sema|Secured eMail|sema
+369|application/vnd.semd|Secured eMail|semd
+370|application/vnd.semf|Secured eMail|semf
+371|application/vnd.shana.informed.formdata|Shana Informed Filler|ifm
+372|application/vnd.shana.informed.formtemplate|Shana Informed Filler|itp
+373|application/vnd.shana.informed.interchange|Shana Informed Filler|iif
+374|application/vnd.shana.informed.package|Shana Informed Filler|ipk
+375|application/vnd.simtech-mindmapper|SimTech MindMapper|twd
+376|application/vnd.smaf|SMAF File|mmf
+377|application/vnd.smart.teacher|SMART Technologies Apps|teacher
+378|application/vnd.solent.sdkm+xml|SudokuMagic|sdkm
+379|application/vnd.spotfire.dxp|TIBCO Spotfire|dxp
+380|application/vnd.spotfire.sfs|TIBCO Spotfire|sfs
+381|application/vnd.stardivision.calc|StarOffice - Calc|sdc
+382|application/vnd.stardivision.draw|StarOffice - Draw|sda
+383|application/vnd.stardivision.impress|StarOffice - Impress|sdd
+384|application/vnd.stardivision.math|StarOffice - Math|smf
+385|application/vnd.stardivision.writer|StarOffice - Writer|sdw
+386|application/vnd.stardivision.writer-global|StarOffice - Writer  (Global)|sgl
+387|application/vnd.stepmania.stepchart|StepMania|sm
+388|application/vnd.sun.xml.calc|OpenOffice - Calc (Spreadsheet)|sxc
+389|application/vnd.sun.xml.calc.template|OpenOffice - Calc Template (Spreadsheet)|stc
+390|application/vnd.sun.xml.draw|OpenOffice - Draw (Graphics)|sxd
+391|application/vnd.sun.xml.draw.template|OpenOffice - Draw Template (Graphics)|std
+392|application/vnd.sun.xml.impress|OpenOffice - Impress (Presentation)|sxi
+393|application/vnd.sun.xml.impress.template|OpenOffice - Impress Template (Presentation)|sti
+394|application/vnd.sun.xml.math|OpenOffice - Math (Formula)|sxm
+395|application/vnd.sun.xml.writer|OpenOffice - Writer (Text - HTML)|sxw
+396|application/vnd.sun.xml.writer.global|OpenOffice - Writer (Text - HTML)|sxg
+397|application/vnd.sun.xml.writer.template|OpenOffice - Writer Template (Text - HTML)|stw
+398|application/vnd.sus-calendar|ScheduleUs|sus
+399|application/vnd.svd|SourceView Document|svd
+400|application/vnd.symbian.install|Symbian Install Package|sis
+401|application/vnd.syncml+xml|SyncML|xsm
+402|application/vnd.syncml.dm+wbxml|SyncML - Device Management|bdm
+403|application/vnd.syncml.dm+xml|SyncML - Device Management|xdm
+404|application/vnd.tao.intent-module-archive|Tao Intent|tao
+405|application/vnd.tmobile-livetv|MobileTV|tmo
+406|application/vnd.trid.tpt|TRI Systems Config|tpt
+407|application/vnd.triscape.mxs|Triscape Map Explorer|mxs
+408|application/vnd.trueapp|True BASIC|tra
+409|application/vnd.ufdl|Universal Forms Description Language|ufd
+410|application/vnd.uiq.theme|User Interface Quartz - Theme (Symbian)|utz
+411|application/vnd.umajin|UMAJIN|umj
+412|application/vnd.unity|Unity 3d|unityweb
+413|application/vnd.uoml+xml|Unique Object Markup Language|uoml
+414|application/vnd.vcx|VirtualCatalog|vcx
+415|application/vnd.visio|Microsoft Visio|vsd
+416|application/vnd.visionary|Visionary|vis
+417|application/vnd.vsf|Viewport+|vsf
+418|application/vnd.wap.wbxml|WAP Binary XML (WBXML)|wbxml
+419|application/vnd.wap.wmlc|Compiled Wireless Markup Language (WMLC)|wmlc
+420|application/vnd.wap.wmlscriptc|WMLScript|wmlsc
+421|application/vnd.webturbo|WebTurbo|wtb
+422|application/vnd.wolfram.player|Mathematica Notebook Player|nbp
+423|application/vnd.wordperfect|Wordperfect|wpd
+424|application/vnd.wqd|SundaHus WQ|wqd
+425|application/vnd.wt.stf|Worldtalk|stf
+426|application/vnd.xara|CorelXARA|xar
+427|application/vnd.xfdl|Extensible Forms Description Language|xfdl
+428|application/vnd.yamaha.hv-dic|HV Voice Dictionary|hvd
+429|application/vnd.yamaha.hv-script|HV Script|hvs
+430|application/vnd.yamaha.hv-voice|HV Voice Parameter|hvp
+431|application/vnd.yamaha.openscoreformat|Open Score Format|osf
+432|application/vnd.yamaha.openscoreformat.osfpvg+xml|OSFPVG|osfpvg
+433|application/vnd.yamaha.smaf-audio|SMAF Audio|saf
+434|application/vnd.yamaha.smaf-phrase|SMAF Phrase|spf
+435|application/vnd.yellowriver-custom-menu|CustomMenu|cmp
+436|application/vnd.zul|Z.U.L. Geometry|zir
+437|application/vnd.zzazz.deck+xml|Zzazz Deck|zaz
+438|application/voicexml+xml|VoiceXML|vxml
+439|application/widget|Widget Packaging and XML Configuration|wgt
+440|application/winhlp|WinHelp|hlp
+441|application/wsdl+xml|WSDL - Web Services Description Language|wsdl
+442|application/wspolicy+xml|Web Services Policy|wspolicy
+443|application/x-7z-compressed|7-Zip|7z
+444|application/x-abiword|AbiWord|abw
+445|application/x-ace-compressed|Ace Archive|ace
+446|application/x-authorware-bin|Adobe (Macropedia) Authorware - Binary File|aab
+447|application/x-authorware-map|Adobe (Macropedia) Authorware - Map|aam
+448|application/x-authorware-seg|Adobe (Macropedia) Authorware - Segment File|aas
+449|application/x-bcpio|Binary CPIO Archive|bcpio
+450|application/x-bittorrent|BitTorrent|torrent
+451|application/x-bzip|Bzip Archive|bz
+452|application/x-bzip2|Bzip2 Archive|bz2
+453|application/x-cdlink|Video CD|vcd
+454|application/x-chat|pIRCh|chat
+455|application/x-chess-pgn|Portable Game Notation (Chess Games)|pgn
+456|application/x-cpio|CPIO Archive|cpio
+457|application/x-csh|C Shell Script|csh
+458|application/x-debian-package|Debian Package|deb
+459|application/x-director|Adobe Shockwave Player|dir
+460|application/x-doom|Doom Video Game|wad
+461|application/x-dtbncx+xml|Navigation Control file for XML (for ePub)|ncx
+462|application/x-dtbook+xml|Digital Talking Book|dtb
+463|application/x-dtbresource+xml|Digital Talking Book - Resource File|res
+464|application/x-dvi|Device Independent File Format (DVI)|dvi
+465|application/x-font-bdf|Glyph Bitmap Distribution Format|bdf
+466|application/x-font-ghostscript|Ghostscript Font|gsf
+467|application/x-font-linux-psf|PSF Fonts|psf
+468|application/x-font-otf|OpenType Font File|otf
+469|application/x-font-pcf|Portable Compiled Format|pcf
+470|application/x-font-snf|Server Normal Format|snf
+471|application/x-font-ttf|TrueType Font|ttf
+472|application/x-font-type1|PostScript Fonts|pfa
+473|application/x-font-woff|Web Open Font Format|woff
+474|application/x-futuresplash|FutureSplash Animator|spl
+475|application/x-gnumeric|Gnumeric|gnumeric
+476|application/x-gtar|GNU Tar Files|gtar
+477|application/x-hdf|Hierarchical Data Format|hdf
+478|application/x-java-jnlp-file|Java Network Launching Protocol|jnlp
+479|application/x-latex|LaTeX|latex
+480|application/x-mobipocket-ebook|Mobipocket|prc
+481|application/x-ms-application|Microsoft ClickOnce|application
+482|application/x-ms-wmd|Microsoft Windows Media Player Download Package|wmd
+483|application/x-ms-wmz|Microsoft Windows Media Player Skin Package|wmz
+484|application/x-ms-xbap|Microsoft XAML Browser Application|xbap
+485|application/x-msaccess|Microsoft Access|mdb
+486|application/x-msbinder|Microsoft Office Binder|obd
+487|application/x-mscardfile|Microsoft Information Card|crd
+488|application/x-msclip|Microsoft Clipboard Clip|clp
+489|application/x-msdownload|Microsoft Application|exe
+490|application/x-msmediaview|Microsoft MediaView|mvb
+491|application/x-msmetafile|Microsoft Windows Metafile|wmf
+492|application/x-msmoney|Microsoft Money|mny
+493|application/x-mspublisher|Microsoft Publisher|pub
+494|application/x-msschedule|Microsoft Schedule+|scd
+495|application/x-msterminal|Microsoft Windows Terminal Services|trm
+496|application/x-mswrite|Microsoft Wordpad|wri
+497|application/x-netcdf|Network Common Data Form (NetCDF)|nc
+498|application/x-pkcs12|PKCS #12 - Personal Information Exchange Syntax Standard|p12
+499|application/x-pkcs7-certificates|PKCS #7 - Cryptographic Message Syntax Standard (Certificates)|p7b
+500|application/x-pkcs7-certreqresp|PKCS #7 - Cryptographic Message Syntax Standard (Certificate Request Response)|p7r
+501|application/x-rar-compressed|RAR Archive|rar
+502|application/x-sh|Bourne Shell Script|sh
+503|application/x-shar|Shell Archive|shar
+504|application/x-shockwave-flash|Adobe Flash|swf
+505|application/x-silverlight-app|Microsoft Silverlight|xap
+506|application/x-stuffit|Stuffit Archive|sit
+507|application/x-stuffitx|Stuffit Archive|sitx
+508|application/x-sv4cpio|System V Release 4 CPIO Archive|sv4cpio
+509|application/x-sv4crc|System V Release 4 CPIO Checksum Data|sv4crc
+510|application/x-tar|Tar File (Tape Archive)|tar
+511|application/x-tcl|Tcl Script|tcl
+512|application/x-tex|TeX|tex
+513|application/x-tex-tfm|TeX Font Metric|tfm
+514|application/x-texinfo|GNU Texinfo Document|texinfo
+515|application/x-ustar|Ustar (Uniform Standard Tape Archive)|ustar
+516|application/x-wais-source|WAIS Source|src
+517|application/x-x509-ca-cert|X.509 Certificate|der
+518|application/x-xfig|Xfig|fig
+519|application/x-xpinstall|XPInstall - Mozilla|xpi
+520|application/xcap-diff+xml|XML Configuration Access Protocol - XCAP Diff|xdf
+521|application/xenc+xml|XML Encryption Syntax and Processing|xenc
+522|application/xhtml+xml|XHTML - The Extensible HyperText Markup Language|xhtml
+523|application/xml|XML - Extensible Markup Language|xml
+524|application/xml-dtd|Document Type Definition|dtd
+525|application/xop+xml|XML-Binary Optimized Packaging|xop
+526|application/xslt+xml|XML Transformations|xslt
+527|application/xspf+xml|XSPF - XML Shareable Playlist Format|xspf
+528|application/xv+xml|MXML|mxml
+529|application/yang|YANG Data Modeling Language|yang
+530|application/yin+xml|YIN (YANG - XML)|yin
+531|application/zip|Zip Archive|zip
+532|audio/adpcm|Adaptive differential pulse-code modulation|adp
+533|audio/basic|Sun Audio - Au file format|au
+534|audio/midi|MIDI - Musical Instrument Digital Interface|mid
+535|audio/mp4|MPEG-4 Audio|mp4a
+536|audio/mpeg|MPEG Audio|mpga
+537|audio/ogg|Ogg Audio|oga
+538|audio/vnd.dece.audio|DECE Audio|uva
+539|audio/vnd.digital-winds|Digital Winds Music|eol
+540|audio/vnd.dra|DRA Audio|dra
+541|audio/vnd.dts|DTS Audio|dts
+542|audio/vnd.dts.hd|DTS High Definition Audio|dtshd
+543|audio/vnd.lucent.voice|Lucent Voice|lvp
+544|audio/vnd.ms-playready.media.pya|Microsoft PlayReady Ecosystem|pya
+545|audio/vnd.nuera.ecelp4800|Nuera ECELP 4800|ecelp4800
+546|audio/vnd.nuera.ecelp7470|Nuera ECELP 7470|ecelp7470
+547|audio/vnd.nuera.ecelp9600|Nuera ECELP 9600|ecelp9600
+548|audio/vnd.rip|Hit'n'Mix|rip
+549|audio/webm|Open Web Media Project - Audio|weba
+550|audio/x-aac|Advanced Audio Coding (AAC)|aac
+551|audio/x-aiff|Audio Interchange File Format|aif
+552|audio/x-mpegurl|M3U (Multimedia Playlist)|m3u
+553|audio/x-ms-wax|Microsoft Windows Media Audio Redirector|wax
+554|audio/x-ms-wma|Microsoft Windows Media Audio|wma
+555|audio/x-pn-realaudio|Real Audio Sound|ram
+556|audio/x-pn-realaudio-plugin|Real Audio Sound|rmp
+557|audio/x-wav|Waveform Audio File Format (WAV)|wav
+558|chemical/x-cdx|ChemDraw eXchange file|cdx
+559|chemical/x-cif|Crystallographic Interchange Format|cif
+560|chemical/x-cmdf|CrystalMaker Data Format|cmdf
+561|chemical/x-cml|Chemical Markup Language|cml
+562|chemical/x-csml|Chemical Style Markup Language|csml
+563|chemical/x-xyz|XYZ File Format|xyz
+564|image/bmp|Bitmap Image File|bmp
+565|image/cgm|Computer Graphics Metafile|cgm
+566|image/g3fax|G3 Fax Image|g3
+567|image/gif|Graphics Interchange Format|gif
+568|image/ief|Image Exchange Format|ief
+569|image/jpeg|JPEG Image|jpg
+570|image/ktx|OpenGL Textures (KTX)|ktx
+571|image/png|Portable Network Graphics (PNG)|png
+572|image/prs.btif|BTIF|btif
+573|image/svg+xml|Scalable Vector Graphics (SVG)|svg
+574|image/tiff|Tagged Image File Format|tiff
+575|image/vnd.adobe.photoshop|Photoshop Document|psd
+576|image/vnd.dece.graphic|DECE Graphic|uvi
+577|image/vnd.dvb.subtitle|Close Captioning - Subtitle|sub
+578|image/vnd.djvu|DjVu|djvu
+579|image/vnd.dwg|DWG Drawing|dwg
+580|image/vnd.dxf|AutoCAD DXF|dxf
+581|image/vnd.fastbidsheet|FastBid Sheet|fbs
+582|image/vnd.fpx|FlashPix|fpx
+583|image/vnd.fst|FAST Search & Transfer ASA|fst
+584|image/vnd.fujixerox.edmics-mmr|EDMICS 2000|mmr
+585|image/vnd.fujixerox.edmics-rlc|EDMICS 2000|rlc
+586|image/vnd.ms-modi|Microsoft Document Imaging Format|mdi
+587|image/vnd.net-fpx|FlashPix|npx
+588|image/vnd.wap.wbmp|WAP Bitamp (WBMP)|wbmp
+589|image/vnd.xiff|eXtended Image File Format (XIFF)|xif
+590|image/webp|WebP Image|webp
+591|image/x-cmu-raster|CMU Image|ras
+592|image/x-cmx|Corel Metafile Exchange (CMX)|cmx
+593|image/x-freehand|FreeHand MX|fh
+594|image/x-icon|Icon Image|ico
+595|image/x-pcx|PCX Image|pcx
+596|image/x-pict|PICT Image|pic
+597|image/x-portable-anymap|Portable Anymap Image|pnm
+598|image/x-portable-bitmap|Portable Bitmap Format|pbm
+599|image/x-portable-graymap|Portable Graymap Format|pgm
+600|image/x-portable-pixmap|Portable Pixmap Format|ppm
+601|image/x-rgb|Silicon Graphics RGB Bitmap|rgb
+602|image/x-xbitmap|X BitMap|xbm
+603|image/x-xpixmap|X PixMap|xpm
+604|image/x-xwindowdump|X Window Dump|xwd
+605|message/rfc822|Email Message|eml
+606|model/iges|Initial Graphics Exchange Specification (IGES)|igs
+607|model/mesh|Mesh Data Type|msh
+608|model/vnd.collada+xml|COLLADA|dae
+609|model/vnd.dwf|Autodesk Design Web Format (DWF)|dwf
+610|model/vnd.gdl|Geometric Description Language (GDL)|gdl
+611|model/vnd.gtw|Gen-Trix Studio|gtw
+612|model/vnd.mts|Virtue MTS|mts
+613|model/vnd.vtu|Virtue VTU|vtu
+614|model/vrml|Virtual Reality Modeling Language|wrl
+615|text/calendar|iCalendar|ics
+616|text/css|Cascading Style Sheets (CSS)|css
+617|text/csv|Comma-Seperated Values|csv
+618|text/html|HyperText Markup Language (HTML)|html
+619|text/n3|Notation3|n3
+620|text/plain|Text File|txt
+621|text/prs.lines.tag|PRS Lines Tag|dsc
+622|text/richtext|Rich Text Format (RTF)|rtx
+623|text/sgml|Standard Generalized Markup Language (SGML)|sgml
+624|text/tab-separated-values|Tab Seperated Values|tsv
+625|text/troff|troff|t
+626|text/turtle|Turtle (Terse RDF Triple Language)|ttl
+627|text/uri-list|URI Resolution Services|uri
+628|text/vnd.curl|Curl - Applet|curl
+629|text/vnd.curl.dcurl|Curl - Detached Applet|dcurl
+630|text/vnd.curl.scurl|Curl - Source Code|scurl
+631|text/vnd.curl.mcurl|Curl - Manifest File|mcurl
+632|text/vnd.fly|mod_fly / fly.cgi|fly
+633|text/vnd.fmi.flexstor|FLEXSTOR|flx
+634|text/vnd.graphviz|Graphviz|gv
+635|text/vnd.in3d.3dml|In3D - 3DML|3dml
+636|text/vnd.in3d.spot|In3D - 3DML|spot
+637|text/vnd.sun.j2me.app-descriptor|J2ME App Descriptor|jad
+638|text/vnd.wap.wml|Wireless Markup Language (WML)|wml
+639|text/vnd.wap.wmlscript|Wireless Markup Language Script (WMLScript)|wmls
+640|text/x-asm|Assembler Source File|s
+641|text/x-c|C Source File|c
+642|text/x-fortran|Fortran Source File|f
+643|text/x-pascal|Pascal Source File|p
+644|text/x-java-source,java|Java Source File|java
+645|text/x-setext|Setext|etx
+646|text/x-uuencode|UUEncode|uu
+647|text/x-vcalendar|vCalendar|vcs
+648|text/x-vcard|vCard|vcf
+649|video/3gpp|3GP|3gp
+650|video/3gpp2|3GP2|3g2
+651|video/h261|H.261|h261
+652|video/h263|H.263|h263
+653|video/h264|H.264|h264
+654|video/jpeg|JPGVideo|jpgv
+655|video/jpm|JPEG 2000 Compound Image File Format|jpm
+656|video/mj2|Motion JPEG 2000|mj2
+657|video/mp4|MPEG-4 Video|mp4
+658|video/mpeg|MPEG Video|mpeg
+659|video/ogg|Ogg Video|ogv
+660|video/quicktime|Quicktime Video|qt
+661|video/vnd.dece.hd|DECE High Definition Video|uvh
+662|video/vnd.dece.mobile|DECE Mobile Video|uvm
+663|video/vnd.dece.pd|DECE PD Video|uvp
+664|video/vnd.dece.sd|DECE SD Video|uvs
+665|video/vnd.dece.video|DECE Video|uvv
+666|video/vnd.fvt|FAST Search & Transfer ASA|fvt
+667|video/vnd.mpegurl|MPEG Url|mxu
+668|video/vnd.ms-playready.media.pyv|Microsoft PlayReady Ecosystem Video|pyv
+669|video/vnd.uvvu.mp4|DECE MP4|uvu
+670|video/vnd.vivo|Vivo|viv
+671|video/webm|Open Web Media Project - Video|webm
+672|video/x-f4v|Flash Video|f4v
+673|video/x-fli|FLI/FLC Animation Format|fli
+674|video/x-flv|Flash Video|flv
+675|video/x-m4v|M4v|m4v
+676|video/x-ms-asf|Microsoft Advanced Systems Format (ASF)|asf
+677|video/x-ms-wm|Microsoft Windows Media|wm
+678|video/x-ms-wmv|Microsoft Windows Media Video|wmv
+679|video/x-ms-wmx|Microsoft Windows Media Audio/Video Playlist|wmx
+680|video/x-ms-wvx|Microsoft Windows Media Video Playlist|wvx
+681|video/x-msvideo|Audio Video Interleave (AVI)|avi
+682|video/x-sgi-movie|SGI Movie|movie
+683|x-conference/x-cooltalk|CoolTalk|ice
+684|text/plain-bas|BAS Partitur Format|par
+685|text/yaml|YAML Ain't Markup Language / Yet Another Markup Language|yaml

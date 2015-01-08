@@ -9,5 +9,6 @@ BEGIN TRANSACTION;
 	M4_CATALOG(city);
 	M4_CATALOG(zipcode);
 	M4_CATALOG(asenta);
+	M4_CATALOG(mime_type);
 
 COMMIT TRANSACTION;
