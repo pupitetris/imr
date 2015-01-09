@@ -41,15 +41,15 @@ namespace IMRpatient
 			del ((Stream) stream);
 		}
 
-		public void LoadFile (Gtk.Window win, string fname, FileReadyDelegate del)
+		public void LoadFile (Gtk.Window win, string fname, string resource, object [] parms, FileReadyDelegate del)
 		{
-			string fullname = dir + "/" + fname + ".jpg";
+			string fullname = dir + "/" + fname;
 			if (File.Exists (fullname)) {
 				CallDelegate (fullname, del);
 				return;
 			}
 
-			charp.request ("file_get_picture", new object[] { fname }, new CharpGtk.CharpGtkCtx {
+			charp.request (resource, parms, new CharpGtk.CharpGtkCtx {
 				parent = win,
 				success_handler = delegate (Charp.CharpCtx ctx) {
 					FileStream stream = new FileStream (fullname, FileMode.Create);

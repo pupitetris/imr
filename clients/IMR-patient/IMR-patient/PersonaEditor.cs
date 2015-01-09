@@ -36,21 +36,22 @@ namespace IMRpatient
 			imagePicture.Pixbuf = Gdk.Pixbuf.LoadFromResource ("IMRpatient.img.image_loading.png");
 			imageSet = true;
 			
-			string fname = myData["persona_id"] + "_" + hash;
-			config.pcache.LoadFile (ParentWin, fname, delegate (Stream stream) {
-				Gtk.Application.Invoke (delegate {
-					if (stream == null) {
-						imagePicture.Pixbuf = Gdk.Pixbuf.LoadFromResource ("IMRpatient.img.image_error.png");
-					} else {
-						try {
-							imagePicture.Pixbuf = new Gdk.Pixbuf (stream);
-						} catch {
+			string fname = myData["persona_id"] + "_" + hash + ".jpg";
+			config.pcache.LoadFile (ParentWin, fname, "file_persona_get_photo", new object[] { myData["persona_id"] }, 
+				delegate (Stream stream) {
+					Gtk.Application.Invoke (delegate {
+						if (stream == null) {
 							imagePicture.Pixbuf = Gdk.Pixbuf.LoadFromResource ("IMRpatient.img.image_error.png");
+						} else {
+							try {
+								imagePicture.Pixbuf = new Gdk.Pixbuf (stream);
+							} catch {
+								imagePicture.Pixbuf = Gdk.Pixbuf.LoadFromResource ("IMRpatient.img.image_error.png");
+							}
+							stream.Close ();
 						}
-						stream.Close ();
-					}
+					});
 				});
-			});
 		}
 		
 		public void LoadData (JObject data) {
