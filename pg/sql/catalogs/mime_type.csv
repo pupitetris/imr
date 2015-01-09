@@ -1,5 +1,5 @@
 mime_type_id|type|name|extension
-1|application/andrew-inset|Andrew Toolkit|N/A
+1|application/andrew-inset|Andrew Toolkit|NA
 2|application/applixware|Applixware|aw
 3|application/atom+xml|Atom Syndication Format|atom
 4|application/atomcat+xml|Atom Publishing Protocol|atomcat
@@ -49,7 +49,7 @@ mime_type_id|type|name|extension
 48|application/onenote|Microsoft OneNote|onetoc
 49|application/patch-ops-error+xml|XML Patch Framework|xer
 50|application/pdf|Adobe Portable Document Format|pdf
-51|application/pgp-encrypted|Pretty Good Privacy|N/A
+51|application/pgp-encrypted|Pretty Good Privacy|NA
 52|application/pgp-signature|Pretty Good Privacy - Signature|pgp
 53|application/pics-rules|PICSRules|prf
 54|application/pkcs10|PKCS #10 - Certification Request Standard|p10
