@@ -1041,10 +1041,10 @@
     </index>
    </folder>
   </table>
-  <table id="TAB307" populated="true" UUID="6cebb632-bb14-4d37-bfc5-6bab23e67595" name="photo" objectType="TABLE" physicalName="photo" >
+  <table id="TAB307" populated="true" UUID="6cebb632-bb14-4d37-bfc5-6bab23e67595" name="file" objectType="TABLE" physicalName="file" >
    <remarks></remarks>
    <folder id="FOLTAB3071" populated="true" name="Columns" physicalName="Columns" type="1">
-    <column id="COL308" populated="true" UUID="4d3fb103-66cc-4421-805c-0626b68ca772" autoIncrement="false" defaultValue="" name="photo_id" nullable="0" physicalName="photo_id" precision="0" primaryKeySeq="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="12" userDefinedTypeUUID="831ac2d4-0e65-47ec-a0b7-62b7f6b8760a" >
+    <column id="COL308" populated="true" UUID="4d3fb103-66cc-4421-805c-0626b68ca772" autoIncrement="true" defaultValue="" name="file_id" nullable="0" physicalName="file_id" precision="0" primaryKeySeq="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="4" userDefinedTypeUUID="63b011c7-c81f-4c75-8271-632b3c87f727" >
      <remarks></remarks>
     </column>
     <column id="COL309" populated="true" UUID="555e90be-22f8-4d97-a6dd-5bf297c46101" autoIncrement="false" defaultValue="" name="inst_id" nullable="0" physicalName="inst_id" precision="0" primaryKeySeq="1" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="4" userDefinedTypeUUID="63b011c7-c81f-4c75-8271-632b3c87f727" >
@@ -1065,8 +1065,8 @@
     <folder id="FOLTAB3072" populated="true" name="Imported Keys" physicalName="Imported Keys" type="2">
     </folder>
     <folder id="FOLTAB3074" populated="true" name="Indices" physicalName="Indices" type="4">
-    <index id="IDX313" populated="true" UUID="abc0635b-d8e8-437d-8813-7861ee4fdf53" clustered="false" name="photo_pk" physicalName="photo_pk" primaryKeyIndex="true" unique="false" >
-     <index-column id="IDC314" populated="true" UUID="976182ae-5133-49da-9f49-b0b46f134d82" ascendingOrDescending="UNSPECIFIED" column-ref="COL308" name="photo_id" physicalName="photo_id" />
+    <index id="IDX313" populated="true" UUID="abc0635b-d8e8-437d-8813-7861ee4fdf53" clustered="false" name="file_pk" physicalName="photo_pk" primaryKeyIndex="true" unique="false" >
+     <index-column id="IDC314" populated="true" UUID="976182ae-5133-49da-9f49-b0b46f134d82" ascendingOrDescending="UNSPECIFIED" column-ref="COL308" name="file_id" physicalName="file_id" />
      <index-column id="IDC315" populated="true" UUID="57e60df6-3751-49b7-972b-4b334e30c719" ascendingOrDescending="UNSPECIFIED" column-ref="COL309" name="inst_id" physicalName="inst_id" />
     </index>
     <index id="IDX316" populated="true" UUID="03c5309d-d93b-4cda-a493-8f94f2ca92fb" clustered="false" name="photo_idx" physicalName="photo_idx" primaryKeyIndex="false" unique="true" >
@@ -1083,7 +1083,7 @@
     <column id="COL320" populated="true" UUID="c201afd5-e798-4b05-84a7-f2e8874b8191" autoIncrement="false" defaultValue="" name="inst_id" nullable="0" physicalName="inst_id" precision="0" primaryKeySeq="1" referenceCount="2" scale="0" sourceDataTypeName="UserDefinedSQLType" type="4" userDefinedTypeUUID="63b011c7-c81f-4c75-8271-632b3c87f727" >
      <remarks></remarks>
     </column>
-    <column id="COL321" populated="true" UUID="6c7c8423-1a14-4efb-b33b-f7b348a70f5e" autoIncrement="false" defaultValue="" name="photo_id" nullable="0" physicalName="photo_id" precision="0" primaryKeySeq="2" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="12" userDefinedTypeUUID="831ac2d4-0e65-47ec-a0b7-62b7f6b8760a" >
+    <column id="COL321" populated="true" UUID="6c7c8423-1a14-4efb-b33b-f7b348a70f5e" autoIncrement="false" defaultValue="" name="file_id" nullable="0" physicalName="file_id" precision="0" primaryKeySeq="2" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="4" userDefinedTypeUUID="63b011c7-c81f-4c75-8271-632b3c87f727" >
      <remarks></remarks>
     </column>
     </folder>
@@ -1095,7 +1095,7 @@
     <index id="IDX322" populated="true" UUID="c98f56cd-feb6-4c2f-8f77-d68c200fbe8f" clustered="false" name="persona_photo_pk" physicalName="persona_photo_pk" primaryKeyIndex="true" unique="false" >
      <index-column id="IDC323" populated="true" UUID="83ddd2ff-0380-4ccb-8712-20d4950d519b" ascendingOrDescending="UNSPECIFIED" column-ref="COL319" name="persona_id" physicalName="persona_id" />
      <index-column id="IDC324" populated="true" UUID="6e5d04ac-9764-4369-96cd-bb3cb196c071" ascendingOrDescending="UNSPECIFIED" column-ref="COL320" name="inst_id" physicalName="inst_id" />
-     <index-column id="IDC325" populated="true" UUID="2e0bf586-5369-4e4f-9a7c-43a35820f401" ascendingOrDescending="UNSPECIFIED" column-ref="COL321" name="photo_id" physicalName="photo_id" />
+     <index-column id="IDC325" populated="true" UUID="2e0bf586-5369-4e4f-9a7c-43a35820f401" ascendingOrDescending="UNSPECIFIED" column-ref="COL321" name="file_id" physicalName="file_id" />
     </index>
    </folder>
   </table>
@@ -1317,7 +1317,7 @@
  <ddl-generator type="ca.sqlpower.architect.ddl.PostgresDDLGenerator" allow-connection="false" target-schema="public"> </ddl-generator>
  <liquibase-settings useSeparateChangeSets="false" generateId="false" idStart="1"/>
  <create-kettle-job-settings filePath="test" jobName="Export" schemaName="" kettleJoinType="0" savingToFile="true" />
- <play-pen zoom="0.8408964152537157" viewportX="2036" viewportY="375" relationship-style="rectilinear" names-displayLogicalNames="true" showPrimaryTag="true" showForeignTag="true" showAlternateTag="true" columnVisibility="ALL" relationshipLabelVisibility="true">
+ <play-pen zoom="0.8408964152537157" viewportX="1861" viewportY="375" relationship-style="rectilinear" names-displayLogicalNames="true" showPrimaryTag="true" showForeignTag="true" showAlternateTag="true" columnVisibility="ALL" relationshipLabelVisibility="true">
   <table-pane table-ref="TAB3" x="1027" y="1298" bgColor="0xb9bbf6" fgColor="0x000000" rounded="false" dashed="false"/>
   <table-pane table-ref="TAB13" x="997" y="1531" bgColor="0xb9bbf6" fgColor="0x000000" rounded="false" dashed="false"/>
   <table-pane table-ref="TAB24" x="1007" y="1025" bgColor="0xb9bbf6" fgColor="0x000000" rounded="false" dashed="false"/>
