@@ -61,14 +61,6 @@ BEGIN
 END »);
 	
 
-M4_SQL_PROCEDURE( rp_file_get_picture(_fname varchar),
-		  «TABLE(mimetype text, filename text)»,
-		  IMMUTABLE, M4_DEFN(user), 'Get an image from the repository.', «
-
-SELECT 'image/jpeg'::text, ('M4_DEFN(image_repo_dir)/' || replace($1, '/', '_') || '.jpg')::text;
-»);
-
-
 M4_SQL_PROCEDURE( rp_get_states_by_inst(_uid charp_user_id),
 		  «TABLE(state_id integer, st_name varchar, st_abrev varchar)»,
 		  IMMUTABLE, M4_DEFN(user), 'Get states catalog for the user''s instance.', «
@@ -141,3 +133,85 @@ SELECT e.email_id, e.email, e.e_type, e.system, e.remarks
        FROM email AS e JOIN account AS ac USING (inst_id)
        WHERE ac.persona_id = $1 AND e.persona_id = $2;
 »);
+
+
+M4_FUNCTION( «file_create(_inst_id integer, _file_name varchar, _mime_type varchar)»,
+	     integer, VOLATILE, M4_DEFN(user), '', «
+DECLARE
+	_mime_type_id integer;
+	_extension varchar;
+	_file_id integer;
+BEGIN
+	SELECT mime_type_id, extension INTO _mime_type_id, _extension FROM mime_type WHERE type = _mime_type;
+	IF NOT FOUND THEN
+	   PERFORM charp_raise('ASSERT', 'MIME type is correct');
+	END IF;
+	
+	INSERT INTO file VALUES(DEFAULT, _inst_id, _file_name || '.' || _extension, CURRENT_TIMESTAMP, _mime_type_id)
+	       RETURNING file_id INTO _file_id;
+	PERFORM charp_cmd('FILE_CREATE', _file_name);
+	RETURN _file_id;
+END »);
+
+
+M4_PROCEDURE( «persona_add_photo(_inst_id integer, _persona_id integer)»,
+	      void, STABLE, M4_DEFN(user), 'Add a new photo to a given person.', «
+DECLARE
+	_file_id integer;
+BEGIN
+	_file_id := file_create(_inst_id, md5(_inst_id || _persona_id || CURRENT_TIMESTAMP), 'image/jpeg');
+	INSERT INTO persona_photo VALUES(_persona_id, _inst_id, _file_id);
+END »);
+
+
+M4_PROCEDURE( «rp_user_add_photo(_uid charp_user_id, _persona_id integer)»,
+	      void, STABLE, M4_DEFN(user), 'Add a new photo to a given user if permissions allow.', «
+DECLARE
+	_my_type imr_account_type;
+	_user_type varchar;
+	_inst_id integer;
+BEGIN
+	IF _uid = _persona_id THEN
+	   -- You have the right to change your own image. CHECK: or not?
+	   SELECT inst_id INTO _inst_id FROM account WHERE persona_id = _uid;
+	ELSE	   
+	   SELECT a1.account_type, a2.account_type, inst_id INTO _my_type, _user_type, _inst_id
+	   	  FROM account AS a1 JOIN account AS a2 USING (inst_id)
+	       	  WHERE a1.persona_id = _uid AND a2.persona_id = _persona_id;
+
+	   IF NOT FOUND THEN PERFORM charp_raise('NOTFOUND'); END IF;
+	   IF NOT account_type_has_perm(_my_type, 'USER_EDIT') OR
+	      NOT account_type_has_perm (_my_type, _user_type::imr_perm) THEN
+	      PERFORM charp_raise('USERPERM');
+	   END IF;
+	END IF;
+
+	PERFORM persona_add_photo(_inst_id, _persona_id);
+END »);
+
+
+M4_PROCEDURE( «rp_file_persona_get_photo(_uid charp_user_id, _persona_id integer)»,
+	      «TABLE(mimetype text, filename text)»,
+	      STABLE, M4_DEFN(user), 'Get current photo for a person from the repository.', «
+DECLARE
+	_inst_id integer;
+	_fname varchar;
+BEGIN
+	IF _uid = _persona_id THEN
+	   -- Trivial case.
+	   SELECT inst_id INTO _inst_id FROM account WHERE persona_id = _uid;
+	ELSE	   
+	   SELECT inst_id INTO _inst_id
+	   	  FROM account AS a JOIN persona AS p USING (inst_id)
+	       	  WHERE a.persona_id = _uid AND p.persona_id = _persona_id;
+
+	   IF NOT FOUND THEN PERFORM charp_raise('NOTFOUND'); END IF;
+	END IF;
+
+	SELECT fname INTO _fname FROM persona_photo NATURAL JOIN file
+	       WHERE inst_id = _inst_id AND persona_id = _persona_id
+	       ORDER BY created DESC LIMIT 1;
+
+	IF NOT FOUND THEN PERFORM charp_raise('EXIT', 'No photo'); END IF;
+	RETURN QUERY SELECT 'image/jpeg'::text, ('M4_DEFN(image_repo_dir)/' || _fname)::text;
+END »);
