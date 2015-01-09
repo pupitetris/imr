@@ -127,18 +127,22 @@ COMMENT ON COLUMN public.inst.country_id IS 'CDH code';
 
 ALTER SEQUENCE public.inst_inst_id_seq OWNED BY public.inst.inst_id;
 
-CREATE TABLE public.photo (
-                photo_id VARCHAR NOT NULL,
+CREATE SEQUENCE public.file_file_id_seq;
+
+CREATE TABLE public.file (
+                file_id INTEGER NOT NULL DEFAULT nextval('public.file_file_id_seq'),
                 inst_id INTEGER NOT NULL,
                 fname VARCHAR NOT NULL,
                 created TIMESTAMP NOT NULL,
                 mime_type_id INTEGER NOT NULL,
-                CONSTRAINT photo_pk PRIMARY KEY (photo_id, inst_id)
+                CONSTRAINT file_pk PRIMARY KEY (file_id, inst_id)
 );
 
 
+ALTER SEQUENCE public.file_file_id_seq OWNED BY public.file.file_id;
+
 CREATE UNIQUE INDEX photo_idx
- ON public.photo
+ ON public.file
  ( fname );
 
 CREATE SEQUENCE public.product_product_id_seq;
@@ -195,8 +199,8 @@ ALTER SEQUENCE public.persona_persona_id_seq OWNED BY public.persona.persona_id;
 CREATE TABLE public.persona_photo (
                 persona_id INTEGER NOT NULL,
                 inst_id INTEGER NOT NULL,
-                photo_id VARCHAR NOT NULL,
-                CONSTRAINT persona_photo_pk PRIMARY KEY (persona_id, inst_id, photo_id)
+                file_id INTEGER NOT NULL,
+                CONSTRAINT persona_photo_pk PRIMARY KEY (persona_id, inst_id, file_id)
 );
 
 
@@ -487,7 +491,7 @@ CREATE TABLE public.request (
 COMMENT ON COLUMN public.request.proname IS 'Nombre del remote procedure que se va a llamar.';
 
 
-ALTER TABLE public.photo ADD CONSTRAINT mime_type_photo_fk
+ALTER TABLE public.file ADD CONSTRAINT mime_type_photo_fk
 FOREIGN KEY (mime_type_id)
 REFERENCES public.mime_type (mime_type_id)
 ON DELETE NO ACTION
@@ -627,7 +631,7 @@ ON DELETE NO ACTION
 ON UPDATE NO ACTION
 NOT DEFERRABLE;
 
-ALTER TABLE public.photo ADD CONSTRAINT inst_photo_fk
+ALTER TABLE public.file ADD CONSTRAINT inst_photo_fk
 FOREIGN KEY (inst_id)
 REFERENCES public.inst (inst_id)
 ON DELETE NO ACTION
@@ -635,8 +639,8 @@ ON UPDATE NO ACTION
 NOT DEFERRABLE;
 
 ALTER TABLE public.persona_photo ADD CONSTRAINT photo_persona_photo_fk
-FOREIGN KEY (inst_id, photo_id)
-REFERENCES public.photo (inst_id, photo_id)
+FOREIGN KEY (inst_id, file_id)
+REFERENCES public.file (inst_id, file_id)
 ON DELETE NO ACTION
 ON UPDATE NO ACTION
 NOT DEFERRABLE;
