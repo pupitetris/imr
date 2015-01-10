@@ -197,7 +197,8 @@ M4_PROCEDURE( «rp_file_persona_get_photo(_uid charp_user_id, _persona_id intege
 	      STABLE, M4_DEFN(user), 'Get current photo for a person from the repository.', «
 DECLARE
 	_inst_id integer;
-	_fname varchar;
+	_filename text;
+	_mimetype text;
 BEGIN
 	IF _uid = _persona_id THEN
 	   -- Trivial case.
@@ -210,10 +211,15 @@ BEGIN
 	   IF NOT FOUND THEN PERFORM charp_raise('NOTFOUND'); END IF;
 	END IF;
 
-	SELECT fname INTO _fname FROM persona_photo NATURAL JOIN file
+	SELECT type, fname INTO _mimetype, _filename
+	       FROM persona_photo
+	       	    NATURAL JOIN file
+	       	    NATURAL JOIN mime_type
 	       WHERE inst_id = _inst_id AND persona_id = _persona_id
 	       ORDER BY created DESC LIMIT 1;
 
 	IF NOT FOUND THEN PERFORM charp_raise('EXIT', 'No photo'); END IF;
-	RETURN QUERY SELECT 'image/jpeg'::text, ('M4_DEFN(image_repo_dir)/' || _fname)::text;
+	mimetype := _mimetype;
+	filename := ('M4_DEFN(image_repo_dir)/' || _filename)::text;
+	RETURN NEXT;
 END »);
