@@ -27,7 +27,7 @@ M4_SQL_PROCEDURE( rp_user_list_get(_uid charp_user_id),
 			  gender imr_gender )»,
 		  STABLE, M4_DEFN(user), 'Get the list of all users for the user''s instance.', «
 
-SELECT a.persona_id, a.account_type, a.username, p.picture, p.remarks,
+SELECT a.persona_id, a.account_type, a.username, ''::varchar, p.remarks,
        p.prefix, p.name, p.paterno, p.materno, a.status, p.gender
        FROM account AS a1
 	    JOIN account AS a USING (inst_id)
@@ -155,11 +155,11 @@ END »);
 
 
 M4_PROCEDURE( «persona_add_photo(_inst_id integer, _persona_id integer)»,
-	      void, STABLE, M4_DEFN(user), 'Add a new photo to a given person.', «
+	      void, VOLATILE, M4_DEFN(user), 'Add a new photo to a given person.', «
 DECLARE
 	_file_id integer;
 BEGIN
-	_file_id := file_create(_inst_id, md5(_inst_id || _persona_id || CURRENT_TIMESTAMP), 'image/jpeg');
+	_file_id := file_create(_inst_id, md5(_inst_id::text || _persona_id::text || CURRENT_TIMESTAMP), 'image/jpeg');
 	INSERT INTO persona_photo VALUES(_persona_id, _inst_id, _file_id);
 END »);
 

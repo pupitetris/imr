@@ -145,6 +145,10 @@ CREATE UNIQUE INDEX photo_idx
  ON public.file
  ( fname );
 
+CREATE INDEX file_idx
+ ON public.file
+ ( fname, created DESC );
+
 CREATE SEQUENCE public.product_product_id_seq;
 
 CREATE TABLE public.product (
@@ -186,21 +190,19 @@ CREATE TABLE public.persona (
                 paterno VARCHAR,
                 materno VARCHAR,
                 gender imr_gender NOT NULL,
-                picture VARCHAR,
                 remarks VARCHAR,
                 p_status imr_record_status NOT NULL,
                 CONSTRAINT persona_pk PRIMARY KEY (persona_id, inst_id)
 );
-COMMENT ON COLUMN public.persona.picture IS 'SHA-256 of picture';
 
 
 ALTER SEQUENCE public.persona_persona_id_seq OWNED BY public.persona.persona_id;
 
 CREATE TABLE public.persona_photo (
                 persona_id INTEGER NOT NULL,
-                inst_id INTEGER NOT NULL,
                 file_id INTEGER NOT NULL,
-                CONSTRAINT persona_photo_pk PRIMARY KEY (persona_id, inst_id, file_id)
+                inst_id INTEGER NOT NULL,
+                CONSTRAINT persona_photo_pk PRIMARY KEY (persona_id, file_id, inst_id)
 );
 
 
@@ -224,7 +226,7 @@ CREATE TABLE public.fiscal (
                 inst_id INTEGER NOT NULL,
                 address_id INTEGER NOT NULL,
                 code VARCHAR NOT NULL,
-                alt_name VARCHAR NOT NULL,
+                alt_name VARCHAR,
                 CONSTRAINT fiscal_pk PRIMARY KEY (persona_id, inst_id)
 );
 COMMENT ON COLUMN public.fiscal.alt_name IS 'In case fiscal data goes to another name (such as a company name)';
@@ -723,8 +725,8 @@ ON UPDATE NO ACTION
 NOT DEFERRABLE;
 
 ALTER TABLE public.fiscal ADD CONSTRAINT address_fiscal_fk
-FOREIGN KEY (address_id, inst_id)
-REFERENCES public.address (address_id, inst_id)
+FOREIGN KEY (inst_id, address_id)
+REFERENCES public.address (inst_id, address_id)
 ON DELETE NO ACTION
 ON UPDATE NO ACTION
 NOT DEFERRABLE;
