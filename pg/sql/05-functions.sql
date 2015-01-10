@@ -27,11 +27,13 @@ M4_SQL_PROCEDURE( rp_user_list_get(_uid charp_user_id),
 			  gender imr_gender )»,
 		  STABLE, M4_DEFN(user), 'Get the list of all users for the user''s instance.', «
 
-SELECT a.persona_id, a.account_type, a.username, ''::varchar, p.remarks,
+SELECT a.persona_id, a.account_type, a.username, f.fname, p.remarks,
        p.prefix, p.name, p.paterno, p.materno, a.status, p.gender
        FROM account AS a1
 	    JOIN account AS a USING (inst_id)
 	    JOIN persona AS p ON (a.persona_id = p.persona_id)
+	    LEFT JOIN persona_photo AS ph ON (a.persona_id = ph.persona_id AND a.inst_id = ph.inst_id)
+	    LEFT JOIN file AS f USING (file_id)
        WHERE a1.persona_id = $1 AND a.status <> 'DELETED';
 »);
 
