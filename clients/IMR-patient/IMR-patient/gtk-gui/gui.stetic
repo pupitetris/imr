@@ -1860,7 +1860,7 @@ Disabled</property>
       </widget>
     </child>
   </widget>
-  <widget class="Gtk.Bin" id="IMRpatient.PersonaEditor" design-size="716 140">
+  <widget class="Gtk.Bin" id="IMRpatient.PersonaEditor" design-size="716 164">
     <property name="MemberName" />
     <property name="Visible">False</property>
     <child>
@@ -1896,6 +1896,51 @@ Disabled</property>
               <widget class="Gtk.VBox" id="vbox3">
                 <property name="MemberName" />
                 <property name="Spacing">6</property>
+                <child>
+                  <widget class="Gtk.Expander" id="expanderNotes">
+                    <property name="MemberName" />
+                    <property name="CanFocus">True</property>
+                    <child>
+                      <widget class="Gtk.Frame" id="frame1">
+                        <property name="MemberName" />
+                        <property name="ShadowType">In</property>
+                        <property name="LabelYalign">0.95</property>
+                        <property name="BorderWidth">2</property>
+                        <child>
+                          <widget class="Gtk.TextView" id="textNotes">
+                            <property name="MemberName" />
+                            <property name="WidthRequest">300</property>
+                            <property name="HeightRequest">42</property>
+                            <property name="CanFocus">True</property>
+                            <property name="AcceptsTab">False</property>
+                            <property name="Text" translatable="yes" />
+                            <property name="WrapMode">Word</property>
+                            <property name="PixelsAboveLines">2</property>
+                            <property name="PixelsBelowLines">2</property>
+                            <property name="LeftMargin">2</property>
+                            <property name="RightMargin">2</property>
+                          </widget>
+                        </child>
+                      </widget>
+                    </child>
+                    <child>
+                      <widget class="Gtk.Label" id="GtkLabel5">
+                        <property name="MemberName" />
+                        <property name="LabelProp" translatable="yes">&lt;b&gt;Notes&lt;/b&gt;</property>
+                        <property name="UseMarkup">True</property>
+                        <property name="UseUnderline">True</property>
+                      </widget>
+                      <packing>
+                        <property name="type">label_item</property>
+                      </packing>
+                    </child>
+                  </widget>
+                  <packing>
+                    <property name="PackType">End</property>
+                    <property name="Position">0</property>
+                    <property name="AutoSize">True</property>
+                  </packing>
+                </child>
                 <child>
                   <widget class="Gtk.HBox" id="hbox2">
                     <property name="MemberName" />
@@ -1981,7 +2026,7 @@ Disabled</property>
                   </widget>
                   <packing>
                     <property name="PackType">End</property>
-                    <property name="Position">0</property>
+                    <property name="Position">1</property>
                     <property name="AutoSize">True</property>
                     <property name="Expand">False</property>
                     <property name="Fill">False</property>
@@ -1993,7 +2038,7 @@ Disabled</property>
                   </widget>
                   <packing>
                     <property name="PackType">End</property>
-                    <property name="Position">1</property>
+                    <property name="Position">2</property>
                     <property name="AutoSize">True</property>
                     <property name="Expand">False</property>
                     <property name="Fill">False</property>
@@ -2174,7 +2219,7 @@ Disabled</property>
                   </widget>
                   <packing>
                     <property name="PackType">End</property>
-                    <property name="Position">2</property>
+                    <property name="Position">3</property>
                     <property name="AutoSize">False</property>
                     <property name="Expand">False</property>
                     <property name="Fill">False</property>
@@ -3038,64 +3083,6 @@ Fiscal</property>
             <property name="MemberName" />
             <property name="Spacing">12</property>
             <child>
-              <widget class="Gtk.HBox" id="hbox2">
-                <property name="MemberName" />
-                <property name="Spacing">6</property>
-                <child>
-                  <widget class="Gtk.Expander" id="expanderNotes">
-                    <property name="MemberName" />
-                    <property name="CanFocus">True</property>
-                    <property name="Expanded">True</property>
-                    <child>
-                      <widget class="Gtk.Frame" id="frame1">
-                        <property name="MemberName" />
-                        <property name="ShadowType">In</property>
-                        <property name="LabelYalign">0.95</property>
-                        <property name="BorderWidth">2</property>
-                        <child>
-                          <widget class="Gtk.TextView" id="textNotes">
-                            <property name="MemberName" />
-                            <property name="WidthRequest">300</property>
-                            <property name="HeightRequest">42</property>
-                            <property name="CanFocus">True</property>
-                            <property name="AcceptsTab">False</property>
-                            <property name="Text" translatable="yes" />
-                            <property name="WrapMode">Word</property>
-                            <property name="PixelsAboveLines">2</property>
-                            <property name="PixelsBelowLines">2</property>
-                            <property name="LeftMargin">2</property>
-                            <property name="RightMargin">2</property>
-                          </widget>
-                        </child>
-                      </widget>
-                    </child>
-                    <child>
-                      <widget class="Gtk.Label" id="GtkLabel5">
-                        <property name="MemberName" />
-                        <property name="LabelProp" translatable="yes">&lt;b&gt;Notes&lt;/b&gt;</property>
-                        <property name="UseMarkup">True</property>
-                        <property name="UseUnderline">True</property>
-                      </widget>
-                      <packing>
-                        <property name="type">label_item</property>
-                      </packing>
-                    </child>
-                  </widget>
-                  <packing>
-                    <property name="Position">0</property>
-                    <property name="AutoSize">True</property>
-                    <property name="Expand">False</property>
-                    <property name="Fill">False</property>
-                  </packing>
-                </child>
-              </widget>
-              <packing>
-                <property name="Position">0</property>
-                <property name="AutoSize">False</property>
-                <property name="Expand">False</property>
-              </packing>
-            </child>
-            <child>
               <widget class="Gtk.Alignment" id="contFiscal">
                 <property name="MemberName" />
                 <property name="Xscale">0</property>
@@ -3137,7 +3124,7 @@ Fiscal</property>
               </widget>
               <packing>
                 <property name="PackType">End</property>
-                <property name="Position">1</property>
+                <property name="Position">0</property>
                 <property name="AutoSize">False</property>
                 <property name="Expand">False</property>
               </packing>
