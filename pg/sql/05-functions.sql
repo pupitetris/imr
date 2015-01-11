@@ -160,8 +160,11 @@ M4_PROCEDURE( «persona_add_photo(_inst_id integer, _persona_id integer)»,
 	      void, VOLATILE, M4_DEFN(user), 'Add a new photo to a given person.', «
 DECLARE
 	_file_id integer;
+	_filename text;
 BEGIN
-	_file_id := file_create(_inst_id, md5(_inst_id::text || _persona_id::text || CURRENT_TIMESTAMP), 'image/jpeg');
+	_filename := _inst_id, md5(_inst_id::text || _persona_id::text || CURRENT_TIMESTAMP);
+	_file_id := file_create(_filename, 'image/jpeg');
+	PERFORM charp_cmd('OTHER', 'Image-CreatePersonaThumb', _filename);
 	INSERT INTO persona_photo VALUES(_persona_id, _inst_id, _file_id);
 END »);
 
