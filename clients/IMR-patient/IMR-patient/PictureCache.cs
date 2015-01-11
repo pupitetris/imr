@@ -51,13 +51,19 @@ namespace IMRpatient
 
 			charp.request (resource, parms, new CharpGtk.CharpGtkCtx {
 				parent = win,
-				success_handler = delegate (Charp.CharpCtx ctx) {
+				reply_complete_handler = delegate (Charp.CharpCtx ctx) {
+					if (ctx.wc.ResponseHeaders["Content-Type"].StartsWith ("application/json")) {
+						// it's an error message.
+						return false;
+					}
+
 					FileStream stream = new FileStream (fullname, FileMode.Create);
 					byte[] result = ((UploadValuesCompletedEventArgs) ctx.status).Result;
 					stream.Write (result, 0, result.Length);
 					stream.Close ();
 
 					CallDelegate (fullname, del);
+					return true;
 				},
 				error = delegate {
 					del (null);
