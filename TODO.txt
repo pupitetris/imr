@@ -1,4 +1,8 @@
 * Bug: si se ingresa mal el password, sale el handler de errores por
   default en vez de notificar amistosamente al usuario.
 
+* Feature: Util-Window: handlear Esc como cerrar ventana.
+
+* Enhancement: Al configurar app (URL/Puerto), si sólo hay un puerto
+  identificado, pre-seleccionarlo.
 
