@@ -195,7 +195,7 @@ BEGIN
 END »);
 
 
-M4_PROCEDURE( «rp_file_persona_get_photo(_uid charp_user_id, _persona_id integer)»,
+M4_PROCEDURE( «rp_file_persona_get_photo(_uid charp_user_id, _persona_id integer, _thumbnail boolean)»,
 	      «TABLE(mimetype text, filename text)»,
 	      STABLE, M4_DEFN(user), 'Get current photo for a person from the repository.', «
 DECLARE
@@ -223,6 +223,12 @@ BEGIN
 
 	IF NOT FOUND THEN PERFORM charp_raise('EXIT', 'No photo'); END IF;
 	mimetype := _mimetype;
-	filename := ('M4_DEFN(image_repo_dir)/' || _filename)::text;
+
+	IF _thumbnail THEN
+	   filename := ('M4_DEFN(image_repo_dir)/thumbs/' || _filename)::text;
+	ELSE
+	   filename := ('M4_DEFN(image_repo_dir)/' || _filename)::text;
+	END IF;
+
 	RETURN NEXT;
 END »);
