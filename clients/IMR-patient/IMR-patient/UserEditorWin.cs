@@ -2,6 +2,7 @@ using System;
 using Mono.Unix;
 using System.Text;
 using Newtonsoft.Json.Linq;
+using monoCharp;
 
 namespace IMRpatient
 {
@@ -14,11 +15,13 @@ namespace IMRpatient
 		}
 
 		private JObject myData;
+		private int personaId;
 		private TYPE OpType;
 
 		private void SetupForNew ()
 		{
 			Title = Catalog.GetString ("New User");
+			personaId = 0;
 
 			DeleteAction.Visible = false;
 
@@ -33,6 +36,7 @@ namespace IMRpatient
 		{
 			Title = Catalog.GetString ("Edit User");
 			myData = data;
+			personaId = (int) myData["persona_id"];
 
 			DeleteAction.Visible = true;
 
@@ -103,35 +107,34 @@ namespace IMRpatient
 
 		private bool Validate () {
 			StringBuilder b = new StringBuilder ();
-			int errors = 0;
-
+			
 			if (entryUsername.Text.Length == 0) {
-				errors ++;
-				b.Append ("You have to set an username.\n");
+				b.Append (Catalog.GetString ("You have to set an username.\n"));
 				Util.GtkLabelStyleAsError (labelUsername);
 			} else {
 				Util.GtkLabelStyleRemove (labelUsername);
 			}
 
-			if (entryPassword.Text.Length == 0) {
-				errors ++;
-				b.Append ("You have to set a password.\n");
+			if (entryPassword.Text.Length == 0 && OpType == TYPE.NEW) {
+				b.Append (Catalog.GetString ("You have to set a password.\n"));
 				Util.GtkLabelStyleAsError (labelPassword);
 			} else {
 				Util.GtkLabelStyleRemove (labelPassword);
 			}
 
 			if (entryPassword.Text != entryConfirm.Text) {
-				errors ++;
-				b.Append ("Password and confirmation must be the same.\n");
+				b.Append (Catalog.GetString ("Password and confirmation must be the same.\n"));
 				Util.GtkLabelStyleAsError (labelConfirm);
 			} else {
 				Util.GtkLabelStyleRemove (labelConfirm);
 			}
 
-			if (errors == 0) {
+			personaEditor.Validate (b);
+			personaAddEditor.Validate (b);
+
+			int errors = b.Length;
+			if (errors == 0)
 				return true;
-			}
 
 			b.Insert (0, String.Format (Catalog.GetPluralString ("You have {0} error:\n\n", 
 			                                                     "You have {0} errors:\n\n", errors), errors));
@@ -146,15 +149,74 @@ namespace IMRpatient
 			return false;
 		}
 
+		private bool CommitError (Charp.CharpError err, Charp.CharpCtx ctx) {
+			Gtk.Application.Invoke (delegate { FinishAction (menubar); });
+			return true;
+		}
+
+		private void CommitSuccess (object data, Charp.CharpCtx ctx) {
+			if (OpType != TYPE.NEW && config.mainwin.userListWin != null) {
+				config.mainwin.userListWin.Refresh ();
+			}
+			Destroy ();
+		}
+
+		private void CommitPersonaSuccess (object data, Charp.CharpCtx ctx) {
+			personaAddEditor.Commit (CommitSuccess, CommitError, this);
+		}
+
+		private void CommitUserSuccess (object data, Charp.CharpCtx ctx) {
+			if (OpType == TYPE.NEW) {
+				personaId = (int) ((JValue) data).Value;
+				personaEditor.SetPersonaId (personaId);
+				personaAddEditor.SetPersonaId (personaId);
+			}
+			personaEditor.Commit (CommitPersonaSuccess, CommitError, this);
+		}
+
+		private void Commit ()
+		{
+			string[] types = { "OPERATOR", "ADMIN", "SUPERUSER" };
+
+			object[] parms = new object[] {
+				entryUsername.Text,
+				entryPassword.Text,
+				types[comboLevel.Active],
+				(comboStatus.Active == 0)? "ACTIVE" : "DISABLED"
+			};
+
+			if (OpType == TYPE.NEW ||
+				(string) parms[0] != (string) myData["username"] ||
+				(string) parms[1] != "" ||
+				(string) parms[2] != (string) myData["type"] ||
+				(string) parms[3] != (string) myData["status"]) {
+
+				if (parms[1] != "")
+					parms[1] = Charp.GetMD5HexHash (entryPassword.Text);
+
+				string resource;
+				if (OpType == TYPE.NEW) {
+					resource = "user_create";
+				} else {
+					resource = "user_update";
+					parms[4] = personaId;
+				}
+
+				config.charp.request (resource, parms, new CharpGtk.CharpGtkCtx {
+					parent = this,
+					success = CommitUserSuccess,
+					error = CommitError
+				});
+			} else {
+				personaEditor.Commit (CommitPersonaSuccess, CommitError, this);
+			}
+		}
+
 		protected void OnOKActionActivated (object sender, EventArgs e)
 		{
 			SendAction (menubar, delegate {
-				if (Validate ()) {
-					if (OpType != TYPE.NEW && config.mainwin.userListWin != null) {
-						config.mainwin.userListWin.Refresh ();
-					}
-					Destroy ();
-				}
+				if (Validate ())
+					Commit ();
 			});
 		}
 	}

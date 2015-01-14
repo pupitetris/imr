@@ -1,4 +1,5 @@
 using System;
+using System.Text;
 using System.Collections.Generic;
 using monoCharp;
 using Mono.Unix;
@@ -19,6 +20,9 @@ namespace IMRpatient
 		private Gtk.Window ParentWin;
 		private Gtk.Container Cont;
 		private JObject myData;
+		private bool isNew = true;
+		private int addressId = 0;
+		private int personaId = 0;
 
 		private JArray zipcodes;
 		private Dictionary<string, JObject> zipcodes_by_code;
@@ -87,6 +91,9 @@ namespace IMRpatient
 		{
 			if (data != null) {
 				myData = data;
+				addressId = (int) myData["address_id"];
+				personaId = (int) myData["persona_id"];
+				isNew = false;
 
 				string val;
 				if (Util.DictTryValue (data, "street", out val)) { entryStreet.Text = val; }
@@ -118,6 +125,10 @@ namespace IMRpatient
 					});
 				}
 			});
+		}
+
+		public void SetPersonaId (int id) {
+			personaId = id;
 		}
 
 		protected void OnComboStateChanged (object sender, EventArgs e)
@@ -288,6 +299,55 @@ namespace IMRpatient
 		protected void OnEntryZipcodeTextInserted (object o, Gtk.TextInsertedArgs args)
 		{
 			CheckZipcodeText ();
+		}
+
+		public bool Validate (StringBuilder b)
+		{
+			if (entryStreet.Text.Length == 0) {
+				b.Append (Catalog.GetString ("You have to set the street address.\n"));
+				Util.GtkLabelStyleAsError (labelStreet);
+			} else {
+				Util.GtkLabelStyleRemove (labelStreet);
+			}
+
+			if (b.Length == 0)
+				return true;
+			return false;
+		}
+
+		public void Commit (Charp.SuccessDelegate success, Charp.ErrorDelegate error, Gtk.Window parent) {
+			string[] types = { "HOME", "WORK", "FISCAL" };
+
+			JObject asenta = (JObject) myComboAsenta.ActiveData ();
+			int asenta_id = asenta != null? (int) asenta["asenta_id"]: 0;
+
+			object[] parms = new object[] {
+				personaId,
+				asenta_id,
+				entryStreet.Text,
+				types[comboType.Active]
+			};
+
+			if (isNew ||
+				(int) parms[1] != (int) myData["asenta_id"] ||
+				(string) parms[2] != (string) myData["street"] ||
+				(string) parms[3] != (string) myData["ad_type"]) {
+
+				string resource;
+				if (isNew) {
+					resource = "address_create";
+				} else {
+					resource = "address_update";
+					parms[4] = addressId;
+				}
+
+				config.charp.request (resource, parms, new CharpGtk.CharpGtkCtx {
+					parent = parent,
+					success = success,
+					error = error
+				});
+
+			}
 		}
 	}
 }

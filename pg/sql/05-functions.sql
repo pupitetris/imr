@@ -1,7 +1,7 @@
 -- Application-specific functions.
 
 
-M4_FUNCTION( «account_type_has_perm(_type imr_account_type, _perm imr_perm)»,
+M4_FUNCTION( «imr_account_type_has_perm(_type imr_account_type, _perm imr_perm)»,
 	     boolean, IMMUTABLE, M4_DEFN(user), 'Check if a given type of account can perform an action.', «
 DECLARE
 	_level varchar;
@@ -44,6 +44,7 @@ DECLARE
 	_my_type imr_account_type;
 	_user_type varchar;
 BEGIN
+	-- Can't remove yourself.
 	IF _uid = _persona_id THEN PERFORM charp_raise('USERPERM'); END IF;
 
 	SELECT a1.account_type, a2.account_type INTO _my_type, _user_type
@@ -51,8 +52,8 @@ BEGIN
 	       WHERE a1.persona_id = _uid AND a2.persona_id = _persona_id;
 
 	IF NOT FOUND THEN PERFORM charp_raise('NOTFOUND'); END IF;
-	IF NOT account_type_has_perm(_my_type, 'USER_DELETE') OR
-	   NOT account_type_has_perm (_my_type, _user_type::imr_perm) THEN
+	IF NOT imr_account_type_has_perm(_my_type, 'USER_DELETE') OR
+	   NOT imr_account_type_has_perm(_my_type, _user_type::imr_perm) THEN
 	   PERFORM charp_raise('USERPERM');
 	END IF;
 
@@ -93,6 +94,7 @@ M4_SQL_FUNCTION( «imr_asenta_fullname(_type imr_asenta_type, _name varchar, _ci
 		 text, IMMUTABLE, M4_DEFN(user), 'Generate the display name for an asenta.', «
 
 SELECT $1 || ' ' || $2 || COALESCE(', ' || $3, '');
+
 »);
 
 
@@ -137,7 +139,7 @@ SELECT e.email_id, e.email, e.e_type, e.system, e.remarks
 »);
 
 
-M4_FUNCTION( «file_create(_inst_id integer, _file_name varchar, _mime_type varchar)»,
+M4_FUNCTION( «imr_file_create(_inst_id integer, _file_name varchar, _mime_type varchar)»,
 	     integer, VOLATILE, M4_DEFN(user), '', «
 DECLARE
 	_mime_type_id integer;
@@ -156,14 +158,14 @@ BEGIN
 END »);
 
 
-M4_PROCEDURE( «persona_add_photo(_inst_id integer, _persona_id integer)»,
+M4_PROCEDURE( «imr_persona_add_photo(_inst_id integer, _persona_id integer)»,
 	      void, VOLATILE, M4_DEFN(user), 'Add a new photo to a given person.', «
 DECLARE
 	_file_id integer;
 	_filename text;
 BEGIN
 	_filename := _inst_id, md5(_inst_id::text || _persona_id::text || CURRENT_TIMESTAMP);
-	_file_id := file_create(_filename, 'image/jpeg');
+	_file_id := imr_file_create(_filename, 'image/jpeg');
 	PERFORM charp_cmd('OTHER', 'Image-CreatePersonaThumb', _filename);
 	INSERT INTO persona_photo VALUES(_persona_id, _inst_id, _file_id);
 END »);
@@ -177,21 +179,21 @@ DECLARE
 	_inst_id integer;
 BEGIN
 	IF _uid = _persona_id THEN
-	   -- You have the right to change your own image. CHECK: or not?
-	   SELECT inst_id INTO _inst_id FROM account WHERE persona_id = _uid;
+	   SELECT inst_id, account_type INTO _inst_id, _my_type FROM account WHERE persona_id = _uid;
+	   IF NOT imr_account_type_has_perm(_my_type, 'USER_EDIT_SELF') THEN PERFORM charp_raise('USERPERM'); END IF;
 	ELSE	   
 	   SELECT a1.account_type, a2.account_type, inst_id INTO _my_type, _user_type, _inst_id
 	   	  FROM account AS a1 JOIN account AS a2 USING (inst_id)
 	       	  WHERE a1.persona_id = _uid AND a2.persona_id = _persona_id;
 
 	   IF NOT FOUND THEN PERFORM charp_raise('NOTFOUND'); END IF;
-	   IF NOT account_type_has_perm(_my_type, 'USER_EDIT') OR
-	      NOT account_type_has_perm (_my_type, _user_type::imr_perm) THEN
+	   IF NOT imr_account_type_has_perm(_my_type, 'USER_EDIT') OR
+	      NOT imr_account_type_has_perm (_my_type, _user_type::imr_perm) THEN
 	      PERFORM charp_raise('USERPERM');
 	   END IF;
 	END IF;
 
-	PERFORM persona_add_photo(_inst_id, _persona_id);
+	PERFORM imr_persona_add_photo(_inst_id, _persona_id);
 END »);
 
 
@@ -232,3 +234,61 @@ BEGIN
 
 	RETURN NEXT;
 END »);
+
+
+M4_FUNCTION( «rp_user_create(_uid charp_user_id, _username varchar, _passwd varchar, _account_type imr_account_type, _status charp_account_status)»
+	     integer, VOLATILE, M4_DEFN(user), 'Create an user with an empty persona.', «
+DECLARE
+	_my_type imr_account_type;
+	_perm text;
+	_inst_id integer;
+	_persona_id integer;
+BEGIN
+	SELECT inst_id, account_type INTO _inst_id, _my_type FROM account WHERE persona_id = _uid;
+
+	IF NOT imr_account_type_has_perm(_my_type, 'USER_CREATE') OR
+	   NOT imr_account_type_has_perm (_my_type, _account_type::imr_perm) THEN
+	   PERFORM charp_raise('USERPERM');
+	END IF;
+	
+	INSERT INTO persona VALUES(DEFAULT, _inst_id, 'USER', NULL, '', NULL, NULL, NULL, '', 'ACTIVE')
+	       RETURNING persona_id INTO _persona_id;
+
+	INSERT INTO account VALUES(_persona_id, _inst_id, _username, _passwd, _account_type, _status);
+
+	RETURN _persona_id;
+END »);
+
+
+M4_FUNCTION( «rp_user_update(_uid charp_user_id, _username varchar, _passwd varchar, _account_type imr_account_type, _status charp_account_status, _persona_id integer)»
+	     void, VOLATILE, M4_DEFN(user), 'Create an user with an empty persona.', «
+DECLARE
+	_my_type imr_account_type;
+	_user_type imr_account_type;
+	_inst_id integer;
+BEGIN
+	IF _uid = _persona_id THEN
+	   SELECT inst_id, account_type INTO _inst_id, _my_type FROM account WHERE persona_id = _uid;
+	   IF NOT imr_account_type_has_perm(_my_type, 'USER_EDIT_SELF') THEN PERFORM charp_raise('USERPERM'); END IF;
+	ELSE	   
+	   SELECT a1.account_type, a2.account_type, inst_id INTO _my_type, _user_type, _inst_id
+	   	  FROM account AS a1 JOIN account AS a2 USING (inst_id)
+	       	  WHERE a1.persona_id = _uid AND a2.persona_id = _persona_id;
+
+	   IF NOT FOUND THEN PERFORM charp_raise('NOTFOUND'); END IF;
+	   IF NOT imr_account_type_has_perm(_my_type, 'USER_EDIT') OR
+	      NOT imr_account_type_has_perm (_my_type, _user_type::imr_perm) THEN
+	      PERFORM charp_raise('USERPERM');
+	   END IF;
+	END IF;
+
+	IF _passwd <> '' THEN
+	   UPDATE persona SET (username, passwd, account_type, status) = (_username, _passwd, _account_type, _status)
+	   	  WHERE persona_id = _persona_id AND inst_id = _inst_id;
+	ELSE
+	   UPDATE persona SET (username, account_type, status) = (_username, _account_type, _status)
+	   	  WHERE persona_id = _persona_id AND inst_id = _inst_id;
+	END IF;
+END »);
+
+
