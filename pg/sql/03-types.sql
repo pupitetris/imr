@@ -76,7 +76,6 @@ CREATE TYPE imr_persona_type AS ENUM (
        'INST',
        'USER',
        'PATIENT',
-       'CONTACT',
        'REFERRAL'
 );
 
@@ -120,6 +119,9 @@ CREATE TYPE imr_perm AS ENUM (
        'PATIENT_CREATE',
        'PATIENT_EDIT',
        'PATIENT_DELETE',
+       'REFERRAL_CREATE',
+       'REFERRAL_EDIT',
+       'REFERRAL_DELETE',
        'USER_EDIT_SELF',
        'OPERATOR',
 
@@ -128,6 +130,7 @@ CREATE TYPE imr_perm AS ENUM (
        'USER_DELETE',
        'ADMIN',
 
+       'INST_EDIT',
        'SYSTEM_BACKUP',
        'SYSTEM_RESTORE',
        'USER_SET_STATUS',

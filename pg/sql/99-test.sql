@@ -25,7 +25,7 @@ BEGIN TRANSACTION;
       	     VALUES (DEFAULT, 1, 'USER', 'Dr.', 'Fulano', 'Sultano', NULL, 'MALE', NULL, 'ACTIVE');
 
       -- A pictures for tito.
-      SELECT persona_add_photo(1, 2);
+      SELECT imr_persona_add_photo(1, 2);
 
       INSERT INTO account(persona_id, inst_id, username, passwd, account_type, status)
       	     VALUES (3, 1, 'fulano', 'd0655af3824a90cf215bedc890a9028a', 'OPERATOR', 'ACTIVE');

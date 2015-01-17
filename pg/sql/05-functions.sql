@@ -1,4 +1,5 @@
 -- Application-specific functions.
+BEGIN TRANSACTION;
 
 
 M4_FUNCTION( «imr_account_type_has_perm(_type imr_account_type, _perm imr_perm)»,
@@ -32,7 +33,7 @@ SELECT a.persona_id, a.account_type, a.username, f.fname, p.remarks,
        FROM account AS a1
 	    JOIN account AS a USING (inst_id)
 	    JOIN persona AS p ON (a.persona_id = p.persona_id)
-	    LEFT JOIN persona_photo AS ph ON (a.persona_id = ph.persona_id AND a.inst_id = ph.inst_id)
+	    LEFT JOIN persona_photo AS ph ON (a.inst_id = ph.inst_id AND a.persona_id = ph.persona_id)
 	    LEFT JOIN file AS f USING (file_id)
        WHERE a1.persona_id = $1 AND a.status <> 'DELETED';
 »);
@@ -123,9 +124,9 @@ M4_SQL_PROCEDURE( «rp_persona_get_phones(_uid charp_user_id, _persona_id intege
 		  «TABLE(phone_id integer, number varchar, p_type imr_phone_type, remarks varchar)»,
 		  STABLE, M4_DEFN(user), 'Get phones related to a given persona.', «
 
-SELECT p.phone_id, p.number, p.p_type, p.remarks
+SELECT p.phone_id, p.number, p.type, p.remarks
        FROM phone AS p JOIN account AS ac USING (inst_id)
-       WHERE ac.persona_id = $1 AND p.persona_id = $2;
+       WHERE ac.persona_id = $1 AND p.persona_id = $2 AND p.ph_status <> 'DELETED';
 »);
 
 
@@ -133,7 +134,7 @@ M4_SQL_PROCEDURE( «rp_persona_get_emails(_uid charp_user_id, _persona_id intege
 		  «TABLE(email_id integer, email varchar, e_type imr_email_type, system imr_email_system, remarks varchar)»,
 		  STABLE, M4_DEFN(user), 'Get emails related to a given persona.', «
 
-SELECT e.email_id, e.email, e.e_type, e.system, e.remarks
+SELECT e.email_id, e.email, e.type, e.system, e.remarks
        FROM email AS e JOIN account AS ac USING (inst_id)
        WHERE ac.persona_id = $1 AND e.persona_id = $2;
 »);
@@ -151,7 +152,8 @@ BEGIN
 	   PERFORM charp_raise('ASSERT', 'MIME type is correct');
 	END IF;
 	
-	INSERT INTO file VALUES(DEFAULT, _inst_id, _file_name || '.' || _extension, CURRENT_TIMESTAMP, _mime_type_id)
+	INSERT INTO file (file_id, inst_id, fname, created, mime_type_id)
+	       VALUES(DEFAULT, _inst_id, _file_name || '.' || _extension, CURRENT_TIMESTAMP, _mime_type_id)
 	       RETURNING file_id INTO _file_id;
 	PERFORM charp_cmd('FILE_CREATE', _file_name);
 	RETURN _file_id;
@@ -164,35 +166,58 @@ DECLARE
 	_file_id integer;
 	_filename text;
 BEGIN
-	_filename := _inst_id, md5(_inst_id::text || _persona_id::text || CURRENT_TIMESTAMP);
+	_filename := md5(_inst_id::text || _persona_id::text || CURRENT_TIMESTAMP);
 	_file_id := imr_file_create(_filename, 'image/jpeg');
 	PERFORM charp_cmd('OTHER', 'Image-CreatePersonaThumb', _filename);
-	INSERT INTO persona_photo VALUES(_persona_id, _inst_id, _file_id);
+	INSERT INTO persona_photo (persona_id, inst_id, file_id)
+	       VALUES(_persona_id, _inst_id, _file_id);
 END »);
 
 
-M4_PROCEDURE( «rp_user_add_photo(_uid charp_user_id, _persona_id integer)»,
-	      void, STABLE, M4_DEFN(user), 'Add a new photo to a given user if permissions allow.', «
+M4_FUNCTION( «imr_user_can_edit_persona(_uid charp_user_id, _persona_id integer)»,
+	     integer, STABLE, M4_DEFN(user), 'Raise exceptions if a given user can''t edit a persona. Return the instance ID for efficiency.', «
 DECLARE
 	_my_type imr_account_type;
+	_persona_type imr_persona_type;
 	_user_type varchar;
 	_inst_id integer;
+	_perm varchar;
 BEGIN
+	SELECT inst_id, account_type INTO _inst_id, _my_type FROM account WHERE persona_id = _uid;
+
 	IF _uid = _persona_id THEN
-	   SELECT inst_id, account_type INTO _inst_id, _my_type FROM account WHERE persona_id = _uid;
 	   IF NOT imr_account_type_has_perm(_my_type, 'USER_EDIT_SELF') THEN PERFORM charp_raise('USERPERM'); END IF;
-	ELSE	   
-	   SELECT a1.account_type, a2.account_type, inst_id INTO _my_type, _user_type, _inst_id
+	   RETURN _inst_id;
+	END IF;
+
+	SELECT type INTO _persona_type FROM persona WHERE inst_id = _inst_id AND persona_id = _persona_id;
+	IF NOT FOUND THEN PERFORM charp_raise('NOTFOUND'); END IF;
+
+	IF NOT imr_account_type_has_perm(_my_type, _persona_type::text || '_EDIT') THEN
+	   PERFORM charp_raise('USERPERM');
+	END IF;
+
+	IF _persona_type = 'USER' THEN
+	   SELECT a2.account_type INTO _user_type
 	   	  FROM account AS a1 JOIN account AS a2 USING (inst_id)
-	       	  WHERE a1.persona_id = _uid AND a2.persona_id = _persona_id;
+	    	  WHERE a1.persona_id = _uid AND a2.persona_id = _persona_id;
 
 	   IF NOT FOUND THEN PERFORM charp_raise('NOTFOUND'); END IF;
-	   IF NOT imr_account_type_has_perm(_my_type, 'USER_EDIT') OR
-	      NOT imr_account_type_has_perm (_my_type, _user_type::imr_perm) THEN
+	   IF NOT imr_account_type_has_perm (_my_type, _user_type::imr_perm) THEN
 	      PERFORM charp_raise('USERPERM');
 	   END IF;
 	END IF;
 
+	RETURN _inst_id;
+END »);	      
+
+
+M4_PROCEDURE( «rp_persona_add_photo(_uid charp_user_id, _persona_id integer)»,
+	      void, STABLE, M4_DEFN(user), 'Add a new photo to a given user if permissions allow.', «
+DECLARE
+	_inst_id integer;
+BEGIN
+	_inst_id := imr_user_can_edit_persona(_uid, _persona_id);
 	PERFORM imr_persona_add_photo(_inst_id, _persona_id);
 END »);
 
@@ -236,7 +261,7 @@ BEGIN
 END »);
 
 
-M4_FUNCTION( «rp_user_create(_uid charp_user_id, _username varchar, _passwd varchar, _account_type imr_account_type, _status charp_account_status)»
+M4_FUNCTION( «rp_user_create(_uid charp_user_id, _username varchar, _passwd varchar, _account_type imr_account_type, _status charp_account_status)»,
 	     integer, VOLATILE, M4_DEFN(user), 'Create an user with an empty persona.', «
 DECLARE
 	_my_type imr_account_type;
@@ -251,44 +276,116 @@ BEGIN
 	   PERFORM charp_raise('USERPERM');
 	END IF;
 	
-	INSERT INTO persona VALUES(DEFAULT, _inst_id, 'USER', NULL, '', NULL, NULL, NULL, '', 'ACTIVE')
+	INSERT INTO persona (persona_id, inst_id, type, prefix, name, paterno, materno, gender, remarks, p_status)
+	       VALUES(DEFAULT, _inst_id, 'USER', NULL, '', NULL, NULL, NULL, '', 'ACTIVE')
 	       RETURNING persona_id INTO _persona_id;
 
-	INSERT INTO account VALUES(_persona_id, _inst_id, _username, _passwd, _account_type, _status);
+	INSERT INTO account (persona_id, inst_id, username, passwd, account_type, status)
+	       VALUES(_persona_id, _inst_id, _username, _passwd, _account_type, _status);
 
 	RETURN _persona_id;
 END »);
 
 
-M4_FUNCTION( «rp_user_update(_uid charp_user_id, _username varchar, _passwd varchar, _account_type imr_account_type, _status charp_account_status, _persona_id integer)»
-	     void, VOLATILE, M4_DEFN(user), 'Create an user with an empty persona.', «
+M4_PROCEDURE( «rp_user_update(_uid charp_user_id, _persona_id integer, _username varchar, _passwd varchar, _account_type imr_account_type, _status charp_account_status)»,
+	      void, VOLATILE, M4_DEFN(user), 'Update an account data. Password is not changed if it is empty string or NULL.', «
 DECLARE
-	_my_type imr_account_type;
-	_user_type imr_account_type;
 	_inst_id integer;
 BEGIN
-	IF _uid = _persona_id THEN
-	   SELECT inst_id, account_type INTO _inst_id, _my_type FROM account WHERE persona_id = _uid;
-	   IF NOT imr_account_type_has_perm(_my_type, 'USER_EDIT_SELF') THEN PERFORM charp_raise('USERPERM'); END IF;
-	ELSE	   
-	   SELECT a1.account_type, a2.account_type, inst_id INTO _my_type, _user_type, _inst_id
-	   	  FROM account AS a1 JOIN account AS a2 USING (inst_id)
-	       	  WHERE a1.persona_id = _uid AND a2.persona_id = _persona_id;
+	_inst_id := imr_user_can_edit_persona(_uid, _persona_id);
 
-	   IF NOT FOUND THEN PERFORM charp_raise('NOTFOUND'); END IF;
-	   IF NOT imr_account_type_has_perm(_my_type, 'USER_EDIT') OR
-	      NOT imr_account_type_has_perm (_my_type, _user_type::imr_perm) THEN
-	      PERFORM charp_raise('USERPERM');
-	   END IF;
-	END IF;
-
-	IF _passwd <> '' THEN
-	   UPDATE persona SET (username, passwd, account_type, status) = (_username, _passwd, _account_type, _status)
-	   	  WHERE persona_id = _persona_id AND inst_id = _inst_id;
+	IF _passwd IS NULL OR _passwd <> '' THEN
+	   UPDATE account SET (username, passwd, account_type, status) = (_username, _passwd, _account_type, _status)
+	          WHERE inst_id = _inst_id AND persona_id = _persona_id;
 	ELSE
-	   UPDATE persona SET (username, account_type, status) = (_username, _account_type, _status)
-	   	  WHERE persona_id = _persona_id AND inst_id = _inst_id;
+	   UPDATE account SET (username, account_type, status) = (_username, _account_type, _status)
+	          WHERE inst_id = _inst_id AND persona_id = _persona_id;
 	END IF;
 END »);
 
 
+M4_PROCEDURE( «rp_persona_update(_uid charp_user_id, _persona_id integer, _prefix varchar, _name varchar, _paterno varchar, _materno varchar, _gender imr_gender, _remarks varchar)»,
+	      void, VOLATILE, M4_DEFN(user), 'Update personal data.', «
+DECLARE
+	_inst_id integer;
+BEGIN
+	_inst_id := imr_user_can_edit_persona(_uid, _persona_id);
+
+	UPDATE persona SET (prefix, name, paterno, materno, gender, remarks) = (_prefix, _name, _paterno, _materno, _gender, _remarks)
+	       WHERE inst_id = _inst_id AND persona_id = _persona_id;
+END »);
+
+
+M4_PROCEDURE( «rp_address_create(_uid charp_user_id, _persona_id integer, _asenta_id integer, _street varchar, _ad_type imr_address_type)»,
+	      void, VOLATILE, M4_DEFN(user), 'Create an address record for a given persona.', «
+DECLARE
+	_inst_id integer;
+BEGIN
+	_inst_id := imr_user_can_edit_persona(_uid, _persona_id);
+
+	INSERT INTO address (address_id, inst_id, persona_id, asenta_id, street, ad_type)
+	       VALUES(DEFAULT, _inst_id, _persona_id, _asenta_id, _street, _ad_type);
+END »);
+
+
+M4_PROCEDURE( «rp_address_update(_uid charp_user_id, _address_id integer, _persona_id integer, _asenta_id integer, _street varchar, _ad_type imr_address_type)»,
+	      void, VOLATILE, M4_DEFN(user), 'Edit an address record for a given persona.', «
+DECLARE
+	_inst_id integer;
+BEGIN
+	_inst_id := imr_user_can_edit_persona(_uid, _persona_id);
+
+	UPDATE address SET (asenta_id, street, ad_type) = (_asenta_id, _street, _ad_type)
+	       WHERE inst_id = _inst_id AND persona_id = _persona_id AND address_id = _address_id;
+END »);
+
+
+M4_PROCEDURE( «rp_phone_create(_uid charp_user_id, _persona_id integer, _number varchar, _type imr_phone_type, _remarks varchar)»,
+	      void, VOLATILE, M4_DEFN(user), 'Create an phone record for a given persona.', «
+DECLARE
+	_inst_id integer;
+BEGIN
+	_inst_id := imr_user_can_edit_persona(_uid, _persona_id);
+
+	INSERT INTO phone (phone_id, inst_id, persona_id, number, type, remarks, status)
+	       VALUES(DEFAULT, _inst_id, _persona_id, _number, _type, _remarks, 'ACTIVE');
+END »);
+
+
+M4_PROCEDURE( «rp_phone_update(_uid charp_user_id, _phone_id integer, _persona_id integer, _asenta_id integer, _street varchar, _ad_type imr_phone_type)»,
+	      void, VOLATILE, M4_DEFN(user), 'Edit an phone record for a given persona.', «
+DECLARE
+	_inst_id integer;
+BEGIN
+	_inst_id := imr_user_can_edit_persona(_uid, _persona_id);
+
+	UPDATE phone SET (number, type, remarks) = (_number, _type, _remarks)
+	       WHERE inst_id = _inst_id AND persona_id = _persona_id AND phone_id = _phone_id;
+END »);
+
+
+M4_PROCEDURE( «rp_email_create(_uid charp_user_id, _persona_id integer, _email varchar, _type imr_email_type, _system imr_email_system, _remarks varchar)»,
+	      void, VOLATILE, M4_DEFN(user), 'Create an email record for a given persona.', «
+DECLARE
+	_inst_id integer;
+BEGIN
+	_inst_id := imr_user_can_edit_persona(_uid, _persona_id);
+
+	INSERT INTO email (email_id, inst_id, persona_id, email, type, system, remarks)
+	       VALUES(DEFAULT, _inst_id, _persona_id, _email, _type, _system, _remarks);
+END »);
+
+
+M4_PROCEDURE( «rp_email_update(_uid charp_user_id, _email_id integer, _persona_id integer, _email varchar, _type imr_email_type, _system imr_email_system, _remarks varchar)»,
+	      void, VOLATILE, M4_DEFN(user), 'Edit an email record for a given persona.', «
+DECLARE
+	_inst_id integer;
+BEGIN
+	_inst_id := imr_user_can_edit_persona(_uid, _persona_id);
+
+	UPDATE email SET (email, type, system, remarks) = (_email, _type, _system, _remarks)
+	       WHERE inst_id = _inst_id AND persona_id = _persona_id AND email_id = _email_id;
+END »);
+
+
+COMMIT TRANSACTION;

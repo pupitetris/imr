@@ -189,7 +189,7 @@ CREATE TABLE public.persona (
                 name VARCHAR NOT NULL,
                 paterno VARCHAR,
                 materno VARCHAR,
-                gender imr_gender NOT NULL,
+                gender imr_gender,
                 remarks VARCHAR,
                 p_status imr_record_status NOT NULL,
                 CONSTRAINT persona_pk PRIMARY KEY (persona_id, inst_id)
@@ -212,7 +212,7 @@ CREATE TABLE public.address (
                 address_id INTEGER NOT NULL DEFAULT nextval('public.address_address_id_seq'),
                 inst_id INTEGER NOT NULL,
                 persona_id INTEGER NOT NULL,
-                asenta_id INTEGER NOT NULL,
+                asenta_id INTEGER,
                 street VARCHAR NOT NULL,
                 ad_type imr_address_type NOT NULL,
                 CONSTRAINT address_pk PRIMARY KEY (address_id, inst_id)
@@ -239,7 +239,7 @@ CREATE TABLE public.email (
                 inst_id INTEGER NOT NULL,
                 persona_id INTEGER NOT NULL,
                 email VARCHAR NOT NULL,
-                e_type imr_email_type NOT NULL,
+                type imr_email_type NOT NULL,
                 system imr_email_system NOT NULL,
                 remarks VARCHAR NOT NULL,
                 CONSTRAINT email_pk PRIMARY KEY (email_id, inst_id)
@@ -256,9 +256,9 @@ CREATE TABLE public.phone (
                 inst_id INTEGER NOT NULL,
                 persona_id INTEGER NOT NULL,
                 number VARCHAR NOT NULL,
-                p_type imr_phone_type NOT NULL,
-                status imr_record_status NOT NULL,
+                type imr_phone_type NOT NULL,
                 remarks VARCHAR NOT NULL,
+                ph_status imr_record_status NOT NULL,
                 CONSTRAINT phone_pk PRIMARY KEY (phone_id, inst_id)
 );
 
@@ -304,7 +304,7 @@ CREATE TABLE public.referral (
                 referral_id INTEGER NOT NULL DEFAULT nextval('public.referral_referral_id_seq'),
                 inst_id INTEGER NOT NULL,
                 patient_persona_id INTEGER NOT NULL,
-                type imr_referral_type NOT NULL,
+                ref_type imr_referral_type NOT NULL,
                 persona_id INTEGER NOT NULL,
                 details VARCHAR NOT NULL,
                 CONSTRAINT referral_pk PRIMARY KEY (referral_id, inst_id)
