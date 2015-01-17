@@ -78,7 +78,7 @@ namespace IMRpatient
 		public void Commit (Charp.SuccessDelegate success, Charp.ErrorDelegate error, Gtk.Window parent) {
 			string[] types = { "MOBILE", "NEXTEL", "HOME", "WORK" };
 
-			object[] parms = new object[] {
+			object[] parms = {
 				personaId,
 				entryNumber.Text,
 				types[comboType.Active],
@@ -95,7 +95,7 @@ namespace IMRpatient
 					resource = "phone_create";
 				} else {
 					resource = "phone_update";
-					parms[4] = phoneId;
+					parms = Util.ArrayUnshift (parms, phoneId);
 				}
 
 				config.charp.request (resource, parms, new CharpGtk.CharpGtkCtx {

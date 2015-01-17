@@ -123,6 +123,14 @@ namespace IMRpatient
 				return true;
 			return false; // not found
 		}
+
+		public static object[] ArrayUnshift (object[] array, object item) {
+			object[] newArr = new object[array.Length + 1];
+			for (int i = array.Length; i > 0; i--)
+				newArr[i] = array[i - 1];
+			newArr[0] = item;
+			return newArr;
+		}
 	}
 }
 

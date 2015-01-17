@@ -86,7 +86,7 @@ namespace IMRpatient
 			string[] types = { "PERSONAL", "WORK" };
 			string[] systems = { "STANDARD", "SKYPE" };
 
-			object[] parms = new object[] {
+			object[] parms = {
 				personaId,
 				entryEmail.Text,
 				types[comboType.Active],
@@ -105,7 +105,7 @@ namespace IMRpatient
 					resource = "email_create";
 				} else {
 					resource = "email_update";
-					parms[4] = emailId;
+					parms = Util.ArrayUnshift (parms, emailId);
 				}
 
 				config.charp.request (resource, parms, new CharpGtk.CharpGtkCtx {

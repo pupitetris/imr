@@ -321,7 +321,7 @@ namespace IMRpatient
 			JObject asenta = (JObject) myComboAsenta.ActiveData ();
 			int asenta_id = asenta != null? (int) asenta["asenta_id"]: 0;
 
-			object[] parms = new object[] {
+			object[] parms = {
 				personaId,
 				asenta_id,
 				entryStreet.Text,
@@ -338,7 +338,7 @@ namespace IMRpatient
 					resource = "address_create";
 				} else {
 					resource = "address_update";
-					parms[4] = addressId;
+					parms = Util.ArrayUnshift (parms, addressId);
 				}
 
 				config.charp.request (resource, parms, new CharpGtk.CharpGtkCtx {

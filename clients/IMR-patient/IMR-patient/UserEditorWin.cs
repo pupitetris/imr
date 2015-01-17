@@ -178,7 +178,7 @@ namespace IMRpatient
 		{
 			string[] types = { "OPERATOR", "ADMIN", "SUPERUSER" };
 
-			object[] parms = new object[] {
+			object[] parms = {
 				entryUsername.Text,
 				entryPassword.Text,
 				types[comboLevel.Active],
@@ -191,7 +191,7 @@ namespace IMRpatient
 				(string) parms[2] != (string) myData["type"] ||
 				(string) parms[3] != (string) myData["status"]) {
 
-				if (parms[1] != "")
+				if ((string) parms[1] != "")
 					parms[1] = Charp.GetMD5HexHash (entryPassword.Text);
 
 				string resource;
@@ -199,7 +199,7 @@ namespace IMRpatient
 					resource = "user_create";
 				} else {
 					resource = "user_update";
-					parms[4] = personaId;
+					parms = Util.ArrayUnshift (parms, personaId);
 				}
 
 				config.charp.request (resource, parms, new CharpGtk.CharpGtkCtx {

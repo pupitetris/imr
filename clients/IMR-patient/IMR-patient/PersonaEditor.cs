@@ -70,13 +70,6 @@ namespace IMRpatient
 			if (Util.DictTryValue (data, "picture", out val)) { LoadPicture (val); }
 			if (Util.DictTryValue (data, "gender", out val)) { SetGender (val); }
 
-			if (Util.DictTryValue (data, "birth", out val)) {
-				entryBirth.Text = val;
-				hboxBirth.Show ();
-			} else {
-				hboxBirth.Hide ();
-			}
-
 			if (Util.DictTryValue (data, "remarks", out val)) { 
 				textNotes.Buffer.InsertAtCursor (val);
 				expanderNotes.Expanded = true;
@@ -186,8 +179,8 @@ namespace IMRpatient
 		}
 
 		private void CommitPersonaSuccess (Charp.SuccessDelegate success, Charp.ErrorDelegate error, Gtk.Window parent) {
-			if (isNew || photoChanged) {
-				config.charp.request ("user_add_photo", new object[] { personaId }, new CharpGtk.CharpGtkCtx {
+			if (photoChanged) {
+				config.charp.request ("persona_add_photo", new object[] { personaId }, new CharpGtk.CharpGtkCtx {
 					success = success,
 					error = error,
 					fileName = filename
@@ -197,23 +190,22 @@ namespace IMRpatient
 		}
 
 		public void Commit (Charp.SuccessDelegate success, Charp.ErrorDelegate error, Gtk.Window parent) {
-			object[] parms = new object[] {
+			object[] parms = {
+				personaId,
 				entryPrefix.Text,
 				entryName.Text,
 				entryPaterno.Text,
 				entryMaterno.Text,
 				radioMale.Active? "MALE" : "FEMALE",
-				entryBirth.Text,
 				textNotes.Buffer.Text
 			};
 
 			if (isNew ||
-				parms[0] != myData["prefix"] ||
-				parms[1] != myData["name"] ||
-				parms[2] != myData["paterno"] ||
-				parms[3] != myData["materno"] ||
-				parms[4] != myData["gender"] ||
-				parms[5] != myData["birth"] ||
+				parms[1] != myData["prefix"] ||
+				parms[2] != myData["name"] ||
+				parms[3] != myData["paterno"] ||
+				parms[4] != myData["materno"] ||
+				parms[5] != myData["gender"] ||
 				parms[6] != myData["remarks"]) {
 
 				config.charp.request ("persona_update", parms, new CharpGtk.CharpGtkCtx {
