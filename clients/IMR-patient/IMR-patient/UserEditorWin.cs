@@ -167,7 +167,7 @@ namespace IMRpatient
 
 		private void CommitUserSuccess (object data, Charp.CharpCtx ctx) {
 			if (OpType == TYPE.NEW) {
-				personaId = (int) ((JValue) data).Value;
+				personaId = ((JValue) data).ToObject<int>();
 				personaEditor.SetPersonaId (personaId);
 				personaAddEditor.SetPersonaId (personaId);
 			}

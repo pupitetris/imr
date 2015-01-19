@@ -166,8 +166,8 @@ DECLARE
 	_file_id integer;
 	_filename text;
 BEGIN
-	_filename := md5(_inst_id::text || _persona_id::text || CURRENT_TIMESTAMP);
-	_file_id := imr_file_create(_filename, 'image/jpeg');
+	_filename := md5('radio' || _inst_id::text || _persona_id::text || CURRENT_TIMESTAMP);
+	_file_id := imr_file_create(_inst_id, _filename, 'image/jpeg');
 	PERFORM charp_cmd('OTHER', 'Image-CreatePersonaThumb', _filename);
 	INSERT INTO persona_photo (persona_id, inst_id, file_id)
 	       VALUES(_persona_id, _inst_id, _file_id);
@@ -193,7 +193,7 @@ BEGIN
 	SELECT type INTO _persona_type FROM persona WHERE inst_id = _inst_id AND persona_id = _persona_id;
 	IF NOT FOUND THEN PERFORM charp_raise('NOTFOUND'); END IF;
 
-	IF NOT imr_account_type_has_perm(_my_type, _persona_type::text || '_EDIT') THEN
+	IF NOT imr_account_type_has_perm(_my_type, (_persona_type::text || '_EDIT')::imr_perm) THEN
 	   PERFORM charp_raise('USERPERM');
 	END IF;
 
@@ -272,7 +272,7 @@ BEGIN
 	SELECT inst_id, account_type INTO _inst_id, _my_type FROM account WHERE persona_id = _uid;
 
 	IF NOT imr_account_type_has_perm(_my_type, 'USER_CREATE') OR
-	   NOT imr_account_type_has_perm (_my_type, _account_type::imr_perm) THEN
+	   NOT imr_account_type_has_perm (_my_type, _account_type::text::imr_perm) THEN
 	   PERFORM charp_raise('USERPERM');
 	END IF;
 	

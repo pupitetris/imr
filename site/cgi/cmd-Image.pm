@@ -18,7 +18,7 @@ sub CreatePersonaThumb {
 	return CHARP::cmderr ($cmd, 'Missing file data.');
     }
 
-    my $path = CHARP::file_find (File::Spec->catfile ('thumbs', $parms->[0]));
+    my $path = CHARP::file_find (File::Spec->catfile ('thumbs', $parms->[0] . '.jpg'));
     return $path if $path->{'err'};
 
     my $err = CHARP::dir_create ($cmd, $path);
