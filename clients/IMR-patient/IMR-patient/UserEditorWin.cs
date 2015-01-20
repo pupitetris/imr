@@ -34,22 +34,10 @@ namespace IMRpatient
 
 		private void SetupForEdit (JObject data)
 		{
+			LoadData (data);
+
 			Title = Catalog.GetString ("Edit User");
-			myData = data;
-			personaId = (int) myData["persona_id"];
-
 			DeleteAction.Visible = true;
-
-			entryUsername.Text = (string) data["username"];
-
-			int idx = 0;
-			switch ((string) data["type"]) {
-			case "OPERATOR": idx = 0; break;
-			case "ADMIN": idx = 1; break;
-			case "SUPERUSER": idx = 2; break;
-			}
-			comboLevel.Active = idx;
-			comboStatus.Active = ((string) data["status"] == "ACTIVE")? 0: 1;
 
 			if (!config.CanPerform (IMR_PERM.USER_SET_ADMIN_LEVEL)) {
 				comboLevel.Sensitive = false;
@@ -57,6 +45,23 @@ namespace IMRpatient
 
 			personaEditor.LoadData (data);
 			personaAddEditor.LoadData (data);
+		}
+
+		private void LoadData (JObject data) 
+		{
+			myData = data;
+			personaId = (int) myData["persona_id"];
+
+			entryUsername.Text = (string) data["username"];
+
+			int idx = 0;
+			switch ((string) data["type"]) {
+				case "OPERATOR": idx = 0; break;
+				case "ADMIN": idx = 1; break;
+				case "SUPERUSER": idx = 2; break;
+			}
+			comboLevel.Active = idx;
+			comboStatus.Active = ((string) data["status"] == "ACTIVE")? 0: 1;
 		}
 
 		public UserEditorWin (TYPE type, AppConfig config, JObject data = null) : 
@@ -155,10 +160,12 @@ namespace IMRpatient
 		}
 
 		private void CommitSuccess (object data, Charp.CharpCtx ctx) {
-			if (OpType != TYPE.NEW && config.mainwin.userListWin != null) {
-				config.mainwin.userListWin.Refresh ();
-			}
-			Destroy ();
+			SendAction (menubar, delegate {
+				if (OpType != TYPE.NEW && config.mainwin.userListWin != null) {
+					config.mainwin.userListWin.Refresh ();
+				}
+				Destroy ();
+			});
 		}
 
 		private void CommitPersonaSuccess (object data, Charp.CharpCtx ctx) {
@@ -166,8 +173,8 @@ namespace IMRpatient
 		}
 
 		private void CommitUserSuccess (object data, Charp.CharpCtx ctx) {
+			LoadData ((JObject) (((JArray) data)[0]));
 			if (OpType == TYPE.NEW) {
-				personaId = ((JValue) data).ToObject<int>();
 				personaEditor.SetPersonaId (personaId);
 				personaAddEditor.SetPersonaId (personaId);
 			}
@@ -214,10 +221,8 @@ namespace IMRpatient
 
 		protected void OnOKActionActivated (object sender, EventArgs e)
 		{
-			SendAction (menubar, delegate {
-				if (Validate ())
-					Commit ();
-			});
+			if (Validate ())
+				Commit ();
 		}
 	}
 }

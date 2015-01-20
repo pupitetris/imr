@@ -211,6 +211,7 @@ namespace IMRpatient
 				config.charp.request ("persona_update", parms, new CharpGtk.CharpGtkCtx {
 					parent = parent,
 					success = delegate (object data, Charp.CharpCtx ctx) {
+						LoadData ((JObject) (((JArray) data)[0]));
 						CommitPersonaSuccess (success, error, parent);
 					},
 					error = error

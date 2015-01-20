@@ -262,7 +262,8 @@ END »);
 
 
 M4_FUNCTION( «rp_user_create(_uid charp_user_id, _username varchar, _passwd varchar, _account_type imr_account_type, _status charp_account_status)»,
-	     integer, VOLATILE, M4_DEFN(user), 'Create an user with an empty persona.', «
+	     «TABLE( persona_id integer, username varchar, account_type imr_account_type, status charp_account_status )»,
+	     VOLATILE, M4_DEFN(user), 'Create an user with an empty persona.', «
 DECLARE
 	_my_type imr_account_type;
 	_perm text;
@@ -283,29 +284,33 @@ BEGIN
 	INSERT INTO account (persona_id, inst_id, username, passwd, account_type, status)
 	       VALUES(_persona_id, _inst_id, _username, _passwd, _account_type, _status);
 
-	RETURN _persona_id;
+	RETURN QUERY SELECT _persona_id, _username, _account_type, _status;
 END »);
 
 
 M4_PROCEDURE( «rp_user_update(_uid charp_user_id, _persona_id integer, _username varchar, _passwd varchar, _account_type imr_account_type, _status charp_account_status)»,
-	      void, VOLATILE, M4_DEFN(user), 'Update an account data. Password is not changed if it is empty string or NULL.', «
+	      «TABLE( persona_id integer, username varchar, account_type imr_account_type, status charp_account_status )»,
+	      VOLATILE, M4_DEFN(user), 'Update an account data. Password is not changed if it is empty string or NULL.', «
 DECLARE
 	_inst_id integer;
 BEGIN
 	_inst_id := imr_user_can_edit_persona(_uid, _persona_id);
 
-	IF _passwd IS NULL OR _passwd <> '' THEN
+	IF _passwd IS NOT NULL AND _passwd <> '' THEN
 	   UPDATE account SET (username, passwd, account_type, status) = (_username, _passwd, _account_type, _status)
 	          WHERE inst_id = _inst_id AND persona_id = _persona_id;
 	ELSE
 	   UPDATE account SET (username, account_type, status) = (_username, _account_type, _status)
 	          WHERE inst_id = _inst_id AND persona_id = _persona_id;
 	END IF;
+
+	RETURN QUERY SELECT _persona_id, _username, _account_type, _status;
 END »);
 
 
 M4_PROCEDURE( «rp_persona_update(_uid charp_user_id, _persona_id integer, _prefix varchar, _name varchar, _paterno varchar, _materno varchar, _gender imr_gender, _remarks varchar)»,
-	      void, VOLATILE, M4_DEFN(user), 'Update personal data.', «
+	      «TABLE( persona_id integer, prefix varchar, name varchar, paterno varchar, materno varchar, gender imr_gender, remarks varchar )»,
+	      VOLATILE, M4_DEFN(user), 'Update personal data.', «
 DECLARE
 	_inst_id integer;
 BEGIN
@@ -313,6 +318,8 @@ BEGIN
 
 	UPDATE persona SET (prefix, name, paterno, materno, gender, remarks) = (_prefix, _name, _paterno, _materno, _gender, _remarks)
 	       WHERE inst_id = _inst_id AND persona_id = _persona_id;
+
+	RETURN QUERY SELECT _persona_id, _prefix, _name, _paterno, _materno, _gender, _remarks;
 END »);
 
 
