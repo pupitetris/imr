@@ -33,8 +33,13 @@ SELECT a.persona_id, a.account_type, a.username, f.fname, p.remarks,
        FROM account AS a1
 	    JOIN account AS a USING (inst_id)
 	    JOIN persona AS p ON (a.persona_id = p.persona_id)
-	    LEFT JOIN persona_photo AS ph ON (a.inst_id = ph.inst_id AND a.persona_id = ph.persona_id)
-	    LEFT JOIN file AS f USING (file_id)
+	    LEFT JOIN (SELECT persona_id, inst_id, fname
+	    	      	      FROM (SELECT persona_id, inst_id, max(created) AS created
+			      	   	   FROM persona_photo
+					   	NATURAL JOIN file
+					   GROUP BY inst_id, persona_id) AS q
+				   NATURAL JOIN file) AS f
+		      ON (a.inst_id = f.inst_id AND a.persona_id = f.persona_id)
        WHERE a1.persona_id = $1 AND a.status <> 'DELETED';
 »);
 
@@ -270,7 +275,7 @@ DECLARE
 	_inst_id integer;
 	_persona_id integer;
 BEGIN
-	SELECT inst_id, account_type INTO _inst_id, _my_type FROM account WHERE persona_id = _uid;
+	SELECT a.inst_id, a.account_type INTO _inst_id, _my_type FROM account AS a WHERE a.persona_id = _uid;
 
 	IF NOT imr_account_type_has_perm(_my_type, 'USER_CREATE') OR
 	   NOT imr_account_type_has_perm (_my_type, _account_type::text::imr_perm) THEN
@@ -279,7 +284,7 @@ BEGIN
 	
 	INSERT INTO persona (persona_id, inst_id, type, prefix, name, paterno, materno, gender, remarks, p_status)
 	       VALUES(DEFAULT, _inst_id, 'USER', NULL, '', NULL, NULL, NULL, '', 'ACTIVE')
-	       RETURNING persona_id INTO _persona_id;
+	       RETURNING persona.persona_id INTO _persona_id;
 
 	INSERT INTO account (persona_id, inst_id, username, passwd, account_type, status)
 	       VALUES(_persona_id, _inst_id, _username, _passwd, _account_type, _status);
