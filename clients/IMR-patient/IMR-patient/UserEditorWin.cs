@@ -27,9 +27,8 @@ namespace IMRpatient
 
 			comboStatus.Active = 0;
 			comboLevel.Active = 0;
-			if (!config.CanPerform (IMR_PERM.USER_SET_ADMIN_LEVEL)) {
+			if (!config.CanPerform (IMR_PERM.USER_SET_ADMIN_LEVEL))
 				comboLevel.Sensitive = false;
-			}
 		}
 
 		private void SetupForEdit (JObject data)
@@ -39,9 +38,8 @@ namespace IMRpatient
 			Title = Catalog.GetString ("Edit User");
 			DeleteAction.Visible = true;
 
-			if (!config.CanPerform (IMR_PERM.USER_SET_ADMIN_LEVEL)) {
+			if (!config.CanPerform (IMR_PERM.USER_SET_ADMIN_LEVEL))
 				comboLevel.Sensitive = false;
-			}
 
 			personaEditor.LoadData (data);
 			personaAddEditor.LoadData (data);
