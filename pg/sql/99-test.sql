@@ -30,4 +30,7 @@ BEGIN TRANSACTION;
       INSERT INTO account(persona_id, inst_id, username, passwd, account_type, status)
       	     VALUES (3, 1, 'fulano', 'd0655af3824a90cf215bedc890a9028a', 'OPERATOR', 'ACTIVE');
 
+\echo
+\echo Success.
+
 COMMIT TRANSACTION;
