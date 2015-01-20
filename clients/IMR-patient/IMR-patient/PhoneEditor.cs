@@ -43,7 +43,7 @@ namespace IMRpatient
 				isNew = false;
 
 				string val;
-				if (Util.DictTryValue (data, "number", out val)) { entryNumber.Text = val; }
+				if (Util.DictTryValue (data, "numbr", out val)) { entryNumber.Text = val; }
 				if (Util.DictTryValue (data, "remarks", out val)) { textRemarks.Buffer.InsertAtCursor (val); }
 				if (Util.DictTryValue (data, "p_type", out val)) {
 					int active;
@@ -102,9 +102,9 @@ namespace IMRpatient
 			};
 
 			if (isNew ||
-				(string) parms[1] != (string) myData["number"] ||
+				(string) parms[1] != (string) myData["numbr"] ||
 				(string) parms[2] != (string) myData["p_type"] ||
-				(string) parms[3] != (string) myData["remarks"]) {
+				!Util.StrEqNull ((string) parms[3], (string) myData["remarks"])) {
 
 				string resource;
 				if (isNew) {

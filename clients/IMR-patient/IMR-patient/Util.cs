@@ -131,6 +131,14 @@ namespace IMRpatient
 			newArr[0] = item;
 			return newArr;
 		}
+
+		public static bool StrEqNull (string a, string b) {
+			if (a == "")
+				a = null;
+			if (b == "")
+				b = null;
+			return a == b;
+		}
 	}
 }
 

@@ -121,10 +121,10 @@ SELECT a.address_id, a.persona_id, a.street, a.ad_type, a.asenta_id
 
 
 M4_SQL_PROCEDURE( «rp_persona_get_phones(_uid charp_user_id, _persona_id integer)»,
-		  «TABLE(phone_id integer, persona_id integer, number varchar, p_type imr_phone_type, remarks varchar)»,
+		  «TABLE(phone_id integer, persona_id integer, numbr varchar, p_type imr_phone_type, remarks varchar)»,
 		  STABLE, M4_DEFN(user), 'Get phones related to a given persona.', «
 
-SELECT p.phone_id, p.persona_id, p.number, p.type, p.remarks
+SELECT p.phone_id, p.persona_id, p.numbr, p.type, p.remarks
        FROM phone AS p JOIN account AS ac USING (inst_id)
        WHERE ac.persona_id = $1 AND p.persona_id = $2 AND p.ph_status <> 'DELETED';
 »);
@@ -174,8 +174,8 @@ BEGIN
 END »);
 
 
-M4_FUNCTION( «imr_user_can_edit_persona(_uid charp_user_id, _persona_id integer)»,
-	     integer, STABLE, M4_DEFN(user), 'Raise exceptions if a given user can''t edit a persona. Return the instance ID for efficiency.', «
+M4_FUNCTION( «imr_user_can_edit_persona(_uid charp_user_id, _persona_id integer, _op_type varchar DEFAULT 'EDIT')»,
+	     integer, STABLE, M4_DEFN(user), 'Raise exceptions if a given user can''t edit a persona. op_type can be CREATE EDIT or DELETE. Return the instance ID for efficiency.', «
 DECLARE
 	_my_type imr_account_type;
 	_persona_type imr_persona_type;
@@ -186,14 +186,14 @@ BEGIN
 	SELECT inst_id, account_type INTO _inst_id, _my_type FROM account WHERE persona_id = _uid;
 
 	IF _uid = _persona_id THEN
-	   IF NOT imr_account_type_has_perm(_my_type, 'USER_EDIT_SELF') THEN PERFORM charp_raise('USERPERM'); END IF;
+	   IF NOT imr_account_type_has_perm(_my_type, ('USER_' || _op_type || '_SELF')::imr_perm) THEN PERFORM charp_raise('USERPERM'); END IF;
 	   RETURN _inst_id;
 	END IF;
 
 	SELECT type INTO _persona_type FROM persona WHERE inst_id = _inst_id AND persona_id = _persona_id;
 	IF NOT FOUND THEN PERFORM charp_raise('NOTFOUND'); END IF;
 
-	IF NOT imr_account_type_has_perm(_my_type, (_persona_type::text || '_EDIT')::imr_perm) THEN
+	IF NOT imr_account_type_has_perm(_my_type, (_persona_type::text || '_' || _op_type)::imr_perm) THEN
 	   PERFORM charp_raise('USERPERM');
 	END IF;
 
@@ -316,8 +316,8 @@ DECLARE
 BEGIN
 	_inst_id := imr_user_can_edit_persona(_uid, _persona_id);
 
-	UPDATE persona SET (prefix, name, paterno, materno, gender, remarks) = (_prefix, _name, _paterno, _materno, _gender, _remarks)
-	       WHERE inst_id = _inst_id AND persona_id = _persona_id;
+	UPDATE persona AS p SET (prefix, name, paterno, materno, gender, remarks) = (_prefix, _name, _paterno, _materno, _gender, _remarks)
+	       WHERE p.inst_id = _inst_id AND p.persona_id = _persona_id;
 
 	RETURN QUERY SELECT _persona_id, _prefix, _name, _paterno, _materno, _gender, _remarks;
 END »);
@@ -355,8 +355,8 @@ BEGIN
 END »);
 
 
-M4_PROCEDURE( «rp_phone_create(_uid charp_user_id, _persona_id integer, _number varchar, _type imr_phone_type, _remarks varchar)»,
-	      «TABLE( phone_id integer, persona_id integer, number varchar, type imr_phone_type, remarks varchar )»,
+M4_PROCEDURE( «rp_phone_create(_uid charp_user_id, _persona_id integer, _numbr varchar, _type imr_phone_type, _remarks varchar)»,
+	      «TABLE( phone_id integer, persona_id integer, numbr varchar, type imr_phone_type, remarks varchar )»,
 	      VOLATILE, M4_DEFN(user), 'Create an phone record for a given persona.', «
 DECLARE
 	_inst_id integer;
@@ -364,26 +364,26 @@ DECLARE
 BEGIN
 	_inst_id := imr_user_can_edit_persona(_uid, _persona_id);
 
-	INSERT INTO phone (phone_id, inst_id, persona_id, number, type, remarks, ph_status)
-	       VALUES(DEFAULT, _inst_id, _persona_id, _number, _type, _remarks, 'ACTIVE')
+	INSERT INTO phone (phone_id, inst_id, persona_id, numbr, type, remarks, ph_status)
+	       VALUES(DEFAULT, _inst_id, _persona_id, _numbr, _type, _remarks, 'ACTIVE')
 	       RETURNING phone.phone_id INTO _phone_id;
 
-	RETURN QUERY SELECT _phone_id, _persona_id, _number, _type, _remarks;
+	RETURN QUERY SELECT _phone_id, _persona_id, _numbr, _type, _remarks;
 END »);
 
 
-M4_PROCEDURE( «rp_phone_update(_uid charp_user_id, _phone_id integer, _persona_id integer, _asenta_id integer, _street varchar, _ad_type imr_phone_type)»,
-	      «TABLE( phone_id integer, persona_id integer, number varchar, type imr_phone_type, remarks varchar )»,
+M4_PROCEDURE( «rp_phone_update(_uid charp_user_id, _phone_id integer, _persona_id integer, _numbr varchar, _type imr_phone_type, _remarks varchar)»,
+	      «TABLE( phone_id integer, persona_id integer, numbr varchar, type imr_phone_type, remarks varchar )»,
 	      VOLATILE, M4_DEFN(user), 'Edit an phone record for a given persona.', «
 DECLARE
 	_inst_id integer;
 BEGIN
 	_inst_id := imr_user_can_edit_persona(_uid, _persona_id);
 
-	UPDATE phone SET (number, type, remarks) = (_number, _type, _remarks)
+	UPDATE phone SET (numbr, type, remarks) = (_numbr, _type, _remarks)
 	       WHERE inst_id = _inst_id AND persona_id = _persona_id AND phone_id = _phone_id;
 
-	RETURN QUERY SELECT _phone_id, _persona_id, _number, _type, _remarks;
+	RETURN QUERY SELECT _phone_id, _persona_id, _numbr, _type, _remarks;
 END »);
 
 
@@ -416,6 +416,39 @@ BEGIN
 	       WHERE inst_id = _inst_id AND persona_id = _persona_id AND email_id = _email_id;
 
 	RETURN QUERY SELECT _email_id, _persona_id, _email, _type, _system, _remarks;
+END »);
+
+
+M4_PROCEDURE( «rp_address_delete(_uid charp_user_id, _persona_id integer, _address_id integer)»,
+	      void, VOLATILE, M4_DEFN(user), 'Remove an address record for a given persona.', «
+DECLARE
+	_inst_id integer;
+BEGIN
+	_inst_id := imr_user_can_edit_persona(_uid, _persona_id);
+
+	DELETE FROM address WHERE inst_id = _inst_id AND persona_id = _persona_id AND address_id = _address_id;
+END »);
+
+
+M4_PROCEDURE( «rp_phone_delete(_uid charp_user_id, _persona_id integer, _phone_id integer)»,
+	      void, VOLATILE, M4_DEFN(user), 'Remove an phone record for a given persona.', «
+DECLARE
+	_inst_id integer;
+BEGIN
+	_inst_id := imr_user_can_edit_persona(_uid, _persona_id);
+
+	DELETE FROM phone WHERE inst_id = _inst_id AND persona_id = _persona_id AND phone_id = _phone_id;
+END »);
+
+
+M4_PROCEDURE( «rp_email_delete(_uid charp_user_id, _persona_id integer, _email_id integer)»,
+	      void, VOLATILE, M4_DEFN(user), 'Remove an email record for a given persona.', «
+DECLARE
+	_inst_id integer;
+BEGIN
+	_inst_id := imr_user_can_edit_persona(_uid, _persona_id);
+
+	DELETE FROM email WHERE inst_id = _inst_id AND persona_id = _persona_id AND email_id = _email_id;
 END »);
 
 

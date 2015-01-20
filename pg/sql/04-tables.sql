@@ -255,7 +255,7 @@ CREATE TABLE public.phone (
                 phone_id INTEGER NOT NULL DEFAULT nextval('public.phone_phone_id_seq'),
                 inst_id INTEGER NOT NULL,
                 persona_id INTEGER NOT NULL,
-                number VARCHAR NOT NULL,
+                numbr VARCHAR NOT NULL,
                 type imr_phone_type NOT NULL,
                 remarks VARCHAR,
                 ph_status imr_record_status NOT NULL,

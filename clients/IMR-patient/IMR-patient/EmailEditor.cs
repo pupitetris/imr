@@ -114,7 +114,7 @@ namespace IMRpatient
 				(string) parms[1] != (string) myData["email"] ||
 				(string) parms[2] != (string) myData["type"] ||
 				(string) parms[3] != (string) myData["system"] ||
-				(string) parms[4] != (string) myData["remarks"]) {
+				!Util.StrEqNull ((string) parms[4], (string) myData["remarks"])) {
 
 				string resource;
 				if (isNew) {

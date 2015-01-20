@@ -202,12 +202,12 @@ namespace IMRpatient
 			};
 
 			if (isNew ||
-				parms[1] != myData["prefix"] ||
-				parms[2] != myData["name"] ||
-				parms[3] != myData["paterno"] ||
-				parms[4] != myData["materno"] ||
-				parms[5] != myData["gender"] ||
-				parms[6] != myData["remarks"]) {
+				!Util.StrEqNull ((string) parms[1], (string) myData["prefix"])  ||
+				!Util.StrEqNull ((string) parms[2], (string) myData["name"])    ||
+				!Util.StrEqNull ((string) parms[3], (string) myData["paterno"]) ||
+				!Util.StrEqNull ((string) parms[4], (string) myData["materno"]) ||
+				!Util.StrEqNull ((string) parms[5], (string) myData["gender"])  ||
+				!Util.StrEqNull ((string) parms[6], (string) myData["remarks"])) {
 
 				config.charp.request ("persona_update", parms, new CharpGtk.CharpGtkCtx {
 					parent = ParentWin,
