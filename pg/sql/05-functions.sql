@@ -437,7 +437,7 @@ DECLARE
 BEGIN
 	_inst_id := imr_user_can_edit_persona(_uid, _persona_id);
 
-	DELETE FROM phone WHERE inst_id = _inst_id AND persona_id = _persona_id AND phone_id = _phone_id;
+	UPDATE phone SET ph_status = 'DELETED' WHERE inst_id = _inst_id AND persona_id = _persona_id AND phone_id = _phone_id;
 END »);
 
 
