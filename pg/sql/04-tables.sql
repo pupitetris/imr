@@ -241,7 +241,7 @@ CREATE TABLE public.email (
                 email VARCHAR NOT NULL,
                 type imr_email_type NOT NULL,
                 system imr_email_system NOT NULL,
-                remarks VARCHAR NOT NULL,
+                remarks VARCHAR,
                 CONSTRAINT email_pk PRIMARY KEY (email_id, inst_id)
 );
 COMMENT ON COLUMN public.email.remarks IS 'Short notes.';
@@ -257,7 +257,7 @@ CREATE TABLE public.phone (
                 persona_id INTEGER NOT NULL,
                 number VARCHAR NOT NULL,
                 type imr_phone_type NOT NULL,
-                remarks VARCHAR NOT NULL,
+                remarks VARCHAR,
                 ph_status imr_record_status NOT NULL,
                 CONSTRAINT phone_pk PRIMARY KEY (phone_id, inst_id)
 );
@@ -268,7 +268,7 @@ ALTER SEQUENCE public.phone_phone_id_seq OWNED BY public.phone.phone_id;
 CREATE TABLE public.patient (
                 persona_id INTEGER NOT NULL,
                 inst_id INTEGER NOT NULL,
-                birth DATE NOT NULL,
+                birth DATE,
                 sickness_remarks VARCHAR NOT NULL,
                 alcohol BOOLEAN NOT NULL,
                 alcohol_remarks VARCHAR NOT NULL,

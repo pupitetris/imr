@@ -598,7 +598,7 @@
     <column id="COL179" populated="true" UUID="e7422e2f-cbe1-4675-9797-a451a1981493" autoIncrement="false" defaultValue="" name="type" nullable="0" physicalName="type" precision="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="1111" userDefinedTypeUUID="d9e42a14-4d15-4b55-b176-ecbba383bbdd" >
      <remarks>TYPE imr_phone_type</remarks>
     </column>
-    <column id="COL180" populated="true" UUID="6c9f3b03-e91e-4ce7-bd27-bde344944229" autoIncrement="false" defaultValue="" name="remarks" nullable="0" physicalName="remarks" precision="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="12" userDefinedTypeUUID="831ac2d4-0e65-47ec-a0b7-62b7f6b8760a" >
+    <column id="COL180" populated="true" UUID="6c9f3b03-e91e-4ce7-bd27-bde344944229" autoIncrement="false" defaultValue="" name="remarks" nullable="1" physicalName="remarks" precision="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="12" userDefinedTypeUUID="831ac2d4-0e65-47ec-a0b7-62b7f6b8760a" >
      <remarks></remarks>
     </column>
     <column id="COL181" populated="true" UUID="22dc03c1-7e5e-431e-acc7-d6fbb351ee1b" autoIncrement="false" defaultValue="" name="ph_status" nullable="0" physicalName="ph_status" precision="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="1111" userDefinedTypeUUID="d9e42a14-4d15-4b55-b176-ecbba383bbdd" >
@@ -637,7 +637,7 @@
     <column id="COL191" populated="true" UUID="2bd4e5ff-e272-4d53-9001-cda7f67d5c5f" autoIncrement="false" defaultValue="" name="system" nullable="0" physicalName="system" precision="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="1111" userDefinedTypeUUID="d9e42a14-4d15-4b55-b176-ecbba383bbdd" >
      <remarks>TYPE imr_email_system</remarks>
     </column>
-    <column id="COL192" populated="true" UUID="f0cad19e-d9d4-45db-959d-298c84c2143c" autoIncrement="false" defaultValue="" name="remarks" nullable="0" physicalName="remarks" precision="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="12" userDefinedTypeUUID="831ac2d4-0e65-47ec-a0b7-62b7f6b8760a" >
+    <column id="COL192" populated="true" UUID="f0cad19e-d9d4-45db-959d-298c84c2143c" autoIncrement="false" defaultValue="" name="remarks" nullable="1" physicalName="remarks" precision="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="12" userDefinedTypeUUID="831ac2d4-0e65-47ec-a0b7-62b7f6b8760a" >
      <remarks>Short notes.</remarks>
     </column>
     </folder>
@@ -1318,7 +1318,7 @@
  <ddl-generator type="ca.sqlpower.architect.ddl.PostgresDDLGenerator" allow-connection="false" target-schema="public"> </ddl-generator>
  <liquibase-settings useSeparateChangeSets="false" generateId="false" idStart="1"/>
  <create-kettle-job-settings filePath="test" jobName="Export" schemaName="" kettleJoinType="0" savingToFile="true" />
- <play-pen zoom="0.8408964152537157" viewportX="2328" viewportY="375" relationship-style="rectilinear" names-displayLogicalNames="true" showPrimaryTag="true" showForeignTag="true" showAlternateTag="true" columnVisibility="ALL" relationshipLabelVisibility="true">
+ <play-pen zoom="0.8408964152537157" viewportX="2603" viewportY="149" relationship-style="rectilinear" names-displayLogicalNames="true" showPrimaryTag="true" showForeignTag="true" showAlternateTag="true" columnVisibility="ALL" relationshipLabelVisibility="true">
   <table-pane table-ref="TAB3" x="1027" y="1298" bgColor="0xb9bbf6" fgColor="0x000000" rounded="false" dashed="false"/>
   <table-pane table-ref="TAB13" x="997" y="1531" bgColor="0xb9bbf6" fgColor="0x000000" rounded="false" dashed="false"/>
   <table-pane table-ref="TAB24" x="1007" y="1025" bgColor="0xb9bbf6" fgColor="0x000000" rounded="false" dashed="false"/>
