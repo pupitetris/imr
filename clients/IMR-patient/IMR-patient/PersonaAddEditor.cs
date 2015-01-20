@@ -141,44 +141,44 @@ namespace IMRpatient
 			return false;
 		}
 
-		private void CommitEmails (System.Collections.IEnumerator e, Charp.SuccessDelegate success, Charp.ErrorDelegate error, Gtk.Window parent) {
+		private void CommitEmails (System.Collections.IEnumerator e, Charp.SuccessDelegate success, Charp.ErrorDelegate error) {
 			if (e.MoveNext ()) {
 				EmailEditor editor = (EmailEditor) e.Current;
 				editor.Commit (delegate (object data, Charp.CharpCtx ctx) {
-					CommitEmails (e, success, error, parent);
-				}, error, parent);
+					CommitEmails (e, success, error);
+				}, error);
 			} else {
 				success (null, null);
 			}
 		}
 
-		private void CommitPhones (System.Collections.IEnumerator e, Charp.SuccessDelegate success, Charp.ErrorDelegate error, Gtk.Window parent) {
+		private void CommitPhones (System.Collections.IEnumerator e, Charp.SuccessDelegate success, Charp.ErrorDelegate error) {
 			if (e.MoveNext ()) {
 				PhoneEditor editor = (PhoneEditor) e.Current;
 				editor.Commit (delegate (object data, Charp.CharpCtx ctx) {
-					CommitPhones (e, success, error, parent);
-				}, error, parent);
+					CommitPhones (e, success, error);
+				}, error);
 			} else {
 				System.Collections.IEnumerator e2 = vboxEmails.GetEnumerator ();
 				e2.Reset ();
-				CommitEmails (e2, success, error, parent);
+				CommitEmails (e2, success, error);
 			}
 		}
 
-		private void CommitAddresses (System.Collections.IEnumerator e, Charp.SuccessDelegate success, Charp.ErrorDelegate error, Gtk.Window parent) {
+		private void CommitAddresses (System.Collections.IEnumerator e, Charp.SuccessDelegate success, Charp.ErrorDelegate error) {
 			if (e.MoveNext ()) {
 				AddressEditor editor = (AddressEditor) e.Current;
 				editor.Commit (delegate (object data, Charp.CharpCtx ctx) {
-					CommitAddresses (e, success, error, parent);
-				}, error, parent);
+					CommitAddresses (e, success, error);
+				}, error);
 			} else {
 				System.Collections.IEnumerator e2 = vboxPhone.GetEnumerator ();
 				e2.Reset ();
-				CommitPhones (e2, success, error, parent);
+				CommitPhones (e2, success, error);
 			}
 		}
 
-		public void Commit (Charp.SuccessDelegate success, Charp.ErrorDelegate error, Gtk.Window parent) {
+		public void Commit (Charp.SuccessDelegate success, Charp.ErrorDelegate error) {
 			foreach (AddressEditor editor in vboxAddress)
 				editor.SetPersonaId (personaId);
 			foreach (PhoneEditor editor in vboxPhone)
@@ -188,7 +188,7 @@ namespace IMRpatient
 
 			System.Collections.IEnumerator e = vboxAddress.GetEnumerator ();
 			e.Reset ();
-			CommitAddresses (e, success, error, parent);
+			CommitAddresses (e, success, error);
 		}
 	}
 }

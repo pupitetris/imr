@@ -55,7 +55,7 @@ namespace IMRpatient
 			myComboMuni = new MyCombo (comboMuni);
 			myComboAsenta = new MyCombo (comboAsenta);
 
-			buttonDelete.ConfirmClick += delegate (object sender, EventArgs e) { Cont.Remove (this); };
+			buttonDelete.ConfirmClick += OnDeleteConfirm;
 
 			WidgetPath = Util.GtkGetWidgetPath (this, config);
 
@@ -300,6 +300,23 @@ namespace IMRpatient
 			CheckZipcodeText ();
 		}
 
+		private void OnDeleteConfirm (object sender, EventArgs e) 
+		{
+			if (isNew) {
+				Cont.Remove (this);
+				return;
+			}
+
+			config.charp.request ("address_delete", new object[] { personaId, addressId }, new CharpGtk.CharpGtkCtx {
+				parent = ParentWin,
+				success = delegate (object data, Charp.CharpCtx ctx) {
+					Gtk.Application.Invoke (delegate {
+						Cont.Remove (this);
+					});
+				}
+			});
+		}
+
 		public bool Validate (StringBuilder b)
 		{
 			if (entryStreet.Text.Length == 0) {
@@ -314,7 +331,7 @@ namespace IMRpatient
 			return false;
 		}
 
-		public void Commit (Charp.SuccessDelegate success, Charp.ErrorDelegate error, Gtk.Window parent) {
+		public void Commit (Charp.SuccessDelegate success, Charp.ErrorDelegate error) {
 			string[] types = { "HOME", "WORK", "FISCAL" };
 
 			JObject asenta = (JObject) myComboAsenta.ActiveData ();
@@ -341,7 +358,7 @@ namespace IMRpatient
 				}
 
 				config.charp.request (resource, parms, new CharpGtk.CharpGtkCtx {
-					parent = parent,
+					parent = ParentWin,
 					success = delegate (object data, Charp.CharpCtx ctx) {
 						LoadData ((JObject) (((JArray) data)[0]));
 						success (null, null);

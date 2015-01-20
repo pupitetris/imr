@@ -29,7 +29,7 @@ namespace IMRpatient
 			ParentWin = parent;
 			Cont = cont;
 
-			buttonDelete.ConfirmClick += delegate (object sender, EventArgs e) { Cont.Remove (this); };
+			buttonDelete.ConfirmClick += OnDeleteConfirm;
 
 			LoadData (data);
 		}
@@ -62,6 +62,23 @@ namespace IMRpatient
 		public void SetPersonaId (int id) {
 			personaId = id;
 		}
+
+		private void OnDeleteConfirm (object sender, EventArgs e) 
+		{
+			if (isNew) {
+				Cont.Remove (this);
+				return;
+			}
+
+			config.charp.request ("phone_delete", new object[] { personaId, phoneId }, new CharpGtk.CharpGtkCtx {
+				parent = ParentWin,
+				success = delegate (object data, Charp.CharpCtx ctx) {
+					Gtk.Application.Invoke (delegate {
+						Cont.Remove (this);
+					});
+				}
+			});
+		}
 			
 		public bool Validate (StringBuilder b)
 		{
@@ -74,7 +91,7 @@ namespace IMRpatient
 			return false;
 		}
 
-		public void Commit (Charp.SuccessDelegate success, Charp.ErrorDelegate error, Gtk.Window parent) {
+		public void Commit (Charp.SuccessDelegate success, Charp.ErrorDelegate error) {
 			string[] types = { "MOBILE", "NEXTEL", "HOME", "WORK" };
 
 			object[] parms = {
@@ -98,7 +115,7 @@ namespace IMRpatient
 				}
 
 				config.charp.request (resource, parms, new CharpGtk.CharpGtkCtx {
-					parent = parent,
+					parent = ParentWin,
 					success = delegate (object data, Charp.CharpCtx ctx) {
 						LoadData ((JObject) (((JArray) data)[0]));
 						success (null, null);

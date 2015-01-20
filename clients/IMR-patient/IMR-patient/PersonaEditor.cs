@@ -178,9 +178,10 @@ namespace IMRpatient
 			return false;
 		}
 
-		private void CommitPersonaSuccess (Charp.SuccessDelegate success, Charp.ErrorDelegate error, Gtk.Window parent) {
+		private void CommitPersonaSuccess (Charp.SuccessDelegate success, Charp.ErrorDelegate error) {
 			if (photoChanged) {
 				config.charp.request ("persona_add_photo", new object[] { personaId }, new CharpGtk.CharpGtkCtx {
+					parent = ParentWin,
 					success = success,
 					error = error,
 					fileName = filename
@@ -189,7 +190,7 @@ namespace IMRpatient
 				success (null, null);
 		}
 
-		public void Commit (Charp.SuccessDelegate success, Charp.ErrorDelegate error, Gtk.Window parent) {
+		public void Commit (Charp.SuccessDelegate success, Charp.ErrorDelegate error) {
 			object[] parms = {
 				personaId,
 				entryPrefix.Text,
@@ -209,15 +210,15 @@ namespace IMRpatient
 				parms[6] != myData["remarks"]) {
 
 				config.charp.request ("persona_update", parms, new CharpGtk.CharpGtkCtx {
-					parent = parent,
+					parent = ParentWin,
 					success = delegate (object data, Charp.CharpCtx ctx) {
 						LoadData ((JObject) (((JArray) data)[0]));
-						CommitPersonaSuccess (success, error, parent);
+						CommitPersonaSuccess (success, error);
 					},
 					error = error
 				});
 			} else {
-				CommitPersonaSuccess (success, error, parent);
+				CommitPersonaSuccess (success, error);
 			}
 		}
 	}

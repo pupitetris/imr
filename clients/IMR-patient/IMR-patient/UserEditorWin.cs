@@ -169,7 +169,7 @@ namespace IMRpatient
 		}
 
 		private void CommitPersonaSuccess (object data, Charp.CharpCtx ctx) {
-			personaAddEditor.Commit (CommitSuccess, CommitError, this);
+			personaAddEditor.Commit (CommitSuccess, CommitError);
 		}
 
 		private void CommitUserSuccess (object data, Charp.CharpCtx ctx) {
@@ -178,7 +178,7 @@ namespace IMRpatient
 				personaEditor.SetPersonaId (personaId);
 				personaAddEditor.SetPersonaId (personaId);
 			}
-			personaEditor.Commit (CommitPersonaSuccess, CommitError, this);
+			personaEditor.Commit (CommitPersonaSuccess, CommitError);
 		}
 
 		private void Commit ()
@@ -215,7 +215,7 @@ namespace IMRpatient
 					error = CommitError
 				});
 			} else {
-				personaEditor.Commit (CommitPersonaSuccess, CommitError, this);
+				personaEditor.Commit (CommitPersonaSuccess, CommitError);
 			}
 		}
 
