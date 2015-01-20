@@ -111,30 +111,30 @@ SELECT a.asenta_id, z.z_code, imr_asenta_fullname(a.a_type, a.a_name, c.c_name)
 
 
 M4_SQL_PROCEDURE( «rp_persona_get_addresses(_uid charp_user_id, _persona_id integer)»,
-		  «TABLE(address_id integer, street varchar, ad_type imr_address_type, asenta_id integer)»,
+		  «TABLE(address_id integer, persona_id integer, street varchar, ad_type imr_address_type, asenta_id integer)»,
 		  STABLE, M4_DEFN(user), 'Get addresses related to a given persona.', «
 
-SELECT a.address_id, a.street, a.ad_type, a.asenta_id
+SELECT a.address_id, a.persona_id, a.street, a.ad_type, a.asenta_id
        FROM address AS a JOIN account AS ac USING (inst_id)
        WHERE ac.persona_id = $1 AND a.persona_id = $2;
 »);
 
 
 M4_SQL_PROCEDURE( «rp_persona_get_phones(_uid charp_user_id, _persona_id integer)»,
-		  «TABLE(phone_id integer, number varchar, p_type imr_phone_type, remarks varchar)»,
+		  «TABLE(phone_id integer, persona_id integer, number varchar, p_type imr_phone_type, remarks varchar)»,
 		  STABLE, M4_DEFN(user), 'Get phones related to a given persona.', «
 
-SELECT p.phone_id, p.number, p.type, p.remarks
+SELECT p.phone_id, p.persona_id, p.number, p.type, p.remarks
        FROM phone AS p JOIN account AS ac USING (inst_id)
        WHERE ac.persona_id = $1 AND p.persona_id = $2 AND p.ph_status <> 'DELETED';
 »);
 
 
 M4_SQL_PROCEDURE( «rp_persona_get_emails(_uid charp_user_id, _persona_id integer)»,
-		  «TABLE(email_id integer, email varchar, e_type imr_email_type, system imr_email_system, remarks varchar)»,
+		  «TABLE(email_id integer, persona_id integer, email varchar, e_type imr_email_type, system imr_email_system, remarks varchar)»,
 		  STABLE, M4_DEFN(user), 'Get emails related to a given persona.', «
 
-SELECT e.email_id, e.email, e.type, e.system, e.remarks
+SELECT e.email_id, e.persona_id, e.email, e.type, e.system, e.remarks
        FROM email AS e JOIN account AS ac USING (inst_id)
        WHERE ac.persona_id = $1 AND e.persona_id = $2;
 »);
@@ -317,19 +317,25 @@ END »);
 
 
 M4_PROCEDURE( «rp_address_create(_uid charp_user_id, _persona_id integer, _asenta_id integer, _street varchar, _ad_type imr_address_type)»,
-	      void, VOLATILE, M4_DEFN(user), 'Create an address record for a given persona.', «
+	      «TABLE( address_id integer, persona_id integer, asenta_id integer, street varchar, ad_type imr_address_type )»,
+	      VOLATILE, M4_DEFN(user), 'Create an address record for a given persona.', «
 DECLARE
 	_inst_id integer;
+	_address_id integer;
 BEGIN
 	_inst_id := imr_user_can_edit_persona(_uid, _persona_id);
 
 	INSERT INTO address (address_id, inst_id, persona_id, asenta_id, street, ad_type)
-	       VALUES(DEFAULT, _inst_id, _persona_id, _asenta_id, _street, _ad_type);
+	       VALUES(DEFAULT, _inst_id, _persona_id, _asenta_id, _street, _ad_type)
+	       RETURNING address.address_id INTO _address_id;
+
+	RETURN QUERY SELECT _address_id, _persona_id, _asenta_id, _street, _ad_type;
 END »);
 
 
 M4_PROCEDURE( «rp_address_update(_uid charp_user_id, _address_id integer, _persona_id integer, _asenta_id integer, _street varchar, _ad_type imr_address_type)»,
-	      void, VOLATILE, M4_DEFN(user), 'Edit an address record for a given persona.', «
+	      «TABLE( address_id integer, persona_id integer, asenta_id integer, street varchar, ad_type imr_address_type )»,
+	      VOLATILE, M4_DEFN(user), 'Edit an address record for a given persona.', «
 DECLARE
 	_inst_id integer;
 BEGIN
@@ -337,23 +343,31 @@ BEGIN
 
 	UPDATE address SET (asenta_id, street, ad_type) = (_asenta_id, _street, _ad_type)
 	       WHERE inst_id = _inst_id AND persona_id = _persona_id AND address_id = _address_id;
+
+	RETURN QUERY SELECT _address_id, _persona_id, _asenta_id, _street, _ad_type;
 END »);
 
 
 M4_PROCEDURE( «rp_phone_create(_uid charp_user_id, _persona_id integer, _number varchar, _type imr_phone_type, _remarks varchar)»,
-	      void, VOLATILE, M4_DEFN(user), 'Create an phone record for a given persona.', «
+	      «TABLE( phone_id integer, persona_id integer, number varchar, type imr_phone_type, remarks varchar )»,
+	      VOLATILE, M4_DEFN(user), 'Create an phone record for a given persona.', «
 DECLARE
 	_inst_id integer;
+	_phone_id integer;
 BEGIN
 	_inst_id := imr_user_can_edit_persona(_uid, _persona_id);
 
-	INSERT INTO phone (phone_id, inst_id, persona_id, number, type, remarks, status)
-	       VALUES(DEFAULT, _inst_id, _persona_id, _number, _type, _remarks, 'ACTIVE');
+	INSERT INTO phone (phone_id, inst_id, persona_id, number, type, remarks, ph_status)
+	       VALUES(DEFAULT, _inst_id, _persona_id, _number, _type, _remarks, 'ACTIVE')
+	       RETURNING phone.phone_id INTO _phone_id;
+
+	RETURN QUERY SELECT _phone_id, _persona_id, _number, _type, _remarks;
 END »);
 
 
 M4_PROCEDURE( «rp_phone_update(_uid charp_user_id, _phone_id integer, _persona_id integer, _asenta_id integer, _street varchar, _ad_type imr_phone_type)»,
-	      void, VOLATILE, M4_DEFN(user), 'Edit an phone record for a given persona.', «
+	      «TABLE( phone_id integer, persona_id integer, number varchar, type imr_phone_type, remarks varchar )»,
+	      VOLATILE, M4_DEFN(user), 'Edit an phone record for a given persona.', «
 DECLARE
 	_inst_id integer;
 BEGIN
@@ -361,23 +375,31 @@ BEGIN
 
 	UPDATE phone SET (number, type, remarks) = (_number, _type, _remarks)
 	       WHERE inst_id = _inst_id AND persona_id = _persona_id AND phone_id = _phone_id;
+
+	RETURN QUERY SELECT _phone_id, _persona_id, _number, _type, _remarks;
 END »);
 
 
 M4_PROCEDURE( «rp_email_create(_uid charp_user_id, _persona_id integer, _email varchar, _type imr_email_type, _system imr_email_system, _remarks varchar)»,
-	      void, VOLATILE, M4_DEFN(user), 'Create an email record for a given persona.', «
+	      «TABLE( email_id integer, persona_id integer, email varchar, type imr_email_type, system imr_email_system, remarks varchar )»,
+	      VOLATILE, M4_DEFN(user), 'Create an email record for a given persona.', «
 DECLARE
 	_inst_id integer;
+	_email_id integer;
 BEGIN
 	_inst_id := imr_user_can_edit_persona(_uid, _persona_id);
 
 	INSERT INTO email (email_id, inst_id, persona_id, email, type, system, remarks)
-	       VALUES(DEFAULT, _inst_id, _persona_id, _email, _type, _system, _remarks);
+	       VALUES(DEFAULT, _inst_id, _persona_id, _email, _type, _system, _remarks)
+	       RETURNING email.email_id INTO _email_id;
+
+	RETURN QUERY SELECT _email_id, _persona_id, _email, _type, _system, _remarks;
 END »);
 
 
 M4_PROCEDURE( «rp_email_update(_uid charp_user_id, _email_id integer, _persona_id integer, _email varchar, _type imr_email_type, _system imr_email_system, _remarks varchar)»,
-	      void, VOLATILE, M4_DEFN(user), 'Edit an email record for a given persona.', «
+	      «TABLE( email_id integer, email varchar, type imr_email_type, system imr_email_system, remarks varchar )»,
+	      VOLATILE, M4_DEFN(user), 'Edit an email record for a given persona.', «
 DECLARE
 	_inst_id integer;
 BEGIN
@@ -385,6 +407,8 @@ BEGIN
 
 	UPDATE email SET (email, type, system, remarks) = (_email, _type, _system, _remarks)
 	       WHERE inst_id = _inst_id AND persona_id = _persona_id AND email_id = _email_id;
+
+	RETURN QUERY SELECT _email_id, _persona_id, _email, _type, _system, _remarks;
 END »);
 
 

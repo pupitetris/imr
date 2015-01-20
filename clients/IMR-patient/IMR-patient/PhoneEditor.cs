@@ -56,8 +56,7 @@ namespace IMRpatient
 					}
 					comboType.Active = active;
 				}
-			} else
-				myData = new JObject ();
+			}
 		}
 
 		public void SetPersonaId (int id) {
@@ -100,7 +99,10 @@ namespace IMRpatient
 
 				config.charp.request (resource, parms, new CharpGtk.CharpGtkCtx {
 					parent = parent,
-					success = success,
+					success = delegate (object data, Charp.CharpCtx ctx) {
+						LoadData ((JObject) (((JArray) data)[0]));
+						success (null, null);
+					},
 					error = error
 				});
 			}

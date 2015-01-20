@@ -45,7 +45,7 @@ namespace IMRpatient
 				string val;
 				if (Util.DictTryValue (data, "email", out val)) { entryEmail.Text = val; }
 				if (Util.DictTryValue (data, "remarks", out val)) { textRemarks.Buffer.InsertAtCursor (val); }
-				if (Util.DictTryValue (data, "e_type", out val)) {
+				if (Util.DictTryValue (data, "type", out val)) {
 					int active;
 					switch (val) {
 						case "PERSONAL": active = 0; break;
@@ -63,8 +63,7 @@ namespace IMRpatient
 					}
 					comboSystem.Active = active;
 				}
-			} else
-				myData = new JObject ();
+			}
 		}
 
 		public void SetPersonaId (int id) {
@@ -96,7 +95,7 @@ namespace IMRpatient
 
 			if (isNew ||
 				(string) parms[1] != (string) myData["email"] ||
-				(string) parms[2] != (string) myData["e_type"] ||
+				(string) parms[2] != (string) myData["type"] ||
 				(string) parms[3] != (string) myData["system"] ||
 				(string) parms[4] != (string) myData["remarks"]) {
 
@@ -110,7 +109,10 @@ namespace IMRpatient
 
 				config.charp.request (resource, parms, new CharpGtk.CharpGtkCtx {
 					parent = parent,
-					success = success,
+					success = delegate (object data, Charp.CharpCtx ctx) {
+						LoadData ((JObject) (((JArray) data)[0]));
+						success (null, null);
+					},
 					error = error
 				});
 			}

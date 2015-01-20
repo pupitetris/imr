@@ -79,7 +79,7 @@ namespace IMRpatient
 			foreach (JObject state in states)
 				myComboState.AppendText ((string) state["st_name"], state);
 
-			int state_id = myData["state_id"] != null? (int) myData["state_id"]: DefaultStateID;
+			int state_id = myData != null && myData["state_id"] != null? (int) myData["state_id"]: DefaultStateID;
 			myComboState.SetActiveByData (delegate(object obj) {
 				return ((int) ((JObject) obj)["state_id"] == state_id);
 			});
@@ -107,8 +107,7 @@ namespace IMRpatient
 					}
 					comboType.Active = active;
 				}
-			} else
-				myData = new JObject ();
+			}
 
 			if (states != null) {
 				PopulateStates ();
@@ -343,7 +342,10 @@ namespace IMRpatient
 
 				config.charp.request (resource, parms, new CharpGtk.CharpGtkCtx {
 					parent = parent,
-					success = success,
+					success = delegate (object data, Charp.CharpCtx ctx) {
+						LoadData ((JObject) (((JArray) data)[0]));
+						success (null, null);
+					},
 					error = error
 				});
 
