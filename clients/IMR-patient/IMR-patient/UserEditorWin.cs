@@ -102,7 +102,20 @@ namespace IMRpatient
 
 		protected void OnDeleteActionActivated (object sender, EventArgs e)
 		{
-			SendClose ();
+			config.charp.request ("user_remove", new object[] { personaId }, new CharpGtk.CharpGtkCtx {
+				parent = this,
+				success = delegate (object data, Charp.CharpCtx ctx) {
+					Gtk.Application.Invoke (delegate {
+						if (config.mainwin.userListWin != null)
+							config.mainwin.userListWin.Refresh ();
+						SendClose ();
+					});
+				},
+				error = delegate(Charp.CharpError err, Charp.CharpCtx ctx) {
+					Gtk.Application.Invoke (delegate { FinishAction (menubar); });
+					return true;
+				}
+			});
 		}
 
 		protected void OnCancelActionActivated (object sender, EventArgs e)
@@ -161,9 +174,8 @@ namespace IMRpatient
 
 		private void CommitSuccess (object data, Charp.CharpCtx ctx) {
 			SendAction (menubar, delegate {
-				if (OpType != TYPE.NEW && config.mainwin.userListWin != null) {
+				if (config.mainwin.userListWin != null)
 					config.mainwin.userListWin.Refresh ();
-				}
 				Destroy ();
 			});
 		}
