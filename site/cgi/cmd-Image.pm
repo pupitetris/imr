@@ -25,7 +25,7 @@ sub CreatePersonaThumb {
     return $err if $err;
 
     my $image = Image::Magick->new (magick => 'jpg');
-    $image->BlobToImage ($fcgi->param ('file'));
+    $image->BlobToImage (scalar $fcgi->param ('file'));
     my ($w, $h) = $image->Get('width', 'height');
     if ($w > $h) {
 	$image->Crop (x => ($w - $h) / 2, y => 0, width => $h, height => $h);
