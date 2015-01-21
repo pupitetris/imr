@@ -146,6 +146,8 @@
     <Compile Include="gtk-gui\IMRpatient.ButtonConfirm.cs" />
     <Compile Include="gtk-gui\IMRpatient.PhoneEditor.cs" />
     <Compile Include="gtk-gui\IMRpatient.EmailEditor.cs" />
+    <Compile Include="PatientEditorWin.cs" />
+    <Compile Include="gtk-gui\IMRpatient.PatientEditorWin.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

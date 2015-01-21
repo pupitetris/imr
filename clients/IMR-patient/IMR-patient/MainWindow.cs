@@ -127,13 +127,20 @@ namespace IMRpatient {
 			}
 		}
 
-
 		protected void OnRefreshThemeActivated (object sender, EventArgs e)
 		{
 			Gtk.Application.Invoke (delegate {
 				if (Gtk.Rc.ReparseAll ())
 					Console.WriteLine ("Theme reloaded");
 			});
+		}
+
+
+		protected void OnPatientsNewActivated (object sender, EventArgs e)
+		{
+			PatientEditorWin win = new PatientEditorWin (PatientEditorWin.TYPE.NEW, config);
+			win.TransientFor = this;
+			win.Show ();
 		}
 	}
 }
