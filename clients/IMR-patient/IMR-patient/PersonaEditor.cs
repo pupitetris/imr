@@ -67,7 +67,7 @@ namespace IMRpatient
 			if (Util.DictTryValue (data, "name", out val)) { entryName.Text = val; }
 			if (Util.DictTryValue (data, "paterno", out val)) { entryPaterno.Text = val; }
 			if (Util.DictTryValue (data, "materno", out val)) { entryMaterno.Text = val; }
-			if (Util.DictTryValue (data, "picture", out val)) { LoadPicture (val); }
+			if (Util.DictTryValue (data, "photo", out val)) { LoadPicture (val); }
 			if (Util.DictTryValue (data, "gender", out val)) { SetGender (val); }
 
 			if (Util.DictTryValue (data, "remarks", out val)) { 

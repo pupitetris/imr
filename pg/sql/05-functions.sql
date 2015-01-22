@@ -23,7 +23,7 @@ END »);
 
 
 M4_SQL_PROCEDURE( rp_user_list_get(_uid charp_user_id),
-		  «TABLE( persona_id integer, type imr_account_type, username varchar, picture varchar, remarks varchar,
+		  «TABLE( persona_id integer, type imr_account_type, username varchar, photo varchar, remarks varchar,
 			  prefix varchar, name varchar, paterno varchar, materno varchar, status charp_account_status,
 			  gender imr_gender )»,
 		  STABLE, M4_DEFN(user), 'Get the list of all users for the user''s instance.', «
