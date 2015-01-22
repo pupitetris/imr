@@ -44,29 +44,21 @@ SELECT a.persona_id, a.account_type, a.username, f.fname, p.remarks,
 »);
 
 
-M4_FUNCTION( «rp_user_remove(_uid charp_user_id, _persona_id integer)»,
-	     boolean, VOLATILE, M4_DEFN(user), 'Mark an user as DELETED.', «
+M4_FUNCTION( «rp_user_delete(_uid charp_user_id, _persona_id integer)»,
+	     void, VOLATILE, M4_DEFN(user), 'Mark an user as DELETED.', «
 DECLARE
-	_my_type imr_account_type;
-	_user_type varchar;
+	_inst_id integer;
 BEGIN
 	-- Can't remove yourself.
 	IF _uid = _persona_id THEN PERFORM charp_raise('USERPERM'); END IF;
 
-	SELECT a1.account_type, a2.account_type INTO _my_type, _user_type
-	       FROM account AS a1 JOIN account AS a2 USING (inst_id)
-	       WHERE a1.persona_id = _uid AND a2.persona_id = _persona_id;
-
-	IF NOT FOUND THEN PERFORM charp_raise('NOTFOUND'); END IF;
-	IF NOT imr_account_type_has_perm(_my_type, 'USER_DELETE') OR
-	   NOT imr_account_type_has_perm(_my_type, _user_type::imr_perm) THEN
-	   PERFORM charp_raise('USERPERM');
-	END IF;
+	_inst_id := imr_user_can_edit_persona(_uid, _persona_id, 'DELETE');
 
 	UPDATE account SET status='DELETED' WHERE persona_id = _persona_id;
-	UPDATE persona SET p_status='DELETED' WHERE persona_id = _persona_id;
 
-	RETURN TRUE;
+	IF NOT FOUND THEN PERFORM charp_raise('NOTFOUND'); END IF;
+
+	UPDATE persona SET p_status='DELETED' WHERE persona_id = _persona_id;
 END »);
 	
 
@@ -456,5 +448,102 @@ BEGIN
 	DELETE FROM email WHERE inst_id = _inst_id AND persona_id = _persona_id AND email_id = _email_id;
 END »);
 
+
+M4_SQL_PROCEDURE( rp_patient_list_get(_uid charp_user_id),
+		  «TABLE( persona_id integer, prefix varchar, name varchar, paterno varchar, materno varchar,
+			  gender imr_gender, remarks varchar, photo varchar )»,
+		  STABLE, M4_DEFN(user), 'Get the list of all patients for the user''s instance.', «
+
+SELECT p.persona_id, p.prefix, p.name, p.paterno, p.materno,
+       p.gender, p.remarks, f.fname
+       FROM account AS a1
+	    JOIN persona AS p USING (inst_id)
+	    LEFT JOIN (SELECT persona_id, inst_id, fname
+	    	      	      FROM (SELECT persona_id, inst_id, max(created) AS created
+			      	   	   FROM persona_photo
+					   	NATURAL JOIN file
+					   GROUP BY inst_id, persona_id) AS q
+				   NATURAL JOIN file) AS f
+		      ON (p.inst_id = f.inst_id AND p.persona_id = f.persona_id)
+       WHERE a1.persona_id = $1
+       	     AND p.p_status <> 'DELETED'
+	     AND p.type = 'PATIENT';
+»);
+
+
+M4_SQL_PROCEDURE( «rp_patient_get_details(_uid charp_user_id, _persona_id integer)»,
+		  «TABLE( birth date, sickness_remarks varchar, medication_remarks varchar, diet_remarks varchar,
+		  alcohol boolean, alcohol_remarks varchar, tobacco boolean, tobacco_remarks varchar, drugs boolean, drugs_remarks varchar )»,
+		  STABLE, M4_DEFN(user), 'Get details related to a given patient.', «
+
+SELECT p.birth, p.sickness_remarks, p.medication_remarks, p.diet_remarks,
+       p.alcohol, p.alcohol_remarks, p.tobacco, p.tobacco_remarks, p.drugs, p.drugs_remarks
+       FROM patient AS p JOIN account AS ac USING (inst_id)
+       WHERE ac.persona_id = $1
+       	     AND p.persona_id = $2;
+»);
+
+
+M4_FUNCTION( «rp_patient_delete(_uid charp_user_id, _persona_id integer)»,
+	     void, VOLATILE, M4_DEFN(user), 'Mark an user as DELETED.', «
+DECLARE
+	_inst_id integer;
+BEGIN
+	_inst_id := imr_user_can_edit_persona(_uid, _persona_id, 'DELETE');
+
+	UPDATE persona SET p_status='DELETED' WHERE persona_id = _persona_id AND type = 'PATIENT';
+
+	IF NOT FOUND THEN PERFORM charp_raise('NOTFOUND'); END IF;
+END »);
+
+
+M4_FUNCTION( «rp_patient_create(_uid charp_user_id, _birth date, _sickness_remarks varchar, _medication_remarks varchar, _diet_remarks varchar,
+		  _alcohol boolean, _alcohol_remarks varchar, _tobacco boolean, _tobacco_remarks varchar, _drugs boolean, _drugs_remarks varchar)»,
+	     «TABLE( persona_id integer, birth date, sickness_remarks varchar, medication_remarks varchar, diet_remarks varchar,
+		  alcohol boolean, alcohol_remarks varchar, tobacco boolean, tobacco_remarks varchar, drugs boolean, drugs_remarks varchar )»,
+	     VOLATILE, M4_DEFN(user), 'Create a patient with an empty persona.', «
+DECLARE
+	_my_type imr_account_type;
+	_inst_id integer;
+	_persona_id integer;
+BEGIN
+	SELECT a.inst_id, a.account_type INTO _inst_id, _my_type FROM account AS a WHERE a.persona_id = _uid;
+
+	IF NOT imr_account_type_has_perm(_my_type, 'PATIENT_CREATE') THEN PERFORM charp_raise('USERPERM'); END IF;
+	
+	INSERT INTO persona (persona_id, inst_id, type, prefix, name, paterno, materno, gender, remarks, p_status)
+	       VALUES(DEFAULT, _inst_id, 'PATIENT', NULL, '', NULL, NULL, NULL, '', 'ACTIVE')
+	       RETURNING persona.persona_id INTO _persona_id;
+
+	INSERT INTO patient (persona_id, inst_id, birth, sickness_remarks, medication_remarks, diet_remarks,
+		    	     alcohol, alcohol_remarks, tobacco, tobacco_remarks, drugs, drugs_remarks)
+	       VALUES( _persona_id, _inst_id, _birth, _sickness_remarks, _medication_remarks, _diet_remarks,
+	       	       _alcohol, _alcohol_remarks, _tobacco, _tobacco_remarks, _drugs, _drugs_remarks);
+
+	RETURN QUERY SELECT _persona_id, _birth, _sickness_remarks, _medication_remarks, _diet_remarks,
+	       	     	    _alcohol, _alcohol_remarks, _tobacco, _tobacco_remarks, _drugs, _drugs_remarks;
+END »);
+
+
+M4_PROCEDURE( «rp_patient_update(_uid charp_user_id, _persona_id varchar, _birth date, _sickness_remarks varchar, _medication_remarks varchar, _diet_remarks varchar,
+		  _alcohol boolean, _alcohol_remarks varchar, _tobacco boolean, _tobacco_remarks varchar, _drugs boolean, _drugs_remarks varchar)»,
+	      «TABLE( persona_id integer, birth date, sickness_remarks varchar, medication_remarks varchar, diet_remarks varchar,
+		  alcohol boolean, alcohol_remarks varchar, tobacco boolean, tobacco_remarks varchar, drugs boolean, drugs_remarks varchar )»,
+	      VOLATILE, M4_DEFN(user), 'Update a patient details.', «
+DECLARE
+	_inst_id integer;
+BEGIN
+	_inst_id := imr_user_can_edit_persona(_uid, _persona_id);
+
+	UPDATE patient SET (birth, sickness_remarks, medication_remarks, diet_remarks,
+		    	    alcohol, alcohol_remarks, tobacco, tobacco_remarks, drugs, drugs_remarks) =
+			   (_birth, _sickness_remarks, _medication_remarks, _diet_remarks,
+	       	     	    _alcohol, _alcohol_remarks, _tobacco, _tobacco_remarks, _drugs, _drugs_remarks)
+	       WHERE inst_id = _inst_id AND persona_id = _persona_id;
+
+	RETURN QUERY SELECT _persona_id, _birth, _sickness_remarks, _medication_remarks, _diet_remarks,
+	       	     	    _alcohol, _alcohol_remarks, _tobacco, _tobacco_remarks, _drugs, _drugs_remarks;
+END »);
+	
 
 COMMIT TRANSACTION;

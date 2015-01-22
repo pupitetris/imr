@@ -88,19 +88,19 @@ namespace IMRpatient
 		{
 			base.SaveState ();
 			if (personaEditor.pictureFolder != null) {
-				SaveKey ("pictureFolder", personaEditor.pictureFolder);
+				SaveKey ("user_pictureFolder", personaEditor.pictureFolder);
 			}
 		}
 
 		protected override void LoadState ()
 		{
 			base.LoadState ();
-			LoadKey ("pictureFolder", out personaEditor.pictureFolder);
+			LoadKey ("user_pictureFolder", out personaEditor.pictureFolder);
 		}
 
 		protected void OnDeleteActionActivated (object sender, EventArgs e)
 		{
-			config.charp.request ("user_remove", new object[] { personaId }, new CharpGtk.CharpGtkCtx {
+			config.charp.request ("user_delete", new object[] { personaId }, new CharpGtk.CharpGtkCtx {
 				parent = this,
 				success = delegate (object data, Charp.CharpCtx ctx) {
 					Gtk.Application.Invoke (delegate {

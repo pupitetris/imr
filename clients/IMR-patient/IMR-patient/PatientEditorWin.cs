@@ -10,18 +10,20 @@ namespace IMRpatient
 	{
 		public enum TYPE {
 			NEW,
-			EDIT,
-			EDIT_SELF
+			EDIT
 		}
 
 		private JObject myData;
+		private JObject myDetails;
 		private int personaId;
 		private TYPE OpType;
+		private bool renewDetails = true;
 
 		private void SetupForNew ()
 		{
 			Title = Catalog.GetString ("New Patient");
 			personaId = 0;
+			renewDetails = false;
 
 			DeletePatientAction.Visible = false;
 		}
@@ -37,12 +39,49 @@ namespace IMRpatient
 			personaAddEditor.LoadData (data);
 		}
 
+		private void LoadDetails (JObject data) {
+			myDetails = data;
+			renewDetails = false;
+
+			string val;
+			if (Util.DictTryValue (data, "birth", out val)) { comboBirth.Entry.Text = val; }
+
+			checkAlcohol.Active = (bool) data["alcohol"];
+			checkTobacco.Active = (bool) data["tobacco"];
+			checkDrugs.Active = (bool) data["drugs"];
+
+			if (Util.DictTryValue (data, "sickness_remarks", out val))
+				textSickness.Buffer.InsertAtCursor (val);
+			if (Util.DictTryValue (data, "medication_remarks", out val))
+				textMedication.Buffer.InsertAtCursor (val);
+			if (Util.DictTryValue (data, "diet_remarks", out val))
+				textDiet.Buffer.InsertAtCursor (val);
+			if (Util.DictTryValue (data, "activity_remarks", out val))
+				textActivity.Buffer.InsertAtCursor (val);
+			if (Util.DictTryValue (data, "alcohol_remarks", out val))
+				textAlcohol.Buffer.InsertAtCursor (val);
+			if (Util.DictTryValue (data, "tobacco_remarks", out val))
+				textTobacco.Buffer.InsertAtCursor (val);
+			if (Util.DictTryValue (data, "drugs_remarks", out val))
+				textDrugs.Buffer.InsertAtCursor (val);
+		}
+
 		private void LoadData (JObject data) 
 		{
 			myData = data;
 			personaId = (int) myData["persona_id"];
 
-			//entryUsername.Text = (string) data["username"];
+			if (renewDetails) {
+				config.charp.request ("patient_get_details", new object[] { myData["persona_id"] }, new CharpGtk.CharpGtkCtx {
+					asSingle = true,
+					parent = this,
+					success = delegate (object dat, Charp.CharpCtx ctx) {
+						Gtk.Application.Invoke (delegate {
+							LoadDetails ((JObject) dat);
+						});
+					}
+				});
+			}
 		}
 
 		public PatientEditorWin (TYPE type, AppConfig config, JObject data = null) : 
@@ -54,8 +93,6 @@ namespace IMRpatient
 			personaAddEditor.Setup (config, this);
 
 			OpType = type;
-
-			//tablePatient.FocusChain = new Gtk.Widget[] { entryUsername, entryPassword, entryConfirm, comboStatus, comboLevel };
 
 			switch (type) {
 				case TYPE.NEW:
@@ -71,24 +108,24 @@ namespace IMRpatient
 		{
 			base.SaveState ();
 			if (personaEditor.pictureFolder != null) {
-				SaveKey ("pictureFolder", personaEditor.pictureFolder);
+				SaveKey ("patient_pictureFolder", personaEditor.pictureFolder);
 			}
 		}
 
 		protected override void LoadState ()
 		{
 			base.LoadState ();
-			LoadKey ("pictureFolder", out personaEditor.pictureFolder);
+			LoadKey ("patient_pictureFolder", out personaEditor.pictureFolder);
 		}
 
 		protected void OnDeleteActionActivated (object sender, EventArgs e)
 		{
-			config.charp.request ("patient_remove", new object[] { personaId }, new CharpGtk.CharpGtkCtx {
+			config.charp.request ("patient_delete", new object[] { personaId }, new CharpGtk.CharpGtkCtx {
 				parent = this,
 				success = delegate (object data, Charp.CharpCtx ctx) {
 					Gtk.Application.Invoke (delegate {
-						if (config.mainwin.userListWin != null)
-							config.mainwin.userListWin.Refresh ();
+//						if (config.mainwin.patientListWin != null)
+//							config.mainwin.patientListWin.Refresh ();
 						SendClose ();
 					});
 				},
@@ -107,27 +144,7 @@ namespace IMRpatient
 		private bool Validate () {
 			StringBuilder b = new StringBuilder ();
 
-			/*
-			if (entryUsername.Text.Length == 0) {
-				b.Append (Catalog.GetString ("You have to set an username.\n"));
-				Util.GtkLabelStyleAsError (labelUsername);
-			} else {
-				Util.GtkLabelStyleRemove (labelUsername);
-			}
-
-			if (entryPassword.Text.Length == 0 && OpType == TYPE.NEW) {
-				b.Append (Catalog.GetString ("You have to set a password.\n"));
-				Util.GtkLabelStyleAsError (labelPassword);
-			} else {
-				Util.GtkLabelStyleRemove (labelPassword);
-			}
-
-			if (entryPassword.Text != entryConfirm.Text) {
-				b.Append (Catalog.GetString ("Password and confirmation must be the same.\n"));
-				Util.GtkLabelStyleAsError (labelConfirm);
-			} else {
-				Util.GtkLabelStyleRemove (labelConfirm);
-			}*/
+			// TODO: validate comboBirth.Entry.Text
 
 			personaEditor.Validate (b);
 			personaAddEditor.Validate (b);
@@ -156,8 +173,8 @@ namespace IMRpatient
 
 		private void CommitSuccess (object data, Charp.CharpCtx ctx) {
 			SendAction (menubar, delegate {
-				if (config.mainwin.userListWin != null)
-					config.mainwin.userListWin.Refresh ();
+//				if (config.mainwin.patientListWin != null)
+//					config.mainwin.patientListWin.Refresh ();
 				Destroy ();
 			});
 		}
@@ -167,7 +184,7 @@ namespace IMRpatient
 		}
 
 		private void CommitPatientSuccess (object data, Charp.CharpCtx ctx) {
-			LoadData ((JObject) (((JArray) data)[0]));
+			LoadData ((JObject) data);
 			if (OpType == TYPE.NEW) {
 				personaEditor.SetPersonaId (personaId);
 				personaAddEditor.SetPersonaId (personaId);
@@ -180,20 +197,31 @@ namespace IMRpatient
 			string[] types = { "OPERATOR", "ADMIN", "SUPERUSER" };
 
 			object[] parms = {
-			/*	entryUsername.Text,
-				entryPassword.Text,
-				types[comboLevel.Active],
-				(comboStatus.Active == 0)? "ACTIVE" : "DISABLED"*/
+				comboBirth.Entry.Text,
+				textSickness.Buffer.Text,
+				textMedication.Buffer.Text,
+				textDiet.Buffer.Text,
+				textActivity.Buffer.Text,
+				checkAlcohol.Active,
+				textAlcohol.Buffer.Text,
+				checkTobacco.Active,
+				textTobacco.Buffer.Text,
+				checkDrugs.Active,
+				textDrugs.Buffer.Text
 			};
 
 			if (OpType == TYPE.NEW ||
-				(string) parms[0] != (string) myData["username"] ||
-				(string) parms[1] != "" ||
-				(string) parms[2] != (string) myData["type"] ||
-				(string) parms[3] != (string) myData["status"]) {
-
-			/*	if ((string) parms[1] != "")
-					parms[1] = Charp.GetMD5HexHash (entryPassword.Text);*/
+				(string) parms[0] != (string) myData["birth"] ||
+				(string) parms[1] != (string) myData["sickness_remarks"] ||
+				(string) parms[2] != (string) myData["medication_remarks"] ||
+				(string) parms[3] != (string) myData["diet_remarks"] ||
+				(string) parms[4] != (string) myData["activity_remarks"] ||
+				(string) parms[5] != (string) myData["alcohol"] ||
+				(string) parms[6] != (string) myData["alcohol_remarks"] ||
+				(string) parms[7] != (string) myData["tobacco"] ||
+				(string) parms[8] != (string) myData["tobacco_remarks"] ||
+				(string) parms[9] != (string) myData["drugs"] ||
+				(string) parms[10] != (string) myData["drugs_remarks"]) {
 
 				string resource;
 				if (OpType == TYPE.NEW) {
@@ -204,6 +232,7 @@ namespace IMRpatient
 				}
 
 				config.charp.request (resource, parms, new CharpGtk.CharpGtkCtx {
+					asSingle = true,
 					parent = this,
 					success = CommitPatientSuccess,
 					error = CommitError
@@ -220,4 +249,3 @@ namespace IMRpatient
 		}
 	}
 }
-

@@ -3502,7 +3502,7 @@ Skype</property>
       </widget>
     </child>
   </widget>
-  <widget class="Gtk.Window" id="IMRpatient.PatientEditorWin" design-size="1167 566">
+  <widget class="Gtk.Window" id="IMRpatient.PatientEditorWin" design-size="1169 566">
     <action-group name="Default">
       <action id="DeletePatientAction">
         <property name="Type">Action</property>
@@ -3655,10 +3655,16 @@ Skype</property>
                         <child>
                           <widget class="Gtk.Table" id="tablePatient">
                             <property name="MemberName" />
-                            <property name="NRows">6</property>
+                            <property name="NRows">8</property>
                             <property name="NColumns">3</property>
                             <property name="RowSpacing">4</property>
                             <property name="ColumnSpacing">6</property>
+                            <child>
+                              <placeholder />
+                            </child>
+                            <child>
+                              <placeholder />
+                            </child>
                             <child>
                               <placeholder />
                             </child>
@@ -3684,8 +3690,8 @@ Skype</property>
                                 </child>
                               </widget>
                               <packing>
-                                <property name="TopAttach">5</property>
-                                <property name="BottomAttach">6</property>
+                                <property name="TopAttach">7</property>
+                                <property name="BottomAttach">8</property>
                                 <property name="LeftAttach">1</property>
                                 <property name="RightAttach">2</property>
                                 <property name="AutoSize">True</property>
@@ -3722,8 +3728,8 @@ Skype</property>
                                 </child>
                               </widget>
                               <packing>
-                                <property name="TopAttach">3</property>
-                                <property name="BottomAttach">4</property>
+                                <property name="TopAttach">5</property>
+                                <property name="BottomAttach">6</property>
                                 <property name="LeftAttach">1</property>
                                 <property name="RightAttach">2</property>
                                 <property name="AutoSize">True</property>
@@ -3755,8 +3761,8 @@ Skype</property>
                                 </child>
                               </widget>
                               <packing>
-                                <property name="TopAttach">3</property>
-                                <property name="BottomAttach">4</property>
+                                <property name="TopAttach">5</property>
+                                <property name="BottomAttach">6</property>
                                 <property name="AutoSize">False</property>
                                 <property name="XOptions">0</property>
                                 <property name="YOptions">Fill</property>
@@ -3786,8 +3792,8 @@ Skype</property>
                                 </child>
                               </widget>
                               <packing>
-                                <property name="TopAttach">4</property>
-                                <property name="BottomAttach">5</property>
+                                <property name="TopAttach">6</property>
+                                <property name="BottomAttach">7</property>
                                 <property name="AutoSize">False</property>
                                 <property name="XOptions">0</property>
                                 <property name="YOptions">Fill</property>
@@ -3817,13 +3823,75 @@ Skype</property>
                                 </child>
                               </widget>
                               <packing>
-                                <property name="TopAttach">5</property>
-                                <property name="BottomAttach">6</property>
+                                <property name="TopAttach">7</property>
+                                <property name="BottomAttach">8</property>
                                 <property name="AutoSize">False</property>
                                 <property name="XOptions">0</property>
                                 <property name="YOptions">Fill</property>
                                 <property name="XExpand">False</property>
                                 <property name="XFill">False</property>
+                                <property name="XShrink">False</property>
+                                <property name="YExpand">False</property>
+                                <property name="YFill">True</property>
+                                <property name="YShrink">False</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <widget class="Gtk.Alignment" id="alignment17">
+                                <property name="MemberName" />
+                                <property name="Yscale">0</property>
+                                <property name="Xalign">0</property>
+                                <property name="Yalign">0</property>
+                                <property name="TopPadding">4</property>
+                                <child>
+                                  <widget class="Gtk.Label" id="label13">
+                                    <property name="MemberName" />
+                                    <property name="Xalign">0</property>
+                                    <property name="LabelProp" translatable="yes">Medication</property>
+                                  </widget>
+                                </child>
+                              </widget>
+                              <packing>
+                                <property name="TopAttach">2</property>
+                                <property name="BottomAttach">3</property>
+                                <property name="LeftAttach">1</property>
+                                <property name="RightAttach">2</property>
+                                <property name="AutoSize">True</property>
+                                <property name="XOptions">Fill</property>
+                                <property name="YOptions">Fill</property>
+                                <property name="XExpand">False</property>
+                                <property name="XFill">True</property>
+                                <property name="XShrink">False</property>
+                                <property name="YExpand">False</property>
+                                <property name="YFill">True</property>
+                                <property name="YShrink">False</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <widget class="Gtk.Alignment" id="alignment18">
+                                <property name="MemberName" />
+                                <property name="Yscale">0</property>
+                                <property name="Xalign">0</property>
+                                <property name="Yalign">0</property>
+                                <property name="TopPadding">4</property>
+                                <child>
+                                  <widget class="Gtk.Label" id="label14">
+                                    <property name="MemberName" />
+                                    <property name="Xalign">0</property>
+                                    <property name="LabelProp" translatable="yes">Diet</property>
+                                  </widget>
+                                </child>
+                              </widget>
+                              <packing>
+                                <property name="TopAttach">3</property>
+                                <property name="BottomAttach">4</property>
+                                <property name="LeftAttach">1</property>
+                                <property name="RightAttach">2</property>
+                                <property name="AutoSize">True</property>
+                                <property name="XOptions">Fill</property>
+                                <property name="YOptions">Fill</property>
+                                <property name="XExpand">False</property>
+                                <property name="XFill">True</property>
                                 <property name="XShrink">False</property>
                                 <property name="YExpand">False</property>
                                 <property name="YFill">True</property>
@@ -3853,8 +3921,8 @@ Skype</property>
                                 </child>
                               </widget>
                               <packing>
-                                <property name="TopAttach">4</property>
-                                <property name="BottomAttach">5</property>
+                                <property name="TopAttach">6</property>
+                                <property name="BottomAttach">7</property>
                                 <property name="LeftAttach">1</property>
                                 <property name="RightAttach">2</property>
                                 <property name="AutoSize">True</property>
@@ -3916,8 +3984,8 @@ Skype</property>
                                 </child>
                               </widget>
                               <packing>
-                                <property name="TopAttach">2</property>
-                                <property name="BottomAttach">3</property>
+                                <property name="TopAttach">4</property>
+                                <property name="BottomAttach">5</property>
                                 <property name="LeftAttach">1</property>
                                 <property name="RightAttach">2</property>
                                 <property name="AutoSize">False</property>
@@ -3988,6 +4056,43 @@ Skype</property>
                               </packing>
                             </child>
                             <child>
+                              <widget class="Gtk.Frame" id="frame10">
+                                <property name="MemberName" />
+                                <property name="ShadowType">In</property>
+                                <property name="LabelYalign">0.95</property>
+                                <property name="BorderWidth">2</property>
+                                <child>
+                                  <widget class="Gtk.TextView" id="textMedication">
+                                    <property name="MemberName" />
+                                    <property name="WidthRequest">300</property>
+                                    <property name="CanFocus">True</property>
+                                    <property name="AcceptsTab">False</property>
+                                    <property name="Text" translatable="yes" />
+                                    <property name="WrapMode">Word</property>
+                                    <property name="PixelsAboveLines">2</property>
+                                    <property name="PixelsBelowLines">2</property>
+                                    <property name="LeftMargin">2</property>
+                                    <property name="RightMargin">2</property>
+                                  </widget>
+                                </child>
+                              </widget>
+                              <packing>
+                                <property name="TopAttach">2</property>
+                                <property name="BottomAttach">3</property>
+                                <property name="LeftAttach">2</property>
+                                <property name="RightAttach">3</property>
+                                <property name="AutoSize">True</property>
+                                <property name="XOptions">Fill</property>
+                                <property name="YOptions">Fill</property>
+                                <property name="XExpand">False</property>
+                                <property name="XFill">True</property>
+                                <property name="XShrink">False</property>
+                                <property name="YExpand">False</property>
+                                <property name="YFill">True</property>
+                                <property name="YShrink">False</property>
+                              </packing>
+                            </child>
+                            <child>
                               <widget class="Gtk.Frame" id="frame4">
                                 <property name="MemberName" />
                                 <property name="ShadowType">In</property>
@@ -4009,8 +4114,8 @@ Skype</property>
                                 </child>
                               </widget>
                               <packing>
-                                <property name="TopAttach">5</property>
-                                <property name="BottomAttach">6</property>
+                                <property name="TopAttach">7</property>
+                                <property name="BottomAttach">8</property>
                                 <property name="LeftAttach">2</property>
                                 <property name="RightAttach">3</property>
                                 <property name="AutoSize">False</property>
@@ -4045,8 +4150,8 @@ Skype</property>
                                 </child>
                               </widget>
                               <packing>
-                                <property name="TopAttach">4</property>
-                                <property name="BottomAttach">5</property>
+                                <property name="TopAttach">6</property>
+                                <property name="BottomAttach">7</property>
                                 <property name="LeftAttach">2</property>
                                 <property name="RightAttach">3</property>
                                 <property name="AutoSize">False</property>
@@ -4081,8 +4186,8 @@ Skype</property>
                                 </child>
                               </widget>
                               <packing>
-                                <property name="TopAttach">3</property>
-                                <property name="BottomAttach">4</property>
+                                <property name="TopAttach">5</property>
+                                <property name="BottomAttach">6</property>
                                 <property name="LeftAttach">2</property>
                                 <property name="RightAttach">3</property>
                                 <property name="AutoSize">False</property>
@@ -4117,8 +4222,8 @@ Skype</property>
                                 </child>
                               </widget>
                               <packing>
-                                <property name="TopAttach">2</property>
-                                <property name="BottomAttach">3</property>
+                                <property name="TopAttach">4</property>
+                                <property name="BottomAttach">5</property>
                                 <property name="LeftAttach">2</property>
                                 <property name="RightAttach">3</property>
                                 <property name="AutoSize">False</property>
@@ -4160,6 +4265,43 @@ Skype</property>
                                 <property name="AutoSize">False</property>
                                 <property name="YOptions">Fill</property>
                                 <property name="XExpand">True</property>
+                                <property name="XFill">True</property>
+                                <property name="XShrink">False</property>
+                                <property name="YExpand">False</property>
+                                <property name="YFill">True</property>
+                                <property name="YShrink">False</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <widget class="Gtk.Frame" id="frame9">
+                                <property name="MemberName" />
+                                <property name="ShadowType">In</property>
+                                <property name="LabelYalign">0.95</property>
+                                <property name="BorderWidth">2</property>
+                                <child>
+                                  <widget class="Gtk.TextView" id="textDiet">
+                                    <property name="MemberName" />
+                                    <property name="WidthRequest">300</property>
+                                    <property name="CanFocus">True</property>
+                                    <property name="AcceptsTab">False</property>
+                                    <property name="Text" translatable="yes" />
+                                    <property name="WrapMode">Word</property>
+                                    <property name="PixelsAboveLines">2</property>
+                                    <property name="PixelsBelowLines">2</property>
+                                    <property name="LeftMargin">2</property>
+                                    <property name="RightMargin">2</property>
+                                  </widget>
+                                </child>
+                              </widget>
+                              <packing>
+                                <property name="TopAttach">3</property>
+                                <property name="BottomAttach">4</property>
+                                <property name="LeftAttach">2</property>
+                                <property name="RightAttach">3</property>
+                                <property name="AutoSize">True</property>
+                                <property name="XOptions">Fill</property>
+                                <property name="YOptions">Fill</property>
+                                <property name="XExpand">False</property>
                                 <property name="XFill">True</property>
                                 <property name="XShrink">False</property>
                                 <property name="YExpand">False</property>
