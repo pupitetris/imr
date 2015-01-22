@@ -115,9 +115,10 @@ namespace IMRpatient
 				}
 
 				config.charp.request (resource, parms, new CharpGtk.CharpGtkCtx {
+					asSingle = true,
 					parent = ParentWin,
 					success = delegate (object data, Charp.CharpCtx ctx) {
-						LoadData ((JObject) (((JArray) data)[0]));
+						LoadData ((JObject) data);
 						success (null, null);
 					},
 					error = error

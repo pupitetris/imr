@@ -210,9 +210,10 @@ namespace IMRpatient
 				!Util.StrEqNull ((string) parms[6], (string) myData["remarks"])) {
 
 				config.charp.request ("persona_update", parms, new CharpGtk.CharpGtkCtx {
+					asSingle = true,
 					parent = ParentWin,
 					success = delegate (object data, Charp.CharpCtx ctx) {
-						LoadData ((JObject) (((JArray) data)[0]));
+						LoadData ((JObject) data);
 						CommitPersonaSuccess (success, error);
 					},
 					error = error

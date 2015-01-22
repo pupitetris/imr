@@ -183,7 +183,7 @@ namespace IMRpatient
 		}
 
 		private void CommitUserSuccess (object data, Charp.CharpCtx ctx) {
-			LoadData ((JObject) (((JArray) data)[0]));
+			LoadData ((JObject) data);
 			if (OpType == TYPE.NEW) {
 				personaEditor.SetPersonaId (personaId);
 				personaAddEditor.SetPersonaId (personaId);
@@ -220,6 +220,7 @@ namespace IMRpatient
 				}
 
 				config.charp.request (resource, parms, new CharpGtk.CharpGtkCtx {
+					asSingle = true,
 					parent = this,
 					success = CommitUserSuccess,
 					error = CommitError
