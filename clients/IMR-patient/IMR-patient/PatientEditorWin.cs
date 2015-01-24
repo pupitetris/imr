@@ -124,8 +124,8 @@ namespace IMRpatient
 				parent = this,
 				success = delegate (object data, Charp.CharpCtx ctx) {
 					Gtk.Application.Invoke (delegate {
-//						if (config.mainwin.patientListWin != null)
-//							config.mainwin.patientListWin.Refresh ();
+						if (config.mainwin.patientListWin != null)
+							config.mainwin.patientListWin.Refresh ();
 						SendClose ();
 					});
 				},

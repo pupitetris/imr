@@ -201,6 +201,7 @@
         <property name="Label" translatable="yes">Search...</property>
         <property name="ShortLabel" translatable="yes">Search...</property>
         <property name="StockId">patients_search</property>
+        <signal name="Activated" handler="OnSearchActionActivated" />
       </action>
       <action id="DeleteAction">
         <property name="Type">Action</property>
@@ -4351,6 +4352,115 @@ Skype</property>
           <packing>
             <property name="Position">1</property>
             <property name="AutoSize">False</property>
+          </packing>
+        </child>
+      </widget>
+    </child>
+  </widget>
+  <widget class="Gtk.Window" id="IMRpatient.PatientListWin" design-size="400 300">
+    <action-group name="Default">
+      <action id="EditPatientAction">
+        <property name="Type">Action</property>
+        <property name="Label" translatable="yes">Edit</property>
+        <property name="Sensitive">False</property>
+        <property name="ShortLabel" translatable="yes">Edit</property>
+        <property name="StockId">userlist_edit</property>
+        <signal name="Activated" handler="OnEditActionActivated" />
+      </action>
+      <action id="DeletePatientAction">
+        <property name="Type">Action</property>
+        <property name="Label" translatable="yes">Delete</property>
+        <property name="Sensitive">False</property>
+        <property name="ShortLabel" translatable="yes">Delete</property>
+        <property name="StockId">useredit_remove</property>
+        <signal name="Activated" handler="OnDeleteActionActivated" />
+      </action>
+      <action id="PleaseWaitEditPatient">
+        <property name="Type">Action</property>
+        <property name="Label" translatable="yes">Please wait...</property>
+        <property name="Sensitive">False</property>
+        <property name="ShortLabel" translatable="yes">Please wait...</property>
+        <property name="StockId">please_wait</property>
+        <property name="Visible">False</property>
+      </action>
+      <action id="PleaseWaitDeletePatient">
+        <property name="Type">Action</property>
+        <property name="Label" translatable="yes">Please wait...</property>
+        <property name="Sensitive">False</property>
+        <property name="ShortLabel" translatable="yes">Please wait...</property>
+        <property name="StockId">please_wait</property>
+        <property name="Visible">False</property>
+      </action>
+      <action id="RefreshPatientsAction">
+        <property name="Type">Action</property>
+        <property name="Label" translatable="yes">Refresh</property>
+        <property name="ShortLabel" translatable="yes">Refresh</property>
+        <property name="StockId">userlist_refresh</property>
+        <signal name="Activated" handler="OnRefreshActionActivated" />
+      </action>
+      <action id="PleaseWaitRefreshPatients">
+        <property name="Type">Action</property>
+        <property name="Label" translatable="yes">Please wait...</property>
+        <property name="Sensitive">False</property>
+        <property name="ShortLabel" translatable="yes">Please wait...</property>
+        <property name="StockId">please_wait</property>
+        <property name="Visible">False</property>
+      </action>
+    </action-group>
+    <property name="MemberName" />
+    <property name="Title" translatable="yes">PatientListWin</property>
+    <property name="WindowPosition">CenterOnParent</property>
+    <child>
+      <widget class="Gtk.VBox" id="vbox2">
+        <property name="MemberName" />
+        <child>
+          <widget class="Gtk.HBox" id="hbox1">
+            <property name="MemberName" />
+            <property name="HeightRequest">40</property>
+            <property name="Spacing">6</property>
+            <child>
+              <widget class="Gtk.MenuBar" id="menubar">
+                <property name="MemberName" />
+                <property name="PackDirection">Rtl</property>
+                <node name="menubar" type="Menubar">
+                  <node type="Menu" action="EditPatientAction">
+                    <node type="Menuitem" action="PleaseWaitEditPatient" />
+                  </node>
+                  <node type="Menu" action="DeletePatientAction">
+                    <node type="Menuitem" action="PleaseWaitDeletePatient" />
+                  </node>
+                </node>
+              </widget>
+              <packing>
+                <property name="Position">0</property>
+                <property name="AutoSize">False</property>
+              </packing>
+            </child>
+          </widget>
+          <packing>
+            <property name="Position">0</property>
+            <property name="AutoSize">True</property>
+            <property name="Expand">False</property>
+            <property name="Fill">False</property>
+          </packing>
+        </child>
+        <child>
+          <widget class="Gtk.ScrolledWindow" id="GtkScrolledWindow">
+            <property name="MemberName" />
+            <property name="ShadowType">In</property>
+            <child>
+              <widget class="Gtk.NodeView" id="nodeview">
+                <property name="MemberName" />
+                <property name="CanFocus">True</property>
+                <property name="ShowScrollbars">True</property>
+                <property name="SearchColumn">1</property>
+                <signal name="RowActivated" handler="OnNodeviewRowActivated" />
+              </widget>
+            </child>
+          </widget>
+          <packing>
+            <property name="Position">1</property>
+            <property name="AutoSize">True</property>
           </packing>
         </child>
       </widget>

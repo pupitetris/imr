@@ -15,6 +15,7 @@ namespace IMRpatient {
 		public Boolean IsLogout;
 
 		public UserListWin userListWin;
+		public PatientListWin patientListWin;
 
 		public MainWindow (AppConfig config): base (Gtk.WindowType.Toplevel)
 		{
@@ -45,6 +46,8 @@ namespace IMRpatient {
 		{
 			if (userListWin != null)
 				userListWin.SaveState ();
+			if (patientListWin != null)
+				patientListWin.SaveState ();
 			config.radionic.Close ();
 			Gtk.Main.Quit ();
 		}
@@ -135,12 +138,28 @@ namespace IMRpatient {
 			});
 		}
 
-
 		protected void OnPatientsNewActivated (object sender, EventArgs e)
 		{
 			PatientEditorWin win = new PatientEditorWin (PatientEditorWin.TYPE.NEW, config);
 			win.TransientFor = this;
 			win.Show ();
+		}
+
+
+		protected void OnSearchActionActivated (object sender, EventArgs e)
+		{
+			if (config.CanPerform (IMR_PERM.PATIENT_EDIT)) {
+				if (patientListWin == null) {
+					PatientListWin win = new PatientListWin (config);
+					win.TransientFor = this;
+					win.DeleteEvent += delegate { patientListWin = null; };
+					win.DestroyEvent += delegate { patientListWin = null; };
+					win.Show ();
+					patientListWin = win;
+				} else {
+					patientListWin.Present ();
+				}
+			}
 		}
 	}
 }
