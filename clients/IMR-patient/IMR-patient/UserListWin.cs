@@ -109,7 +109,7 @@ namespace IMRpatient
 			Gtk.ITreeNode[] selected = selection.SelectedNodes;
 			if (i < selected.Length) {
 				UserListNode node = (UserListNode) selected[i];
-				config.charp.request ("user_remove", new object[] {Convert.ToUInt32 (node.Data["persona_id"])}, 
+				config.charp.request ("user_delete", new object[] {Convert.ToUInt32 (node.Data["persona_id"])}, 
 				new CharpGtk.CharpGtkCtx {
 					parent = this,
 					success = delegate (object data, Charp.CharpCtx ctx) {
