@@ -27,4 +27,12 @@
     <itemgroups />
     <signals />
   </object>
+  <object type="IMRpatient.DateButton" palette-category="General" allow-children="false" base-type="Gtk.ToggleButton">
+    <itemgroups>
+      <itemgroup label="DateButton Properties">
+        <property name="Date" />
+      </itemgroup>
+    </itemgroups>
+    <signals />
+  </object>
 </objects>

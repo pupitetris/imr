@@ -105,6 +105,7 @@
     <EmbeddedResource Include="img\system_users_search.png" />
     <EmbeddedResource Include="img\system_users_edit.png" />
     <EmbeddedResource Include="img\system_users.png" />
+    <EmbeddedResource Include="img\date_toggle.png" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MainWindow.cs" />
@@ -150,6 +151,8 @@
     <Compile Include="gtk-gui\IMRpatient.PatientEditorWin.cs" />
     <Compile Include="PatientListWin.cs" />
     <Compile Include="gtk-gui\IMRpatient.PatientListWin.cs" />
+    <Compile Include="gtk-gui\IMRpatient.DateButton.cs" />
+    <Compile Include="Widgets\DateButton.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
@@ -166,5 +169,8 @@
       <Project>{7DE14CEC-61E3-46F4-9CB3-C367DA555044}</Project>
       <Name>monoCHARP</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Widgets\" />
   </ItemGroup>
 </Project>
