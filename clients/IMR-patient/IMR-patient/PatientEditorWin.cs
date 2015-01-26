@@ -3,6 +3,7 @@ using Mono.Unix;
 using System.Text;
 using Newtonsoft.Json.Linq;
 using monoCharp;
+using System.Linq;
 
 namespace IMRpatient
 {
@@ -44,7 +45,7 @@ namespace IMRpatient
 			renewDetails = false;
 
 			string val;
-			if (Util.DictTryValue (data, "birth", out val)) { comboBirth.Entry.Text = val; }
+			if (Util.DictTryValue (data, "birth", out val)) {  dateButtonBirth.Date = DateTime.Parse (val); }
 
 			checkAlcohol.Active = (bool) data["alcohol"];
 			checkTobacco.Active = (bool) data["tobacco"];
@@ -144,12 +145,11 @@ namespace IMRpatient
 		private bool Validate () {
 			StringBuilder b = new StringBuilder ();
 
-			// TODO: validate comboBirth.Entry.Text
-
 			personaEditor.Validate (b);
 			personaAddEditor.Validate (b);
 
-			int errors = b.Length;
+			string msg = b.ToString ();
+			int errors = msg.Count (c => c == '●');
 			if (errors == 0)
 				return true;
 
@@ -157,7 +157,7 @@ namespace IMRpatient
 				"You have {0} errors:\n\n", errors), errors));
 
 			Gtk.MessageDialog dlg = new Gtk.MessageDialog (this, Gtk.DialogFlags.Modal, Gtk.MessageType.Error, 
-				Gtk.ButtonsType.Ok, b.ToString ());
+				Gtk.ButtonsType.Ok, msg);
 			dlg.Icon = Stetic.IconLoader.LoadIcon (dlg, "gtk-dialog-error", Gtk.IconSize.Dialog);
 			dlg.Title = Catalog.GetString ("Validation");
 			dlg.Run ();
@@ -173,8 +173,8 @@ namespace IMRpatient
 
 		private void CommitSuccess (object data, Charp.CharpCtx ctx) {
 			SendAction (menubar, delegate {
-//				if (config.mainwin.patientListWin != null)
-//					config.mainwin.patientListWin.Refresh ();
+				if (config.mainwin.patientListWin != null)
+					config.mainwin.patientListWin.Refresh ();
 				Destroy ();
 			});
 		}
@@ -197,7 +197,7 @@ namespace IMRpatient
 			string[] types = { "OPERATOR", "ADMIN", "SUPERUSER" };
 
 			object[] parms = {
-				comboBirth.Entry.Text,
+				dateButtonBirth.Date.ToShortDateString (),
 				textSickness.Buffer.Text,
 				textMedication.Buffer.Text,
 				textDiet.Buffer.Text,
@@ -244,8 +244,10 @@ namespace IMRpatient
 
 		protected void OnOKActionActivated (object sender, EventArgs e)
 		{
-			if (Validate ())
-				Commit ();
+			SendAction (menubar, delegate {
+				if (Validate ())
+					Commit ();
+			});
 		}
 	}
 }

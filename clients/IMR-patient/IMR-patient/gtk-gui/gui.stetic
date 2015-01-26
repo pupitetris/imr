@@ -3503,7 +3503,7 @@ Skype</property>
       </widget>
     </child>
   </widget>
-  <widget class="Gtk.Window" id="IMRpatient.PatientEditorWin" design-size="1169 566">
+  <widget class="Gtk.Window" id="IMRpatient.PatientEditorWin" design-size="1249 566">
     <action-group name="Default">
       <action id="DeletePatientAction">
         <property name="Type">Action</property>
@@ -3562,6 +3562,7 @@ Skype</property>
     </action-group>
     <property name="MemberName" />
     <property name="Title" translatable="yes">PatientEditorWin</property>
+    <property name="TypeHint">Utility</property>
     <property name="WindowPosition">CenterOnParent</property>
     <child>
       <widget class="Gtk.VBox" id="vbox2">
@@ -4035,10 +4036,36 @@ Skype</property>
                                 <property name="Xscale">0</property>
                                 <property name="Xalign">0</property>
                                 <child>
-                                  <widget class="Gtk.ComboBoxEntry" id="comboBirth">
+                                  <widget class="Gtk.HBox" id="hbox14">
                                     <property name="MemberName" />
-                                    <property name="IsTextCombo">False</property>
-                                    <property name="Items" translatable="yes" />
+                                    <property name="Spacing">6</property>
+                                    <child>
+                                      <widget class="Gtk.Image" id="image41">
+                                        <property name="MemberName" />
+                                        <property name="Pixbuf">resource:IMRpatient.img.date_toggle.png</property>
+                                      </widget>
+                                      <packing>
+                                        <property name="Position">0</property>
+                                        <property name="AutoSize">True</property>
+                                        <property name="Expand">False</property>
+                                        <property name="Fill">False</property>
+                                      </packing>
+                                    </child>
+                                    <child>
+                                      <widget class="IMRpatient.DateButton" id="dateButtonBirth">
+                                        <property name="MemberName" />
+                                        <property name="Events">ButtonPressMask</property>
+                                        <property name="Type">TextOnly</property>
+                                        <property name="Label" translatable="yes">Select...</property>
+                                        <property name="Date">0</property>
+                                      </widget>
+                                      <packing>
+                                        <property name="Position">1</property>
+                                        <property name="AutoSize">True</property>
+                                        <property name="Expand">False</property>
+                                        <property name="Fill">False</property>
+                                      </packing>
+                                    </child>
                                   </widget>
                                 </child>
                               </widget>
@@ -4315,7 +4342,7 @@ Skype</property>
                       </widget>
                     </child>
                     <child>
-                      <widget class="Gtk.Label" id="GtkLabel10">
+                      <widget class="Gtk.Label" id="GtkLabel11">
                         <property name="MemberName" />
                         <property name="LabelProp" translatable="yes">&lt;b&gt;Patient&lt;/b&gt;</property>
                         <property name="UseMarkup">True</property>
@@ -4465,5 +4492,12 @@ Skype</property>
         </child>
       </widget>
     </child>
+  </widget>
+  <widget class="Gtk.ToggleButton" id="IMRpatient.DateButton" design-size="52 30">
+    <property name="MemberName" />
+    <property name="Tooltip" translatable="yes">Select date</property>
+    <property name="CanFocus">True</property>
+    <property name="Type">TextOnly</property>
+    <property name="Label" translatable="yes">Select...</property>
   </widget>
 </stetic-interface>
