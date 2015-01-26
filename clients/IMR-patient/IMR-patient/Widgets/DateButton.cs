@@ -38,6 +38,7 @@ namespace IMRpatient
 		private DateTime date;
 		private Calendar cal;
 		private string displayFormat;
+		private bool hasChanged = false;
 
 		private const uint CURRENT_TIME = 0;
 
@@ -134,6 +135,7 @@ namespace IMRpatient
 			if(update) {
 				date = cal.GetDate();
 				Label = date.ToString(displayFormat);
+				hasChanged = true;
 			}
 
 			Active = false;
@@ -201,6 +203,12 @@ namespace IMRpatient
 				HideCalendar (false);
 				date = value;
 				Label = date.ToString(displayFormat);
+			}
+		}
+
+		public bool HasChanged {
+			get {
+				return hasChanged;
 			}
 		}
 	}

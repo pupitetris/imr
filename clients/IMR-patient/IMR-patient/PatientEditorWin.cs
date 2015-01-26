@@ -43,6 +43,8 @@ namespace IMRpatient
 		private void LoadDetails (JObject data) {
 			myDetails = data;
 			renewDetails = false;
+			if (data["persona_id"] != null)
+				personaId = (int) data["persona_id"];
 
 			string val;
 			if (Util.DictTryValue (data, "birth", out val)) {  dateButtonBirth.Date = DateTime.Parse (val); }
@@ -186,7 +188,7 @@ namespace IMRpatient
 		}
 
 		private void CommitPatientSuccess (object data, Charp.CharpCtx ctx) {
-			LoadData ((JObject) data);
+			LoadDetails ((JObject) data);
 			if (OpType == TYPE.NEW) {
 				personaEditor.SetPersonaId (personaId);
 				personaAddEditor.SetPersonaId (personaId);
@@ -199,7 +201,7 @@ namespace IMRpatient
 			string[] types = { "OPERATOR", "ADMIN", "SUPERUSER" };
 
 			object[] parms = {
-				dateButtonBirth.Date.ToShortDateString (),
+				OpType == TYPE.EDIT || dateButtonBirth.HasChanged? dateButtonBirth.Date.ToShortDateString (): null,
 				textSickness.Buffer.Text,
 				textMedication.Buffer.Text,
 				textDiet.Buffer.Text,

@@ -4057,7 +4057,7 @@ Skype</property>
                                         <property name="Events">ButtonPressMask</property>
                                         <property name="Type">TextOnly</property>
                                         <property name="Label" translatable="yes">Select...</property>
-                                        <property name="Date">0</property>
+                                        <property name="Date">631281600000000000</property>
                                       </widget>
                                       <packing>
                                         <property name="Position">1</property>
@@ -4384,7 +4384,7 @@ Skype</property>
       </widget>
     </child>
   </widget>
-  <widget class="Gtk.Window" id="IMRpatient.PatientListWin" design-size="400 300">
+  <widget class="Gtk.Window" id="IMRpatient.PatientListWin" design-size="405 300">
     <action-group name="Default">
       <action id="EditPatientAction">
         <property name="Type">Action</property>
@@ -4436,6 +4436,7 @@ Skype</property>
     </action-group>
     <property name="MemberName" />
     <property name="Title" translatable="yes">PatientListWin</property>
+    <property name="Icon">resource:IMRpatient.img.imr-icon.png</property>
     <property name="WindowPosition">CenterOnParent</property>
     <child>
       <widget class="Gtk.VBox" id="vbox2">

@@ -85,7 +85,7 @@ namespace IMRpatient
 				success = delegate (object data, Charp.CharpCtx ctx) {
 					Gtk.Application.Invoke (delegate {
 						foreach (JObject dat in (JArray) data) {
-							store.AddNode (new UserListNode (dat));
+							store.AddNode (new PatientListNode (dat));
 						}
 						nodeview.ShowNow ();
 						FinishAction (menubar);
@@ -107,7 +107,7 @@ namespace IMRpatient
 		{
 			Gtk.ITreeNode[] selected = selection.SelectedNodes;
 			if (i < selected.Length) {
-				UserListNode node = (UserListNode) selected[i];
+				PatientListNode node = (PatientListNode) selected[i];
 				config.charp.request ("patient_delete", new object[] {Convert.ToUInt32 (node.Data["persona_id"])}, 
 					new CharpGtk.CharpGtkCtx {
 						parent = this,
@@ -170,8 +170,8 @@ namespace IMRpatient
 				throw new Exception ("Selection must be 1");
 			}
 
-			UserListNode node = (UserListNode) selected[0];
-			UserEditorWin win = new UserEditorWin (UserEditorWin.TYPE.EDIT, config, node.Data);
+			PatientListNode node = (PatientListNode) selected[0];
+			PatientEditorWin win = new PatientEditorWin (PatientEditorWin.TYPE.EDIT, config, node.Data);
 			win.Show ();
 		}
 
