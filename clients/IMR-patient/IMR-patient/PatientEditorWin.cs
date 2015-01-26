@@ -153,15 +153,17 @@ namespace IMRpatient
 			if (errors == 0)
 				return true;
 
-			b.Insert (0, String.Format (Catalog.GetPluralString ("You have {0} error:\n\n", 
-				"You have {0} errors:\n\n", errors), errors));
+			SendAction (menubar, delegate {
+				b.Insert (0, String.Format (Catalog.GetPluralString ("You have {0} error:\n\n", 
+					"You have {0} errors:\n\n", errors), errors));
 
-			Gtk.MessageDialog dlg = new Gtk.MessageDialog (this, Gtk.DialogFlags.Modal, Gtk.MessageType.Error, 
-				Gtk.ButtonsType.Ok, msg);
-			dlg.Icon = Stetic.IconLoader.LoadIcon (dlg, "gtk-dialog-error", Gtk.IconSize.Dialog);
-			dlg.Title = Catalog.GetString ("Validation");
-			dlg.Run ();
-			dlg.Destroy ();
+				Gtk.MessageDialog dlg = new Gtk.MessageDialog (this, Gtk.DialogFlags.Modal, Gtk.MessageType.Error, 
+					Gtk.ButtonsType.Ok, msg);
+				dlg.Icon = Stetic.IconLoader.LoadIcon (dlg, "gtk-dialog-error", Gtk.IconSize.Dialog);
+				dlg.Title = Catalog.GetString ("Validation");
+				dlg.Run ();
+				dlg.Destroy ();
+			});
 
 			return false;
 		}
@@ -244,10 +246,8 @@ namespace IMRpatient
 
 		protected void OnOKActionActivated (object sender, EventArgs e)
 		{
-			SendAction (menubar, delegate {
-				if (Validate ())
-					Commit ();
-			});
+			if (Validate ())
+				Commit ();
 		}
 	}
 }
