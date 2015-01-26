@@ -10,9 +10,9 @@ namespace IMRpatient
 
 		protected AppConfig config;
 		
-		private static uint SEND_CLOSE_TIMEOUT = 50; // msecs to pass before closing the window.
-		private static uint SEND_ACTION_TIMEOUT = 100; // msecs to pass before an action is performed.
-		private static uint PRESENT_TIMEOUT = 100; // msecs to pass before the window is presented after initial show.
+		private const uint SEND_CLOSE_TIMEOUT = 50; // msecs to pass before closing the window.
+		private const uint SEND_ACTION_TIMEOUT = 100; // msecs to pass before an action is performed.
+		private const uint PRESENT_TIMEOUT = 100; // msecs to pass before the window is presented after initial show.
 
 		public UtilityWin (AppConfig config) :
 			base(Gtk.WindowType.Toplevel)
@@ -77,10 +77,10 @@ namespace IMRpatient
 		protected void SendAction (Gtk.MenuBar menubar, VoidDelegate del)
 		{
 			ActionDelegate adel = delegate () {
-				GLib.Signal.Emit (menubar, "cancel");
-				if (del != null) {
+				menubar.Cancel ();
+				if (del != null)
 					del ();
-				}
+
 				return false;
 			};
 
