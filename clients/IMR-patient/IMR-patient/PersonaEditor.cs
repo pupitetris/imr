@@ -167,7 +167,7 @@ namespace IMRpatient
 
 		public bool Validate (StringBuilder b) {
 			if (entryName.Text.Length == 0) {
-				b.Append (Catalog.GetString ("You have to set at least a name.\n"));
+				b.Append (Catalog.GetString ("● You have to set at least a name.\n"));
 				Util.GtkLabelStyleAsError (labelName);
 			} else {
 				Util.GtkLabelStyleRemove (labelName);

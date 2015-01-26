@@ -90,7 +90,7 @@ namespace IMRpatient
 		public bool Validate (StringBuilder b)
 		{
 			if (entryEmail.Text.Length == 0) {
-				b.Append (Catalog.GetString ("You have to set the address.\n"));
+				b.Append (Catalog.GetString ("● You have to set the address.\n"));
 			}
 
 			if (b.Length == 0)

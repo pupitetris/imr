@@ -320,7 +320,7 @@ namespace IMRpatient
 		public bool Validate (StringBuilder b)
 		{
 			if (entryStreet.Text.Length == 0) {
-				b.Append (Catalog.GetString ("You have to set the street address.\n"));
+				b.Append (Catalog.GetString ("● You have to set the street address.\n"));
 				Util.GtkLabelStyleAsError (labelStreet);
 			} else {
 				Util.GtkLabelStyleRemove (labelStreet);

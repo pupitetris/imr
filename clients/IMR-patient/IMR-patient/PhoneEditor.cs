@@ -83,7 +83,7 @@ namespace IMRpatient
 		public bool Validate (StringBuilder b)
 		{
 			if (entryNumber.Text.Length == 0) {
-				b.Append (Catalog.GetString ("You have to set a number.\n"));
+				b.Append (Catalog.GetString ("● You have to set a number.\n"));
 			}
 
 			if (b.Length == 0)
