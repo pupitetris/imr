@@ -530,7 +530,7 @@ BEGIN
 END »);
 
 
-M4_PROCEDURE( «rp_patient_update(_uid charp_user_id, _persona_id varchar, _birth date,
+M4_PROCEDURE( «rp_patient_update(_uid charp_user_id, _persona_id integer, _birth date,
 	       _sickness_remarks varchar, _medication_remarks varchar, _diet_remarks varchar, _activity_remarks varchar,
 	       _alcohol boolean, _alcohol_remarks varchar, _tobacco boolean, _tobacco_remarks varchar, _drugs boolean, _drugs_remarks varchar)»,
 	      «TABLE( persona_id integer, birth date,
@@ -548,7 +548,7 @@ BEGIN
 			  ( _birth,
 			    _sickness_remarks, _medication_remarks, _diet_remarks, _activity_remarks,
 	       	     	    _alcohol, _alcohol_remarks, _tobacco, _tobacco_remarks, _drugs, _drugs_remarks)
-	       WHERE inst_id = _inst_id AND persona_id = _persona_id;
+	       WHERE inst_id = _inst_id AND patient.persona_id = _persona_id;
 
 	RETURN QUERY SELECT _persona_id, _birth,
 	       	     	    _sickness_remarks, _medication_remarks, _diet_remarks, _activity_remarks,
