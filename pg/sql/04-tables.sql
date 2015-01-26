@@ -269,16 +269,16 @@ CREATE TABLE public.patient (
                 persona_id INTEGER NOT NULL,
                 inst_id INTEGER NOT NULL,
                 birth DATE,
-                sickness_remarks VARCHAR NOT NULL,
+                sickness_remarks VARCHAR,
+                medication_remarks VARCHAR,
+                diet_remarks VARCHAR,
+                activity_remarks VARCHAR,
                 alcohol BOOLEAN NOT NULL,
-                alcohol_remarks VARCHAR NOT NULL,
+                alcohol_remarks VARCHAR,
                 tobacco BOOLEAN NOT NULL,
-                tobacco_remarks VARCHAR NOT NULL,
+                tobacco_remarks VARCHAR,
                 drugs BOOLEAN NOT NULL,
-                drugs_remarks VARCHAR NOT NULL,
-                medication_remarks VARCHAR NOT NULL,
-                diet_remarks VARCHAR NOT NULL,
-                activity_remarks VARCHAR NOT NULL,
+                drugs_remarks VARCHAR,
                 CONSTRAINT patient_pk PRIMARY KEY (persona_id, inst_id)
 );
 COMMENT ON COLUMN public.patient.activity_remarks IS 'Actividad física';
