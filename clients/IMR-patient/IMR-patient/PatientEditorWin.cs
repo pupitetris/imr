@@ -125,6 +125,8 @@ namespace IMRpatient
 
 		protected void OnDeleteActionActivated (object sender, EventArgs e)
 		{
+			LockMenu (menubar, (Gtk.Action) sender);
+
 			config.charp.request ("patient_delete", new object[] { personaId }, new CharpGtk.CharpGtkCtx {
 				parent = this,
 				success = delegate (object data, Charp.CharpCtx ctx) {
@@ -252,13 +254,10 @@ namespace IMRpatient
 
 		protected void OnOKActionActivated (object sender, EventArgs e)
 		{
+			LockMenu (menubar, (Gtk.Action) sender);
+
 			if (Validate ())
 				Commit ();
 		}
-
-		protected void OnMenubarSelectionDone (object sender, EventArgs e)
-		{
-			Console.WriteLine ("whatever");
-		}
 	}
 }

@@ -3590,7 +3590,6 @@ Skype</property>
               <widget class="Gtk.MenuBar" id="menubar">
                 <property name="MemberName" />
                 <property name="PackDirection">Rtl</property>
-                <signal name="SelectionDone" handler="OnMenubarSelectionDone" />
                 <node name="menubar" type="Menubar">
                   <node type="Menu" action="OKPatientAction">
                     <node type="Menuitem" action="PleaseWaitOKPatient" />

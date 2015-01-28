@@ -81,6 +81,9 @@ namespace IMRpatient
 				if (del != null)
 					del ();
 
+				foreach (Gtk.MenuItem child in menubar.Children)
+					child.Show ();
+
 				return false;
 			};
 
@@ -89,6 +92,13 @@ namespace IMRpatient
 
 		protected void FinishAction (Gtk.MenuBar menubar) {
 			SendAction (menubar, null);
+		}
+
+		protected void LockMenu (Gtk.MenuBar menubar, Gtk.Action action) {
+			foreach (Gtk.MenuItem child in menubar.Children) {
+				if (child.Action != action)
+					child.Hide ();
+			}
 		}
 	}
 }
