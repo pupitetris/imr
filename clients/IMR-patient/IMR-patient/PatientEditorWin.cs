@@ -49,14 +49,16 @@ namespace IMRpatient
 			string val;
 			if (Util.DictTryValue (data, "birth", out val)) {  dateButtonBirth.Date = DateTime.Parse (val); }
 
-			checkAlcohol.Active = (bool) data["alcohol"];
-			checkTobacco.Active = (bool) data["tobacco"];
-			checkDrugs.Active = (bool) data["drugs"];
+			checkAlcohol.TriState = (bool?) data["alcohol"];
+			checkTobacco.TriState = (bool?) data["tobacco"];
+			checkDrugs.TriState = (bool?) data["drugs"];
 
 			if (Util.DictTryValue (data, "sickness_remarks", out val))
 				textSickness.Buffer.InsertAtCursor (val);
-			if (Util.DictTryValue (data, "medication_remarks", out val))
-				textMedication.Buffer.InsertAtCursor (val);
+			if (Util.DictTryValue (data, "medic_remarks", out val))
+				textMedic.Buffer.InsertAtCursor (val);
+			if (Util.DictTryValue (data, "hereditary_remarks", out val))
+				textHereditary.Buffer.InsertAtCursor (val);
 			if (Util.DictTryValue (data, "diet_remarks", out val))
 				textDiet.Buffer.InsertAtCursor (val);
 			if (Util.DictTryValue (data, "activity_remarks", out val))
@@ -203,29 +205,31 @@ namespace IMRpatient
 			object[] parms = {
 				OpType == TYPE.EDIT || dateButtonBirth.HasChanged? dateButtonBirth.Date.ToShortDateString (): null,
 				textSickness.Buffer.Text,
-				textMedication.Buffer.Text,
+				textMedic.Buffer.Text,
+				textHereditary.Buffer.Text,
 				textDiet.Buffer.Text,
 				textActivity.Buffer.Text,
-				checkAlcohol.Active,
+				checkAlcohol.TriState,
 				textAlcohol.Buffer.Text,
-				checkTobacco.Active,
+				checkTobacco.TriState,
 				textTobacco.Buffer.Text,
-				checkDrugs.Active,
+				checkDrugs.TriState,
 				textDrugs.Buffer.Text
 			};
 
 			if (OpType == TYPE.NEW ||
 				(string) parms[0] != (string) myData["birth"] ||
 				(string) parms[1] != (string) myData["sickness_remarks"] ||
-				(string) parms[2] != (string) myData["medication_remarks"] ||
-				(string) parms[3] != (string) myData["diet_remarks"] ||
-				(string) parms[4] != (string) myData["activity_remarks"] ||
-				(string) parms[5] != (string) myData["alcohol"] ||
-				(string) parms[6] != (string) myData["alcohol_remarks"] ||
-				(string) parms[7] != (string) myData["tobacco"] ||
-				(string) parms[8] != (string) myData["tobacco_remarks"] ||
-				(string) parms[9] != (string) myData["drugs"] ||
-				(string) parms[10] != (string) myData["drugs_remarks"]) {
+				(string) parms[2] != (string) myData["medic_remarks"] ||
+				(string) parms[3] != (string) myData["hereditary_remarks"] ||
+				(string) parms[4] != (string) myData["diet_remarks"] ||
+				(string) parms[5] != (string) myData["activity_remarks"] ||
+				(string) parms[6] != (string) myData["alcohol"] ||
+				(string) parms[7] != (string) myData["alcohol_remarks"] ||
+				(string) parms[8] != (string) myData["tobacco"] ||
+				(string) parms[9] != (string) myData["tobacco_remarks"] ||
+				(string) parms[10] != (string) myData["drugs"] ||
+				(string) parms[11] != (string) myData["drugs_remarks"]) {
 
 				string resource;
 				if (OpType == TYPE.NEW) {
@@ -250,6 +254,11 @@ namespace IMRpatient
 		{
 			if (Validate ())
 				Commit ();
+		}
+
+		protected void OnMenubarSelectionDone (object sender, EventArgs e)
+		{
+			Console.WriteLine ("whatever");
 		}
 	}
 }

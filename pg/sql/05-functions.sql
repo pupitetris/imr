@@ -346,7 +346,7 @@ BEGIN
 	_inst_id := imr_user_can_edit_persona(_uid, _persona_id);
 
 	UPDATE address SET (asenta_id, street, ad_type) = (_asenta_id, _street, _ad_type)
-	       WHERE inst_id = _inst_id AND persona_id = _persona_id AND address_id = _address_id;
+	       WHERE inst_id = _inst_id AND address.persona_id = _persona_id AND address.address_id = _address_id;
 
 	RETURN QUERY SELECT _address_id, _persona_id, _asenta_id, _street, _ad_type;
 END »);
@@ -378,7 +378,7 @@ BEGIN
 	_inst_id := imr_user_can_edit_persona(_uid, _persona_id);
 
 	UPDATE phone SET (numbr, type, remarks) = (_numbr, _type, _remarks)
-	       WHERE inst_id = _inst_id AND persona_id = _persona_id AND phone_id = _phone_id;
+	       WHERE inst_id = _inst_id AND phone.persona_id = _persona_id AND phone.phone_id = _phone_id;
 
 	RETURN QUERY SELECT _phone_id, _persona_id, _numbr, _type, _remarks;
 END »);
@@ -402,7 +402,7 @@ END »);
 
 
 M4_PROCEDURE( «rp_email_update(_uid charp_user_id, _email_id integer, _persona_id integer, _email varchar, _type imr_email_type, _system imr_email_system, _remarks varchar)»,
-	      «TABLE( email_id integer, email varchar, type imr_email_type, system imr_email_system, remarks varchar )»,
+	      «TABLE( email_id integer, persona_id integer, email varchar, type imr_email_type, system imr_email_system, remarks varchar )»,
 	      VOLATILE, M4_DEFN(user), 'Edit an email record for a given persona.', «
 DECLARE
 	_inst_id integer;
@@ -410,7 +410,7 @@ BEGIN
 	_inst_id := imr_user_can_edit_persona(_uid, _persona_id);
 
 	UPDATE email SET (email, type, system, remarks) = (_email, _type, _system, _remarks)
-	       WHERE inst_id = _inst_id AND persona_id = _persona_id AND email_id = _email_id;
+	       WHERE inst_id = _inst_id AND email.persona_id = _persona_id AND email.email_id = _email_id;
 
 	RETURN QUERY SELECT _email_id, _persona_id, _email, _type, _system, _remarks;
 END »);
@@ -472,11 +472,11 @@ SELECT p.persona_id, p.prefix, p.name, p.paterno, p.materno,
 
 
 M4_SQL_PROCEDURE( «rp_patient_get_details(_uid charp_user_id, _persona_id integer)»,
-		  «TABLE( birth date, sickness_remarks varchar, medic_remarks varchar, diet_remarks varchar,
+		  «TABLE( birth date, sickness_remarks varchar, medic_remarks varchar, hereditary_remarks varchar, diet_remarks varchar, activity_remarks varchar,
 		  alcohol boolean, alcohol_remarks varchar, tobacco boolean, tobacco_remarks varchar, drugs boolean, drugs_remarks varchar )»,
 		  STABLE, M4_DEFN(user), 'Get details related to a given patient.', «
 
-SELECT p.birth, p.sickness_remarks, p.medic_remarks, p.diet_remarks,
+SELECT p.birth, p.sickness_remarks, p.medic_remarks, p.hereditary_remarks, p.diet_remarks, p.activity_remarks,
        p.alcohol, p.alcohol_remarks, p.tobacco, p.tobacco_remarks, p.drugs, p.drugs_remarks
        FROM patient AS p JOIN account AS ac USING (inst_id)
        WHERE ac.persona_id = $1
@@ -498,10 +498,10 @@ END »);
 
 
 M4_FUNCTION( «rp_patient_create(_uid charp_user_id, _birth date,
-	      _sickness_remarks varchar, _medic_remarks varchar, _diet_remarks varchar, _activity_remarks varchar,
+	      _sickness_remarks varchar, _medic_remarks varchar, _hereditary_remarks varchar, _diet_remarks varchar, _activity_remarks varchar,
 	      _alcohol boolean, _alcohol_remarks varchar, _tobacco boolean, _tobacco_remarks varchar, _drugs boolean, _drugs_remarks varchar)»,
 	     «TABLE( persona_id integer, birth date,
-	     	     sickness_remarks varchar, medic_remarks varchar, diet_remarks varchar, activity_remarks varchar,
+	     	     sickness_remarks varchar, medic_remarks varchar, hereditary_remarks varchar, diet_remarks varchar, activity_remarks varchar,
 		     alcohol boolean, alcohol_remarks varchar, tobacco boolean, tobacco_remarks varchar, drugs boolean, drugs_remarks varchar )»,
 	     VOLATILE, M4_DEFN(user), 'Create a patient with an empty persona.', «
 DECLARE
@@ -518,23 +518,23 @@ BEGIN
 	       RETURNING persona.persona_id INTO _persona_id;
 
 	INSERT INTO patient( persona_id, inst_id, birth,
-	       	    	     sickness_remarks, medic_remarks, diet_remarks, activity_remarks,
+	       	    	     sickness_remarks, medic_remarks, hereditary_remarks, diet_remarks, activity_remarks,
 		    	     alcohol, alcohol_remarks, tobacco, tobacco_remarks, drugs, drugs_remarks)
 	       VALUES( _persona_id, _inst_id, _birth,
-	       	       _sickness_remarks, _medic_remarks, _diet_remarks, _activity_remarks,
+	       	       _sickness_remarks, _medic_remarks, _hereditary_remarks, _diet_remarks, _activity_remarks,
 	       	       _alcohol, _alcohol_remarks, _tobacco, _tobacco_remarks, _drugs, _drugs_remarks);
 
 	RETURN QUERY SELECT _persona_id, _birth,
-	       	     	    _sickness_remarks, _medic_remarks, _diet_remarks, _activity_remarks,
+	       	     	    _sickness_remarks, _medic_remarks, _hereditary_remarks, _diet_remarks, _activity_remarks,
 	       	     	    _alcohol, _alcohol_remarks, _tobacco, _tobacco_remarks, _drugs, _drugs_remarks;
 END »);
 
 
 M4_PROCEDURE( «rp_patient_update(_uid charp_user_id, _persona_id integer, _birth date,
-	       _sickness_remarks varchar, _medic_remarks varchar, _diet_remarks varchar, _activity_remarks varchar,
+	       _sickness_remarks varchar, _medic_remarks varchar, _hereditary_remarks varchar, _diet_remarks varchar, _activity_remarks varchar,
 	       _alcohol boolean, _alcohol_remarks varchar, _tobacco boolean, _tobacco_remarks varchar, _drugs boolean, _drugs_remarks varchar)»,
 	      «TABLE( persona_id integer, birth date,
-	      	      sickness_remarks varchar, medic_remarks varchar, diet_remarks varchar, activity_remarks varchar,
+	      	      sickness_remarks varchar, medic_remarks varchar, hereditary_remarks varchar, diet_remarks varchar, activity_remarks varchar,
 		      alcohol boolean, alcohol_remarks varchar, tobacco boolean, tobacco_remarks varchar, drugs boolean, drugs_remarks varchar )»,
 	      VOLATILE, M4_DEFN(user), 'Update a patient details.', «
 DECLARE
@@ -543,15 +543,15 @@ BEGIN
 	_inst_id := imr_user_can_edit_persona(_uid, _persona_id);
 
 	UPDATE patient SET( birth,
-	       	       	    sickness_remarks, medic_remarks, diet_remarks, activity_remarks,
+	       	       	    sickness_remarks, medic_remarks, hereditary_remarks, diet_remarks, activity_remarks,
 		    	    alcohol, alcohol_remarks, tobacco, tobacco_remarks, drugs, drugs_remarks) =
 			  ( _birth,
-			    _sickness_remarks, _medic_remarks, _diet_remarks, _activity_remarks,
+			    _sickness_remarks, _medic_remarks, _hereditary_remarks, _diet_remarks, _activity_remarks,
 	       	     	    _alcohol, _alcohol_remarks, _tobacco, _tobacco_remarks, _drugs, _drugs_remarks)
 	       WHERE inst_id = _inst_id AND patient.persona_id = _persona_id;
 
 	RETURN QUERY SELECT _persona_id, _birth,
-	       	     	    _sickness_remarks, _medic_remarks, _diet_remarks, _activity_remarks,
+	       	     	    _sickness_remarks, _medic_remarks, _hereditary_remarks, _diet_remarks, _activity_remarks,
 	       	     	    _alcohol, _alcohol_remarks, _tobacco, _tobacco_remarks, _drugs, _drugs_remarks;
 END »);
 	

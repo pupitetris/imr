@@ -271,14 +271,14 @@ CREATE TABLE public.patient (
                 birth DATE,
                 sickness_remarks VARCHAR,
                 medic_remarks VARCHAR,
+                hereditary_remarks VARCHAR,
                 diet_remarks VARCHAR,
                 activity_remarks VARCHAR,
-                hereditary_remarks VARCHAR,
-                alcohol BOOLEAN NOT NULL,
+                alcohol BOOLEAN,
                 alcohol_remarks VARCHAR,
-                tobacco BOOLEAN NOT NULL,
+                tobacco BOOLEAN,
                 tobacco_remarks VARCHAR,
-                drugs BOOLEAN NOT NULL,
+                drugs BOOLEAN,
                 drugs_remarks VARCHAR,
                 CONSTRAINT patient_pk PRIMARY KEY (persona_id, inst_id)
 );

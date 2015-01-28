@@ -483,28 +483,28 @@
     <column id="COL142" populated="true" UUID="0a504b80-79bc-468c-81fa-c58b9fc47519" autoIncrement="false" defaultValue="" name="medic_remarks" nullable="1" physicalName="medic_remarks" precision="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="12" userDefinedTypeUUID="831ac2d4-0e65-47ec-a0b7-62b7f6b8760a" >
      <remarks></remarks>
     </column>
-    <column id="COL143" populated="true" UUID="64bea455-0b1d-4621-837b-18cd3acaea0e" autoIncrement="false" defaultValue="" name="diet_remarks" nullable="1" physicalName="diet_remarks" precision="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="12" userDefinedTypeUUID="831ac2d4-0e65-47ec-a0b7-62b7f6b8760a" >
+    <column id="COL143" populated="true" UUID="d1c1bb10-f8b1-4392-989e-40c0e8c49158" autoIncrement="false" autoIncrementSequenceName="patient_hereditary_remarks_seq" defaultValue="" name="hereditary_remarks" nullable="1" physicalName="hereditary_remarks" precision="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="12" userDefinedTypeUUID="831ac2d4-0e65-47ec-a0b7-62b7f6b8760a" >
      <remarks></remarks>
     </column>
-    <column id="COL144" populated="true" UUID="66ba342f-7419-445d-b748-a489584b659b" autoIncrement="false" defaultValue="" name="activity_remarks" nullable="1" physicalName="activity_remarks" precision="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="12" userDefinedTypeUUID="831ac2d4-0e65-47ec-a0b7-62b7f6b8760a" >
+    <column id="COL144" populated="true" UUID="64bea455-0b1d-4621-837b-18cd3acaea0e" autoIncrement="false" defaultValue="" name="diet_remarks" nullable="1" physicalName="diet_remarks" precision="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="12" userDefinedTypeUUID="831ac2d4-0e65-47ec-a0b7-62b7f6b8760a" >
+     <remarks></remarks>
+    </column>
+    <column id="COL145" populated="true" UUID="66ba342f-7419-445d-b748-a489584b659b" autoIncrement="false" defaultValue="" name="activity_remarks" nullable="1" physicalName="activity_remarks" precision="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="12" userDefinedTypeUUID="831ac2d4-0e65-47ec-a0b7-62b7f6b8760a" >
      <remarks>Actividad física</remarks>
     </column>
-    <column id="COL145" populated="true" UUID="d1c1bb10-f8b1-4392-989e-40c0e8c49158" autoIncrement="false" autoIncrementSequenceName="patient_hereditary_remarks_seq" defaultValue="" name="hereditary_remarks" nullable="1" physicalName="hereditary_remarks" precision="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="12" userDefinedTypeUUID="831ac2d4-0e65-47ec-a0b7-62b7f6b8760a" >
-     <remarks></remarks>
-    </column>
-    <column id="COL146" populated="true" UUID="466e5f86-9658-4180-a362-f94d0a7c03b2" autoIncrement="false" defaultValue="" name="alcohol" nullable="0" physicalName="alcohol" precision="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="16" userDefinedTypeUUID="a26374aa-3026-4bb8-b564-eb2e186dfa5d" >
+    <column id="COL146" populated="true" UUID="466e5f86-9658-4180-a362-f94d0a7c03b2" autoIncrement="false" defaultValue="" name="alcohol" nullable="1" physicalName="alcohol" precision="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="16" userDefinedTypeUUID="a26374aa-3026-4bb8-b564-eb2e186dfa5d" >
      <remarks></remarks>
     </column>
     <column id="COL147" populated="true" UUID="d9bca402-f7fc-4862-a8c2-14db8df1dbc8" autoIncrement="false" defaultValue="" name="alcohol_remarks" nullable="1" physicalName="alcohol_remarks" precision="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="12" userDefinedTypeUUID="831ac2d4-0e65-47ec-a0b7-62b7f6b8760a" >
      <remarks></remarks>
     </column>
-    <column id="COL148" populated="true" UUID="3c4dadce-6a5d-4656-a424-3e16466d44ea" autoIncrement="false" defaultValue="" name="tobacco" nullable="0" physicalName="tobacco" precision="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="16" userDefinedTypeUUID="a26374aa-3026-4bb8-b564-eb2e186dfa5d" >
+    <column id="COL148" populated="true" UUID="3c4dadce-6a5d-4656-a424-3e16466d44ea" autoIncrement="false" defaultValue="" name="tobacco" nullable="1" physicalName="tobacco" precision="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="16" userDefinedTypeUUID="a26374aa-3026-4bb8-b564-eb2e186dfa5d" >
      <remarks></remarks>
     </column>
     <column id="COL149" populated="true" UUID="19afae07-8d09-4895-8765-fc03364a9ea2" autoIncrement="false" defaultValue="" name="tobacco_remarks" nullable="1" physicalName="tobacco_remarks" precision="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="12" userDefinedTypeUUID="831ac2d4-0e65-47ec-a0b7-62b7f6b8760a" >
      <remarks></remarks>
     </column>
-    <column id="COL150" populated="true" UUID="d8f9650a-3f52-4174-ba6d-ca77d62d871f" autoIncrement="false" defaultValue="" name="drugs" nullable="0" physicalName="drugs" precision="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="16" userDefinedTypeUUID="a26374aa-3026-4bb8-b564-eb2e186dfa5d" >
+    <column id="COL150" populated="true" UUID="d8f9650a-3f52-4174-ba6d-ca77d62d871f" autoIncrement="false" defaultValue="" name="drugs" nullable="1" physicalName="drugs" precision="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="16" userDefinedTypeUUID="a26374aa-3026-4bb8-b564-eb2e186dfa5d" >
      <remarks></remarks>
     </column>
     <column id="COL151" populated="true" UUID="2b53a886-184f-46e8-840f-b0339a9631e6" autoIncrement="false" defaultValue="" name="drugs_remarks" nullable="1" physicalName="drugs_remarks" precision="0" referenceCount="1" scale="0" sourceDataTypeName="UserDefinedSQLType" type="12" userDefinedTypeUUID="831ac2d4-0e65-47ec-a0b7-62b7f6b8760a" >
@@ -1321,7 +1321,7 @@
  <ddl-generator type="ca.sqlpower.architect.ddl.PostgresDDLGenerator" allow-connection="false" target-schema="public"> </ddl-generator>
  <liquibase-settings useSeparateChangeSets="false" generateId="false" idStart="1"/>
  <create-kettle-job-settings filePath="test" jobName="Export" schemaName="" kettleJoinType="0" savingToFile="true" />
- <play-pen zoom="0.8408964152537157" viewportX="2613" viewportY="90" relationship-style="rectilinear" names-displayLogicalNames="true" showPrimaryTag="true" showForeignTag="true" showAlternateTag="true" columnVisibility="ALL" relationshipLabelVisibility="true">
+ <play-pen zoom="0.8408964152537157" viewportX="2882" viewportY="465" relationship-style="rectilinear" names-displayLogicalNames="true" showPrimaryTag="true" showForeignTag="true" showAlternateTag="true" columnVisibility="ALL" relationshipLabelVisibility="true">
   <table-pane table-ref="TAB3" x="1027" y="1298" bgColor="0xb9bbf6" fgColor="0x000000" rounded="false" dashed="false"/>
   <table-pane table-ref="TAB13" x="997" y="1531" bgColor="0xb9bbf6" fgColor="0x000000" rounded="false" dashed="false"/>
   <table-pane table-ref="TAB24" x="1007" y="1025" bgColor="0xb9bbf6" fgColor="0x000000" rounded="false" dashed="false"/>
@@ -1334,7 +1334,7 @@
   <table-pane table-ref="TAB88" x="3476" y="545" bgColor="0xe6d794" fgColor="0x000000" rounded="false" dashed="false"/>
   <table-pane table-ref="TAB102" x="2512" y="1730" bgColor="0xdfedce" fgColor="0x000000" rounded="false" dashed="false"/>
   <table-pane table-ref="TAB116" x="3325" y="1127" bgColor="0xdfedce" fgColor="0x000000" rounded="false" dashed="false"/>
-  <table-pane table-ref="TAB137" x="3778" y="1046" bgColor="0xe6d794" fgColor="0x000000" rounded="false" dashed="false"/>
+  <table-pane table-ref="TAB137" x="3776" y="990" bgColor="0xe6d794" fgColor="0x000000" rounded="false" dashed="false"/>
   <table-pane table-ref="TAB155" x="2560" y="1586" bgColor="0xdfedce" fgColor="0x000000" rounded="false" dashed="false"/>
   <table-pane table-ref="TAB166" x="3062" y="1161" bgColor="0xdfedce" fgColor="0x000000" rounded="false" dashed="false"/>
   <table-pane table-ref="TAB175" x="3798" y="409" bgColor="0xe6d794" fgColor="0x000000" rounded="false" dashed="false"/>
