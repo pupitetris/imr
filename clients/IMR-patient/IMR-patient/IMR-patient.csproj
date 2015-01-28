@@ -153,6 +153,8 @@
     <Compile Include="gtk-gui\IMRpatient.PatientListWin.cs" />
     <Compile Include="gtk-gui\IMRpatient.DateButton.cs" />
     <Compile Include="Widgets\DateButton.cs" />
+    <Compile Include="Widgets\CheckTristate.cs" />
+    <Compile Include="gtk-gui\IMRpatient.CheckTristate.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

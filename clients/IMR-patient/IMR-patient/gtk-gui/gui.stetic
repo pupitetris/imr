@@ -2445,7 +2445,7 @@ Disabled</property>
       </widget>
     </child>
   </widget>
-  <widget class="Gtk.Bin" id="IMRpatient.AddressEditor" design-size="312 166">
+  <widget class="Gtk.Bin" id="IMRpatient.AddressEditor" design-size="312 126">
     <property name="MemberName" />
     <child>
       <widget class="Gtk.VBox" id="vbox3">
@@ -3136,7 +3136,7 @@ Fiscal</property>
       </widget>
     </child>
   </widget>
-  <widget class="Gtk.Bin" id="IMRpatient.PhoneEditor" design-size="290 70">
+  <widget class="Gtk.Bin" id="IMRpatient.PhoneEditor" design-size="290 64">
     <property name="MemberName" />
     <property name="WidthRequest">290</property>
     <child>
@@ -3253,10 +3253,18 @@ Nextel</property>
                   </packing>
                 </child>
                 <child>
-                  <widget class="Gtk.TextView" id="textRemarks">
+                  <widget class="Gtk.Frame" id="frame12">
                     <property name="MemberName" />
-                    <property name="CanFocus">True</property>
-                    <property name="Text" translatable="yes" />
+                    <property name="ShadowType">In</property>
+                    <property name="LabelYalign">0.95</property>
+                    <property name="BorderWidth">2</property>
+                    <child>
+                      <widget class="Gtk.TextView" id="textRemarks">
+                        <property name="MemberName" />
+                        <property name="CanFocus">True</property>
+                        <property name="Text" translatable="yes" />
+                      </widget>
+                    </child>
                   </widget>
                   <packing>
                     <property name="Position">1</property>
@@ -3290,7 +3298,7 @@ Nextel</property>
       </widget>
     </child>
   </widget>
-  <widget class="Gtk.Bin" id="IMRpatient.EmailEditor" design-size="299 111">
+  <widget class="Gtk.Bin" id="IMRpatient.EmailEditor" design-size="285 93">
     <property name="MemberName" />
     <child>
       <widget class="Gtk.VBox" id="vbox5">
@@ -3416,6 +3424,34 @@ Skype</property>
                   </packing>
                 </child>
                 <child>
+                  <widget class="Gtk.Frame" id="frame12">
+                    <property name="MemberName" />
+                    <property name="ShadowType">In</property>
+                    <property name="LabelYalign">0.95</property>
+                    <property name="BorderWidth">2</property>
+                    <child>
+                      <widget class="Gtk.TextView" id="textRemarks">
+                        <property name="MemberName" />
+                        <property name="CanFocus">True</property>
+                        <property name="Text" translatable="yes" />
+                      </widget>
+                    </child>
+                  </widget>
+                  <packing>
+                    <property name="TopAttach">1</property>
+                    <property name="BottomAttach">2</property>
+                    <property name="LeftAttach">1</property>
+                    <property name="RightAttach">2</property>
+                    <property name="AutoSize">False</property>
+                    <property name="XExpand">True</property>
+                    <property name="XFill">True</property>
+                    <property name="XShrink">False</property>
+                    <property name="YExpand">True</property>
+                    <property name="YFill">True</property>
+                    <property name="YShrink">False</property>
+                  </packing>
+                </child>
+                <child>
                   <widget class="Gtk.Label" id="label2">
                     <property name="MemberName" />
                     <property name="Xalign">1</property>
@@ -3442,28 +3478,6 @@ Skype</property>
                   <packing>
                     <property name="TopAttach">1</property>
                     <property name="BottomAttach">2</property>
-                    <property name="AutoSize">True</property>
-                    <property name="XOptions">Fill</property>
-                    <property name="YOptions">Fill</property>
-                    <property name="XExpand">False</property>
-                    <property name="XFill">True</property>
-                    <property name="XShrink">False</property>
-                    <property name="YExpand">False</property>
-                    <property name="YFill">True</property>
-                    <property name="YShrink">False</property>
-                  </packing>
-                </child>
-                <child>
-                  <widget class="Gtk.TextView" id="textRemarks">
-                    <property name="MemberName" />
-                    <property name="CanFocus">True</property>
-                    <property name="Text" translatable="yes" />
-                  </widget>
-                  <packing>
-                    <property name="TopAttach">1</property>
-                    <property name="BottomAttach">2</property>
-                    <property name="LeftAttach">1</property>
-                    <property name="RightAttach">2</property>
                     <property name="AutoSize">True</property>
                     <property name="XOptions">Fill</property>
                     <property name="YOptions">Fill</property>
@@ -3503,7 +3517,7 @@ Skype</property>
       </widget>
     </child>
   </widget>
-  <widget class="Gtk.Window" id="IMRpatient.PatientEditorWin" design-size="1249 566">
+  <widget class="Gtk.Window" id="IMRpatient.PatientEditorWin" design-size="1449 566">
     <action-group name="Default">
       <action id="DeletePatientAction">
         <property name="Type">Action</property>
@@ -3576,6 +3590,7 @@ Skype</property>
               <widget class="Gtk.MenuBar" id="menubar">
                 <property name="MemberName" />
                 <property name="PackDirection">Rtl</property>
+                <signal name="SelectionDone" handler="OnMenubarSelectionDone" />
                 <node name="menubar" type="Menubar">
                   <node type="Menu" action="OKPatientAction">
                     <node type="Menuitem" action="PleaseWaitOKPatient" />
@@ -3657,10 +3672,13 @@ Skype</property>
                         <child>
                           <widget class="Gtk.Table" id="tablePatient">
                             <property name="MemberName" />
-                            <property name="NRows">8</property>
+                            <property name="NRows">9</property>
                             <property name="NColumns">3</property>
                             <property name="RowSpacing">4</property>
                             <property name="ColumnSpacing">6</property>
+                            <child>
+                              <placeholder />
+                            </child>
                             <child>
                               <placeholder />
                             </child>
@@ -3692,8 +3710,8 @@ Skype</property>
                                 </child>
                               </widget>
                               <packing>
-                                <property name="TopAttach">7</property>
-                                <property name="BottomAttach">8</property>
+                                <property name="TopAttach">8</property>
+                                <property name="BottomAttach">9</property>
                                 <property name="LeftAttach">1</property>
                                 <property name="RightAttach">2</property>
                                 <property name="AutoSize">True</property>
@@ -3730,8 +3748,8 @@ Skype</property>
                                 </child>
                               </widget>
                               <packing>
-                                <property name="TopAttach">5</property>
-                                <property name="BottomAttach">6</property>
+                                <property name="TopAttach">6</property>
+                                <property name="BottomAttach">7</property>
                                 <property name="LeftAttach">1</property>
                                 <property name="RightAttach">2</property>
                                 <property name="AutoSize">True</property>
@@ -3752,44 +3770,16 @@ Skype</property>
                                 <property name="Yalign">0</property>
                                 <property name="TopPadding">3</property>
                                 <child>
-                                  <widget class="Gtk.CheckButton" id="checkAlcohol">
+                                  <widget class="IMRpatient.CheckTristate" id="checkAlcohol">
                                     <property name="MemberName" />
-                                    <property name="CanFocus">True</property>
+                                    <property name="Events">ButtonPressMask</property>
                                     <property name="Label" translatable="yes" />
+                                    <property name="Active">True</property>
+                                    <property name="Inconsistent">True</property>
                                     <property name="DrawIndicator">True</property>
-                                    <property name="HasLabel">False</property>
+                                    <property name="HasLabel">True</property>
                                     <property name="UseUnderline">True</property>
-                                  </widget>
-                                </child>
-                              </widget>
-                              <packing>
-                                <property name="TopAttach">5</property>
-                                <property name="BottomAttach">6</property>
-                                <property name="AutoSize">False</property>
-                                <property name="XOptions">0</property>
-                                <property name="YOptions">Fill</property>
-                                <property name="XExpand">False</property>
-                                <property name="XFill">False</property>
-                                <property name="XShrink">False</property>
-                                <property name="YExpand">False</property>
-                                <property name="YFill">True</property>
-                                <property name="YShrink">False</property>
-                              </packing>
-                            </child>
-                            <child>
-                              <widget class="Gtk.Alignment" id="alignment15">
-                                <property name="MemberName" />
-                                <property name="Yscale">0</property>
-                                <property name="Yalign">0</property>
-                                <property name="TopPadding">3</property>
-                                <child>
-                                  <widget class="Gtk.CheckButton" id="checkTobacco">
-                                    <property name="MemberName" />
-                                    <property name="CanFocus">True</property>
-                                    <property name="Label" translatable="yes" />
-                                    <property name="DrawIndicator">True</property>
-                                    <property name="HasLabel">False</property>
-                                    <property name="UseUnderline">True</property>
+                                    <property name="FocusOnClick">False</property>
                                   </widget>
                                 </child>
                               </widget>
@@ -3808,25 +3798,62 @@ Skype</property>
                               </packing>
                             </child>
                             <child>
-                              <widget class="Gtk.Alignment" id="alignment16">
+                              <widget class="Gtk.Alignment" id="alignment15">
                                 <property name="MemberName" />
                                 <property name="Yscale">0</property>
                                 <property name="Yalign">0</property>
                                 <property name="TopPadding">3</property>
                                 <child>
-                                  <widget class="Gtk.CheckButton" id="checkDrugs">
+                                  <widget class="IMRpatient.CheckTristate" id="checkTobacco">
                                     <property name="MemberName" />
-                                    <property name="CanFocus">True</property>
+                                    <property name="Events">ButtonPressMask</property>
                                     <property name="Label" translatable="yes" />
+                                    <property name="Active">True</property>
+                                    <property name="Inconsistent">True</property>
                                     <property name="DrawIndicator">True</property>
-                                    <property name="HasLabel">False</property>
+                                    <property name="HasLabel">True</property>
                                     <property name="UseUnderline">True</property>
+                                    <property name="FocusOnClick">False</property>
                                   </widget>
                                 </child>
                               </widget>
                               <packing>
                                 <property name="TopAttach">7</property>
                                 <property name="BottomAttach">8</property>
+                                <property name="AutoSize">False</property>
+                                <property name="XOptions">0</property>
+                                <property name="YOptions">Fill</property>
+                                <property name="XExpand">False</property>
+                                <property name="XFill">False</property>
+                                <property name="XShrink">False</property>
+                                <property name="YExpand">False</property>
+                                <property name="YFill">True</property>
+                                <property name="YShrink">False</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <widget class="Gtk.Alignment" id="alignment16">
+                                <property name="MemberName" />
+                                <property name="Yscale">0</property>
+                                <property name="Yalign">0</property>
+                                <property name="TopPadding">3</property>
+                                <child>
+                                  <widget class="IMRpatient.CheckTristate" id="checkDrugs">
+                                    <property name="MemberName" />
+                                    <property name="Events">ButtonPressMask</property>
+                                    <property name="Label" translatable="yes" />
+                                    <property name="Active">True</property>
+                                    <property name="Inconsistent">True</property>
+                                    <property name="DrawIndicator">True</property>
+                                    <property name="HasLabel">True</property>
+                                    <property name="UseUnderline">True</property>
+                                    <property name="FocusOnClick">False</property>
+                                  </widget>
+                                </child>
+                              </widget>
+                              <packing>
+                                <property name="TopAttach">8</property>
+                                <property name="BottomAttach">9</property>
                                 <property name="AutoSize">False</property>
                                 <property name="XOptions">0</property>
                                 <property name="YOptions">Fill</property>
@@ -3849,7 +3876,7 @@ Skype</property>
                                   <widget class="Gtk.Label" id="label13">
                                     <property name="MemberName" />
                                     <property name="Xalign">0</property>
-                                    <property name="LabelProp" translatable="yes">Medication</property>
+                                    <property name="LabelProp" translatable="yes">Medic</property>
                                   </widget>
                                 </child>
                               </widget>
@@ -3881,6 +3908,37 @@ Skype</property>
                                     <property name="MemberName" />
                                     <property name="Xalign">0</property>
                                     <property name="LabelProp" translatable="yes">Diet</property>
+                                  </widget>
+                                </child>
+                              </widget>
+                              <packing>
+                                <property name="TopAttach">4</property>
+                                <property name="BottomAttach">5</property>
+                                <property name="LeftAttach">1</property>
+                                <property name="RightAttach">2</property>
+                                <property name="AutoSize">True</property>
+                                <property name="XOptions">Fill</property>
+                                <property name="YOptions">Fill</property>
+                                <property name="XExpand">False</property>
+                                <property name="XFill">True</property>
+                                <property name="XShrink">False</property>
+                                <property name="YExpand">False</property>
+                                <property name="YFill">True</property>
+                                <property name="YShrink">False</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <widget class="Gtk.Alignment" id="alignment19">
+                                <property name="MemberName" />
+                                <property name="Yscale">0</property>
+                                <property name="Xalign">0</property>
+                                <property name="Yalign">0</property>
+                                <property name="TopPadding">4</property>
+                                <child>
+                                  <widget class="Gtk.Label" id="label15">
+                                    <property name="MemberName" />
+                                    <property name="Xalign">0</property>
+                                    <property name="LabelProp" translatable="yes">Hereditary</property>
                                   </widget>
                                 </child>
                               </widget>
@@ -3923,8 +3981,8 @@ Skype</property>
                                 </child>
                               </widget>
                               <packing>
-                                <property name="TopAttach">6</property>
-                                <property name="BottomAttach">7</property>
+                                <property name="TopAttach">7</property>
+                                <property name="BottomAttach">8</property>
                                 <property name="LeftAttach">1</property>
                                 <property name="RightAttach">2</property>
                                 <property name="AutoSize">True</property>
@@ -3986,8 +4044,8 @@ Skype</property>
                                 </child>
                               </widget>
                               <packing>
-                                <property name="TopAttach">4</property>
-                                <property name="BottomAttach">5</property>
+                                <property name="TopAttach">5</property>
+                                <property name="BottomAttach">6</property>
                                 <property name="LeftAttach">1</property>
                                 <property name="RightAttach">2</property>
                                 <property name="AutoSize">False</property>
@@ -4090,7 +4148,7 @@ Skype</property>
                                 <property name="LabelYalign">0.95</property>
                                 <property name="BorderWidth">2</property>
                                 <child>
-                                  <widget class="Gtk.TextView" id="textMedication">
+                                  <widget class="Gtk.TextView" id="textMedic">
                                     <property name="MemberName" />
                                     <property name="WidthRequest">300</property>
                                     <property name="CanFocus">True</property>
@@ -4107,6 +4165,43 @@ Skype</property>
                               <packing>
                                 <property name="TopAttach">2</property>
                                 <property name="BottomAttach">3</property>
+                                <property name="LeftAttach">2</property>
+                                <property name="RightAttach">3</property>
+                                <property name="AutoSize">True</property>
+                                <property name="XOptions">Fill</property>
+                                <property name="YOptions">Fill</property>
+                                <property name="XExpand">False</property>
+                                <property name="XFill">True</property>
+                                <property name="XShrink">False</property>
+                                <property name="YExpand">False</property>
+                                <property name="YFill">True</property>
+                                <property name="YShrink">False</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <widget class="Gtk.Frame" id="frame11">
+                                <property name="MemberName" />
+                                <property name="ShadowType">In</property>
+                                <property name="LabelYalign">0.95</property>
+                                <property name="BorderWidth">2</property>
+                                <child>
+                                  <widget class="Gtk.TextView" id="textHereditary">
+                                    <property name="MemberName" />
+                                    <property name="WidthRequest">300</property>
+                                    <property name="CanFocus">True</property>
+                                    <property name="AcceptsTab">False</property>
+                                    <property name="Text" translatable="yes" />
+                                    <property name="WrapMode">Word</property>
+                                    <property name="PixelsAboveLines">2</property>
+                                    <property name="PixelsBelowLines">2</property>
+                                    <property name="LeftMargin">2</property>
+                                    <property name="RightMargin">2</property>
+                                  </widget>
+                                </child>
+                              </widget>
+                              <packing>
+                                <property name="TopAttach">3</property>
+                                <property name="BottomAttach">4</property>
                                 <property name="LeftAttach">2</property>
                                 <property name="RightAttach">3</property>
                                 <property name="AutoSize">True</property>
@@ -4142,8 +4237,8 @@ Skype</property>
                                 </child>
                               </widget>
                               <packing>
-                                <property name="TopAttach">7</property>
-                                <property name="BottomAttach">8</property>
+                                <property name="TopAttach">8</property>
+                                <property name="BottomAttach">9</property>
                                 <property name="LeftAttach">2</property>
                                 <property name="RightAttach">3</property>
                                 <property name="AutoSize">False</property>
@@ -4178,8 +4273,8 @@ Skype</property>
                                 </child>
                               </widget>
                               <packing>
-                                <property name="TopAttach">6</property>
-                                <property name="BottomAttach">7</property>
+                                <property name="TopAttach">7</property>
+                                <property name="BottomAttach">8</property>
                                 <property name="LeftAttach">2</property>
                                 <property name="RightAttach">3</property>
                                 <property name="AutoSize">False</property>
@@ -4214,8 +4309,8 @@ Skype</property>
                                 </child>
                               </widget>
                               <packing>
-                                <property name="TopAttach">5</property>
-                                <property name="BottomAttach">6</property>
+                                <property name="TopAttach">6</property>
+                                <property name="BottomAttach">7</property>
                                 <property name="LeftAttach">2</property>
                                 <property name="RightAttach">3</property>
                                 <property name="AutoSize">False</property>
@@ -4250,8 +4345,8 @@ Skype</property>
                                 </child>
                               </widget>
                               <packing>
-                                <property name="TopAttach">4</property>
-                                <property name="BottomAttach">5</property>
+                                <property name="TopAttach">5</property>
+                                <property name="BottomAttach">6</property>
                                 <property name="LeftAttach">2</property>
                                 <property name="RightAttach">3</property>
                                 <property name="AutoSize">False</property>
@@ -4322,8 +4417,8 @@ Skype</property>
                                 </child>
                               </widget>
                               <packing>
-                                <property name="TopAttach">3</property>
-                                <property name="BottomAttach">4</property>
+                                <property name="TopAttach">4</property>
+                                <property name="BottomAttach">5</property>
                                 <property name="LeftAttach">2</property>
                                 <property name="RightAttach">3</property>
                                 <property name="AutoSize">True</property>
@@ -4435,8 +4530,9 @@ Skype</property>
       </action>
     </action-group>
     <property name="MemberName" />
-    <property name="Title" translatable="yes">PatientListWin</property>
-    <property name="Icon">resource:IMRpatient.img.imr-icon.png</property>
+    <property name="Title" translatable="yes">Patient List</property>
+    <property name="Icon">resource:IMRpatient.img.imr.ico</property>
+    <property name="TypeHint">Utility</property>
     <property name="WindowPosition">CenterOnParent</property>
     <child>
       <widget class="Gtk.VBox" id="vbox2">
@@ -4500,5 +4596,14 @@ Skype</property>
     <property name="CanFocus">True</property>
     <property name="Type">TextOnly</property>
     <property name="Label" translatable="yes">Select...</property>
+  </widget>
+  <widget class="Gtk.CheckButton" id="IMRpatient.CheckTristate" design-size="156 21">
+    <property name="MemberName" />
+    <property name="CanFocus">True</property>
+    <property name="Label" translatable="yes">IMRpatient.CheckTristate</property>
+    <property name="DrawIndicator">True</property>
+    <property name="HasLabel">True</property>
+    <property name="UseUnderline">True</property>
+    <signal name="Toggled" handler="OnTristateToggled" />
   </widget>
 </stetic-interface>
