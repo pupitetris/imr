@@ -31,6 +31,7 @@
     <itemgroups>
       <itemgroup label="DateButton Properties">
         <property name="Date" />
+        <property name="DisplayFormat" />
       </itemgroup>
     </itemgroups>
     <signals />

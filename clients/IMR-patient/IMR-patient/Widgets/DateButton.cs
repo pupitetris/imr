@@ -188,6 +188,9 @@ namespace IMRpatient
 
 		public string DisplayFormat
 		{
+			get {
+				return displayFormat;
+			}
 			set {
 				displayFormat = value;
 			}
