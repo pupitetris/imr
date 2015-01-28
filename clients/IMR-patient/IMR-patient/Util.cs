@@ -42,6 +42,18 @@ namespace IMRpatient
 			}
 		}
 
+		public static bool GtkTextSetFromDict (Gtk.TextView text, JObject dict, string key)
+		{
+			string val;
+
+			if (DictTryValue (dict, key, out val)) {
+				text.Buffer.Clear ();
+				text.Buffer.InsertAtCursor (val);
+				return true;
+			}
+			return false;
+		}
+
 		public static string StringPlusSpace (string str) {
 			if (str == null) {
 				return "";
