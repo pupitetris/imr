@@ -86,9 +86,9 @@ CREATE TYPE imr_gender AS ENUM (
 
 CREATE TYPE imr_phone_type AS ENUM (
        'MOBILE',
-       'NEXTEL',
        'HOME',
-       'WORK'
+       'WORK',
+       'NEXTEL'
 );
 
 CREATE TYPE imr_level AS ENUM (

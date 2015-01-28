@@ -118,7 +118,7 @@ SELECT a.address_id, a.persona_id, a.street, a.ad_type, a.asenta_id
 
 
 M4_SQL_PROCEDURE( «rp_persona_get_phones(_uid charp_user_id, _persona_id integer)»,
-		  «TABLE(phone_id integer, persona_id integer, numbr varchar, p_type imr_phone_type, remarks varchar)»,
+		  «TABLE(phone_id integer, persona_id integer, numbr varchar, type imr_phone_type, remarks varchar)»,
 		  STABLE, M4_DEFN(user), 'Get phones related to a given persona.', «
 
 SELECT p.phone_id, p.persona_id, p.numbr, p.type, p.remarks
@@ -128,7 +128,7 @@ SELECT p.phone_id, p.persona_id, p.numbr, p.type, p.remarks
 
 
 M4_SQL_PROCEDURE( «rp_persona_get_emails(_uid charp_user_id, _persona_id integer)»,
-		  «TABLE(email_id integer, persona_id integer, email varchar, e_type imr_email_type, system imr_email_system, remarks varchar)»,
+		  «TABLE(email_id integer, persona_id integer, email varchar, type imr_email_type, system imr_email_system, remarks varchar)»,
 		  STABLE, M4_DEFN(user), 'Get emails related to a given persona.', «
 
 SELECT e.email_id, e.persona_id, e.email, e.type, e.system, e.remarks

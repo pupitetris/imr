@@ -45,7 +45,7 @@ namespace IMRpatient
 				string val;
 				if (Util.DictTryValue (data, "numbr", out val)) { entryNumber.Text = val; }
 				Util.GtkTextSetFromDict (textRemarks, data, "remarks");
-				if (Util.DictTryValue (data, "p_type", out val)) {
+				if (Util.DictTryValue (data, "type", out val)) {
 					int active;
 					switch (val) {
 						case "MOBILE": active = 0; break;
@@ -92,7 +92,7 @@ namespace IMRpatient
 		}
 
 		public void Commit (Charp.SuccessDelegate success, Charp.ErrorDelegate error) {
-			string[] types = { "MOBILE", "NEXTEL", "HOME", "WORK" };
+			string[] types = { "MOBILE", "HOME", "WORK", "NEXTEL" };
 
 			object[] parms = {
 				personaId,
@@ -103,7 +103,7 @@ namespace IMRpatient
 
 			if (isNew ||
 				(string) parms[1] != (string) myData["numbr"] ||
-				(string) parms[2] != (string) myData["p_type"] ||
+				(string) parms[2] != (string) myData["type"] ||
 				!Util.StrEqNull ((string) parms[3], (string) myData["remarks"])) {
 
 				string resource;
