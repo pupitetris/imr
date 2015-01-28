@@ -345,9 +345,9 @@ namespace IMRpatient
 			};
 
 			if (isNew ||
-				(int) parms[1] != (int) myData["asenta_id"] ||
-				(string) parms[2] != (string) myData["street"] ||
-				(string) parms[3] != (string) myData["ad_type"]) {
+			    (int) parms[1] != (int) myData["asenta_id"] ||
+			    (string) parms[2] != (string) myData["street"] ||
+			    (string) parms[3] != (string) myData["ad_type"]) {
 
 				string resource;
 				if (isNew) {
@@ -366,8 +366,8 @@ namespace IMRpatient
 					},
 					error = error
 				});
-
-			}
+			} else
+				success (null, null);
 		}
 	}
 }

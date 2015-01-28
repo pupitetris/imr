@@ -111,10 +111,10 @@ namespace IMRpatient
 			};
 
 			if (isNew ||
-				(string) parms[1] != (string) myData["email"] ||
-				(string) parms[2] != (string) myData["type"] ||
-				(string) parms[3] != (string) myData["system"] ||
-				!Util.StrEqNull ((string) parms[4], (string) myData["remarks"])) {
+			    (string) parms[1] != (string) myData["email"] ||
+			    (string) parms[2] != (string) myData["type"] ||
+			    (string) parms[3] != (string) myData["system"] ||
+			    !Util.StrEqNull ((string) parms[4], (string) myData["remarks"])) {
 
 				string resource;
 				if (isNew) {
@@ -133,7 +133,8 @@ namespace IMRpatient
 					},
 					error = error
 				});
-			}
+			} else
+				success (null, null);
 		}
 	}
 }

@@ -123,7 +123,8 @@ namespace IMRpatient
 					},
 					error = error
 				});
-			}
+			} else
+				success (null, null);
 		}
 	}
 }

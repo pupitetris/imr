@@ -77,12 +77,13 @@ namespace IMRpatient
 		protected void SendAction (Gtk.MenuBar menubar, VoidDelegate del)
 		{
 			ActionDelegate adel = delegate () {
-				menubar.Cancel ();
-				if (del != null)
-					del ();
-
 				foreach (Gtk.MenuItem child in menubar.Children)
 					child.Show ();
+
+				menubar.Cancel ();
+
+				if (del != null)
+					del ();
 
 				return false;
 			};
