@@ -44,7 +44,7 @@ namespace IMRpatient
 				
 				string val;
 				if (Util.DictTryValue (data, "email", out val)) { entryEmail.Text = val; }
-				if (Util.DictTryValue (data, "remarks", out val)) { textRemarks.Buffer.InsertAtCursor (val); }
+				Util.GtkTextSetFromDict (textRemarks, data, "remarks");
 				if (Util.DictTryValue (data, "type", out val)) {
 					int active;
 					switch (val) {

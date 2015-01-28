@@ -53,22 +53,14 @@ namespace IMRpatient
 			checkTobacco.TriState = (bool?) data["tobacco"];
 			checkDrugs.TriState = (bool?) data["drugs"];
 
-			if (Util.DictTryValue (data, "sickness_remarks", out val))
-				textSickness.Buffer.InsertAtCursor (val);
-			if (Util.DictTryValue (data, "medic_remarks", out val))
-				textMedic.Buffer.InsertAtCursor (val);
-			if (Util.DictTryValue (data, "hereditary_remarks", out val))
-				textHereditary.Buffer.InsertAtCursor (val);
-			if (Util.DictTryValue (data, "diet_remarks", out val))
-				textDiet.Buffer.InsertAtCursor (val);
-			if (Util.DictTryValue (data, "activity_remarks", out val))
-				textActivity.Buffer.InsertAtCursor (val);
-			if (Util.DictTryValue (data, "alcohol_remarks", out val))
-				textAlcohol.Buffer.InsertAtCursor (val);
-			if (Util.DictTryValue (data, "tobacco_remarks", out val))
-				textTobacco.Buffer.InsertAtCursor (val);
-			if (Util.DictTryValue (data, "drugs_remarks", out val))
-				textDrugs.Buffer.InsertAtCursor (val);
+			Util.GtkTextSetFromDict (textSickness, data, "sickness_remarks");
+			Util.GtkTextSetFromDict (textMedic, data, "medic_remarks");
+			Util.GtkTextSetFromDict (textHereditary, data, "hereditary_remarks");
+			Util.GtkTextSetFromDict (textDiet, data, "diet_remarks");
+			Util.GtkTextSetFromDict (textAlcohol, data, "activity_remarks");
+			Util.GtkTextSetFromDict (textAlcohol, data, "alcohol_remarks");
+			Util.GtkTextSetFromDict (textTobacco, data, "tobacco_remarks");
+			Util.GtkTextSetFromDict (textDrugs, data, "drugs_remarks");
 		}
 
 		private void LoadData (JObject data) 
@@ -205,7 +197,7 @@ namespace IMRpatient
 			string[] types = { "OPERATOR", "ADMIN", "SUPERUSER" };
 
 			object[] parms = {
-				OpType == TYPE.EDIT || dateButtonBirth.HasChanged? dateButtonBirth.Date.ToShortDateString (): null,
+				null,
 				textSickness.Buffer.Text,
 				textMedic.Buffer.Text,
 				textHereditary.Buffer.Text,
@@ -219,19 +211,22 @@ namespace IMRpatient
 				textDrugs.Buffer.Text
 			};
 
+			if (OpType == TYPE.EDIT || dateButtonBirth.HasChanged)
+				parms[0] = dateButtonBirth.Date.ToString ("yyyy-MM-dd");
+
 			if (OpType == TYPE.NEW ||
-				(string) parms[0] != (string) myData["birth"] ||
-				(string) parms[1] != (string) myData["sickness_remarks"] ||
-				(string) parms[2] != (string) myData["medic_remarks"] ||
-				(string) parms[3] != (string) myData["hereditary_remarks"] ||
-				(string) parms[4] != (string) myData["diet_remarks"] ||
-				(string) parms[5] != (string) myData["activity_remarks"] ||
-				(string) parms[6] != (string) myData["alcohol"] ||
-				(string) parms[7] != (string) myData["alcohol_remarks"] ||
-				(string) parms[8] != (string) myData["tobacco"] ||
-				(string) parms[9] != (string) myData["tobacco_remarks"] ||
-				(string) parms[10] != (string) myData["drugs"] ||
-				(string) parms[11] != (string) myData["drugs_remarks"]) {
+				!Util.StrEqNull ((string) parms[0], (string) myDetails["birth"])  ||
+				!Util.StrEqNull ((string) parms[1], (string) myDetails["sickness_remarks"])  ||
+				!Util.StrEqNull ((string) parms[2], (string) myDetails["medic_remarks"])  ||
+				!Util.StrEqNull ((string) parms[3], (string) myDetails["hereditary_remarks"])  ||
+				!Util.StrEqNull ((string) parms[4], (string) myDetails["diet_remarks"])  ||
+				!Util.StrEqNull ((string) parms[5], (string) myDetails["activity_remarks"])  ||
+				!Util.StrEqNull ((string) parms[6], (string) myDetails["alcohol"])  ||
+				!Util.StrEqNull ((string) parms[7], (string) myDetails["alcohol_remarks"])  ||
+				!Util.StrEqNull ((string) parms[8], (string) myDetails["tobacco"])  ||
+				!Util.StrEqNull ((string) parms[9], (string) myDetails["tobacco_remarks"])  ||
+				!Util.StrEqNull ((string) parms[10], (string) myDetails["drugs"])  ||
+				!Util.StrEqNull ((string) parms[11], (string) myDetails["drugs_remarks"])) {
 
 				string resource;
 				if (OpType == TYPE.NEW) {
@@ -258,6 +253,7 @@ namespace IMRpatient
 
 			if (Validate ())
 				Commit ();
-		}
+		}
+
 	}
 }

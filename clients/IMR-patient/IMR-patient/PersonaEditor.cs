@@ -70,12 +70,10 @@ namespace IMRpatient
 			if (Util.DictTryValue (data, "photo", out val)) { LoadPicture (val); }
 			if (Util.DictTryValue (data, "gender", out val)) { SetGender (val); }
 
-			if (Util.DictTryValue (data, "remarks", out val)) { 
-				textNotes.Buffer.InsertAtCursor (val);
+			if (Util.GtkTextSetFromDict (textNotes, data, "remarks"))
 				expanderNotes.Expanded = true;
-			} else {
+			else
 				expanderNotes.Expanded = false;
-			}
 		}
 
 		public void SetPersonaId (int id) {

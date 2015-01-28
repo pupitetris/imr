@@ -44,7 +44,7 @@ namespace IMRpatient
 
 				string val;
 				if (Util.DictTryValue (data, "numbr", out val)) { entryNumber.Text = val; }
-				if (Util.DictTryValue (data, "remarks", out val)) { textRemarks.Buffer.InsertAtCursor (val); }
+				Util.GtkTextSetFromDict (textRemarks, data, "remarks");
 				if (Util.DictTryValue (data, "p_type", out val)) {
 					int active;
 					switch (val) {
